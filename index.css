@@ -30,7 +30,7 @@ h3 {
     min-width: 250px;
     background-color: rgb(255, 255, 255);
     margin:15px;
-    padding: 15px;
+    padding: 20px;
     border-radius: 40px;
 }
 
@@ -49,22 +49,21 @@ ul li {
     border:0;
     font-size: 60px;
     text-align: center;
-    
 }
 
 .urgencia {
-    padding: 5px;
+    padding: 30px;
     margin:10px;
-    width: 70px;
+    width: 100px;
     height: 70px;
     text-align: center;
 }
 
 .item   {
     margin:10px;
-    padding: 5px;
+    padding: 30px;
     padding-left: 15px;
-    width: 550px;
+    width: 920px;
     display: inline-block;
     background-color: #dddddd;
     text-align: left;
@@ -72,7 +71,7 @@ ul li {
 
 .cantidad {
     margin:10px;
-    padding: 5px;
+    padding: 30px;
     width: 150px;
     display: inline-block;
     background-color: #dddddd;
