@@ -1,11 +1,19 @@
 const shoppingListEl = document.getElementById("shopping-list")
 
-db.collection("messages").orderBy("id").onSnapshot({includeMetadataChanges: true},(querySnapshot) => {      
-    querySnapshot.forEach((doc) => {
-            console.log(doc.data())
-            renderBook(doc);  
+db.collection("messages").orderBy("id").onSnapshot(snapshot => {
+    let changes = snapshot.docChanges();
+    changes.forEach(change => {
+        console.log(change)
+        if(change.type == 'added'){
+            renderBook(change.doc);
+        }
+        if(change.type == 'mofified'){
+            renderBook(doc);
+            location.reload();
+        }
     });
-});
+})
+
 
 function renderBook(doc){
     let li = document.createElement('li')
@@ -35,45 +43,28 @@ function renderBook(doc){
     }
 
     text.addEventListener("click", () => {
-        db.collection("messages").doc(doc.id).set({
-        categoria: doc.data().categoria,
+        db.collection("messages").doc(doc.id).update({
         cantidad : 0,
-        id: doc.data().id,
-        text: doc.data().text,
-        urgente: doc.data().urgente,
-    }) 
-    console.log("updated cantidad to 0")});
+        urgente:false,
+        }) 
+        console.log("updated cantidad to 0")});
     
     cantidad.addEventListener("click", () => {
-            db.collection("messages").doc(doc.id).set({
-            categoria: doc.data().categoria,
-            cantidad : doc.data().cantidad + 1,
-            id: doc.data().id,
-            text: doc.data().text,
-            urgente: doc.data().urgente,
+            db.collection("messages").doc(doc.id).update({
+            cantidad : doc.data().cantidad + 1
         }) 
-        
         console.log("updated cantidad")});
 
     urgente.addEventListener("click", () => {
-    if(doc.data().urgente==true){
-        db.collection("messages").doc(doc.id).set({
-        categoria: doc.data().categoria,
-        cantidad : doc.data().cantidad,
-        id: doc.data().id,
-        text: doc.data().text,
-        urgente: false,
-        }) }    
-    else{
-        db.collection("messages").doc(doc.id).set({
-            categoria: doc.data().categoria,
-            cantidad : doc.data().cantidad,
-            id: doc.data().id,
-            text: doc.data().text,
+        if(doc.data().urgente==true){
+            db.collection("messages").doc(doc.id).update({
+            urgente: false
+            }) }    
+        else{
+            db.collection("messages").doc(doc.id).update({
             urgente: true,
-            }) 
-    }    
-    console.log("updated urgencia")});
+        }) }    
+        console.log("updated urgencia")});
 
     li.appendChild(text) 
     li.appendChild(cantidad)
