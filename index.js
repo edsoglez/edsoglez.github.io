@@ -1,14 +1,17 @@
 const shoppingListEl = document.getElementById("shopping-list")
 
+
+//realtime listener
 db.collection("messages").orderBy("id").onSnapshot(snapshot => {
     let changes = snapshot.docChanges();
     changes.forEach(change => {
+        
         console.log(change)
         if(change.type == 'added'){
             renderBook(change.doc);
         }
         if(change.type == 'modified'){
-            renderBook(change.doc);
+            location.reload();
         }
     });
 })
