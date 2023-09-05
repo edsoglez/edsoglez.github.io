@@ -11,7 +11,7 @@ db.collection("messages").orderBy("id").onSnapshot(snapshot => {
             renderBook(change.doc);
         }
         if(change.type == 'modified'){
-            location.reload();
+            renderBook(change.doc);
         }
     });
 })
@@ -32,18 +32,18 @@ function renderBook(doc){
     text.textContent = doc.data().text
     cantidad.textContent = doc.data().cantidad
         
-    if (doc.data().cantidad == 0 ){
-        urgente.classList.add('zero')
-    } 
-    else{
-        if (doc.data().urgente == true){
-            urgente.classList.add('urgente')
+    if (doc.data().cantidad == 0 ){ urgente.classList.add('zero') } 
+    else{   if (doc.data().urgente == true){ urgente.classList.add('urgente') }
+            else{ urgente.classList.add('non')} 
         }
-        else{
-            urgente.classList.add('non')
-        } 
-    }
 
+        
+    li.appendChild(text) 
+    li.appendChild(cantidad)
+    li.appendChild(urgente)
+        
+    shoppingListEl.append(li)    
+/* 
     text.addEventListener("click", () => {
         db.collection("messages").doc(doc.id).update({
         cantidad : 0,
@@ -52,11 +52,13 @@ function renderBook(doc){
         console.log("updated cantidad to 0")});
     
     cantidad.addEventListener("click", () => {
-            db.collection("messages").doc(doc.id).update({
-            cantidad : doc.data().cantidad + 1
-        }) 
+        const curCant=doc.data().cantidad
+        const newCant=curCant+1
+        db.collection("messages").doc(doc.id).update({
+            cantidad: newCant
+        })
         console.log("updated cantidad")});
-
+    
     urgente.addEventListener("click", () => {
         if(doc.data().urgente==true){
             db.collection("messages").doc(doc.id).update({
@@ -67,12 +69,8 @@ function renderBook(doc){
             urgente: true,
         }) }    
         console.log("updated urgencia")});
-
-    li.appendChild(text) 
-    li.appendChild(cantidad)
-    li.appendChild(urgente)
+*/
     
-    shoppingListEl.append(li)
 
     
 };
