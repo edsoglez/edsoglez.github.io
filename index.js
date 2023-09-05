@@ -32,7 +32,8 @@ function renderBook(doc){
     urgente.textContent = "_"
     text.textContent = doc.data().text
     cantidad.textContent = doc.data().cantidad
-        
+    const curCant=doc.data().cantidad
+
     if (doc.data().cantidad == 0 ){ urgente.classList.add('zero') } 
     else{   if (doc.data().urgente == true){ urgente.classList.add('urgente') }
             else{ urgente.classList.add('non')} 
@@ -51,7 +52,7 @@ function renderBook(doc){
         console.log("updated cantidad to 0")});
     
     cantidad.addEventListener("click", () => {
-        const curCant=doc.data().cantidad
+        
         const newCant=curCant+1
         db.collection("messages").doc(doc.id).update({
             cantidad: newCant
