@@ -73,4 +73,6 @@ function renderBook(doc){
     li.appendChild(urgente)
     
     shoppingListEl.append(li)
+
+    
 };
