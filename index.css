@@ -54,8 +54,8 @@ ul li {
 .urgencia {
     padding: 30px;
     margin:10px;
-    width: 100px;
-    height: 70px;
+    width: 60px;
+    height: auto;
     text-align: center;
 }
 
