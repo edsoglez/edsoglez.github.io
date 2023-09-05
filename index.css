@@ -47,7 +47,7 @@ ul li {
     margin: 0px;
     border-radius: 12px;
     border:0;
-    font-size: 24px;
+    font-size: 40px;
     text-align: center;
     
 }
@@ -55,8 +55,8 @@ ul li {
 .urgencia {
     padding: 5px;
     margin:5px;
-    width: 30px;
-    height: 30px;
+    width: 45px;
+    height: 45px;
     text-align: center;
 }
 
@@ -64,7 +64,7 @@ ul li {
     margin:5px;
     padding: 5px;
     padding-left: 15px;
-    width: 240px;
+    width: 500px;
     display: inline-block;
     background-color: #dddddd;
     text-align: left;
