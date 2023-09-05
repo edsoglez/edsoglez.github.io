@@ -1,14 +1,11 @@
 const shoppingListEl = document.getElementById("shopping-list")
 
-
-    db.collection("messages").orderBy("id").get().then((onSnapshot) => {        
-    onSnapshot.forEach((doc) => {
-        console.log(`${doc.id} => ${doc.data()}`);
-        renderBook(doc);
+db.collection("messages").orderBy("id").onSnapshot({includeMetadataChanges: true},(querySnapshot) => {      
+    querySnapshot.forEach((doc) => {
+            console.log(doc.data())
+            renderBook(doc);  
     });
 });
-
-
 
 function renderBook(doc){
     let li = document.createElement('li')
@@ -36,6 +33,16 @@ function renderBook(doc){
             urgente.classList.add('non')
         } 
     }
+
+    text.addEventListener("click", () => {
+        db.collection("messages").doc(doc.id).set({
+        categoria: doc.data().categoria,
+        cantidad : 0,
+        id: doc.data().id,
+        text: doc.data().text,
+        urgente: doc.data().urgente,
+    }) 
+    console.log("updated cantidad to 0")});
     
     cantidad.addEventListener("click", () => {
             db.collection("messages").doc(doc.id).set({
@@ -46,8 +53,7 @@ function renderBook(doc){
             urgente: doc.data().urgente,
         }) 
         
-        console.log("success")
-    });
+        console.log("updated cantidad")});
 
     urgente.addEventListener("click", () => {
     if(doc.data().urgente==true){
@@ -67,9 +73,7 @@ function renderBook(doc){
             urgente: true,
             }) 
     }    
-    
-    console.log("success")
-});
+    console.log("updated urgencia")});
 
     li.appendChild(text) 
     li.appendChild(cantidad)
@@ -77,4 +81,3 @@ function renderBook(doc){
     
     shoppingListEl.append(li)
 };
-
