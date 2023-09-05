@@ -24,6 +24,8 @@ function renderBook(doc){
     let cantidad = document.createElement('li')
     let urgente = document.createElement('li')
 
+    li.setAttribute('data-id',doc.data().id)
+
     text.classList.add('item')
     cantidad.classList.add('cantidad')
     urgente.classList.add('urgencia')
@@ -43,7 +45,7 @@ function renderBook(doc){
     li.appendChild(urgente)
         
     shoppingListEl.append(li)    
-/* 
+ 
     text.addEventListener("click", () => {
         db.collection("messages").doc(doc.id).update({
         cantidad : 0,
@@ -69,7 +71,7 @@ function renderBook(doc){
             urgente: true,
         }) }    
         console.log("updated urgencia")});
-*/
+
     
 
     
