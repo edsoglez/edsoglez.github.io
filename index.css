@@ -47,7 +47,7 @@ ul li {
     margin: 0px;
     border-radius: 20px;
     border:0;
-    font-size: 60px;
+    font-size: 50px;
     text-align: center;
 }
 
@@ -63,7 +63,7 @@ ul li {
     margin:10px;
     padding: 30px;
     padding-left: 30px;
-    width: 920px;
+    width: 400px;
     display: inline-block;
     background-color: #dddddd;
     text-align: left;
@@ -72,7 +72,7 @@ ul li {
 .cantidad {
     margin:10px;
     padding: 30px;
-    width: 150px;
+    width: 100px;
     display: inline-block;
     background-color: #dddddd;
     text-align: center;
