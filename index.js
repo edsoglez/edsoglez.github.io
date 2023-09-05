@@ -1,8 +1,8 @@
 const shoppingListEl = document.getElementById("shopping-list")
 
 
-    db.collection("messages").orderBy("id").get().then((querySnapshot) => {        
-    querySnapshot.forEach((doc) => {
+    db.collection("messages").orderBy("id").get().then((onSnapshot) => {        
+    onSnapshot.forEach((doc) => {
         console.log(`${doc.id} => ${doc.data()}`);
         renderBook(doc);
     });
