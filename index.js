@@ -7,9 +7,8 @@ db.collection("messages").orderBy("id").onSnapshot(snapshot => {
         if(change.type == 'added'){
             renderBook(change.doc);
         }
-        if(change.type == 'mofified'){
-            renderBook(doc);
-            location.reload();
+        if(change.type == 'modified'){
+            renderBook(change.doc);
         }
     });
 })
