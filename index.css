@@ -29,7 +29,7 @@ h3 {
 .container {
     min-width: 250px;
     background-color: rgb(255, 255, 255);
-    margin:5px;
+    margin:15px;
     padding: 15px;
     border-radius: 40px;
 }
