@@ -1,30 +1,29 @@
-const shoppingListEl = document.getElementById("shopping-list")
-
+const itemList = document.getElementById("shopping-list")
 
 //realtime listener
 db.collection("messages").orderBy("id").onSnapshot(snapshot => {
     let changes = snapshot.docChanges();
     changes.forEach(change => {
         
-        console.log(change)
         if(change.type == 'added'){
             renderBook(change.doc);
+            console.log(change)
         }
         if(change.type == 'modified'){
             renderBook(change.doc);
+            console.log(change)
         }
     });
 })
 
-
+//list renderer
 function renderBook(doc){
     let li = document.createElement('li')
-
     let text = document.createElement('li')
     let cantidad = document.createElement('li')
     let urgente = document.createElement('li')
 
-    li.setAttribute('data-id',doc.data().id)
+    li.setAttribute('data-id',doc.id)
 
     text.classList.add('item')
     cantidad.classList.add('cantidad')
@@ -39,12 +38,10 @@ function renderBook(doc){
             else{ urgente.classList.add('non')} 
         }
 
-        
     li.appendChild(text) 
     li.appendChild(cantidad)
     li.appendChild(urgente)
-        
-    shoppingListEl.append(li)    
+    itemList.append(li)    
  
     text.addEventListener("click", () => {
         db.collection("messages").doc(doc.id).update({
