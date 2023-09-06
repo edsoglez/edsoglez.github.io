@@ -30,7 +30,7 @@ h3 {
 .container {
     min-width: 250px;
     background-color: rgb(255, 255, 255);
-    margin:10px;
+    margin:0px;
     padding: 10px;
     border-radius: 30px;
 }
