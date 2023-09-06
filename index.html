@@ -1,37 +1,106 @@
-<!doctype html>
-<html>
-    <head>
-        <title>Calesa Orders</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="index.css">
-        <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
-        <script> 
-        const firebaseConfig = {
-            apiKey: "AIzaSyDSY3BT3CLQEnYE79asYIZ96xo6GZziZcs",
-            authDomain: "chat-app-demo-82cbd.firebaseapp.com",
-            projectId: "chat-app-demo-82cbd",
-            storageBucket: "chat-app-demo-82cbd.appspot.com",
-            messagingSenderId: "589178338295",
-            appId: "1:589178338295:web:b67ffd092f863b86f10cf2"
-            };
-            firebase.initializeApp(firebaseConfig)
-            const db = firebase.firestore();
-        </script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Time Test</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+    
 
     </head>
-    <body>
-        <div>
-            <h1>CALESA</h1>
-            <h3>coffee shop</h3>
-        </div>
-        <div class="container">
-            <ul id="shopping-list">
-            </ul>
-        </div>
+<body>
+    <div>
+        <h1>CALESA</h1>
+        <h3>coffee shop</h3>
+    </div>
+    <div class="container">
+        <ul id="itemList"></ul>
+    </div>
 
-        <script src="index.js"></script>
-    </body>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+    
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+import {initializeApp} from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js";
+import {getDatabase, set, get, update, remove, ref, child, onValue} from "https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js"; 
+
+const firebaseConfig = {
+    apiKey: "AIzaSyDb87oTfIXSDWFTmCwpoZ1hpjovJLtwDI0",
+    authDomain: "calesawebapp.firebaseapp.com",
+    databaseURL: "https://calesawebapp-default-rtdb.firebaseio.com",
+    projectId: "calesawebapp",
+    storageBucket: "calesawebapp.appspot.com",
+    messagingSenderId: "992390081249",
+    appId: "1:992390081249:web:6b5a47227f9546e64ae5a0"
+}; 
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const db = getDatabase();
+
+//Test for multiple items
+const itemRef = ref(db,'Items/');
+
+function Render(text,cantidad,urgente,id){
+    
+    let ul = document.getElementById("itemList");
+    let _text = document.createElement('li');
+    let _cantidad = document.createElement('li');
+    let _urgente = document.createElement('li');
+    
+
+    _text.classList.add('item')
+    _cantidad.classList.add('cantidad')
+    _urgente.classList.add('urgencia')
+
+    if (cantidad == 0 ){_urgente.classList.add('zero') } 
+    else{   if (urgente == true){_urgente.classList.add('urgente') }
+            else{_urgente.classList.add('non')} 
+        }
+
+    _text.innerHTML = text;
+    _cantidad.innerHTML = cantidad;
+    _urgente.innerHTML = '_';
+
+    ul.appendChild(_text);
+    ul.appendChild(_cantidad);
+    ul.appendChild(_urgente);
+    ul.append();
+
+    _text.addEventListener("click", () => {});
+    
+    
+    _cantidad.addEventListener("click", () => {
+        update(ref(db,'Items/'+id),{
+            Cantidad: cantidad + 1
+        });
+    });
+    
+    _urgente.addEventListener("click", () => {
+        if(urgente==true){}    
+        else{} 
+    });
+}
+
+
+onValue(itemRef, (snapshot)=>{
+        document.getElementById("itemList").innerHTML = "" // on change, reset to black and re-render
+        snapshot.forEach(
+            function(ChildSnapshot){
+                let Text = ChildSnapshot.val().Text;
+                let Cantidad = ChildSnapshot.val().Cantidad;
+                let Urgente = ChildSnapshot.val().Urgente;
+                let id = ChildSnapshot.val().id;
+
+                Render(Text,Cantidad,Urgente,id);
+            }
+        )
+});
+
+
+
+    
+    </script>
+</body>
 </html>

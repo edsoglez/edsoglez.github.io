@@ -1,6 +1,6 @@
 const itemList = document.getElementById("shopping-list")
 
-//realtime listener
+//non-realtime listener
 db.collection("messages").orderBy("id").onSnapshot(snapshot => {
     let changes = snapshot.docChanges();
     changes.forEach(change => {
@@ -15,6 +15,8 @@ db.collection("messages").orderBy("id").onSnapshot(snapshot => {
         }
     });
 })
+//Test for realtime listener
+
 
 //list renderer
 function renderBook(doc){
