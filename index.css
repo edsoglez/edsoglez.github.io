@@ -74,6 +74,17 @@ ul {
     text-align: center;
 }
 
+.link {
+    text-align: center;
+    font-size: 16px;
+    color: white;
+    font-weight: normal;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+
 ul li {
     background-color: #fffdf800;
     padding: 5px;
