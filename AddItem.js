@@ -20,7 +20,6 @@ function addItem(){
                 Cantidad: 0,
                 Urgente: false,
             })
-            alert("Item created!")
             fieldId.value= "";
             fieldText.value= "";
         }
