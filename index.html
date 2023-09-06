@@ -68,7 +68,12 @@ function Render(text,cantidad,urgente,id){
     ul.appendChild(_urgente);
     ul.append();
 
-    _text.addEventListener("click", () => {});
+    _text.addEventListener("click", () => {
+        update(ref(db,'Items/'+id),{
+            Cantidad: 0,
+            Urgente: false
+        });
+    });
     
     
     _cantidad.addEventListener("click", () => {
@@ -78,8 +83,16 @@ function Render(text,cantidad,urgente,id){
     });
     
     _urgente.addEventListener("click", () => {
-        if(urgente==true){}    
-        else{} 
+        if(urgente==true){
+            update(ref(db,'Items/'+id),{
+            Urgente: false
+        });
+        }    
+        else{
+            update(ref(db,'Items/'+id),{
+            Urgente: true
+        });
+        } 
     });
 }
 
