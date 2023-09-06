@@ -21,7 +21,7 @@
         }; 
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
-        const db = getDatabase();    
+        window.db = getDatabase();    
         window.itemRef = ref(db,'Items/');
     </script>
     </head>
