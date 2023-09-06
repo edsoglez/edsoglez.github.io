@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calesa Order</title>
+    <title>Calesa New Item</title>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="index.css">
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
     <script type="module">
         //Import all JS dependencies and config database
         import {initializeApp} from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js";
@@ -23,15 +25,21 @@
         const app = initializeApp(firebaseConfig);
         window.db = getDatabase();    
         window.itemRef = ref(db,'Items/');
+        window.userRef = ref(db,'Users/');
     </script>
-    </head>
+</head>
 <body>
     <div>
         <h1>CALESA</h1>
         <h3>coffee shop</h3>
     </div>
     <div class="container">
-        <ul id="itemList"></ul>
+        <div class="loginForm">
+            <input type="text" placeholder="id" id="enterId"><br>
+            <input type="text" placeholder="Articulo" id="enterText"><br>
+            <button id="enterItem">Create</button>
+        </div>
+            
     </div> <br>
     <div>
         <a href="AddItem.html" class="link">Add Item</a>
@@ -39,9 +47,10 @@
 
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
-    
-<script src="index.js" type="module"></script>
-<script src="itemList.js" type="module"></script>
-    
+    <script>
+        window.createButton = document.querySelector("#enterItem"); 
+    </script>
+    <script src="AddItem.js" type="module"></script>
+
 </body>
 </html>

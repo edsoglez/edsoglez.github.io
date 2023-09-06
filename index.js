@@ -1,12 +1,13 @@
 import {getDatabase, set, get, update, remove, ref, child, onValue} from "https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js";
     
-      
-
     submitButton.addEventListener('click',findUser);
+
+    const dbref = ref(db)
+
         function findUser(){
             window.fieldUsername = document.querySelector("#enterUsername");
             window.fieldPassword = document.querySelector("#enterPassword");
-            const dbref = ref(db)
+            
             get(child(dbref,'Users/'+fieldUsername.value))
             .then((snapshot)=>{
                 if(snapshot.exists()){
@@ -27,4 +28,6 @@ import {getDatabase, set, get, update, remove, ref, child, onValue} from "https:
             })
             
         }
+
+        
 
