@@ -43,6 +43,8 @@ ul {
     height: 1850px;
     overflow:hidden; 
     overflow-y:scroll;
+    align-items: center;
+    text-align: center;
 }
 
 ul li {
