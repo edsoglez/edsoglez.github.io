@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="index.css">
     
-
+    
     </head>
 <body>
     <div>
@@ -20,100 +20,27 @@
 
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
-    
     <script type="module">
-        // Import the functions you need from the SDKs you need
-import {initializeApp} from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js";
-import {getDatabase, set, get, update, remove, ref, child, onValue} from "https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js"; 
-
-const firebaseConfig = {
-    apiKey: "AIzaSyDb87oTfIXSDWFTmCwpoZ1hpjovJLtwDI0",
-    authDomain: "calesawebapp.firebaseapp.com",
-    databaseURL: "https://calesawebapp-default-rtdb.firebaseio.com",
-    projectId: "calesawebapp",
-    storageBucket: "calesawebapp.appspot.com",
-    messagingSenderId: "992390081249",
-    appId: "1:992390081249:web:6b5a47227f9546e64ae5a0"
-}; 
+        //Import all JS dependencies and config database
+        import {initializeApp} from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js";
+        import {getDatabase, set, get, update, remove, ref, child, onValue} from "https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js"; 
+        const firebaseConfig = {
+        apiKey: "AIzaSyDb87oTfIXSDWFTmCwpoZ1hpjovJLtwDI0",
+        authDomain: "calesawebapp.firebaseapp.com",
+        databaseURL: "https://calesawebapp-default-rtdb.firebaseio.com",
+        projectId: "calesawebapp",
+        storageBucket: "calesawebapp.appspot.com",
+        messagingSenderId: "992390081249",
+        appId: "1:992390081249:web:6b5a47227f9546e64ae5a0"
+    }; 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const db = getDatabase();
-
-//Test for multiple items
-const itemRef = ref(db,'Items/');
-
-function Render(text,cantidad,urgente,id){
-    
-    let ul = document.getElementById("itemList");
-    let _text = document.createElement('li');
-    let _cantidad = document.createElement('li');
-    let _urgente = document.createElement('li');
-    
-
-    _text.classList.add('item')
-    _cantidad.classList.add('cantidad')
-    _urgente.classList.add('urgencia')
-
-    if (cantidad == 0 ){_urgente.classList.add('zero') } 
-    else{   if (urgente == true){_urgente.classList.add('urgente') }
-            else{_urgente.classList.add('non')} 
-        }
-
-    _text.innerHTML = text;
-    _cantidad.innerHTML = cantidad;
-    _urgente.innerHTML = '_';
-
-    ul.appendChild(_text);
-    ul.appendChild(_cantidad);
-    ul.appendChild(_urgente);
-    ul.append();
-
-    _text.addEventListener("click", () => {
-        update(ref(db,'Items/'+id),{
-            Cantidad: 0,
-            Urgente: false
-        });
-    });
-    
-    
-    _cantidad.addEventListener("click", () => {
-        update(ref(db,'Items/'+id),{
-            Cantidad: cantidad + 1
-        });
-    });
-    
-    _urgente.addEventListener("click", () => {
-        if(urgente==true){
-            update(ref(db,'Items/'+id),{
-            Urgente: false
-        });
-        }    
-        else{
-            update(ref(db,'Items/'+id),{
-            Urgente: true
-        });
-        } 
-    });
-}
-
-
-onValue(itemRef, (snapshot)=>{
-        document.getElementById("itemList").innerHTML = "" // on change, reset to black and re-render
-        snapshot.forEach(
-            function(ChildSnapshot){
-                let Text = ChildSnapshot.val().Text;
-                let Cantidad = ChildSnapshot.val().Cantidad;
-                let Urgente = ChildSnapshot.val().Urgente;
-                let id = ChildSnapshot.val().id;
-
-                Render(Text,Cantidad,Urgente,id);
-            }
-        )
-});
-
-
-
-    
+const db = getDatabase();    
+window.itemRef = ref(db,'Items/');
     </script>
+
+<script src="index.js" type="module"></script>
+<script src="itemList.js" type="module"></script>
+    
 </body>
 </html>
