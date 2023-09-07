@@ -20,8 +20,10 @@ const dbref = ref(db)
 function addItem(){
     window.fieldText = document.querySelector("#enterText");
     window.fieldCategoria = document.querySelector("#enterCategoria");
+    
     if(fieldText.value == ""){
         alert("Cannot leave item blank")
+        return
     }
     
     get(child(dbref,'Items/'+fieldText.value))
