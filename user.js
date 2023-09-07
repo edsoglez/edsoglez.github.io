@@ -3,4 +3,4 @@ function setUser(USER){
     window.USER = USER;
 }
 export{setUser}
-export{USER} from "https:calesa.cloud/user.js"  
+export{USER} 
