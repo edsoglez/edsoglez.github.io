@@ -1,5 +1,5 @@
 import {getDatabase, set, get, update, remove, ref, child, onValue} from "https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js";
-    
+import {setUser} from "https:calesa.cloud/user.js"    
     submitButton.addEventListener('click',findUser);
 
     const dbref = ref(db)
@@ -13,6 +13,7 @@ import {getDatabase, set, get, update, remove, ref, child, onValue} from "https:
                 if(snapshot.exists()){
                     if(snapshot.val().password == fieldPassword.value){
                         window.USER = snapshot.val();
+                        setUser(USER);
                         console.log(USER);
                         location.href = 'order.html';
                     }
