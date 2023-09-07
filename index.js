@@ -1,13 +1,23 @@
 import {getDatabase, set, get, update, remove, ref, child, onValue} from "https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js";
-
+    window.fieldUsername = document.querySelector("#enterUsername");
+    window.fieldPassword = document.querySelector("#enterPassword");
+    
     submitButton.addEventListener('click',findUser);
-    fieldPassword.addEventListener('Enter',findUser);
+    fieldPassword.addEventListener("keypress", function(event) {
+        // If the user presses the "Enter" key on the keyboard
+        if (event.key === "Enter") {
+          // Cancel the default action, if needed
+        event.preventDefault();
+        console.log("Enter pressed")
+          // Trigger the button element with a click
+        submitButton.click();
+        }
+    });
 
     const dbref = ref(db)
 
         function findUser(){
-            window.fieldUsername = document.querySelector("#enterUsername");
-            window.fieldPassword = document.querySelector("#enterPassword");
+            
             
             get(child(dbref,'Users/'+fieldUsername.value))
             .then((snapshot)=>{

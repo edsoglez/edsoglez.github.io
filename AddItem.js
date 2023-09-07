@@ -14,7 +14,17 @@ if(loggedUser == null){
 }
 
 createButton.addEventListener('click',addItem);
-fieldText.addEventListener('Enter',addItem);
+
+fieldText.addEventListener("keypress", function(event) {
+    // If the user presses the "Enter" key on the keyboard
+    if (event.key === "Enter") {
+      // Cancel the default action, if needed
+    event.preventDefault();
+    console.log("Enter pressed")
+      // Trigger the button element with a click
+    submitButton.click();
+    }
+});
 
 const dbref = ref(db)
 
