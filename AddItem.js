@@ -5,16 +5,18 @@ const dbref = ref(db)
 
 function addItem(){
     window.fieldText = document.querySelector("#enterText");
+    window.fieldCategoria = document.querySelector("#enterCategoria");
 
     get(child(dbref,'Items/'+fieldText.value))
     .then((snapshot)=>{
         if(snapshot.exists()){
             alert("id taken")
-            fieldId.value= "";
         }
         else{
             set(ref(db,'Items/'+fieldText.value),{
+                id: fieldText.value,
                 Text: fieldText.value,
+                Categoria: fieldCategoria.value,
                 Cantidad: 0,
                 Urgente: false,
             })

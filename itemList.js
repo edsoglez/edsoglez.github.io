@@ -1,5 +1,7 @@
 import {getDatabase, set, get, update, remove, ref, child, onValue} from "https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js"; 
+
 //Test for multiple item
+//console.log(USER); need to get USER varibale across all files from index
 function Render(text,cantidad,urgente,id){
     
     let ul = document.getElementById("itemList");
@@ -27,10 +29,12 @@ function Render(text,cantidad,urgente,id){
     ul.append();
 
     _text.addEventListener("click", () => {
-        update(ref(db,'Items/'+id),{
-            Cantidad: 0,
-            Urgente: false
-        });
+        
+            update(ref(db,'Items/'+id),{
+                Cantidad: 0,
+                Urgente: false
+            });
+        
     });
     
     
