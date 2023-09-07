@@ -35,7 +35,6 @@
         get(child(dbref,'Users/'+loggedUser))
             .then((snapshot)=>{
                 if(snapshot.exists()){
-                    
                         window.USER = snapshot.val();
                         localStorage.setItem("USER",USER.username)
                         localStorage.setItem("canEdit",USER.canEdit)
