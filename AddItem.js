@@ -24,6 +24,7 @@ fieldText.addEventListener("keypress", function(event) {
     console.log("Enter pressed")
       // Trigger the button element with a click
     createButton.click();
+    fielfText.value=""
     }
 });
 
