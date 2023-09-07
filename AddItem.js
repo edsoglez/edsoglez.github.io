@@ -44,6 +44,7 @@ function addItem(){
             if(canAdd=="true"){
                 if(snapshot.exists()){
                     alert("id taken")
+                    return
                 }
                 else{
                     set(ref(db,'Items/'+fieldText.value),{
