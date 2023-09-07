@@ -60,6 +60,28 @@ function Render(text,cantidad,urgente,id){
 
 selectCategoria = document.querySelector("#selectCategoria");
 
+selectCategoria.addEventListener('change', fakeUpdate)
+
+function fakeUpdate(){
+
+console.log(currentStatus)    
+if(currentStatus){
+    update(ref(db,'Items/Vaso Tp16'),{
+        Fake: false
+    });
+    
+}
+else{
+    update(ref(db,'Items/Vaso Tp16'),{
+        Fake: true
+    });
+    
+}
+    
+
+}
+
+
 onValue(itemRef, (snapshot)=>{
         document.getElementById("itemList").innerHTML = "" // on change, reset to black and re-render
         snapshot.forEach(
@@ -68,9 +90,16 @@ onValue(itemRef, (snapshot)=>{
                 let Cantidad = ChildSnapshot.val().Cantidad;
                 let Urgente = ChildSnapshot.val().Urgente;
                 let id = ChildSnapshot.val().id;
+
+
+                if(ChildSnapshot.val().Text=="Vaso Tp16"){
+                    window.currentStatus = ChildSnapshot.val().Fake;    
+                }
                 
-                if(ChildSnapshot.val().Categoria==selectCategoria.value){
+                
+                if(ChildSnapshot.val().Categoria==document.querySelector("#selectCategoria").value){
                 Render(Text,Cantidad,Urgente,id);
+                
                 }
             }
         )
