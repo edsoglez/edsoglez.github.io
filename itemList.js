@@ -1,4 +1,7 @@
 import {getDatabase, set, get, update, remove, ref, child, onValue} from "https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js"; 
+window.loggedUser = localStorage.getItem("USER");
+        window.canEdit = localStorage.getItem("canEdit");
+        window.canAdd = localStorage.getItem("canAdd");
 
 //Test for multiple item
 //console.log(USER); need to get USER varibale across all files from index
@@ -29,22 +32,32 @@ function Render(text,cantidad,urgente,id){
     ul.append();
 
     _text.addEventListener("click", () => {
-        
+        if(canEdit=="true"){
             update(ref(db,'Items/'+id),{
                 Cantidad: 0,
                 Urgente: false
             });
+        }
+        else{
+            alert("Usuario no puede modificar")
+        }
         
     });
     
     
     _cantidad.addEventListener("click", () => {
+        if(canEdit=="true"){
         update(ref(db,'Items/'+id),{
             Cantidad: cantidad + 1
         });
+        }
+        else{
+            alert("Usuario no puede modificar")
+        }
     });
     
     _urgente.addEventListener("click", () => {
+    if(canEdit=="true"){
         if(urgente==true){
             update(ref(db,'Items/'+id),{
             Urgente: false
@@ -55,6 +68,8 @@ function Render(text,cantidad,urgente,id){
             Urgente: true
         });
         } 
+    }
+    else{alert("Usuario no puede modificar")}
     });
 }
 

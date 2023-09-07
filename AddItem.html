@@ -26,6 +26,10 @@
         window.db = getDatabase();    
         window.itemRef = ref(db,'Items/');
         window.userRef = ref(db,'Users/');
+
+        window.loggedUser = localStorage.getItem("USER");
+        window.canEdit = localStorage.getItem("canEdit");
+        window.canAdd = localStorage.getItem("canAdd");
     </script>
 </head>
 <body>

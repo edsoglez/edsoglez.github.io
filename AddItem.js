@@ -1,5 +1,9 @@
 import {getDatabase, set, get, update, remove, ref, child, onValue} from "https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js";
     
+        window.loggedUser = localStorage.getItem("USER");
+        window.canEdit = localStorage.getItem("canEdit");
+        window.canAdd = localStorage.getItem("canAdd");
+
 createButton.addEventListener('click',addItem);
 const dbref = ref(db)
 
@@ -9,19 +13,25 @@ function addItem(){
 
     get(child(dbref,'Items/'+fieldText.value))
     .then((snapshot)=>{
-        if(snapshot.exists()){
-            alert("id taken")
+        if(canAdd=="true"){
+            if(snapshot.exists()){
+                alert("id taken")
+            }
+            else{
+                set(ref(db,'Items/'+fieldText.value),{
+                    id: fieldText.value,
+                    Text: fieldText.value,
+                    Categoria: fieldCategoria.value,
+                    Cantidad: 0,
+                    Urgente: false,
+                })
+                fieldText.value= "";
+            }
         }
         else{
-            set(ref(db,'Items/'+fieldText.value),{
-                id: fieldText.value,
-                Text: fieldText.value,
-                Categoria: fieldCategoria.value,
-                Cantidad: 0,
-                Urgente: false,
-            })
-            fieldText.value= "";
+            alert("Usuario no tiene permiso de agregar")
         }
+        
     });
     
 }
