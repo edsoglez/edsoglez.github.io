@@ -9,6 +9,7 @@ catch(exception){
     location.href = 'index.html';
 }
 console.log(loggedUser)
+
 if(loggedUser == null){
     location.href = 'index.html';
 }
@@ -37,28 +38,30 @@ function addItem(){
         alert("Cannot leave item blank")
         return
     }
-    
-    get(child(dbref,'Items/'+fieldText.value))
-    .then((snapshot)=>{
-        if(canAdd=="true"){
-            if(snapshot.exists()){
-                alert("id taken")
+    else{
+        get(child(dbref,'Items/'+fieldText.value))
+        .then((snapshot)=>{
+            if(canAdd=="true"){
+                if(snapshot.exists()){
+                    alert("id taken")
+                }
+                else{
+                    set(ref(db,'Items/'+fieldText.value),{
+                        id: fieldText.value,
+                        Text: fieldText.value,
+                        Categoria: fieldCategoria.value,
+                        Cantidad: 0,
+                        Urgente: false,
+                    })
+                    fieldText.value= "";
+                }
             }
             else{
-                set(ref(db,'Items/'+fieldText.value),{
-                    id: fieldText.value,
-                    Text: fieldText.value,
-                    Categoria: fieldCategoria.value,
-                    Cantidad: 0,
-                    Urgente: false,
-                })
-                fieldText.value= "";
+                alert("Usuario no tiene permiso de agregar")
             }
-        }
-        else{
-            alert("Usuario no tiene permiso de agregar")
-        }
-        
-    });
+            
+        });
+    }
+    
     
 }
