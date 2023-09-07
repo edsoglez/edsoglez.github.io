@@ -23,7 +23,7 @@ fieldText.addEventListener("keypress", function(event) {
     event.preventDefault();
     console.log("Enter pressed")
       // Trigger the button element with a click
-    submitButton.click();
+    createButton.click();
     }
 });
 
