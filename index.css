@@ -10,9 +10,24 @@ html, body {
     text-align: center;
 }
 
+.chooseSelect{
+    width: 99%;
+    text-align: center;
+    background-color:  #A1231E;
+    color: white;
+    
+}
+.centered{
+    text-align: center;
+}
+.setSelect{
+    width: 45%;
+    background-color: #dddddd;
+}
+
 select{
-    margin:5px;
-    width: 98%;
+    margin:10px;
+    margin-top: 5px;
     padding: 10px;
     border: 0;
     border-radius: 15px;
