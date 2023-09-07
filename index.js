@@ -1,6 +1,7 @@
 import {getDatabase, set, get, update, remove, ref, child, onValue} from "https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js";
 
     submitButton.addEventListener('click',findUser);
+    submitButton.addEventListener('Enter',findUser);
 
     const dbref = ref(db)
 

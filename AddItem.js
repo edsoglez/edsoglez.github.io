@@ -14,6 +14,7 @@ if(loggedUser == null){
 }
 
 createButton.addEventListener('click',addItem);
+createButton.addEventListener('Enter',addItem);
 
 const dbref = ref(db)
 
