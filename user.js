@@ -1,6 +1,7 @@
-function setUser(USER){
-    console.log(USER)
-    window.USER = USER;
+function setUser(username){
+    console.log(username)
+    window.USER = username
+    return username;
 }
-export{setUser}
-export{USER} 
+
+export{setUser, USER}
