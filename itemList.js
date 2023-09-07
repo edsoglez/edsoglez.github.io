@@ -58,6 +58,7 @@ function Render(text,cantidad,urgente,id){
     });
 }
 
+selectCategoria = document.querySelector("#selectCategoria");
 
 onValue(itemRef, (snapshot)=>{
         document.getElementById("itemList").innerHTML = "" // on change, reset to black and re-render
@@ -67,8 +68,10 @@ onValue(itemRef, (snapshot)=>{
                 let Cantidad = ChildSnapshot.val().Cantidad;
                 let Urgente = ChildSnapshot.val().Urgente;
                 let id = ChildSnapshot.val().id;
-
+                
+                if(ChildSnapshot.val().Categoria==selectCategoria.value){
                 Render(Text,Cantidad,Urgente,id);
+                }
             }
         )
 });

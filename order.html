@@ -31,6 +31,13 @@
         <h3>coffee shop</h3>
     </div>
     <div class="container">
+        <select name="categoria" id="selectCategoria">
+            <option value="Desechable">Desechable</option>
+            <option value="Sabor">Sabor</option>
+            <option value="Insumo">Insumo</option>
+            <option value="Papeleria">Papeleria</option>
+            <option value="Limpieza">Limpieza</option>
+        </select>
         <ul id="itemList"></ul>
     </div> <br>
     <div class="link">
@@ -39,7 +46,9 @@
 
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
-    
+    <script>
+        window.selectCategoria = document.querySelector("#selectCategoria");
+    </script>
 <script src="itemList.js" type="module"></script>
     
 </body>
