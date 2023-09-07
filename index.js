@@ -12,6 +12,8 @@ import {getDatabase, set, get, update, remove, ref, child, onValue} from "https:
             .then((snapshot)=>{
                 if(snapshot.exists()){
                     if(snapshot.val().password == fieldPassword.value){
+                        window.USER = snapshot.val();
+                        console.log(USER);
                         location.href = 'order.html';
                     }
                     else{
