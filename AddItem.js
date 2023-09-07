@@ -12,7 +12,8 @@ console.log(loggedUser)
 if(loggedUser == null){
     location.href = 'index.html';
 }
-
+window.fieldText = document.querySelector("#enterText");
+window.fieldCategoria = document.querySelector("#enterCategoria");
 createButton.addEventListener('click',addItem);
 
 fieldText.addEventListener("keypress", function(event) {
@@ -29,8 +30,7 @@ fieldText.addEventListener("keypress", function(event) {
 const dbref = ref(db)
 
 function addItem(){
-    window.fieldText = document.querySelector("#enterText");
-    window.fieldCategoria = document.querySelector("#enterCategoria");
+    
     
     if(fieldText.value == ""){
         alert("Cannot leave item blank")
