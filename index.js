@@ -13,7 +13,7 @@ import {getDatabase, set, get, update, remove, ref, child, onValue} from "https:
                 if(snapshot.exists()){
                     if(snapshot.val().password == fieldPassword.value){
                         window.USER = snapshot.val();
-                        localStorage.setItem("USER",USER.value)
+                        localStorage.setItem("USER",USER.username)
                         localStorage.setItem("canEdit",USER.canEdit)
                         localStorage.setItem('canAdd',USER.canAdd)
                         console.log(USER);
