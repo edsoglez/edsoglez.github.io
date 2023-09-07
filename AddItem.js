@@ -5,12 +5,16 @@ import {getDatabase, set, get, update, remove, ref, child, onValue} from "https:
         window.canAdd = localStorage.getItem("canAdd");
 
 createButton.addEventListener('click',addItem);
+
 const dbref = ref(db)
 
 function addItem(){
     window.fieldText = document.querySelector("#enterText");
     window.fieldCategoria = document.querySelector("#enterCategoria");
-
+    if(fieldText.value == ""){
+        alert("Cannot leave item blank")
+    }
+    
     get(child(dbref,'Items/'+fieldText.value))
     .then((snapshot)=>{
         if(canAdd=="true"){
