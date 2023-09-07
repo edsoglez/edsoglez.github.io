@@ -25,6 +25,8 @@
         const app = initializeApp(firebaseConfig);
         window.db = getDatabase();    
         window.itemRef = ref(db,'Items/');
+        window.canEdit = localStorage.getItem("canEdit");
+        window.canAdd = localStorage.getItem("canAdd");
         
     </script>
     </head>
@@ -55,8 +57,7 @@
 	<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
     <script>
         window.selectCategoria = document.querySelector("#selectCategoria");
-        window.canEdit = localStorage.getItem("canEdit");
-        window.canAdd = localStorage.getItem("canAdd");
+        
     </script>
 <script src="itemList.js" type="module"></script>
 </body>

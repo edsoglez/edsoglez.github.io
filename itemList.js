@@ -1,7 +1,7 @@
 import {getDatabase, set, get, update, remove, ref, child, onValue} from "https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js"; 
 window.loggedUser = localStorage.getItem("USER");
-        window.canEdit = localStorage.getItem("canEdit");
-        window.canAdd = localStorage.getItem("canAdd");
+window.canEdit = localStorage.getItem("canEdit");
+window.canAdd = localStorage.getItem("canAdd");
 
 //Test for multiple item
 //console.log(USER); need to get USER varibale across all files from index
