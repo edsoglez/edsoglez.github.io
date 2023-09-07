@@ -24,12 +24,27 @@
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         window.db = getDatabase();    
+        window.dbref = ref(db)
         window.itemRef = ref(db,'Items/');
         window.userRef = ref(db,'Users/');
 
         window.loggedUser = localStorage.getItem("USER");
         window.canEdit = localStorage.getItem("canEdit");
         window.canAdd = localStorage.getItem("canAdd");
+
+        get(child(dbref,'Users/'+loggedUser))
+            .then((snapshot)=>{
+                if(snapshot.exists()){
+                    
+                        window.USER = snapshot.val();
+                        localStorage.setItem("USER",USER.username)
+                        localStorage.setItem("canEdit",USER.canEdit)
+                        localStorage.setItem('canAdd',USER.canAdd)
+                }
+                else{   
+                    
+                }   
+            })
     </script>
 </head>
 <body>

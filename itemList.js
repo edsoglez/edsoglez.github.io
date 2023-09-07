@@ -39,7 +39,7 @@ function Render(text,cantidad,urgente,id){
             });
         }
         else{
-            alert("Usuario no puede modificar")
+            
         }
         
     });

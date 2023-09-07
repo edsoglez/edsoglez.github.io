@@ -16,7 +16,6 @@ import {getDatabase, set, get, update, remove, ref, child, onValue} from "https:
                         localStorage.setItem("USER",USER.username)
                         localStorage.setItem("canEdit",USER.canEdit)
                         localStorage.setItem('canAdd',USER.canAdd)
-                        console.log(USER);
                         location.href = 'order.html';
                     }
                     else{
