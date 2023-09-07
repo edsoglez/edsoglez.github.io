@@ -91,7 +91,7 @@ selectCategoria.addEventListener('change', fakeUpdate)
 
 function fakeUpdate(){
 
-console.log(currentStatus)    
+  
 if(currentStatus){
     update(ref(db,'Items/Vaso Tp16'),{
         Fake: false
