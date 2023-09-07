@@ -1,5 +1,5 @@
 import {getDatabase, set, get, update, remove, ref, child, onValue} from "https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js";
-import {setUser} from "https:calesa.cloud/user.js"    
+
     submitButton.addEventListener('click',findUser);
 
     const dbref = ref(db)
@@ -13,7 +13,9 @@ import {setUser} from "https:calesa.cloud/user.js"
                 if(snapshot.exists()){
                     if(snapshot.val().password == fieldPassword.value){
                         window.USER = snapshot.val();
-                        setUser(USER);
+                        localStorage.setItem("USER",USER.value)
+                        localStorage.setItem("canEdit",USER.canEdit)
+                        localStorage.setItem('canAdd',USER.canAdd)
                         console.log(USER);
                         location.href = 'order.html';
                     }
