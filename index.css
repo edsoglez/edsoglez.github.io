@@ -141,6 +141,14 @@ ul li {
     display: inline-block;
     background-color: #dddddd;
     text-align: left;
+    transition: all 0.5s ease-in-out;
+}
+
+.item:hover {
+  color: #fff;
+  border: none;
+  transition: all 0.5s ease-in-out;
+  background-color: #fb3f3f;
 }
 
 .cantidad {
