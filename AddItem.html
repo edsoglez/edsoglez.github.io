@@ -6,32 +6,41 @@
     <title>Calesa New Item</title>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="index.css">
+
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+
     <script type="module">
         //Import all JS dependencies and config database
         import {initializeApp} from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js";
         import {getDatabase, set, get, update, remove, ref, child, onValue} from "https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js"; 
+
+        //DB/API config
         const firebaseConfig = {
-        apiKey: "AIzaSyDb87oTfIXSDWFTmCwpoZ1hpjovJLtwDI0",
-        authDomain: "calesawebapp.firebaseapp.com",
-        databaseURL: "https://calesawebapp-default-rtdb.firebaseio.com",
-        projectId: "calesawebapp",
-        storageBucket: "calesawebapp.appspot.com",
-        messagingSenderId: "992390081249",
-        appId: "1:992390081249:web:6b5a47227f9546e64ae5a0"
+            apiKey: "AIzaSyDb87oTfIXSDWFTmCwpoZ1hpjovJLtwDI0",
+            authDomain: "calesawebapp.firebaseapp.com",
+            databaseURL: "https://calesawebapp-default-rtdb.firebaseio.com",
+            projectId: "calesawebapp",
+            storageBucket: "calesawebapp.appspot.com",
+            messagingSenderId: "992390081249",
+            appId: "1:992390081249:web:6b5a47227f9546e64ae5a0"
         }; 
+
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         window.db = getDatabase();    
+
+        //creates references for the db and its subdirectories
         window.dbref = ref(db)
         window.itemRef = ref(db,'Items/');
         window.userRef = ref(db,'Users/');
 
+        //gets Current user and permisions saved on local storage
         window.loggedUser = localStorage.getItem("USER");
         window.canEdit = localStorage.getItem("canEdit");
         window.canAdd = localStorage.getItem("canAdd");
 
+        //Updates user permisions to realtime permisions on DB
         get(child(dbref,'Users/'+loggedUser))
             .then((snapshot)=>{
                 if(snapshot.exists()){
@@ -43,7 +52,8 @@
                 else{   
                     
                 }   
-            })
+            }
+        )
     </script>
 </head>
 <body>
@@ -51,6 +61,7 @@
         <h1>CALESA</h1>
         <h3>coffee shop</h3>
     </div>
+
     <div class="container">
         <div class="loginForm">
             <input type="text" placeholder="Articulo" id="enterText"><br>
@@ -69,18 +80,19 @@
             <button id="enterItem">Create</button>
         </div>
             
-    </div> <br>
+    </div>
+    <br>
+
     <div class="link">
         <a href="order.html" class="link">Back to Order</a>
     </div>    
 
-    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
     <script>
         window.createButton = document.querySelector("#enterItem"); 
     </script>
+
+    //Here is all the field input and button functionality as well as functions
     <script src="AddItem.js" type="module"></script>
     
-
 </body>
 </html>
