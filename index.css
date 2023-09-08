@@ -148,7 +148,7 @@ ul li {
   color: #fff;
   border: none;
   transition: all 0.5s ease-in-out;
-  background-color: #fb3f3f;
+  background-color: rgb(227, 64, 64);
 }
 
 .cantidad {
