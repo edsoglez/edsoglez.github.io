@@ -34,6 +34,10 @@ fieldText.addEventListener("keypress", function(event) {
 
 //refrences DB in current scope
 const dbref = ref(db)
+let DateInfo = new Date()
+let date = String(DateInfo)
+console.log(date)
+let dt = date.substring(4,11) + date.substring(16,21)
 
 function addItem(){
     //Checks if field is empty
@@ -57,6 +61,8 @@ function addItem(){
                         Categoria: fieldCategoria.value,
                         Cantidad: 0,
                         Urgente: false,
+                        Date: "",
+                        Modder: loggedUser
                     })
                     fieldText.value= ""; //Resets input field
                 }
