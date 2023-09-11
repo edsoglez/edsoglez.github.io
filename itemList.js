@@ -60,7 +60,8 @@ function Render(text,cantidad,urgente,id){
     _cantidad.addEventListener("click", () => {
         if(canEdit=="true"){
         update(ref(db,'Items/'+id),{
-            Cantidad: cantidad + 1
+            Cantidad: cantidad + 1,
+            Timestamp: firebase.firestore.FieldValue.serverTimestamp()
         });
         }
         else{
@@ -72,12 +73,14 @@ function Render(text,cantidad,urgente,id){
     if(canEdit=="true"){
         if(urgente==true){
             update(ref(db,'Items/'+id),{
-            Urgente: false
+            Urgente: false,
+            Timestamp: firebase.firestore.FieldValue.serverTimestamp()
         });
         }    
         else{
             update(ref(db,'Items/'+id),{
-            Urgente: true
+            Urgente: true,
+            Timestamp: firebase.firestore.FieldValue.serverTimestamp()
         });
         } 
     }
