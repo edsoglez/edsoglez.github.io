@@ -12,6 +12,7 @@ console.log(loggedUser)
 if(loggedUser == null){
     location.href = 'index.html';
 }
+
 let DateInfo = new Date()
 let date = String(DateInfo)
 console.log(date)
