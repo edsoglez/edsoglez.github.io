@@ -16,7 +16,7 @@ if(loggedUser == null){
 let DateInfo = new Date()
 let date = String(DateInfo)
 console.log(date)
-let dt = date.substring(4,11) + date.substring(16,21)
+let dt = date
 
 console.log(dt)
 //Test for multiple item
