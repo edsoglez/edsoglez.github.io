@@ -9,32 +9,9 @@
 
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+    <script src="dbConfig.js" type="module"></script>
 
     <script type="module">
-        //Import all JS dependencies and config database
-        import {initializeApp} from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js";
-        import {getDatabase, set, get, update, remove, ref, child, onValue} from "https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js"; 
-
-        //DB/API config
-        const firebaseConfig = {
-            apiKey: "AIzaSyDb87oTfIXSDWFTmCwpoZ1hpjovJLtwDI0",
-            authDomain: "calesawebapp.firebaseapp.com",
-            databaseURL: "https://calesawebapp-default-rtdb.firebaseio.com",
-            projectId: "calesawebapp",
-            storageBucket: "calesawebapp.appspot.com",
-            messagingSenderId: "992390081249",
-            appId: "1:992390081249:web:6b5a47227f9546e64ae5a0"
-        }; 
-
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        window.db = getDatabase();    
-
-        //creates references for the db and its subdirectories
-        window.dbref = ref(db)
-        window.itemRef = ref(db,'Items/');
-        window.userRef = ref(db,'Users/');
-
         //gets Current user and permisions saved on local storage
         window.loggedUser = localStorage.getItem("USER");
         window.canEdit = localStorage.getItem("canEdit");
@@ -49,11 +26,7 @@
                         localStorage.setItem("canEdit",USER.canEdit)
                         localStorage.setItem('canAdd',USER.canAdd)
                 }
-                else{   
-                    
-                }   
-            }
-        )
+                else{}})
     </script>
 </head>
 <body>
