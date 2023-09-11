@@ -191,18 +191,22 @@ ul li {
     display: inline-block;
     background-color: rgb(115, 114, 114);
     color: rgb(115, 114, 114);
+
+    margin-bottom: 0px;
 }
 
 .urgente{
     display: inline-block;
     background-color: rgb(227, 64, 64);
     color:  rgb(227, 64, 64);
+    margin-bottom: 0px;
 }
 
 .non{
     display: inline-block;
     background-color: rgb(255, 200, 0);
     color:  rgb(255, 200, 0);
+    margin-bottom: 0px;
 }
 
 
