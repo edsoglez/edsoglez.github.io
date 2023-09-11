@@ -1,7 +1,7 @@
 html, body {
     margin: 0;
     padding: 0;
-    background-color: #d4d4d4;
+    background-color: #ececec;
     font-family: 'Gotham', sans-serif;
     color: #432000;
 }
@@ -90,6 +90,7 @@ h3 {
     padding: 10px;
     padding-top: 20px;
     border-radius: 30px;
+    box-shadow: 15px;
 }
 
 ul {
