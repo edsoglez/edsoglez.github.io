@@ -41,7 +41,7 @@ function Render(text,cantidad,urgente,id,Date){
             else{_urgente.classList.add('non')} 
         }
 
-    _date.innerHTML = Date;
+    _date.innerHTML = "Modified "+Date;
     _text.innerHTML = text;
     _cantidad.innerHTML = cantidad;
     _urgente.innerHTML = '_';
