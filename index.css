@@ -10,6 +10,16 @@ html, body {
     text-align: center;
 }
 
+.subinfo{
+    font-size: 10px;
+    color: grey;
+    flex-wrap:nowrap;
+    text-align: left;
+    align-content: left;
+    margin-left: 20px;
+    padding-top: 0px;
+}
+
 .chooseSelect{
     width: 95%;
     text-align: center;
@@ -136,6 +146,7 @@ ul li {
 
 .item   {
     margin:5px;
+    margin-bottom: 0px;
     padding: 5px;
     padding-left: 15px;
     width: 55%;
