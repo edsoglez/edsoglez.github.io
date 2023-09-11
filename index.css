@@ -151,6 +151,7 @@ ul li {
 
 .urgencia {
     padding: 5px;
+    margin-bottom: 0px;
     margin:5px;
     width: 30px;
     height: auto;
@@ -178,6 +179,7 @@ ul li {
 
 .cantidad {
     margin:5px;
+    margin-bottom: 0px;
     padding: 5px;
     width: 40px;
     display: inline-block;
