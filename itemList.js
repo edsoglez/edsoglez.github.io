@@ -20,7 +20,7 @@ let dt = date.substring(4,11) + date.substring(16,21)
 console.log(dt)
 //Test for multiple item
 //console.log(USER); need to get USER varibale across all files from index
-function Render(text,cantidad,urgente,id,Date){
+function Render(text,cantidad,urgente,id,Date,Modder){
 
     console.log(date)
     
@@ -41,7 +41,7 @@ function Render(text,cantidad,urgente,id,Date){
             else{_urgente.classList.add('non')} 
         }
 
-    _date.innerHTML = "Modified "+Date;
+    _date.innerHTML = "Modified "+Date+" by "+Modder;
     _text.innerHTML = text;
     _cantidad.innerHTML = cantidad;
     _urgente.innerHTML = '_';
@@ -59,7 +59,8 @@ function Render(text,cantidad,urgente,id,Date){
             update(ref(db,'Items/'+id),{
                 Cantidad: 0,
                 Urgente: false,
-                Date: dt
+                Date: dt,
+                Modder: loggedUser
             });
         }
         else{
@@ -73,7 +74,8 @@ function Render(text,cantidad,urgente,id,Date){
         if(canEdit=="true"){
         update(ref(db,'Items/'+id),{
             Cantidad: cantidad + 1,
-            Date: dt
+            Date: dt,
+            Modder: loggedUser
         });
         }
         else{
@@ -86,13 +88,15 @@ function Render(text,cantidad,urgente,id,Date){
         if(urgente==true){
             update(ref(db,'Items/'+id),{
             Urgente: false,
-            Date: dt
+            Date: dt,
+            Modder: loggedUser
         });
         }    
         else{
             update(ref(db,'Items/'+id),{
             Urgente: true,
-            Date: dt
+            Date: dt,
+            Modder: loggedUser
         });
         } 
     }
@@ -132,6 +136,7 @@ onValue(itemRef, (snapshot)=>{
                 let Urgente = ChildSnapshot.val().Urgente;
                 let id = ChildSnapshot.val().id;
                 let Date = ChildSnapshot.val().Date;
+                let Modder = ChildSnapshot.val().Modder;
 
                 if(ChildSnapshot.val().Text=="Vaso Tp16"){
                     window.currentStatus = ChildSnapshot.val().Fake;    
@@ -139,7 +144,7 @@ onValue(itemRef, (snapshot)=>{
                 
                 
                 if(ChildSnapshot.val().Categoria==document.querySelector("#selectCategoria").value){
-                Render(Text,Cantidad,Urgente,id,Date);
+                Render(Text,Cantidad,Urgente,id,Date,Modder);
                 
                 }
             }
