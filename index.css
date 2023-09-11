@@ -17,13 +17,14 @@ html, body {
 
 .subinfo{
     font-size: 12px;
+    width: 62%;
     color: grey;
-    flex-wrap:nowrap;
-    text-align: left;
+    flex-wrap: nowrap;
+    text-align: center;
     align-content: left;
-    margin-left: 5%;
     margin-top: 0px;
-    padding-top: 0px;
+    margin: 0px;
+    padding-top: 2px;
     padding-bottom: 0px;
 }
 a{
