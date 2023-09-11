@@ -11,7 +11,7 @@ html, body {
 }
 
 .subinfo{
-    font-size: 10px;
+    font-size: 12px;
     color: grey;
     flex-wrap:nowrap;
     text-align: left;
