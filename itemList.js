@@ -60,8 +60,7 @@ function Render(text,cantidad,urgente,id){
     _cantidad.addEventListener("click", () => {
         if(canEdit=="true"){
         update(ref(db,'Items/'+id),{
-            Cantidad: cantidad + 1,
-            Timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            Cantidad: cantidad + 1
         });
         }
         else{
