@@ -73,14 +73,12 @@ function Render(text,cantidad,urgente,id){
     if(canEdit=="true"){
         if(urgente==true){
             update(ref(db,'Items/'+id),{
-            Urgente: false,
-            Timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            Urgente: false
         });
         }    
         else{
             update(ref(db,'Items/'+id),{
-            Urgente: true,
-            Timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            Urgente: true
         });
         } 
     }
