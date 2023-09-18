@@ -1,0 +1,82 @@
+import {getDatabase, set, get, update, remove, ref, child, onValue} from "https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js"; 
+
+try{
+    window.loggedUser = localStorage.getItem("USER");
+    window.canEdit = localStorage.getItem("canEdit");
+    window.canAdd = localStorage.getItem("canAdd");
+}
+catch(exception){
+    location.href = 'index.html';
+}
+console.log(loggedUser)
+if(loggedUser == null){
+    location.href = 'index.html';
+}
+
+let DateInfo = new Date()
+let date = String(DateInfo)
+console.log(date)
+let dt = date
+
+console.log(dt)
+//Test for multiple item
+//console.log(USER); need to get USER varibale across all files from index
+function Render(text,cantidad,urgente,id,Date,Modder){
+
+    console.log(date)
+    
+    let ul = document.getElementById("itemListSummary");
+    let _text = document.createElement('li');
+    let _date = document.createElement('li');
+    let _cantidad = document.createElement('li');
+    let _urgente = document.createElement('li');
+    
+
+    _text.classList.add('item')
+    _date.classList.add('subinfo')
+    _cantidad.classList.add('cantidad')
+    _urgente.classList.add('urgencia')
+
+    if (cantidad == 0 ){_urgente.classList.add('zero') } 
+    else{   if (urgente == true){_urgente.classList.add('urgente') }
+            else{_urgente.classList.add('non')} 
+        }
+
+    _date.innerHTML = "Modified "+Date.substring(4,11)+" by "+Modder+" @ "+Date.substring(16,21);
+    _text.innerHTML = text;
+    _cantidad.innerHTML = cantidad;
+    _urgente.innerHTML = '_';
+
+    ul.appendChild(_text);
+    ul.appendChild(_cantidad);
+    ul.appendChild(_urgente);
+    ul.appendChild(_date);
+    ul.append();    
+}
+
+onValue(itemRef, (snapshot)=>{
+        document.getElementById("itemListSummary").innerHTML = "" // on change, reset to black and re-render
+        snapshot.forEach(
+            function(ChildSnapshot){
+                let Text = ChildSnapshot.val().Text;
+                let Cantidad = ChildSnapshot.val().Cantidad;
+                let Urgente = ChildSnapshot.val().Urgente;
+                let id = ChildSnapshot.val().id;
+                let Date = ChildSnapshot.val().Date;
+                let Modder = ChildSnapshot.val().Modder;
+
+                if(ChildSnapshot.val().Text=="Vaso Tp16"){
+                    window.currentStatus = ChildSnapshot.val().Fake;    
+                }
+                
+                
+                if(ChildSnapshot.val().Cantidad!=0){
+                Render(Text,Cantidad,Urgente,id,Date,Modder);
+                }
+            }
+        )
+});
+
+
+
+    
