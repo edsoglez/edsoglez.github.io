@@ -16,20 +16,18 @@
         
     <div class="container">
         <div class="centered">
-            <select name="categoria" id="selectCategoria" class="chooseSelect">
-            <option value="Desechable">Desechable</option>
-            <option value="Bebidas">Bebidas</option>
-            <option value="Pasteles">Pasteles</option>
-            <option value="Sabor">Sabor</option>
-            <option value="Insumo">Insumo</option>
-            <option value="Papeleria">Papeleria</option>
-            <option value="Limpieza">Limpieza</option>
+            <select name="categoria" id="selectVendor" class="chooseSelect">
+            <option value="Costco">Costco</option>
+            <option value="Sams">Sams</option>
+            <option value="Unica">Unica</option>
+            <option value="Origen">Origen</option>
+            <option value="Etrusca">Etrusca</option>
         </select></div>
         
         <ul id="itemList"></ul>
     </div> <br>
     <div class="link">
-        <a href="byVendor.html" class="link">by Vendor</a>
+        <a href="order.html" class="link">by Catergory</a>
         <a href="AddItem.html" class="link">Add Item</a>
         <a href="summary.html" class="link">Summary</a>
         <a href="index.html" class="link">Sign out</a>
@@ -38,9 +36,9 @@
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
     <script>
-        window.selectCategoria = document.querySelector("#selectCategoria");
+        window.selectVendor = document.querySelector("#selectVendor");
         
     </script>
-<script src="itemList.js" type="module"></script>
+<script src="byVendor.js" type="module"></script>
 </body>
 </html>
