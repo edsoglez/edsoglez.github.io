@@ -144,7 +144,9 @@ onValue(itemRef, (snapshot)=>{
                 
                 
                 if(ChildSnapshot.val().Vendor==document.querySelector("#selectVendor").value){
-                Render(Text,Cantidad,Urgente,id,Date,Modder);
+                    if(ChildSnapshot.val().Cantidad!=0){
+                        Render(Text,Cantidad,Urgente,id,Date,Modder);
+                        }
                 
                 }
             }
