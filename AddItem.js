@@ -17,6 +17,7 @@ if(loggedUser == null){
 //defines input elements
 window.fieldText = document.querySelector("#enterText");
 window.fieldCategoria = document.querySelector("#enterCategoria");
+window.fieldVendor = document.querySelector("#enterVendor");
 createButton.addEventListener('click',addItem);
 
 //gives input functionality for submiting with Enter Keypress
@@ -41,8 +42,8 @@ let dt = date.substring(4,11) + date.substring(16,21)
 
 function addItem(){
     //Checks if field is empty
-    if(fieldText.value == ""){
-        alert("Cannot leave item blank")
+    if(fieldText.value == "" || fieldCategoria.value == "" || fieldVendor.value ==""){
+        alert("Todos los campos deben llenarse")
         return //if empty exit function, since it would erase all DB items
     }
     else{
@@ -59,10 +60,12 @@ function addItem(){
                         id: fieldText.value,
                         Text: fieldText.value,
                         Categoria: fieldCategoria.value,
+                        Vendor: fieldVendor.value,
                         Cantidad: 0,
                         Urgente: false,
                         Date: "",
                         Modder: loggedUser
+                    
                     })
                     fieldText.value= ""; //Resets input field
                 }
