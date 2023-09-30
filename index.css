@@ -29,7 +29,8 @@ html, body {
 }
 
 .chooseSelect{
-    font-size: 28px;
+    font-size: 24px;
+    font-weight: bold;
     width: 95%;
     text-align: center;
     background-color:  #b2b2b2;
