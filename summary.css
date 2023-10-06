@@ -180,13 +180,6 @@ ul li {
     
 }
 
-.item:hover {
-    color: #fff;
-    border: none;
-    transition: all 0.5s ease-in-out;
-    background-color: rgb(227, 64, 64);
-}
-
 .cantidad {
     margin:5px;
     margin-bottom: 0px;
