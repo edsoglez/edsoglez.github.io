@@ -172,11 +172,12 @@ ul li {
     margin-bottom: 0px;
     padding: 5px;
     padding-left: 15px;
-    width: 40%;
+    width: 45%;
     display: inline-block;
     background-color: #dddddd;
     text-align: left;
     transition: all 0.5s ease-in-out;
+    
 }
 
 .item:hover {
