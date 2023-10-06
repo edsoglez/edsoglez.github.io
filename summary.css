@@ -1,0 +1,232 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    background-color: #393939;
+    font-family: 'Gotham', sans-serif;
+    color: #000000;
+}
+
+.loginForm {
+    text-align: center;
+}
+
+.header{
+    text-decoration: none;
+    height: 63px;
+}
+
+.subinfoholder{
+    font-size: 12px;
+    width: 100%;
+    color: grey;
+    flex-wrap: nowrap;
+    text-align: center;
+    align-content: left;
+    margin-top: 0px;
+    margin: 0px;
+    padding-top: 2px;
+    padding-bottom: 0px;
+}
+
+.chooseSelect{
+    font-size: 24px;
+    font-weight: bold;
+    width: 95%;
+    text-align: center;
+    background-color:  #b2b2b2;
+    color: rgb(49, 49, 49);
+    
+}
+.centered{
+    text-align: center;
+}
+.setSelect{
+    width: 220px;
+    height: 50px;
+    background-color: #dddddd;
+}
+
+select{
+    -moz-appearance: none; 
+    -webkit-appearance: none; 
+    appearance: none;
+    margin:10px;
+    margin-top: 5px;
+    padding: 10px;
+    border: 0;
+    border-radius: 15px;
+    background-color: #dddddd;
+    text-align: center;
+    font-size: 20px;
+}
+
+input{
+    margin:5px;
+    width: 200px;
+    padding: 10px;
+    border: 0;
+    border-radius: 15px;
+    background-color: #dddddd;
+    text-align: center;
+    font-size: 30px;
+}
+
+button{
+    margin:15px;
+    padding: 10px;
+    border: 0;
+    border-radius: 15px;
+    background-color: #A1231E;
+    color: white;
+    text-align: center;
+    font-size: 30px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 30px;
+    font-weight:bold;
+    color:  white;
+    margin: 0;
+    margin-top: 10px;
+    
+}
+
+h3 {
+    text-align: center;
+    font-size: 16px;
+    color:  white;
+    font-weight: normal;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+
+.container {
+    min-width: 250px;
+    background-color: rgb(255, 255, 255);
+    margin:0px;
+    padding: 10px;
+    padding-top: 20px;
+    border-radius: 30px;
+    box-shadow: 15px;
+}
+
+ul {
+    list-style-type: none;
+    padding:1px;
+    margin:0px;
+    border-radius: 15px;
+    height: 370px;
+    overflow:hidden; 
+    overflow-y:scroll;
+    align-items: center;
+    text-align: center;
+}
+
+.link{
+    text-align: center;
+    margin-left: 15px;
+    margin-right: 15px;
+    padding: 0;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+
+a.linkbutton{
+    display: inline-block;
+    text-decoration: none;
+    font-size: 16px;
+    color:  white;
+    background-color: #A1231E;
+    font-weight: normal;
+    border: 3px solid #A1231E;
+    border-radius: 10px;
+    padding: 5px;
+    margin: 5px;
+    margin-top: 2px;
+}
+
+ul li {
+    background-color: #fffdf800;
+    padding: 5px;
+    margin: 0px;
+    border-radius: 15px;
+    border:0;
+    font-size: 20px;
+    text-align: center;
+}
+
+.urgencia {
+    padding: 5px;
+    margin-bottom: 0px;
+    margin:5px;
+    width: 25px;
+    height: auto;
+    text-align: center;
+}
+
+.item   {
+    margin:5px;
+    margin-bottom: 0px;
+    padding: 5px;
+    padding-left: 15px;
+    width: 60%;
+    display: inline-block;
+    background-color: #dddddd;
+    text-align: left;
+    transition: all 0.5s ease-in-out;
+    
+}
+
+.item:hover {
+    color: #fff;
+    border: none;
+    transition: all 0.5s ease-in-out;
+    background-color: rgb(227, 64, 64);
+}
+
+.cantidad {
+    margin:5px;
+    margin-bottom: 0px;
+    padding: 5px;
+    width: 30px;
+    display: inline-block;
+    background-color: #dddddd;
+    text-align: center;
+}
+.reset {
+    margin:5px;
+    margin-bottom: 0px;
+    padding: 5px;
+    width: 30px;
+    display: inline-block;
+    background-color: #dddddd;
+    text-align: center;
+}
+
+.zero{
+    display: inline-block;
+    background-color: rgb(115, 114, 114);
+    color: rgb(115, 114, 114);
+
+    margin-bottom: 0px;
+}
+
+.urgente{
+    display: inline-block;
+    background-color: rgb(227, 64, 64);
+    color:  rgb(227, 64, 64);
+    margin-bottom: 0px;
+}
+
+.non{
+    display: inline-block;
+    background-color: rgb(255, 200, 0);
+    color:  rgb(255, 200, 0);
+    margin-bottom: 0px;
+}
+
+
+
