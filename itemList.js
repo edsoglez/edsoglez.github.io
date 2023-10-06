@@ -24,6 +24,7 @@ console.log(dt)
 function Render(text,cantidad,urgente,id,Date,Modder){
 
     console.log(date)
+    let subvisible=false;
     
     let ul = document.getElementById("itemList");
     let _text = document.createElement('li');
@@ -44,7 +45,7 @@ function Render(text,cantidad,urgente,id,Date,Modder){
             else{_urgente.classList.add('non')} 
         }
 
-    _date.innerHTML = "Modified "+Date.substring(4,11)+" by "+Modder+" @ "+Date.substring(16,21);
+    _date.innerHTML = '';
     _text.innerHTML = text;
     _cantidad.innerHTML = cantidad;
     _urgente.innerHTML = '_';
@@ -56,6 +57,18 @@ function Render(text,cantidad,urgente,id,Date,Modder){
     ul.appendChild(_urgente);
     ul.appendChild(_date);
     ul.append();
+
+
+    _text.addEventListener("click", () => {
+        if(subvisible){
+            subvisible=false;
+            _date.innerHTML = '';
+        }
+        else{
+            subvisible=true;
+            _date.innerHTML = "Modified "+Date.substring(4,11)+" by "+Modder+" @ "+Date.substring(16,21);
+        }
+    });
 
     _reset.addEventListener("click", () => {
 
