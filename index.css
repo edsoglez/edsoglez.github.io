@@ -15,9 +15,9 @@ html, body {
     height: 63px;
 }
 
-.subinfo{
+.subinfoholder{
     font-size: 12px;
-    width: 62%;
+    width: 100%;
     color: grey;
     flex-wrap: nowrap;
     text-align: center;

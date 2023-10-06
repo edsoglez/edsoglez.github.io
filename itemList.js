@@ -66,7 +66,10 @@ function Render(text,cantidad,urgente,id,Date,Modder){
         }
         else{
             subvisible=true;
-            _date.innerHTML = "Modified "+Date.substring(4,11)+" by "+Modder+" @ "+Date.substring(16,21);
+            _date.innerHTML = 
+            `<div class="subinfoholder">
+             Modified: ${Date.substring(4,11)} by ${Modder} @ ${Date.substring(16,21)}
+             </div>`;
         }
     });
 
