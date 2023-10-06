@@ -30,12 +30,14 @@ function Render(text,cantidad,urgente,id,Date,Modder){
     let _date = document.createElement('li');
     let _cantidad = document.createElement('li');
     let _urgente = document.createElement('li');
+    let _reset = document.createElement('li');
     
 
     _text.classList.add('item')
     _date.classList.add('subinfo')
     _cantidad.classList.add('cantidad')
     _urgente.classList.add('urgencia')
+    _reset.classList.add('reset')
 
     if (cantidad == 0 ){_urgente.classList.add('zero') } 
     else{   if (urgente == true){_urgente.classList.add('urgente') }
@@ -46,15 +48,16 @@ function Render(text,cantidad,urgente,id,Date,Modder){
     _text.innerHTML = text;
     _cantidad.innerHTML = cantidad;
     _urgente.innerHTML = '_';
+    _reset.innerHTML = '⭕️';
 
+    ul.appendChild(_reset);
     ul.appendChild(_text);
-    
     ul.appendChild(_cantidad);
     ul.appendChild(_urgente);
     ul.appendChild(_date);
     ul.append();
 
-    _text.addEventListener("click", () => {
+    _reset.addEventListener("click", () => {
 
         if(canEdit=="true"){
             update(ref(db,'Items/'+id),{
@@ -146,7 +149,6 @@ onValue(itemRef, (snapshot)=>{
                 
                 if(ChildSnapshot.val().Categoria==document.querySelector("#selectCategoria").value){
                 Render(Text,Cantidad,Urgente,id,Date,Modder);
-                
                 }
             }
         )

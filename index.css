@@ -162,7 +162,7 @@ ul li {
     padding: 5px;
     margin-bottom: 0px;
     margin:5px;
-    width: 30px;
+    width: 25px;
     height: auto;
     text-align: center;
 }
@@ -190,7 +190,16 @@ ul li {
     margin:5px;
     margin-bottom: 0px;
     padding: 5px;
-    width: 40px;
+    width: 35px;
+    display: inline-block;
+    background-color: #dddddd;
+    text-align: center;
+}
+.reset {
+    margin:5px;
+    margin-bottom: 0px;
+    padding: 5px;
+    width: 30px;
     display: inline-block;
     background-color: #dddddd;
     text-align: center;
