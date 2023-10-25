@@ -45,7 +45,7 @@ const codesProxy = new Proxy(codes, {
 
     // Append elements to custom element
     temp.appendChild(rawValue);
-    temp.appendChild(format);
+    //temp.appendChild(format);
 
     // Append Custom element to scanned container
     scanned.appendChild(temp);
