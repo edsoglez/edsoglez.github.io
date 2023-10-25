@@ -32,12 +32,11 @@ const codesProxy = new Proxy(codes, {
     // Select the container scanned
     const scanned = document.querySelector('#scanned')
     const temp = document.createElement('scaned-item')
-    const format = document.createElement('span')
     const rawValue = document.createElement('span')
 
     // Goes into the custom elements formate slot
-    format.setAttribute('slot', 'format');
-    format.innerHTML = value.format;
+    //format.setAttribute('slot', 'format');
+    //format.innerHTML = value.format;
     
     // Goes into the custom elements raw slot 
     rawValue.setAttribute('slot', 'raw');
