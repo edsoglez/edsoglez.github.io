@@ -49,7 +49,7 @@ function Render(text,cantidad,urgente,id,Date,Modder){
     _text.innerHTML = text;
     _cantidad.innerHTML = cantidad;
     _urgente.innerHTML = '_';
-    _reset.innerHTML = '⭕️';
+    _reset.innerHTML = '✅';
 
     ul.appendChild(_reset);
     ul.appendChild(_text);
