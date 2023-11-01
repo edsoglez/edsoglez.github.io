@@ -31,12 +31,14 @@ function Render(text,cantidad,urgente,id,Date,Modder){
     let _date = document.createElement('li');
     let _cantidad = document.createElement('li');
     let _urgente = document.createElement('li');
+    let _reset = document.createElement('li');
     
 
     _text.classList.add('item')
     _date.classList.add('subinfo')
     _cantidad.classList.add('cantidad')
     _urgente.classList.add('urgencia')
+    _reset.classList.add('reset')
 
     if (cantidad == 0 ){_urgente.classList.add('zero') } 
     else{   if (urgente == true){_urgente.classList.add('urgente') }
@@ -47,7 +49,9 @@ function Render(text,cantidad,urgente,id,Date,Modder){
     _text.innerHTML = text;
     _cantidad.innerHTML = cantidad;
     _urgente.innerHTML = '_';
+    _reset.innerHTML = '⭕️';
 
+    ul.appendChild(_reset);
     ul.appendChild(_text);
     ul.appendChild(_cantidad);
     ul.appendChild(_urgente);
@@ -66,6 +70,22 @@ function Render(text,cantidad,urgente,id,Date,Modder){
             Modified: ${Date.substring(4,11)} by ${Modder} @ ${Date.substring(16,21)}
             </div>`;
         }
+    });
+
+    _reset.addEventListener("click", () => {
+
+        if(canEdit=="true"){
+            update(ref(db,'Items/'+id),{
+                Cantidad: 0,
+                Urgente: false,
+                Date: dt,
+                Modder: loggedUser
+            });
+        }
+        else{
+            
+        }
+        
     });
 }
 
