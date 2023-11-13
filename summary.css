@@ -34,10 +34,11 @@ html, body {
     font-weight: bold;
     width: 95%;
     text-align: center;
-    background-color:  #b2b2b2;
-    color: rgb(49, 49, 49);
-    
+    background-color:  #c91616;
+    color: rgb(255, 255, 255);
 }
+    
+
 .centered{
     text-align: center;
 }
