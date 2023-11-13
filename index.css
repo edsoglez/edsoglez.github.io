@@ -1,7 +1,8 @@
 html, body {
     margin: 0;
     padding: 0;
-    background-color: #393939;
+    background-image: url('https://as2.ftcdn.net/v2/jpg/01/83/50/03/1000_F_183500322_FlkTJuJJkfrnGnRmLS4nVisf8ipIdmGj.jpg');
+    background-position: center; /* Center the image */
     font-family: 'Gotham', sans-serif;
     color: #000000;
 }
@@ -33,8 +34,8 @@ html, body {
     font-weight: bold;
     width: 95%;
     text-align: center;
-    background-color:  #b2b2b2;
-    color: rgb(49, 49, 49);
+    background-color:  #c91616;
+    color: rgb(255, 255, 255);
     
 }
 .centered{
@@ -63,23 +64,35 @@ select{
 input{
     margin:5px;
     width: 200px;
-    padding: 10px;
-    border: 0;
-    border-radius: 15px;
-    background-color: #dddddd;
-    text-align: center;
+    padding: 5px;
+    padding-left: 20px;
+    border: 1px solid gray;
+    border-radius: 10px;
+    background-color: #f6f6f6;
     font-size: 30px;
+    text-align: left;
 }
+
+
 
 button{
     margin:15px;
-    padding: 10px;
+    padding: 15px;
     border: 0;
     border-radius: 15px;
     background-color: #A1231E;
     color: white;
     text-align: center;
     font-size: 30px;
+}
+#loginSubmit{
+    margin: 20px;
+    padding: 5px;
+    width: 200px;
+    border-radius: 15px;
+    justify-content: center;
+    text-align: center;
+    background-color: rgb(0, 77, 0);
 }
 
 h1 {
@@ -138,12 +151,13 @@ a.linkbutton{
     display: inline-block;
     text-decoration: none;
     font-size: 16px;
+    font-weight: bold;
     color:  white;
-    background-color: #A1231E;
+    background-color: rgb(0, 77, 0);
     font-weight: normal;
-    border: 3px solid #A1231E;
+    border: 0px solid #ffffff;
     border-radius: 10px;
-    padding: 5px;
+    padding: 10px;
     margin: 5px;
     margin-top: 2px;
 }
