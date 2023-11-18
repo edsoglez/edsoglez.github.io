@@ -1,7 +1,7 @@
 html, body {
     margin: 0;
     padding: 0;
-    background-image: url('https://as2.ftcdn.net/v2/jpg/01/83/50/03/1000_F_183500322_FlkTJuJJkfrnGnRmLS4nVisf8ipIdmGj.jpg');
+    background-color: black;
     background-position: center; /* Center the image */
     font-family: 'Gotham', sans-serif;
     color: #000000;
@@ -92,7 +92,7 @@ button{
     border-radius: 15px;
     justify-content: center;
     text-align: center;
-    background-color: rgb(0, 77, 0);
+    background-color: rgb(52, 50, 50);
 }
 
 h1 {
@@ -153,9 +153,9 @@ a.linkbutton{
     font-size: 16px;
     font-weight: bold;
     color:  white;
-    background-color: rgb(0, 77, 0);
+    background-color: rgba(0, 77, 0, 0);
     font-weight: normal;
-    border: 0px solid #ffffff;
+    border: 2px solid #ffffff;
     border-radius: 10px;
     padding: 10px;
     margin: 5px;
@@ -231,14 +231,14 @@ ul li {
 .urgente{
     display: inline-block;
     background-color: rgb(227, 64, 64);
-    color:  rgb(227, 64, 64);
+    color:  rgb(255, 255, 255);
     margin-bottom: 0px;
 }
 
 .non{
     display: inline-block;
     background-color: rgb(255, 200, 0);
-    color:  rgb(255, 200, 0);
+    color:  rgb(33, 33, 33);
     margin-bottom: 0px;
 }
 

@@ -15,15 +15,28 @@ if(loggedUser == null){
 
 let DateInfo = new Date()
 let date = String(DateInfo)
-console.log(date)
+
+
 let dt = date
 
-console.log(dt)
+
 //Test for multiple item
 //console.log(USER); need to get USER varibale across all files from index
 function Render(text,cantidad,urgente,id,Date,Modder){
 
-    console.log(date)
+    let day = date.substring(8,10)
+    let DaysSince = Number(day - Date.substring(7,10))
+
+    if(DaysSince < 0){
+        DaysSince = (30 - Number(Date.substring(7,10))) + Number(day)
+    }
+        
+    if(DaysSince > 3 && urgente == false){
+        update(ref(db,'Items/'+id),{
+            Urgente: true,
+        });
+    }
+        
     let subvisible=false;
     
     let ul = document.getElementById("itemList");
@@ -48,7 +61,7 @@ function Render(text,cantidad,urgente,id,Date,Modder){
     _date.innerHTML = '';
     _text.innerHTML = text;
     _cantidad.innerHTML = cantidad;
-    _urgente.innerHTML = '_';
+    _urgente.innerHTML = DaysSince;
     _reset.innerHTML = '⭕️';
 
     ul.appendChild(_reset);
