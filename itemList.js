@@ -45,7 +45,6 @@ function Render(text,cantidad,urgente,id,Date,Modder){
     let _cantidad = document.createElement('li');
     let _urgente = document.createElement('li');
     let _reset = document.createElement('li');
-    
 
     _text.classList.add('item')
     _date.classList.add('subinfo')
@@ -87,7 +86,6 @@ function Render(text,cantidad,urgente,id,Date,Modder){
     });
 
     _reset.addEventListener("click", () => {
-
         if(canEdit=="true"){
             update(ref(db,'Items/'+id),{
                 Cantidad: 0,
@@ -104,6 +102,7 @@ function Render(text,cantidad,urgente,id,Date,Modder){
     
     
     _cantidad.addEventListener("click", () => {
+
         if(canEdit=="true"){
         update(ref(db,'Items/'+id),{
             Cantidad: cantidad + 1,
