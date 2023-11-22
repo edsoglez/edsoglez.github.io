@@ -30,25 +30,26 @@ userButton.addEventListener('blur',()=>{
 })
 
 filterButton.addEventListener('focus',()=>{
-    filterButton.style.transform = 'translate(-75px,0px)'
-    filterButton.style.height = '500px'
-    filterButton.style.width = '150px'
+    filterButton.style.transform = 'translate(-200px,0px)'
+    filterButton.style.height = 'auto'
+    filterButton.style.width = '300px'
 
     setTimeout(()=>{
         filterButton.innerHTML = `
         <h3>Categoria</h3>
-        <button class="filter-button" onmousedown="localStorage.setItem('Summary',false);localStorage.setItem('Filter','Desechable');flagUpdate()">Desechable</button><br>
-        <button class="filter-button" onmousedown="localStorage.setItem('Summary',false);localStorage.setItem('Filter','Insumo');flagUpdate()">Insumo</button><br>
-        <button class="filter-button" onmousedown="localStorage.setItem('Summary',false);localStorage.setItem('Filter','Pasteles');flagUpdate()">Pasteles</button><br>
-        <button class="filter-button" onmousedown="localStorage.setItem('Summary',false);localStorage.setItem('Filter','Sabor');flagUpdate()">Sabor</button><br>
-        <button class="filter-button" onmousedown="localStorage.setItem('Summary',false);localStorage.setItem('Filter','Bebidas');flagUpdate()">Bebidas</button><br>
-        <button class="filter-button" onmousedown="localStorage.setItem('Summary',true);localStorage.setItem('Filter','All');flagUpdate()">Summary</button><br>
+        <button class="filter-button" onmousedown="localStorage.setItem('FilterBy','Categoria');localStorage.setItem('Filter','Desechable');flagUpdate()">Desechable</button>
+        <button class="filter-button" onmousedown="localStorage.setItem('FilterBy','Categoria');localStorage.setItem('Filter','Insumo');flagUpdate()">Insumo</button>
+        <button class="filter-button" onmousedown="localStorage.setItem('FilterBy','Categoria');localStorage.setItem('Filter','Pasteles');flagUpdate()">Pasteles</button>
+        <button class="filter-button" onmousedown="localStorage.setItem('FilterBy','Categoria');localStorage.setItem('Filter','Sabor');flagUpdate()">Sabor</button>
+        <button class="filter-button" onmousedown="localStorage.setItem('FilterBy','Categoria');localStorage.setItem('Filter','Bebidas');flagUpdate()">Bebidas</button>
         <h3>Vendor</h3>
-        <button class="filter-button" onmousedown="localStorage.setItem('FilterBy','Vendor');localStorage.setItem('Filter','Costco');flagUpdate()">Costco</button><br>
-        <button class="filter-button" onmousedown="localStorage.setItem('FilterBy','Vendor');localStorage.setItem('Filter','Sams');flagUpdate()">Sams</button><br>
-        <button class="filter-button" onmousedown="localStorage.setItem('FilterBy','Vendor');localStorage.setItem('Filter','Unica');flagUpdate()">Unica</button><br>
-        <button class="filter-button" onmousedown="localStorage.setItem('FilterBy','Vendor');localStorage.setItem('Filter','Origen');flagUpdate()">Origen</button><br>
-        <button class="filter-button" onmousedown="localStorage.setItem('FilterBy','Vendor');localStorage.setItem('Filter','Dummy');flagUpdate()">Dummy</button><br>
+        <button class="filter-button" onmousedown="localStorage.setItem('FilterBy','Vendor');localStorage.setItem('Filter','Costco');flagUpdate()">Costco</button>
+        <button class="filter-button" onmousedown="localStorage.setItem('FilterBy','Vendor');localStorage.setItem('Filter','Sams');flagUpdate()">Sams</button>
+        <button class="filter-button" onmousedown="localStorage.setItem('FilterBy','Vendor');localStorage.setItem('Filter','Unica');flagUpdate()">Unica</button>
+        <button class="filter-button" onmousedown="localStorage.setItem('FilterBy','Vendor');localStorage.setItem('Filter','Origen');flagUpdate()">Origen</button>
+        <button class="filter-button" onmousedown="localStorage.setItem('FilterBy','Vendor');localStorage.setItem('Filter','Dummy');flagUpdate()">Dummy</button>
+        <h3>Resumen</h3>
+        <button class="filter-button" onmousedown="localStorage.setItem('Summary','true';localStorage.setItem('Filter','All');flagUpdate()">Summary</button>
         
         `
     },100)

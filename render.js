@@ -10,7 +10,6 @@ let dt = date
 let Filter = localStorage.getItem("Filter")
 Filter==null? localStorage.setItem("Filter","All"):null;
 
-
 let Summary = localStorage.getItem("Summary")
 Summary==null? localStorage.setItem("Summary",false):null;
 
@@ -51,40 +50,40 @@ function Render(Child,filter){
     Child.val().Cantidad!=0? urgente=Child.val().Urgente: null;
     
     try{
-        if(FilterBy=="Categoria"){
-            if(Child.val().Categoria==filter||filter=="All"){
-                List.innerHTML += 
-                    `<li id="${Child.val().Text}">
-                    <div style="display:flex" class="list-item">
-                        <div style="width:70%; text-align: left; padding-left:10px">${Child.val().Text}</div>
-                        <div style="display:flex; flex-direction: row;">
-                            <button class="quant-control" onclick="decreaseQty('${Child.key}',${Child.val().Cantidad})">-</button>
-                            <button class="quant-control" onclick="increaseQty('${Child.key}',${Child.val().Cantidad})">+</button>
+        
+            if(FilterBy=="Categoria"){
+                if(Child.val().Categoria==filter||filter=="All"){
+                    List.innerHTML += 
+                        `<li id="${Child.val().Text}">
+                        <div style="display:flex" class="list-item">
+                            <div style="width:70%; text-align: left; padding-left:10px">${Child.val().Text}</div>
+                            <div style="display:flex; flex-direction: row;">
+                                <button class="quant-control" onclick="decreaseQty('${Child.key}',${Child.val().Cantidad})">-</button>
+                                <button class="quant-control" onclick="increaseQty('${Child.key}',${Child.val().Cantidad})">+</button>
+                            </div>
+                            <div style="width:80px"><button class="quant-button" onclick="zeroQty('${Child.key}')">${Child.val().Cantidad}</button></div>
+                            <div><button class="urgente-${urgente}" onclick="urgentToggle('${Child.key}',${Child.val().Urgente})">${DaysSince}D</button></div>
                         </div>
-                        <div style="width:80px"><button class="quant-button" onclick="zeroQty('${Child.key}')">${Child.val().Cantidad}</button></div>
-                        <div><button class="urgente-${urgente}" onclick="urgentToggle('${Child.key}',${Child.val().Urgente})">${DaysSince}D</button></div>
-                    </div>
-                    <span id="${Child.val().Text}-date" class="date-container"></span>
-                    </li>`
-        }}
-        if(FilterBy=="Vendor"){
-            if(Child.val().Vendor==filter){
-                List.innerHTML += 
-                    `<li id="${Child.val().Text}">
-                    <div style="display:flex" class="list-item">
-                        <div style="width:70%; text-align: left; padding-left:10px">${Child.val().Text}</div>
-                        <div style="display:flex; flex-direction: row;">
-                            <button class="quant-control" onclick="decreaseQty('${Child.key}',${Child.val().Cantidad})">-</button>
-                            <button class="quant-control" onclick="increaseQty('${Child.key}',${Child.val().Cantidad})">+</button>
+                        <span id="${Child.val().Text}-date" class="date-container"></span>
+                        </li>`
+            }}
+            if(FilterBy=="Vendor"){
+                if(Child.val().Vendor==filter){
+                    List.innerHTML += 
+                        `<li id="${Child.val().Text}">
+                        <div style="display:flex" class="list-item">
+                            <div style="width:70%; text-align: left; padding-left:10px">${Child.val().Text}</div>
+                            <div style="display:flex; flex-direction: row;">
+                                <button class="quant-control" onclick="decreaseQty('${Child.key}',${Child.val().Cantidad})">-</button>
+                                <button class="quant-control" onclick="increaseQty('${Child.key}',${Child.val().Cantidad})">+</button>
+                            </div>
+                            <div style="width:80px"><button class="quant-button" onclick="zeroQty('${Child.key}')">${Child.val().Cantidad}</button></div>
+                            <div><button class="urgente-${urgente}" onclick="urgentToggle('${Child.key}',${Child.val().Urgente})">${DaysSince}D</button></div>
                         </div>
-                        <div style="width:80px"><button class="quant-button" onclick="zeroQty('${Child.key}')">${Child.val().Cantidad}</button></div>
-                        <div><button class="urgente-${urgente}" onclick="urgentToggle('${Child.key}',${Child.val().Urgente})">${DaysSince}D</button></div>
-                    </div>
-                    <span id="${Child.val().Text}-date" class="date-container"></span>
-                    </li>`
+                        <span id="${Child.val().Text}-date" class="date-container"></span>
+                        </li>`
+                }
             }
-        }
-            
         
     }catch(e){}
 
