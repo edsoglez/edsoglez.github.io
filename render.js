@@ -85,10 +85,30 @@ export function urgentToggle(id,current){
     });
 }
 
+export function addItemToDB(id,categoria,vendor){
+
+    if(id==""||categoria==""||vendor==""){
+        alert("Todos los campos deben llenarse")
+        return
+    } 
+
+    set(ref(db,'Items/'+id),{
+        Text: id,
+        Urgente: false,
+        Date: date,
+        Cantidad: 0,
+        Categoria: categoria,
+        Vendor: vendor
+        });
+
+    id=""
+    categoria=""
+    vendor=""
+}
+
 window.increaseQty = increaseQty;
 window.decreaseQty = decreaseQty;
 window.zeroQty = zeroQty;
 window.urgentToggle = urgentToggle;
-
-
+window.addItemToDB = addItemToDB;
 

@@ -112,18 +112,21 @@ li{
 
 input{
     margin: 10px;
-    padding: 10px;
+    padding: 0px;
+    padding-left: 10px;
     width: 200px;
     height: 60px;
     border: 1px solid gray;
     border-radius: 15px;
     background-color: white;
     color: black;
+    font-size: 14px;
 }
 select{
+    font-size: 14px;
     margin: 10px;
     padding: 10px;
-    width: 200px;
+    width: 215px;
     height: 60px;
     border: 1px solid gray;
     border-radius: 15px;
@@ -140,5 +143,17 @@ select{
     background-color: white;
     color: black;
     font-size: 16px;
+    font-weight: bold;
+}
+
+#add-submit-button{
+    margin: 10px;
+    background-color: black;
+    color: white;
+    border: 1px solid black;
+    width: 210px;
+    height: 60px;
+    border-radius: 15px;
+    font-size: 18px;
     font-weight: bold;
 }

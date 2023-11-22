@@ -19,6 +19,4 @@ window.db = getDatabase();
 window.itemRef = ref(db,'Items/');
 window.userRef = ref(db,'Users/');
 
-function increaseQty(id){
-    alert(id)
-}
+
