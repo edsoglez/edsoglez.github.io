@@ -4,6 +4,9 @@ let DateInfo = new Date()
 let date = String(DateInfo)
 let dt = date
 
+let Filter = localStorage.getItem("Filter")
+Filter==null? Filter="All":null;
+
 const List = document.getElementById('itemList')
 
 onValue(itemRef,(snapshot)=>{
@@ -11,7 +14,9 @@ onValue(itemRef,(snapshot)=>{
 
     snapshot.forEach(
     function(Child){
-        Render(Child,'All')
+        if(Child.key!="Flag"){
+            Render(Child,Filter)
+        }
     })
 })
 

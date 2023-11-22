@@ -1,3 +1,5 @@
+import {getDatabase, set, get, update, remove, ref, child, onValue} from "https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js"; 
+window.itemRef = ref(db,'Items/');
 const userButton = document.getElementById('user-button')
 const filterButton = document.getElementById('filter-button')
 
@@ -6,8 +8,6 @@ const addButton = document.getElementById('add-button')
 addButton.addEventListener('focus',()=>{
     location.href = "additem.html"
 })
-
-
 
 userButton.addEventListener('focus',()=>{
     userButton.style.transform = 'translate(-160px,0px)'
@@ -25,11 +25,17 @@ userButton.addEventListener('blur',()=>{
 })
 
 filterButton.addEventListener('focus',()=>{
-    filterButton.style.transform = 'translate(-50px,0px)'
-    filterButton.style.height = '200px'
-    filterButton.style.width = '100px'
+    filterButton.style.transform = 'translate(-75px,0px)'
+    filterButton.style.height = '250px'
+    filterButton.style.width = '150px'
 
-    filterButton.innerHTML = ""
+    filterButton.innerHTML = `
+        <button class="filter-button" onmousedown="localStorage.setItem('Filter','Desechable');flagUpdate()">Desechable</button><br>
+        <button class="filter-button" onmousedown="localStorage.setItem('Filter','Insumo');flagUpdate()">Insumo</button><br>
+        <button class="filter-button" onmousedown="localStorage.setItem('Filter','Pasteles');flagUpdate()">Pasteles</button><br>
+        <button class="filter-button" onmousedown="localStorage.setItem('Filter','Sabor');flagUpdate()">Sabor</button><br>
+        <button class="filter-button" onmousedown="localStorage.setItem('Filter','Bebidas');flagUpdate()">Bebidas</button><br>
+    `
 })
 
 filterButton.addEventListener('blur',()=>{
@@ -39,3 +45,9 @@ filterButton.addEventListener('blur',()=>{
 
     filterButton.innerHTML = `<img class="icon" width="20px" style="margin: 0px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAABZklEQVR4nO3Zr0teURzH8TNFRMQkLAwMC5YVg8kyDEsm09rammFhVf+ARZtNsJhMpqUFncE4FhYWDIbBQNDBmOj2kgcVThB/PD733u8Z5/0HXO6Lz+XCuTelWuDwWTnt3AYpqlQhBS2yp5z2boM8xTfx+45nd725pnAgbod4ft/X8DR+iNdPvLgXIsPM4EicjjH7IESGmcOvrgX4jZd9ITLMK/zpEHGKhUchMswizjpAnOP1QBAZ5g3+toj4h7cDRWSYpRYh7xtBZJiVFhDLjSIyzIcGEautIK4gT7DWAGK9d+3WIFeYIWwOELGF4VYRGWYE2wNAfMRoJ4gMM4ZPj0D0jtfjKUIY7/O8v4+JFClM9gGZTBHzwFLUVEiw1EWCpS4SLHWRYKmLBEtdJFjqIsFSFwkWdv+Xg9UI3uGkaMh1vf972Cgech3m8bV4yF2PWyoxNzxuqeRc/sr70vs62fW91FKDXQBLWu3l0s62iwAAAABJRU5ErkJggg==">`
 })
+
+function flagUpdate(){
+    location.reload()
+}
+
+window.flagUpdate = flagUpdate
