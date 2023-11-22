@@ -41,13 +41,18 @@
         
     </div>
     
+    
 
     <div id="main-container" class="container">
+        <div id="current-filter" style="margin: 0px; margin-top: 10px; padding: 0px; height: 10px; font-size: 16px;"></div>
         <ul id="itemList" style="list-style: none;">
 
         </ul>
     </div>
 
+    <script>
+        document.getElementById('current-filter').textContent = localStorage.getItem('Filter')
+    </script>
     
     
 </body>

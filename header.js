@@ -29,13 +29,16 @@ filterButton.addEventListener('focus',()=>{
     filterButton.style.height = '250px'
     filterButton.style.width = '150px'
 
-    filterButton.innerHTML = `
+    setTimeout(()=>{
+        filterButton.innerHTML = `
         <button class="filter-button" onmousedown="localStorage.setItem('Filter','Desechable');flagUpdate()">Desechable</button><br>
         <button class="filter-button" onmousedown="localStorage.setItem('Filter','Insumo');flagUpdate()">Insumo</button><br>
         <button class="filter-button" onmousedown="localStorage.setItem('Filter','Pasteles');flagUpdate()">Pasteles</button><br>
         <button class="filter-button" onmousedown="localStorage.setItem('Filter','Sabor');flagUpdate()">Sabor</button><br>
         <button class="filter-button" onmousedown="localStorage.setItem('Filter','Bebidas');flagUpdate()">Bebidas</button><br>
     `
+    },100)
+    
 })
 
 filterButton.addEventListener('blur',()=>{
