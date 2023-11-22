@@ -70,17 +70,20 @@ function Render(Child,filter){
 export function increaseQty(id,current){
     update(ref(db,'Items/'+id),{
     Cantidad: current +1,
+    Date: date
     });
 }
 export function decreaseQty(id,current){
     if(current==0) return
     update(ref(db,'Items/'+id),{
     Cantidad: current -1,
+    Date: date
     });
 }
 export function zeroQty(id){
     update(ref(db,'Items/'+id),{
     Cantidad: 0,
+    Date: date
     });
 }
 export function urgentToggle(id,current){
