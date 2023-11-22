@@ -8,12 +8,17 @@ const addButton = document.getElementById('add-button')
 addButton.addEventListener('focus',()=>{
     location.href = "additem.html"
 })
+localStorage.removeItem
 
 userButton.addEventListener('focus',()=>{
-    userButton.style.transform = 'translate(-160px,0px)'
+    userButton.style.transform = 'translate(-100px,0px)'
     userButton.style.height = '200px'
-    userButton.style.width = '200px'
-    userButton.innerHTML = ""
+    userButton.style.width = '150px'
+    userButton.innerHTML = `
+        Usuario: ${localStorage.getItem("USER")}
+        <br>
+        <button onmousedown="localStorage.removeItem('USER');location.href = 'index.html'">Cerrar Sesión</button>
+    `
 })
 
 userButton.addEventListener('blur',()=>{
