@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calesa Add Item</title>
+    <title>Calesa Order</title>
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="headerfooter.css">
     <script type="module" src="dbconfig.js"></script>
@@ -12,13 +12,11 @@
 
 </head>
 <body>
-    <script>
-        
-    </script>
+    
 
     <div id="header" style="display: flex ;">
         <div id="header-left">
-            <button class="logo-button" style="background-color: black; border: 0px; padding: 0px; text-align: left; margin: 10px;" onclick="location.href = 'order.html'">
+            <button class="logo-button" style="background-color: black; border: 0px; padding: 0px; text-align: left; margin: 10px;">
                 <h1 style="color: white; margin-top: 0px;">CALESA</h1>
                 <h4 style="color: white;">coffee shop</h2>
             </button>
@@ -43,35 +41,18 @@
         
     </div>
     
+    
 
     <div id="main-container" class="container">
-        <input type="text" id="add-item-input" placeholder="Articulo nuevo" style="margin-top: 25%;">
-        <br>
-        <select name="" id="add-categoria-select">
-            <option value="">Categoria</option>
-            <option value="Desechable">Desechable</option>
-            <option value="Sabor">Sabor</option>
-            <option value="Insumo">Insumo</option>
-            <option value="Pasteles">Pasteles</option>
-            <option value="Bebidas">Bebidas</option>
-        </select>
-        <br>
-        <select name="" id="add-vendor-select">
-            <option value="">Proveedor</option>
-            <option value="Costco">Costco</option>
-            <option value="Sams">Sams</option>
-            <option value="Unica">Unica</option>
-            <option value="Origen">Origen</option>
-            <option value="Dummy">Dummy</option>
-        </select>
-        <br>
-        <script>
+        <div id="current-filter" style="margin: 0px; margin-top: 10px; padding: 0px; height: 10px; font-size: 16px;"></div>
+        <ul id="itemList" style="list-style: none;">
 
-        </script>
-        <button id="add-submit-button" onclick="addItemToDB(document.getElementById('add-item-input').value,document.getElementById('add-categoria-select').value,document.getElementById('add-vendor-select').value)">+ Añadir</button>
-
+        </ul>
     </div>
 
+    <script>
+        document.getElementById('current-filter').textContent = localStorage.getItem('Filter')
+    </script>
     
     
 </body>

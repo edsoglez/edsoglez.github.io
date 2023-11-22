@@ -1,3 +1,5 @@
+localStorage.getItem("USER")==null?location.href="index.html":null;
+
 import {getDatabase, set, get, update, remove, ref, child, onValue} from "https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js"; 
 window.itemRef = ref(db,'Items/');
 let DateInfo = new Date()
@@ -70,25 +72,29 @@ function Render(Child,filter){
 export function increaseQty(id,current){
     update(ref(db,'Items/'+id),{
     Cantidad: current +1,
-    Date: date
+    Date: date,
+    Modder: localStorage.getItem("USER")
     });
 }
 export function decreaseQty(id,current){
     if(current==0) return
     update(ref(db,'Items/'+id),{
     Cantidad: current -1,
-    Date: date
+    Date: date,
+    Modder: localStorage.getItem("USER")
     });
 }
 export function zeroQty(id){
     update(ref(db,'Items/'+id),{
     Cantidad: 0,
-    Date: date
+    Date: date,
+    Modder: localStorage.getItem("USER")
     });
 }
 export function urgentToggle(id,current){
     update(ref(db,'Items/'+id),{
     Urgente: !current,
+    Modder: localStorage.getItem("USER")
     });
 }
 
@@ -105,7 +111,8 @@ export function addItemToDB(id,categoria,vendor){
         Date: date,
         Cantidad: 0,
         Categoria: categoria,
-        Vendor: vendor
+        Vendor: vendor,
+        Modder: localStorage.getItem("USER")
         });
 
     alert("Articulo añadido")
