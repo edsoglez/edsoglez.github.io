@@ -48,8 +48,10 @@ filterButton.addEventListener('focus',()=>{
         <button class="filter-button" onmousedown="localStorage.setItem('FilterBy','Vendor');localStorage.setItem('Filter','Unica');flagUpdate()">Unica</button>
         <button class="filter-button" onmousedown="localStorage.setItem('FilterBy','Vendor');localStorage.setItem('Filter','Origen');flagUpdate()">Origen</button>
         <button class="filter-button" onmousedown="localStorage.setItem('FilterBy','Vendor');localStorage.setItem('Filter','Dummy');flagUpdate()">Dummy</button>
-        <h3>Resumen</h3>
-        <button class="filter-button" onmousedown="localStorage.setItem('Summary',Number(!Boolean(Number(localStorage.getItem('Summary')))) );flagUpdate()">Summary</button>
+        
+        <br><h3>Otras funciones</h3>
+        <button class="filter-button" onmousedown="localStorage.setItem('FilterBy','Categoria');localStorage.setItem('Filter','All');flagUpdate()">Todo</button>
+        <button class="filter-button" onmousedown="localStorage.setItem('Summary',Number(!Boolean(Number(localStorage.getItem('Summary')))) );flagUpdate()">Resumen</button>
         
         `
     },100)
