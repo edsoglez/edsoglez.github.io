@@ -4,8 +4,10 @@ let DateInfo = new Date()
 let date = String(DateInfo)
 let dt = date
 
+
 let Filter = localStorage.getItem("Filter")
-Filter==null? Filter="All":null;
+Filter==null? localStorage.setItem("Filter","All"):null;
+
 
 let Summary = localStorage.getItem("Summary")
 Summary==null? localStorage.setItem("Summary",false)="False":null;
@@ -19,9 +21,8 @@ onValue(itemRef,(snapshot)=>{
 
     snapshot.forEach(
     function(Child){
-        if(Child.key!="Flag"){
             Render(Child,Filter)
-        }
+        
     })
 })
 
@@ -38,9 +39,9 @@ function Render(Child,filter){
     let urgente = null
     Child.val().Cantidad!=0? urgente=Child.val().Urgente: null;
     
-    if(Child.val().Cantidad>0||localStorage.getItem("Summary")==true){
-        if(Child.val().Categoria==filter||filter=="All"){
-            List.innerHTML += 
+if(Child.val().Cantidad>0||localStorage.getItem("Summary")==false){
+    if(Child.val().Categoria==filter||filter=="All"){
+        List.innerHTML += 
             `<li id="${Child.val().Text}">
             <div style="display:flex" class="list-item">
                 <div style="width:50%; text-align: left; padding-left:10px">${Child.val().Text}</div>
@@ -53,8 +54,10 @@ function Render(Child,filter){
             </div>
             <span id="${Child.val().Text}-date" class="date-container"></span>
             </li>`
-            }
     }
+}
+    
+    
     
 
 }
