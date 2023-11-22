@@ -31,18 +31,26 @@ userButton.addEventListener('blur',()=>{
 
 filterButton.addEventListener('focus',()=>{
     filterButton.style.transform = 'translate(-75px,0px)'
-    filterButton.style.height = '300px'
+    filterButton.style.height = '500px'
     filterButton.style.width = '150px'
 
     setTimeout(()=>{
         filterButton.innerHTML = `
+        <h3>Categoria</h3>
         <button class="filter-button" onmousedown="localStorage.setItem('Summary',false);localStorage.setItem('Filter','Desechable');flagUpdate()">Desechable</button><br>
         <button class="filter-button" onmousedown="localStorage.setItem('Summary',false);localStorage.setItem('Filter','Insumo');flagUpdate()">Insumo</button><br>
         <button class="filter-button" onmousedown="localStorage.setItem('Summary',false);localStorage.setItem('Filter','Pasteles');flagUpdate()">Pasteles</button><br>
         <button class="filter-button" onmousedown="localStorage.setItem('Summary',false);localStorage.setItem('Filter','Sabor');flagUpdate()">Sabor</button><br>
         <button class="filter-button" onmousedown="localStorage.setItem('Summary',false);localStorage.setItem('Filter','Bebidas');flagUpdate()">Bebidas</button><br>
         <button class="filter-button" onmousedown="localStorage.setItem('Summary',true);localStorage.setItem('Filter','All');flagUpdate()">Summary</button><br>
-    `
+        <h3>Vendor</h3>
+        <button class="filter-button" onmousedown="localStorage.setItem('FilterBy','Vendor');localStorage.setItem('Filter','Costco');flagUpdate()">Costco</button><br>
+        <button class="filter-button" onmousedown="localStorage.setItem('FilterBy','Vendor');localStorage.setItem('Filter','Sams');flagUpdate()">Sams</button><br>
+        <button class="filter-button" onmousedown="localStorage.setItem('FilterBy','Vendor');localStorage.setItem('Filter','Unica');flagUpdate()">Unica</button><br>
+        <button class="filter-button" onmousedown="localStorage.setItem('FilterBy','Vendor');localStorage.setItem('Filter','Origen');flagUpdate()">Origen</button><br>
+        <button class="filter-button" onmousedown="localStorage.setItem('FilterBy','Vendor');localStorage.setItem('Filter','Dummy');flagUpdate()">Dummy</button><br>
+        
+        `
     },100)
     
 })
