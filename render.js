@@ -10,7 +10,7 @@ Filter==null? localStorage.setItem("Filter","All"):null;
 
 
 let Summary = localStorage.getItem("Summary")
-Summary==null? localStorage.setItem("Summary",false)="False":null;
+Summary==null? localStorage.setItem("Summary",false):null;
 
 
 
