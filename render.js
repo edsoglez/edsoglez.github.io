@@ -39,7 +39,7 @@ function Render(Child,filter){
     let urgente = null
     Child.val().Cantidad!=0? urgente=Child.val().Urgente: null;
     
-if(true){
+if(Child.val().Cantidad > 0 || Summary == false){
     if(Child.val().Categoria==filter||filter=="All"){
         List.innerHTML += 
             `<li id="${Child.val().Text}">
