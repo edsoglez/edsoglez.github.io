@@ -19,4 +19,24 @@ window.db = getDatabase();
 window.itemRef = ref(db,'Items/');
 window.userRef = ref(db,'Users/');
 
+export function addItemToDB(id,categoria,vendor){
 
+    if(id==""||categoria==""||vendor==""){
+        alert("Todos los campos deben llenarse")
+        return
+    } 
+
+    set(ref(db,'Items/'+id),{
+        Text: id,
+        Urgente: false,
+        Date: date,
+        Cantidad: 0,
+        Categoria: categoria,
+        Vendor: vendor
+        });
+
+    id=""
+    categoria=""
+    vendor=""
+}
+window.addItemToDB = addItemToDB;
