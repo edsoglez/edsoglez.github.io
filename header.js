@@ -31,11 +31,12 @@ filterButton.addEventListener('focus',()=>{
 
     setTimeout(()=>{
         filterButton.innerHTML = `
-        <button class="filter-button" onmousedown="localStorage.setItem('Filter','Desechable');flagUpdate()">Desechable</button><br>
-        <button class="filter-button" onmousedown="localStorage.setItem('Filter','Insumo');flagUpdate()">Insumo</button><br>
-        <button class="filter-button" onmousedown="localStorage.setItem('Filter','Pasteles');flagUpdate()">Pasteles</button><br>
-        <button class="filter-button" onmousedown="localStorage.setItem('Filter','Sabor');flagUpdate()">Sabor</button><br>
-        <button class="filter-button" onmousedown="localStorage.setItem('Filter','Bebidas');flagUpdate()">Bebidas</button><br>
+        <button class="filter-button" onmousedown="localStorage.setItem('Summary',false);localStorage.setItem('Filter','Desechable');flagUpdate()">Desechable</button><br>
+        <button class="filter-button" onmousedown="localStorage.setItem('Summary',false);localStorage.setItem('Filter','Insumo');flagUpdate()">Insumo</button><br>
+        <button class="filter-button" onmousedown="localStorage.setItem('Summary',false);localStorage.setItem('Filter','Pasteles');flagUpdate()">Pasteles</button><br>
+        <button class="filter-button" onmousedown="localStorage.setItem('Summary',false);localStorage.setItem('Filter','Sabor');flagUpdate()">Sabor</button><br>
+        <button class="filter-button" onmousedown="localStorage.setItem('Summary',false);localStorage.setItem('Filter','Bebidas');flagUpdate()">Bebidas</button><br>
+        <button class="filter-button" onmousedown="localStorage.setItem('Summary',true);localStorage.setItem('Filter','All');flagUpdate()">Summary</button><br>
     `
     },100)
     
