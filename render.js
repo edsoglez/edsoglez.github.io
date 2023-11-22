@@ -51,7 +51,7 @@ function Render(Child,filter){
                 List.innerHTML += 
                     `<li id="${Child.val().Text}">
                     <div style="display:flex" class="list-item">
-                        <div style="width:50%; text-align: left; padding-left:10px">${Child.val().Text}</div>
+                        <div style="width:70%; text-align: left; padding-left:10px">${Child.val().Text}</div>
                         <div style="display:flex; flex-direction: row;">
                             <button class="quant-control" onclick="decreaseQty('${Child.key}',${Child.val().Cantidad})">-</button>
                             <button class="quant-control" onclick="increaseQty('${Child.key}',${Child.val().Cantidad})">+</button>
