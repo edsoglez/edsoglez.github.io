@@ -27,6 +27,7 @@ onValue(itemRef,(snapshot)=>{
 })
 
 function Render(Child,filter){
+    let Summarize = localStorage.getItem("Summary")
     let day = date.substring(8,10)
     let DateMod = Child.val().Date
 
@@ -39,7 +40,7 @@ function Render(Child,filter){
     let urgente = null
     Child.val().Cantidad!=0? urgente=Child.val().Urgente: null;
     
-if(Child.val().Cantidad > 0 || Summary == false){
+if(true){
     if(Child.val().Categoria==filter||filter=="All"){
         List.innerHTML += 
             `<li id="${Child.val().Text}">
