@@ -11,7 +11,7 @@ let Filter = localStorage.getItem("Filter")
 Filter==null? localStorage.setItem("Filter","All"):null;
 
 let Summary = localStorage.getItem("Summary")
-Summary==null? localStorage.setItem("Summary",false):null;
+Summary==null? localStorage.setItem("Summary",0):null;
 
 let FilterBy = localStorage.getItem("FilterBy")
 FilterBy==null? localStorage.setItem("FilterBy","Categoria"):null;
@@ -52,7 +52,7 @@ function Render(Child,filter){
     try{
         
             if(FilterBy=="Categoria"){
-                if(Child.val().Categoria==filter||filter=="All"){
+                if((Child.val().Categoria==filter||filter=="All")&&(Child.val().Cantidad>0||!Boolean(Number(Summary)))){
                     List.innerHTML += 
                         `<li id="${Child.val().Text}">
                         <div style="display:flex" class="list-item">
@@ -68,7 +68,7 @@ function Render(Child,filter){
                         </li>`
             }}
             if(FilterBy=="Vendor"){
-                if(Child.val().Vendor==filter){
+                if(Child.val().Vendor==filter&&(Child.val().Cantidad>0||!Boolean(Number(Summary)))){
                     List.innerHTML += 
                         `<li id="${Child.val().Text}">
                         <div style="display:flex" class="list-item">
