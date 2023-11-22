@@ -51,7 +51,7 @@ filterButton.addEventListener('blur',()=>{
 })
 
 function flagUpdate(){
-    location.reload()
+    location.href = 'order.html'
 }
 
 window.flagUpdate = flagUpdate
