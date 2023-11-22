@@ -105,9 +105,11 @@ export function addItemToDB(id,categoria,vendor){
         Vendor: vendor
         });
 
-    id=""
-    categoria=""
-    vendor=""
+    alert("Articulo añadido")
+
+    document.getElementById("add-item-input").value = ""
+    document.getElementById("add-categoria-select").value = ""
+    document.getElementById("add-vendor-select").value = ""
 }
 window.addItemToDB = addItemToDB;
 
