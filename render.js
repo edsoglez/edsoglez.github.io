@@ -32,12 +32,12 @@ function Render(Child,filter){
     List.innerHTML += 
     `<li id="${Child.val().Text}">
     <div style="display:flex" class="list-item">
-        <div style="width:80%; text-align: left; padding-left:10px">${Child.val().Text}</div>
+        <div style="width:50%; text-align: left; padding-left:10px">${Child.val().Text}</div>
         <div style="display:flex; flex-direction: row;">
             <button class="quant-control" onclick="decreaseQty('${Child.key}',${Child.val().Cantidad})">-</button>
             <button class="quant-control" onclick="increaseQty('${Child.key}',${Child.val().Cantidad})">+</button>
         </div>
-        <div style="width:100px"><button class="quant-button" onclick="zeroQty('${Child.key}')">${Child.val().Cantidad}</button></div>
+        <div style="width:80px"><button class="quant-button" onclick="zeroQty('${Child.key}')">${Child.val().Cantidad}</button></div>
         <div><button class="urgente-${urgente}" onclick="urgentToggle('${Child.key}',${Child.val().Urgente})">${DaysSince}D</button></div>
     </div>
     <span id="${Child.val().Text}-date" class="date-container"></span>

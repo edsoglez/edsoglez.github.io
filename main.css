@@ -34,7 +34,7 @@ li{
 }
 
 .list-item{
-    font-size: 22px;
+    font-size: 18px;
     align-items: center;
     height: 40px;
     border-radius: 20px;
@@ -108,4 +108,16 @@ li{
     background-color: rgb(215, 215, 215);
     border: 0px;
     padding: 0px;
+}
+
+input{
+    margin: 10px;
+    padding: 10px;
+    width: 200px;
+}
+select{
+    margin: 10px;
+    padding: 10px;
+    width: 200px;
+
 }
