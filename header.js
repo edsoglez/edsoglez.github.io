@@ -42,11 +42,13 @@ filterButton.addEventListener('focus',()=>{
         <button class="filter-button" onmousedown="localStorage.setItem('FilterBy','Categoria');localStorage.setItem('Filter','Pasteles');flagUpdate()">Pasteles</button>
         <button class="filter-button" onmousedown="localStorage.setItem('FilterBy','Categoria');localStorage.setItem('Filter','Sabor');flagUpdate()">Sabor</button>
         <button class="filter-button" onmousedown="localStorage.setItem('FilterBy','Categoria');localStorage.setItem('Filter','Bebidas');flagUpdate()">Bebidas</button>
+        <button class="filter-button" onmousedown="localStorage.setItem('FilterBy','Categoria');localStorage.setItem('Filter','Limpieza');flagUpdate()">Limpieza</button>
         <h3>Vendor</h3>
         <button class="filter-button" onmousedown="localStorage.setItem('FilterBy','Vendor');localStorage.setItem('Filter','Costco');flagUpdate()">Costco</button>
         <button class="filter-button" onmousedown="localStorage.setItem('FilterBy','Vendor');localStorage.setItem('Filter','Sams');flagUpdate()">Sams</button>
         <button class="filter-button" onmousedown="localStorage.setItem('FilterBy','Vendor');localStorage.setItem('Filter','Unica');flagUpdate()">Unica</button>
         <button class="filter-button" onmousedown="localStorage.setItem('FilterBy','Vendor');localStorage.setItem('Filter','Origen');flagUpdate()">Origen</button>
+        <button class="filter-button" onmousedown="localStorage.setItem('FilterBy','Vendor');localStorage.setItem('Filter','Etrusca');flagUpdate()">Etrusca</button>
         <button class="filter-button" onmousedown="localStorage.setItem('FilterBy','Vendor');localStorage.setItem('Filter','Dummy');flagUpdate()">Dummy</button>
         
         <br><h3>Otras funciones</h3>
