@@ -10,14 +10,14 @@ addButton.addEventListener('focus',()=>{
 })
 localStorage.removeItem
 
-userButton.addEventListener('focus',()=>{
+userButton.addEventListener('click',()=>{
     userButton.style.transform = 'translate(-100px,0px)'
     userButton.style.height = '200px'
     userButton.style.width = '150px'
     userButton.innerHTML = `
         Usuario: ${localStorage.getItem("USER")}
         <br>
-        <button onmousedown="localStorage.removeItem('USER');location.href = 'index.html'">Cerrar Sesión</button>
+        <button id="sign-off" onmousedown="localStorage.removeItem('USER');location.href = 'index.html'">Cerrar Sesión</button>
     `
 })
 
