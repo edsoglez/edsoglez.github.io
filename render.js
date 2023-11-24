@@ -1,4 +1,12 @@
 localStorage.getItem("USER")==null?location.href="index.html":null;
+let Filter = localStorage.getItem("Filter")
+Filter==null ? localStorage.setItem("Filter","All"):null;
+
+let Summary = localStorage.getItem("Summary")
+Summary==null ? localStorage.setItem("Summary",0):null;
+
+let FilterBy = localStorage.getItem("FilterBy")
+FilterBy==null ? Reload():null;
 
 import {getDatabase, set, get, update, remove, ref, child, onValue} from "https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js"; 
 window.itemRef = ref(db,'Items/');
@@ -6,17 +14,10 @@ let DateInfo = new Date()
 let date = String(DateInfo)
 let dt = date
 
-
-let Filter = localStorage.getItem("Filter")
-Filter==null? localStorage.setItem("Filter","All"):null;
-
-let Summary = localStorage.getItem("Summary")
-Summary==null? localStorage.setItem("Summary",0):null;
-
-let FilterBy = localStorage.getItem("FilterBy")
-FilterBy==null? localStorage.setItem("FilterBy","Categoria"):null;
-
-
+function Reload(){
+    localStorage.setItem("FilterBy","Categoria");
+    location.href = "order.html" 
+}
 
 const List = document.getElementById('itemList')
 
