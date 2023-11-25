@@ -19,4 +19,15 @@ get(child(ref(db),`Users/`+_username)).then((snapshot) => {
     
 }
 
+document.querySelector('#username').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        Auth(document.getElementById('username').value,document.getElementById('password').value)
+    }
+});
+document.querySelector('#password').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        Auth(document.getElementById('username').value,document.getElementById('password').value)
+    }
+});
+
 window.Auth = Auth;
