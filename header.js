@@ -12,10 +12,12 @@ localStorage.removeItem
 
 userButton.addEventListener('click',()=>{
     userButton.style.transform = 'translate(-100px,0px)'
-    userButton.style.height = '200px'
+    userButton.style.height = 'auto'
     userButton.style.width = '150px'
     userButton.innerHTML = `
         Usuario: ${localStorage.getItem("USER")}
+        <br>
+        <button id="usermenu-button" onmousedown="location.href='usermenu.html'">Config.</button>
         <br>
         <button id="sign-off" onmousedown="localStorage.removeItem('USER');location.href = 'index.html'">Cerrar Sesión</button>
     `
