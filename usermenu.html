@@ -45,30 +45,37 @@
     
 
     <div id="main-container" class="container">
-        <input type="text" id="add-item-input" placeholder="Articulo nuevo" style="margin-top: 100px;">
-        <br>
-        <select name="" id="add-categoria-select">
-            <option value="">Categoria</option>
-            <option value="Desechable">Desechable</option>
-            <option value="Sabor">Sabor</option>
-            <option value="Insumo">Insumo</option>
-            <option value="Pasteles">Pasteles</option>
-            <option value="Bebidas">Bebidas</option>
-        </select>
-        <br>
-        <select name="" id="add-vendor-select">
-            <option value="">Proveedor</option>
-            <option value="Costco">Costco</option>
-            <option value="Sams">Sams</option>
-            <option value="Unica">Unica</option>
-            <option value="Origen">Origen</option>
-            <option value="Dummy">Dummy</option>
-        </select>
-        <br>
-        <script>
+        <br><h3>Cambio de contraseña</h3>
+        
+        <div style="margin-left: auto; margin-right: auto; display: flex; flex-direction: row; width: 230px; flex-wrap: wrap; height: auto; justify-content: center; align-items: center;" id="password-form">
 
-        </script>
-        <button id="add-submit-button" onclick="addItemToDB(document.getElementById('add-item-input').value,document.getElementById('add-categoria-select').value,document.getElementById('add-vendor-select').value)">+ Añadir</button>
+            <div style="width: 230px;">
+                <input type="password" id="currentPass" placeholder="Contraseña Actual">
+            </div>
+            <div style="width: 0px;">
+                <button onmouseover="document.getElementById('currentPass').type = 'text'; document.getElementById('showpass-1').style.opacity = '10%';" onmouseleave="document.getElementById('currentPass').type = 'password'; document.getElementById('showpass-1').style.opacity = '40%';" style="position: relative; transform: translateX(-50px); background-color: transparent; border: 0;">
+                    <img id="showpass-1" style="opacity: 40%;" width="20px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAABkklEQVR4nO2WvUoDQRSFPwsjoomk8wHEUpNgL9aKnVjYii/hT2FEIwgS8hBKgp1gY6ddYpGHWPNjKRKrRAZuYBj3zu5iRIs9cJs7557D3Duzs5AixT/AGlAGHoEOMJDoSO4UKE3ScBt4AUYxowls/cRwGXhIYOjGPbCU1HQX+AgR6wGHQAGYkygCR7Lm8t+BnTiGU8A5MAwRqQNZT61Za4TUGa0z0VZNa0rb6r5CRyPMfARUNY0rpaAXsVMXOaCvaF265APPITEztZERgVcgACqSs3Hs0dsfk1aBTw/RrNuohHBMzkbRozcAVgypFXEt3DYHIRyTs5GN0GwZUvsXjHMRmm1D2lCuzzgKMVp9kaDVQ2B9TKx6iObjYCMj5oHncJ149K5dsecJXacF4E3RegKm3YK8Z96NBB+QO89c81rhorwumnkuYqeaaVO0vZgFbhWBvnwczLs7L1GSmWrtvRHNWDAt21OuTtwIRCPOiL4hKy+LthutK+WEB1LFDLApr5c5/V3r16cruZpwDDdFCv4MXw/YJO5+W1zLAAAAAElFTkSuQmCC" alt="">
+                </button>
+            </div>
+            
+            <br>
+
+            <div style="width: 230px;">
+                <input type="password" id="newPass" placeholder="Contraseña Nueva">
+            </div>
+            <div style="width: 0px;">
+                <button onmouseover="document.getElementById('newPass').type = 'text'; document.getElementById('showpass-2').style.opacity = '10%'; " onmouseleave="document.getElementById('newPass').type = 'password'; document.getElementById('showpass-2').style.opacity = '40%';" style="position: relative; transform: translateX(-50px); background-color: transparent; border: 0;">
+                    <img id="showpass-2" style="opacity: 40%;" width="20px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAABkklEQVR4nO2WvUoDQRSFPwsjoomk8wHEUpNgL9aKnVjYii/hT2FEIwgS8hBKgp1gY6ddYpGHWPNjKRKrRAZuYBj3zu5iRIs9cJs7557D3Duzs5AixT/AGlAGHoEOMJDoSO4UKE3ScBt4AUYxowls/cRwGXhIYOjGPbCU1HQX+AgR6wGHQAGYkygCR7Lm8t+BnTiGU8A5MAwRqQNZT61Za4TUGa0z0VZNa0rb6r5CRyPMfARUNY0rpaAXsVMXOaCvaF265APPITEztZERgVcgACqSs3Hs0dsfk1aBTw/RrNuohHBMzkbRozcAVgypFXEt3DYHIRyTs5GN0GwZUvsXjHMRmm1D2lCuzzgKMVp9kaDVQ2B9TKx6iObjYCMj5oHncJ149K5dsecJXacF4E3RegKm3YK8Z96NBB+QO89c81rhorwumnkuYqeaaVO0vZgFbhWBvnwczLs7L1GSmWrtvRHNWDAt21OuTtwIRCPOiL4hKy+LthutK+WEB1LFDLApr5c5/V3r16cruZpwDDdFCv4MXw/YJO5+W1zLAAAAAElFTkSuQmCC" alt="">
+                </button>
+            </div>
+            
+            <br>
+            
+        </div> 
+        
+        
+        
+        <button id="add-submit-button" onclick="">Guardar</button>
 
     </div>
 
