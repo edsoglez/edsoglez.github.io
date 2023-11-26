@@ -26,9 +26,10 @@ export function ChangePass(_username,_password,_newpassword){
                 update(ref(db,'Users/'+_username),{
                     password: _newpassword
                     });
+                alert("Contraseña de "+localStorage.getItem("USER")+" modificada correctamente")
             }
             else{
-                alert("Wrong password")
+                alert("Contraseña original incorrecta")
             }
 
         } else {
@@ -37,16 +38,27 @@ export function ChangePass(_username,_password,_newpassword){
     });
 }
 
-document.querySelector('#username').addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') {
-        Auth(document.getElementById('username').value,document.getElementById('password').value)
-    }
-});
-document.querySelector('#password').addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') {
-        Auth(document.getElementById('username').value,document.getElementById('password').value)
-    }
-});
+try{
+    document.querySelector('#username').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            Auth(document.getElementById('username').value,document.getElementById('password').value)
+        }
+    });
+    document.querySelector('#password').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            Auth(document.getElementById('username').value,document.getElementById('password').value)
+        }
+    });
+}catch(exception){
+    document.querySelector('#change-pass-button').addEventListener('click', ()=>{
+        ChangePass(localStorage.getItem("USER"),document.querySelector('#currentPass').value,document.querySelector('#newPass').value)
+        
+    })
+    
+}
+
+
+
 
 window.ChangePass = ChangePass;
 window.Auth = Auth;
