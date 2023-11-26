@@ -9,7 +9,5 @@ export function hashing(string) {
     hash = ((hash << 5) - hash) + ch;
     hash = hash & hash;
     }
-
-    console.log(hash);
     return hash;
 }
