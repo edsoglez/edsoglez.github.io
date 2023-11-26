@@ -2,8 +2,6 @@ import {getDatabase, set, get, update, remove, ref, child, onValue} from "https:
 import { hashing } from "./hashing.js";
 
 export function Auth(_username,_password){
-  
-
 
 get(child(ref(db),`Users/`+_username)).then((snapshot) => {
         if (snapshot.exists()) {
