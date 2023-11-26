@@ -1,10 +1,13 @@
 import {getDatabase, set, get, update, remove, ref, child, onValue} from "https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js"; 
+import { hashing } from "./hashing.js";
 
 export function Auth(_username,_password){
   
+
+
 get(child(ref(db),`Users/`+_username)).then((snapshot) => {
         if (snapshot.exists()) {
-            if(snapshot.val().password == _password){
+            if(snapshot.val().password == hashing(_password)){
                 localStorage.setItem("USER",_username);
                 location.href = "order.html"
             }
@@ -22,9 +25,9 @@ get(child(ref(db),`Users/`+_username)).then((snapshot) => {
 export function ChangePass(_username,_password,_newpassword){
     get(child(ref(db),`Users/`+_username)).then((snapshot) => {
         if (snapshot.exists()) {
-            if(snapshot.val().password == _password){
+            if(snapshot.val().password == hashing(_password)){
                 update(ref(db,'Users/'+_username),{
-                    password: _newpassword
+                    password: hashing(_newpassword)
                     });
                 alert("Contraseña de "+localStorage.getItem("USER")+" modificada correctamente")
             }
