@@ -19,6 +19,24 @@ get(child(ref(db),`Users/`+_username)).then((snapshot) => {
     
 }
 
+export function ChangePass(_username,_password,_newpassword){
+    get(child(ref(db),`Users/`+_username)).then((snapshot) => {
+        if (snapshot.exists()) {
+            if(snapshot.val().password == _password){
+                update(ref(db,'Users/'+_username),{
+                    password: _newpassword
+                    });
+            }
+            else{
+                alert("Wrong password")
+            }
+
+        } else {
+            console.log("No user found");
+        }
+    });
+}
+
 document.querySelector('#username').addEventListener('keypress', function (e) {
     if (e.key === 'Enter') {
         Auth(document.getElementById('username').value,document.getElementById('password').value)
@@ -30,4 +48,5 @@ document.querySelector('#password').addEventListener('keypress', function (e) {
     }
 });
 
+window.ChangePass = ChangePass;
 window.Auth = Auth;
