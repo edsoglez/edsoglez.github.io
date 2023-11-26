@@ -145,7 +145,7 @@ select{
     font-size: 16px;
 }
 
-#add-submit-button,#login-submit-button{
+#add-submit-button,#login-submit-button,#change-pass-button{
     margin: 10px;
     background-color: black;
     color: white;
