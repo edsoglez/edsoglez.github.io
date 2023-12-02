@@ -14,7 +14,6 @@ userButton.addEventListener('click',()=>{
     userButton.style.transform = 'translate(-100px,0px)'
     userButton.style.height = 'auto'
     userButton.style.width = '150px'
-
     userButton.style.backdropFilter= 'blur(5px)'; 
     userButton.style.backgroundColor= 'rgba(0, 0, 0, 0.6)'; 
     userButton.style.color= 'white'; 
@@ -34,7 +33,6 @@ userButton.addEventListener('blur',()=>{
     userButton.style.transform = 'translate(0px,0px)'
     userButton.style.height = '50px'
     userButton.style.width = '50px'
-
     userButton.style.backgroundColor= 'rgba(0, 0, 0, 1)'; 
     userButton.style.color= 'white'; 
     userButton.style.border= '2px solid white'; 
@@ -46,7 +44,6 @@ filterButton.addEventListener('focus',()=>{
     filterButton.style.transform = 'translate(-195px,0px)'
     filterButton.style.height = 'auto'
     filterButton.style.width = '300px'
-
     filterButton.style.backdropFilter= 'blur(5px)'; 
     filterButton.style.backgroundColor= 'rgba(0, 0, 0, 0.6)'; 
     filterButton.style.color= 'white'; 
@@ -82,7 +79,6 @@ filterButton.addEventListener('blur',()=>{
     filterButton.style.transform = 'translate(0px,0px)'
     filterButton.style.height = '50px'
     filterButton.style.width = '50px'
-
     filterButton.style.backgroundColor= 'rgba(0, 0, 0, 1)'; 
     filterButton.style.color= 'white'; 
     filterButton.style.border= '2px solid white'; 
