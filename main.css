@@ -143,6 +143,14 @@ select{
     background-color: white;
     color: black;
     font-size: 16px;
+    transition: 0.2s;
+}
+.filter-button:hover{
+    background-color: rgb(27, 170, 84);
+    transform: scale(1.1);
+    font-weight: bold;
+    color: white;
+    border: 0;
 }
 
 #add-submit-button,#login-submit-button,#change-pass-button{
