@@ -63,11 +63,11 @@
 
     <script>
         document.getElementById('current-filter').textContent = localStorage.getItem('Filter')
-        if(localStorage.getItem('Filter') == "All"){
-            document.getElementById('circle').style.marginLeft='0px'
+        if(localStorage.getItem('Summary') == "1"){
+            document.getElementById('circle').style.marginLeft='25px'
         }
         else{
-            document.getElementById('circle').style.marginLeft='25px'
+            document.getElementById('circle').style.marginLeft='0px'
         }
 
     </script>
