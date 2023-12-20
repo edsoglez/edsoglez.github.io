@@ -194,10 +194,30 @@ select{
 }
 
 .toggle{
+    display: flex;
     background-color: rgb(238, 238, 238);
     width: 60px;
     height: 30px;
     border: 1px solid gray;
     border-radius: 20px;
     margin-left: 10px;
+}
+.toggle2{
+    display: flex;
+    background-color: rgb(18, 57, 163);
+    width: 30px;
+    height: 30px;
+    border: 1px solid gray;
+    border-radius: 20px;
+    margin-left: 10px;
+}
+
+.circle{
+    background-color: rgb(238, 238, 238);
+    width: 25px;
+    height: 25px;
+    border: 1px solid gray;
+    border-radius: 20px;
+    margin-left: 10px;
+    transform: translateX(-30);
 }
