@@ -15,7 +15,7 @@ userButton.addEventListener('click',()=>{
     userButton.style.height = 'auto'
     userButton.style.width = '150px'
     userButton.style.backdropFilter= 'blur(5px)'; 
-    userButton.style.backgroundColor= 'rgba(0, 0, 0, 0.6)'; 
+    userButton.style.backgroundColor= 'rgba(0, 0, 0, 0.9)'; 
     userButton.style.color= 'white'; 
     userButton.style.border= '0'; 
 
@@ -45,12 +45,16 @@ filterButton.addEventListener('focus',()=>{
     filterButton.style.height = 'auto'
     filterButton.style.width = '300px'
     filterButton.style.backdropFilter= 'blur(5px)'; 
-    filterButton.style.backgroundColor= 'rgba(0, 0, 0, 0.6)'; 
+    filterButton.style.backgroundColor= 'rgba(0, 0, 0, 0.9)'; 
     filterButton.style.color= 'white'; 
     filterButton.style.border= '0'; 
 
     setTimeout(()=>{
         filterButton.innerHTML = `
+        <div class="close-tab">
+            <button class='close-button'>x</button>
+        </div>
+        <br>
         <h3>Categoria</h3>
         <button class="filter-button" onmousedown="localStorage.setItem('FilterBy','Categoria');localStorage.setItem('Filter','Desechable');flagUpdate()">Desechable</button>
         <button class="filter-button" onmousedown="localStorage.setItem('FilterBy','Categoria');localStorage.setItem('Filter','Insumo');flagUpdate()">Insumo</button>

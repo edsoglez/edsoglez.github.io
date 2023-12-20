@@ -214,3 +214,23 @@ select{
     transition: 0.2s;
 }
 
+.close-button{
+    margin: 5px;
+    margin-bottom: 0px;
+    width: 30px;
+    height: 30px;
+    padding: 0px;
+    font-size: 25px;
+    color: white;
+    border: 0px;
+    background: rgba(147, 40, 40, 0.9);
+    border-radius: 5px;
+    justify-content: center;
+    align-items: center;
+}
+
+.close-tab{
+    display: flex;
+    justify-content: left;
+    align-items: left;
+}
