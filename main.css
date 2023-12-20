@@ -194,6 +194,7 @@ select{
 }
 
 .toggle{
+    border: 0;
     display: flex;
     width: 60px;
     height: 30px;
