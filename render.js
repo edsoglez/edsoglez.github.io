@@ -34,7 +34,15 @@ const List = document.getElementById('itemList')
         })
     })
 
-let playSound = () => new Audio("/click.wav").play()
+window.tapSound = new Audio();
+tapSound.src="/click.wav";
+tapSound.preload='auto';
+
+function playSound() {
+    tapSound.currentTime=0.001;
+    //tapSound.play();
+}
+
 
 function Render(Child,filter){
     let Summarize = localStorage.getItem("Summary")
