@@ -232,6 +232,7 @@ select{
 
 .close-tab{
     display: flex;
+    height: 15px;
     justify-content: left;
     align-items: left;
 }

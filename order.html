@@ -82,14 +82,17 @@
         }
 
         function enter(enter){
-            document.getElementById('circle').style.transition='0.2s'; 
+            document.getElementById('circle').style.transition='0.25s'; 
             if(localStorage.getItem('Summary') == 1 && enter){
+
                 document.getElementById('circle').style.marginLeft='1px'
                 document.getElementById('toggle').style.backgroundColor='rgb(220, 220, 220)'
+                
             }
             else{
                 document.getElementById('circle').style.marginLeft='30px'
                 document.getElementById('toggle').style.backgroundColor='rgb(91, 194, 60)'
+                
             }
         }
 

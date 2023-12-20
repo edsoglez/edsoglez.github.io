@@ -20,6 +20,10 @@ userButton.addEventListener('click',()=>{
     userButton.style.border= '0'; 
 
     userButton.innerHTML = `
+        <div class="close-tab">
+            <button class='close-button'>x</button>
+        </div>
+        <br>
         <h3>${localStorage.getItem("USER")}</h3>
         <button id="usermenu-button" onmousedown="location.href='usermenu.html'">Contraseña</button>
         <br>
