@@ -195,29 +195,22 @@ select{
 
 .toggle{
     display: flex;
-    background-color: rgb(238, 238, 238);
+    background-color: rgb(248, 248, 248);
     width: 60px;
     height: 30px;
-    border: 1px solid gray;
+    border: 2px solid rgb(75, 75, 75);
     border-radius: 20px;
     margin-left: 10px;
-}
-.toggle2{
-    display: flex;
-    background-color: rgb(18, 57, 163);
-    width: 30px;
-    height: 30px;
-    border: 1px solid gray;
-    border-radius: 20px;
-    margin-left: 10px;
+    align-items: center;
 }
 
 .circle{
-    background-color: rgb(238, 238, 238);
-    width: 25px;
-    height: 25px;
-    border: 1px solid gray;
+    background-color: rgb(80, 150, 230);
+    width: 20px;
+    height: 20px;
+    border: 0px solid rgb(68, 174, 198);
     border-radius: 20px;
-    margin-left: 10px;
-    transform: translateX(-30);
+    margin-left: 0px;
+    transition: 0.2s;
 }
+

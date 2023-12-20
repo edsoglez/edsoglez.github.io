@@ -49,7 +49,9 @@
             <div id="current-filter" style="width: 100%; margin-left: 20px; text-align: left; font-weight: bold;"></div>
             Resumir:
             <div style="width: 80px; height: 30px;">
-                <button class="toggle" onmousedown="localStorage.setItem('Summary',Number(!Boolean(Number(localStorage.getItem('Summary')))) );flagUpdate()"></button>
+                <button class="toggle" onmouseover="document.getElementById('circle').style.marginLeft='25px'" onmouseleave="document.getElementById('circle').style.marginLeft='0px'" onmousedown="localStorage.setItem('Summary',Number(!Boolean(Number(localStorage.getItem('Summary')))) );flagUpdate()">
+                <div class="circle" id="circle"></div>
+                </button>
             </div>
             
         </div>
