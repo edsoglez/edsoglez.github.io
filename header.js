@@ -21,7 +21,7 @@ userButton.addEventListener('click',()=>{
 
     userButton.innerHTML = `
         <div class="close-tab">
-            <button class='close-button'>x</button>
+            <button class='close-button'>X</button>
         </div>
         <br>
         <h3>${localStorage.getItem("USER")}</h3>
@@ -56,7 +56,7 @@ filterButton.addEventListener('focus',()=>{
     setTimeout(()=>{
         filterButton.innerHTML = `
         <div class="close-tab">
-            <button class='close-button'>x</button>
+            <button class='close-button'>X</button>
         </div>
         <br>
         <h3>Categoria</h3>
