@@ -207,7 +207,7 @@ select{
 }
 
 .circle{
-    background-color: rgb(245, 245, 245);
+    background-color: rgb(255, 255, 255);
     width: 25px;
     height: 25px;
     border: 0px solid rgb(59, 172, 54);
