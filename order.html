@@ -49,7 +49,7 @@
             <div id="current-filter" style="width: 100%; margin-left: 20px; text-align: left; font-weight: bold; font-size: 24px;"></div>
             Resumir:
             <div style="width: 80px; height: 30px;">
-                <button class="toggle" onmousedown="localStorage.setItem('Summary',Number(!Boolean(Number(localStorage.getItem('Summary')))) );flagUpdate()">
+                <button id="toggle" class="toggle" onmousedown="localStorage.setItem('Summary',Number(!Boolean(Number(localStorage.getItem('Summary')))) );flagUpdate()">
                 <div class="circle" id="circle"></div>
                 </button>
             </div>
@@ -66,12 +66,12 @@
     <script>
         document.getElementById('current-filter').textContent = localStorage.getItem('Filter')
         if(localStorage.getItem('Summary') == "1"){
-            document.getElementById('circle').style.marginLeft='20px'
-            document.getElementById('circle').style.background='rgb(60, 180, 60)'
+            document.getElementById('circle').style.marginLeft='30px'
+            document.getElementById('toggle').style.backgroundColor='rgb(91, 194, 60)'
         }
         else{
-            document.getElementById('circle').style.marginLeft='2px'
-            document.getElementById('circle').style.background='rgb(220, 220, 220)'
+            document.getElementById('circle').style.marginLeft='1px'
+            document.getElementById('toggle').style.backgroundColor='rgb(220, 220, 220)'
         }
 
     </script>
