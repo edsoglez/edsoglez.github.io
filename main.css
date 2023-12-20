@@ -202,13 +202,15 @@ select{
     border-radius: 20px;
     margin-left: 10px;
     align-items: center;
+    padding: 2px;
+    transition: 0.2s;
 }
 
 .circle{
     background-color: rgb(80, 150, 230);
-    width: 20px;
+    width: 30px;
     height: 20px;
-    border: 0px solid rgb(68, 174, 198);
+    border: 0px solid rgb(59, 172, 54);
     border-radius: 20px;
     margin-left: 0px;
     transition: 0.2s;
