@@ -52,7 +52,8 @@
                 <button id="toggle" class="toggle" onmousedown="
                     enter(localStorage.getItem('Summary') == '1')
                     setTimeout(function() {
-                        localStorage.setItem('Summary',Number(!Boolean(Number(localStorage.getItem('Summary')))) );flagUpdate()
+                        localStorage.setItem('Summary',Number(!Boolean(Number(localStorage.getItem('Summary')))));
+                        flagUpdate()
                     }, 150);
                     ">
                 <div class="circle" id="circle"></div>
