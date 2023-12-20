@@ -34,7 +34,7 @@ const List = document.getElementById('itemList')
         })
     })
 
-
+let playSound = () => new Audio("/click.wav").play()
 
 function Render(Child,filter){
     let Summarize = localStorage.getItem("Summary")
@@ -59,11 +59,11 @@ function Render(Child,filter){
                         <div style="display:flex" class="list-item">
                             <div style="width:70%; text-align: left; padding-left:10px">${Child.val().Text}</div>
                             <div style="display:flex; flex-direction: row;">
-                                <button class="quant-control" onclick="decreaseQty('${Child.key}',${Child.val().Cantidad})">-</button>
-                                <button class="quant-control" onclick="increaseQty('${Child.key}',${Child.val().Cantidad})">+</button>
+                                <button class="quant-control" onclick="playSound(); decreaseQty('${Child.key}',${Child.val().Cantidad})">-</button>
+                                <button class="quant-control" onclick="playSound();  increaseQty('${Child.key}',${Child.val().Cantidad})">+</button>
                             </div>
-                            <div style="width:80px"><button class="quant-button" onclick="zeroQty('${Child.key}')">${Child.val().Cantidad}</button></div>
-                            <div><button class="urgente-${urgente}" onclick="urgentToggle('${Child.key}',${Child.val().Urgente})">${DaysSince}D</button></div>
+                            <div style="width:80px"><button class="quant-button" onclick="playSound(); zeroQty('${Child.key}')">${Child.val().Cantidad}</button></div>
+                            <div><button class="urgente-${urgente}" onclick="playSound(); urgentToggle('${Child.key}',${Child.val().Urgente})">${DaysSince}D</button></div>
                         </div>
                         <span id="${Child.val().Text}-date" class="date-container"></span>
                         </li>`
@@ -89,6 +89,8 @@ function Render(Child,filter){
     }catch(e){}
 
 }
+
+
 
 export function increaseQty(id,current){
     update(ref(db,'Items/'+id),{
@@ -148,4 +150,5 @@ window.increaseQty = increaseQty;
 window.decreaseQty = decreaseQty;
 window.zeroQty = zeroQty;
 window.urgentToggle = urgentToggle;
+window.playSound = playSound;
 
