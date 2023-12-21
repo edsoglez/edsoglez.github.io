@@ -46,7 +46,7 @@ li{
 .list-item:hover{
     transform: scale(1.05);
     box-shadow: 0px 2px 10px 5px rgba(0, 0, 0, 0.1);
-    background-color: rgb(245, 245, 245);
+    background-color: rgb(239, 239, 239);
 }
 
 .urgente-null{
@@ -261,4 +261,14 @@ select{
 
 h3{
     font-size: 20px;
+}
+
+.item-button{
+    background-color: transparent;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    color: black;
+    font-size: 18px;
+    text-align: left;
 }
