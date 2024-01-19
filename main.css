@@ -14,11 +14,11 @@ html,body{
 background-color: white;
 border-radius: 30px;
 width: auto;
-height: 85%;
+height: 82%;
 margin: 10px;
 margin-top: 20px;
-margin-bottom: 20px;
-padding-bottom: 10px;
+margin-bottom: 0px;
+padding-bottom: 0px;
 overflow: hidden;
 }
 
