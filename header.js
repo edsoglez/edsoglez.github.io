@@ -10,7 +10,7 @@ addButton.addEventListener('focus',()=>{
 })
 localStorage.removeItem
 
-userButton.addEventListener('click',()=>{
+userButton.addEventListener('focus',()=>{
     userButton.style.transform = 'translate(-100px,0px)'
     userButton.style.height = 'auto'
     userButton.style.width = '150px'
@@ -45,6 +45,7 @@ userButton.addEventListener('blur',()=>{
 })
 
 filterButton.addEventListener('focus',()=>{
+    filterButton.style.zIndex = '0'
     filterButton.style.transform = 'translate(-195px,0px)'
     filterButton.style.height = 'auto'
     filterButton.style.width = '300px'
