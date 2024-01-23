@@ -51,7 +51,7 @@
         <div style="margin-left: auto; margin-right: auto; display: flex; flex-direction: row; width: 230px; flex-wrap: wrap; height: auto; justify-content: center; align-items: center;" id="password-form">
 
             <div style="width: 230px;">
-                <input type="password" id="currentPass" placeholder="Contraseña Actual">
+                <input class="inputfield" type="password" id="currentPass" placeholder="Contraseña Actual">
             </div>
             <div style="width: 0px;">
                 <button onmouseover="document.getElementById('currentPass').type = 'text'; document.getElementById('showpass-1').style.opacity = '10%';" onmouseleave="document.getElementById('currentPass').type = 'password'; document.getElementById('showpass-1').style.opacity = '40%';" style="position: relative; transform: translateX(-50px); background-color: transparent; border: 0;">
@@ -62,7 +62,7 @@
             <br>
 
             <div style="width: 230px;">
-                <input type="password" id="newPass" placeholder="Contraseña Nueva">
+                <input class="inputfield" type="password" id="newPass" placeholder="Contraseña Nueva">
             </div>
             <div style="width: 0px;">
                 <button onmouseover="document.getElementById('newPass').type = 'text'; document.getElementById('showpass-2').style.opacity = '10%'; " onmouseleave="document.getElementById('newPass').type = 'password'; document.getElementById('showpass-2').style.opacity = '40%';" style="position: relative; transform: translateX(-50px); background-color: transparent; border: 0;">
@@ -73,7 +73,7 @@
             <br>
             
         </div> 
-        
+        <br>
         <button id="change-pass-button">Cambiar</button>
 
     </div>

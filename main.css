@@ -177,14 +177,27 @@ select{
 
 #add-submit-button,#login-submit-button,#change-pass-button{
     margin: 10px;
-    background-color: black;
+    background-color: rgb(43, 107, 219);
     color: white;
-    border: 1px solid black;
+    border: 0px solid black;
     width: 210px;
-    height: 60px;
+    height: 50px;
     border-radius: 15px;
     font-size: 18px;
     font-weight: bold;
+}
+
+.inputfield{
+    margin: 10px;
+    padding: 0px;
+    padding-left: 10px;
+    width: 200px;
+    height: 40px;
+    border: 1px solid gray;
+    border-radius: 15px;
+    background-color: white;
+    color: black;
+    font-size: 14px;
 }
 
 #sign-off:hover,#usermenu-button:hover{
