@@ -1,8 +1,15 @@
 html,body{
     width: auto;
     height: 99%;
+    background: rgb(0,0,0);
     background-color: black;
+    background: linear-gradient(180deg, rgb(0, 0, 0) 40%, rgb(58, 0, 0) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000",endColorstr="#9f0000",GradientType=1);
+
     text-align: center;
+}
+html{
+    background: black;
 }
 
 *{
@@ -11,7 +18,10 @@ html,body{
 }
 
 .container{    
-background-color: white;
+z-index: 4;
+background: rgba(255, 255, 255, 0.8);
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(7.8px);
 border-radius: 30px;
 width: auto;
 height: 84%;
@@ -177,14 +187,20 @@ select{
 
 #add-submit-button,#login-submit-button,#change-pass-button{
     margin: 10px;
-    background-color: rgb(43, 107, 219);
+    background-image: linear-gradient(120deg, rgb(165, 0, 0) 0%, rgb(221, 0, 0)60%);
     color: white;
     border: 0px solid black;
     width: 210px;
     height: 50px;
-    border-radius: 15px;
+    border-radius: 20px;
     font-size: 18px;
     font-weight: bold;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.45);
+    transition: 0.5s;
+}
+
+#add-submit-button:hover,#login-submit-button:hover,#change-pass-button:hover{
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.55);
 }
 
 .inputfield{
