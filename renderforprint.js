@@ -13,7 +13,7 @@ let DateInfo = new Date()
 let date = String(DateInfo)
 let dt = date
 
-let Vendors = ["Costco","Sams","Origen","Unica","Etrusca"]
+let Vendors = ["Costco","Sams","Origen","Unica","Etrusca","Dummy"]
 
 for (let i = 0; i < Vendors.length; i++) {
     let currentlist = Vendors[i]+"-items"
@@ -41,6 +41,6 @@ for (let i = 0; i < Vendors.length; i++) {
 }
 
 setTimeout(() => {
-    print()
+    
   }, "1000");
 
