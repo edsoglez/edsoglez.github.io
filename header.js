@@ -45,7 +45,6 @@ userButton.addEventListener('blur',()=>{
 })
 
 filterButton.addEventListener('focus',()=>{
-    filterButton.style.zIndex = '0'
     filterButton.style.transform = 'translate(-195px,0px)'
     filterButton.style.height = 'auto'
     filterButton.style.width = '300px'
