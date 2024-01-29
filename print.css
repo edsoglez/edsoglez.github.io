@@ -11,3 +11,10 @@ html,body{
     margin-right: auto;
     padding: 10px;
 }
+
+ul{
+    width: 100%;
+}
+h2{
+    width: 10%;
+}
