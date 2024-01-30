@@ -11,6 +11,7 @@ FilterBy==null ? Reload():null;
 import {getDatabase, set, get, update, remove, ref, child, onValue} from "https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js"; 
 window.itemRef = ref(db,'Items/');
 window.transRef = ref(db,'Transactions/');
+
 var Months = {
     "Jan":"01",
     "Feb":"02",
