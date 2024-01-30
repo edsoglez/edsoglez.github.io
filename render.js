@@ -56,6 +56,9 @@ const List = document.getElementById('itemList')
         })
     })
 
+    //This section reads and sums all transactions
+    //TODO, filtering by dates
+
     onValue(transRef,(snapshot)=>{
         snapshot.forEach(
             function(Child){
