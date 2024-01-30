@@ -10,9 +10,31 @@ FilterBy==null ? Reload():null;
 
 import {getDatabase, set, get, update, remove, ref, child, onValue} from "https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js"; 
 window.itemRef = ref(db,'Items/');
+window.transRef = ref(db,'Transactions/');
+var Months = {
+    "Jan":"01",
+    "Feb":"02",
+    "Mar":"03",
+    "Apr":"04",
+    "May":"05",
+    "Jun":"06",
+    "Jul":"07",
+    "Aug":"08",
+    "Sep":"09",
+    "Oct":"10",
+    "Nov":"11",
+    "Dec":"12"
+} 
+
 let DateInfo = new Date()
 let date = String(DateInfo)
-let dt = date
+let year = date.substring(11,15)
+let month = Months[date.substring(4,7)]
+let day = Number(date.substring(8,10))
+let hour = date.substring(16,18)
+let minute = date.substring(19,21)
+let second = date.substring(22,24)
+let time = hour+":"+minute+":"+second
 
 function Reload(){
     localStorage.setItem("FilterBy","Categoria");
@@ -32,6 +54,20 @@ const List = document.getElementById('itemList')
                 Render(Child,Filter)
             
         })
+    })
+
+    onValue(transRef,(snapshot)=>{
+        snapshot.forEach(
+            function(Child){
+                let cantidadPedida = 0;
+                Child.forEach(
+                    function(GChild){
+                        cantidadPedida = cantidadPedida + GChild.val().Cantidad
+                    }
+                )
+                console.log(Child.key,cantidadPedida)
+            }
+        )
     })
 
 window.tapSound = new Audio();
@@ -120,17 +156,38 @@ export function decreaseQty(id,current){
     });
 }
 export function zeroQty(id){
-    update(ref(db,'Items/'+id),{
-    Cantidad: 0,
-    Date: date,
-    Modder: localStorage.getItem("USER")
-    });
+    if(confirm('Esta funcion agregara la cantidad actual a recibos, si desea reducir el pedido usar los controles de +/-')){
+        ingressQty(id)
+        update(ref(db,'Items/'+id),{
+        Cantidad: 0,
+        Date: date,
+        Modder: localStorage.getItem("USER")
+        });
+    }
 }
 export function urgentToggle(id,current){
     update(ref(db,'Items/'+id),{
     Urgente: !current,
     Modder: localStorage.getItem("USER")
     });
+}
+
+export function ingressQty(id){
+    //get current item's ordered cuantity
+    get(child(ref(getDatabase()), `Items/${id}`)).then((snapshot) => {
+        if (snapshot.exists()) {
+            let currentOrderedQty = snapshot.val().Cantidad
+
+            set(ref(db,'Transactions/'+id+"/"+year+"_"+month+"_"+day+"_"+time+"_"+Math.floor(Math.random() * 99)),{
+                Cantidad: currentOrderedQty
+            });
+        
+        } else {
+          console.log("No data available");
+        }
+      })
+    //guardar dicha cantidad en base de datos como historico
+    
 }
 
 export function addItemToDB(id,categoria,vendor){
@@ -157,7 +214,7 @@ export function addItemToDB(id,categoria,vendor){
     document.getElementById("add-vendor-select").value = ""
 }
 window.addItemToDB = addItemToDB;
-
+window.ingressQty = increaseQty;
 window.increaseQty = increaseQty;
 window.decreaseQty = decreaseQty;
 window.zeroQty = zeroQty;
