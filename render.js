@@ -168,7 +168,8 @@ export function ingressQty(id){
             let currentOrderedQty = snapshot.val().Cantidad
 
             set(ref(db,'Transactions/'+id+"/"+year+"_"+month+"_"+day+"_"+time+"_"+Math.floor(Math.random() * 99)),{
-                Cantidad: currentOrderedQty
+                Cantidad: currentOrderedQty,
+                Modder: localStorage.getItem("USER")
             });
         
         } else {
