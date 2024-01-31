@@ -67,7 +67,12 @@ data2.addRows(datatoload2);
 
  // Set chart options
  var options = {'title':'Recibos de: '+localStorage.getItem("graph-item"),
+ 'height':'300',
                 'hAxis.format':{format:"#"},
+                
+                'vAxis': {minValue: 0, maxValue: 10, gridlines: {
+                    count: 5
+                  }},
                 'aggregationTarget': 'category',
                 'backgroundColor':'transparent',
                 'curveType': 'function',
@@ -77,7 +82,9 @@ data2.addRows(datatoload2);
  var chart = new google.visualization.ScatterChart(document.getElementById('chart_div'));
  var table = new google.visualization.Table(document.getElementById('chart_div2'));
  chart.draw(data, options);
- table.draw(data2, options);
+ table.draw(data2, {'title':'Recibos de: '+localStorage.getItem("graph-item"),
+ 'backgroundColor':'transparent',
+ 'legend': { position: "none" },});
  }, "1000");
 
 
