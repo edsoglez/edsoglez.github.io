@@ -41,10 +41,12 @@ data.addRows(Object.entries(datatoload));
 
  // Set chart options
  var options = {'title':'Consumo:',
-                 'width':600,
-                 'height':300,
-                 'bar': {groupWidth: "95%"},
-                 'legend': { position: "none" },};
+                'titleTextStyle': {color: 'black', fontSize: 18},
+                
+                'backgroundColor':'transparent',
+                'fontSize':12,
+                'bar': {groupWidth: "95%"},
+                'legend': { position: "bottom" },};
 
  // Instantiate and draw our chart, passing in some options.
  var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
