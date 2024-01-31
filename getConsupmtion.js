@@ -9,7 +9,6 @@ onValue(itemRef,(snapshot)=>{
     snapshot.forEach(
         function(Child){
             document.getElementById("item-choose").innerHTML += `<option value="${Child.key}">${Child.key}</option>`
-            console.log(Child.key)
     })
 })
 
@@ -20,17 +19,19 @@ onValue(transRef,(snapshot)=>{
         function(Child){
             
             if(Child.key == localStorage.getItem("graph-item")){
-            let fechaPedido = ""
             let cantidadPedida = 0;
             let receiver = ""
              Child.forEach(
                  function(GChild){
-                    fechaPedido = String(GChild.key).substring(5,7)+"/"+String(GChild.key).substring(8,10)
-                    console.log(fechaPedido)
+                    let mes = Number(String(GChild.key).substring(5,7))-1
+                    let dia = Number(String(GChild.key).substring(8,10))
+                    console.log(mes)
+                    console.log(dia)
+                    console.log(new Date(2024,mes,dia))
                     cantidadPedida = GChild.val().Cantidad
                     receiver = GChild.val().Modder
-                    datatoload.push([fechaPedido, cantidadPedida])
-                    datatoload2.push([fechaPedido, cantidadPedida, receiver])
+                    datatoload.push([new Date(2024,mes,dia), cantidadPedida])
+                    datatoload2.push([new Date(2024,mes,dia), cantidadPedida, receiver])
                  }
              )
             console.log(datatoload) 
@@ -56,9 +57,9 @@ setTimeout(() => {
  // Create the data table.
  var data = new google.visualization.DataTable();
  var data2 = new google.visualization.DataTable();
- data.addColumn('string', 'Fecha');
+ data.addColumn('date', 'Fecha');
  data.addColumn('number', 'Cant Recibo');    
- data2.addColumn('string', 'Fecha');
+ data2.addColumn('date', 'Fecha');
  data2.addColumn('number', 'Cant Recibo');    
  data2.addColumn('string', 'Quien');    
 console.log("adding columns")
