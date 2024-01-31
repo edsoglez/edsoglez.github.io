@@ -25,12 +25,12 @@ onValue(transRef,(snapshot)=>{
             let receiver = ""
              Child.forEach(
                  function(GChild){
-                    fechaPedido = (String(GChild.key).substring(8,10))
+                    fechaPedido = String(GChild.key).substring(5,7)+"/"+String(GChild.key).substring(8,10)
                     console.log(fechaPedido)
                     cantidadPedida = GChild.val().Cantidad
                     receiver = GChild.val().Modder
-                    datatoload.push([Number(fechaPedido), cantidadPedida])
-                    datatoload2.push([Number(fechaPedido), cantidadPedida, receiver])
+                    datatoload.push([fechaPedido, cantidadPedida])
+                    datatoload2.push([fechaPedido, cantidadPedida, receiver])
                  }
              )
             console.log(datatoload) 
@@ -56,9 +56,9 @@ setTimeout(() => {
  // Create the data table.
  var data = new google.visualization.DataTable();
  var data2 = new google.visualization.DataTable();
- data.addColumn('number', 'Fecha');
+ data.addColumn('string', 'Fecha');
  data.addColumn('number', 'Cant Recibo');    
- data2.addColumn('number', 'Fecha');
+ data2.addColumn('string', 'Fecha');
  data2.addColumn('number', 'Cant Recibo');    
  data2.addColumn('string', 'Quien');    
 console.log("adding columns")
