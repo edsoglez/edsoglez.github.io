@@ -66,7 +66,7 @@ data.addRows(datatoload);
 data2.addRows(datatoload2);
 
  // Set chart options
- var options = {'title':'Consumo:',
+ var options = {'title':'Recibos de: '+localStorage.getItem("graph-item"),
                 'hAxis.format':{format:"#"},
                 'aggregationTarget': 'category',
                 'backgroundColor':'transparent',
