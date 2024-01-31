@@ -91,7 +91,7 @@ function Render(Child,filter){
                         `<li id="${Child.val().Text}">
                         <div style="display:flex" class="list-item">
                             <div style="width:100%; text-align: left; padding-left:10px">
-                                <button class="item-button">${Child.val().Text}</button>
+                                <button class="item-button" onclick="localStorage.setItem('graph-item','${Child.val().Text}');location.href='consumos.html';">${Child.val().Text}</button>
                             </div>
                             <div style="display:flex; flex-direction: row;">
                                 <button class="quant-control" onclick="playSound(); decreaseQty('${Child.key}',${Child.val().Cantidad})">-</button>
@@ -109,7 +109,7 @@ function Render(Child,filter){
                         `<li id="${Child.val().Text}">
                         <div style="display:flex" class="list-item">
                         <div style="width:100%; text-align: left; padding-left:10px">
-                                <button class="item-button">${Child.val().Text}</button>
+                                <button class="item-button" onclick="localStorage.setItem('graph-item','${Child.val().Text}');location.href='consumos.html';")'>${Child.val().Text}</button>
                             </div>
                             <div style="display:flex; flex-direction: row;">
                                 <button class="quant-control" onclick="decreaseQty('${Child.key}',${Child.val().Cantidad})">-</button>
