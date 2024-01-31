@@ -57,22 +57,7 @@ const List = document.getElementById('itemList')
         })
     })
 
-    //This section reads and sums all transactions
-    //TODO, filtering by dates
-
-    onValue(transRef,(snapshot)=>{
-        snapshot.forEach(
-            function(Child){
-                let cantidadPedida = 0;
-                Child.forEach(
-                    function(GChild){
-                        cantidadPedida = cantidadPedida + GChild.val().Cantidad
-                    }
-                )
-                console.log(Child.key,cantidadPedida)
-            }
-        )
-    })
+    
 
 window.tapSound = new Audio();
 tapSound.src="/click.wav";
