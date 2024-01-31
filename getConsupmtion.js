@@ -70,22 +70,32 @@ data2.addRows(datatoload2);
  var options = {'title':'Recibos de: '+localStorage.getItem("graph-item"),
  'height':'300',
                 'hAxis.format':{format:"#"},
-                
                 'vAxis': {minValue: 0, maxValue: 10, gridlines: {
                     count: 5
                   }},
+                'colors':['#CC0000'],
                 'aggregationTarget': 'category',
                 'backgroundColor':'transparent',
                 'curveType': 'function',
                 'legend': { position: "none" },};
 
+var cssClassNames = {
+                    'headerRow': 'italic-darkblue-font large-font bold-font red-background',
+                    'tableRow': 'table-row',
+                    'oddTableRow': 'beige-background',
+                    'selectedTableRow': 'orange-background large-font',
+                    'hoverTableRow': '',
+                    'headerCell': 'gold-border',
+                    'tableCell': '',
+                    'rowNumberCell': 'underline-blue-font'};
+                    
+var options2 = {'showRowNumber': false, 'allowHtml': true, 'cssClassNames': cssClassNames};
+
  // Instantiate and draw our chart, passing in some options.
  var chart = new google.visualization.ScatterChart(document.getElementById('chart_div'));
  var table = new google.visualization.Table(document.getElementById('chart_div2'));
  chart.draw(data, options);
- table.draw(data2, {'title':'Recibos de: '+localStorage.getItem("graph-item"),
- 'backgroundColor':'transparent',
- 'legend': { position: "none" },});
+ table.draw(data2, options2);
  }, "1000");
 
 

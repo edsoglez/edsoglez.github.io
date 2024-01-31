@@ -311,3 +311,23 @@ h3{
     font-size: 18px;
     text-align: left;
 }
+
+.table-row{
+    text-align: center;
+}
+
+.orange-background {
+   background-color: orange;
+  }
+  .red-background {
+    background-color: #CC0000;
+    color: white;
+   }
+
+ .orchid-background {
+  background-color: orchid;
+ }
+
+.beige-background {
+ background-color: rgb(245, 221, 220);
+}
