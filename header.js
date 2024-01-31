@@ -37,7 +37,7 @@ userButton.addEventListener('blur',()=>{
     userButton.style.transform = 'translate(0px,0px)'
     userButton.style.height = '50px'
     userButton.style.width = '50px'
-    userButton.style.backgroundColor= 'rgba(0, 0, 0, 1)'; 
+    userButton.style.backgroundColor= 'transparent'; 
     userButton.style.color= 'white'; 
     userButton.style.border= '2px solid white'; 
 
@@ -87,7 +87,7 @@ filterButton.addEventListener('blur',()=>{
     filterButton.style.transform = 'translate(0px,0px)'
     filterButton.style.height = '50px'
     filterButton.style.width = '50px'
-    filterButton.style.backgroundColor= 'rgba(0, 0, 0, 1)'; 
+    filterButton.style.backgroundColor= 'transparent'; 
     filterButton.style.color= 'white'; 
     filterButton.style.border= '2px solid white'; 
 
