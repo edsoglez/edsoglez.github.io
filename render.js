@@ -1,4 +1,4 @@
-localStorage.getItem("USER")==null?location.href="index.html":null;
+document.cookie==""?location.href="index.html":null;
 let Filter = localStorage.getItem("Filter")
 Filter==null ? localStorage.setItem("Filter","All"):null;
 
