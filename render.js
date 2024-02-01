@@ -145,7 +145,7 @@ export function decreaseQty(id,current){
     });
 }
 export function zeroQty(id){
-    if(confirm('Esta funcion agregara la cantidad actual a recibos, si desea reducir el pedido usar los controles de +/-')){
+    if(confirm('Recibir articulo a inventario? (si deseas bajar la cantidad usa los controles de -/+)')){
         ingressQty(id)
         update(ref(db,'Items/'+id),{
         Cantidad: 0,
