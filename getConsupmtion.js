@@ -4,11 +4,20 @@ window.transRef = ref(db,'Transactions/');
 
 
 get(child(ref(getDatabase()), `Items/`)).then((snapshot) => {
+    document.getElementById("item-choose").innerHTML += `<option value="${localStorage.getItem("graph-item")}">${localStorage.getItem("graph-item")}</option>`
     snapshot.forEach(
         function(Child){
+            console.log(Child.val())
             document.getElementById("item-choose").innerHTML += `<option value="${Child.key}">${Child.key}</option>`
+            if(Child.key == localStorage.getItem("graph-item")){
+                document.getElementById("itemPackQty").innerHTML = Child.val().PackQty
+            }
     })
   })
+
+get(child(ref(getDatabase()), `Inventory/${localStorage.getItem("graph-item")}`)).then((snapshot) => {
+    document.getElementById("itemCurrentInv").innerHTML = snapshot.val().Cantidad
+})
 
 var datatoload = []
 var datatoload2 = []

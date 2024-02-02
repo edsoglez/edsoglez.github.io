@@ -54,9 +54,14 @@
             <select name="item-choose" id="item-choose" onchange="localStorage.setItem('graph-item',this.value); location.reload()" style="background-color:#cc3333; color:whitesmoke; height: 50px; width: 100%; border-radius: 25px; border: 0px solid rgb(150, 150, 150); font-size: 18px;">
             </select>
         </div>
-        <div style="display: flex; flex-direction: column; text-align: center; padding: 0px; margin: 5px; overflow: scroll; padding-bottom: 20px;">
-                <div id="chart_div" style="width:100%; height:100%;"></div>
 
+        <div style="display: flex; flex-direction: column; text-align: center; padding: 0px; margin: 5px; overflow: scroll; padding-bottom: 20px;">
+                <div>
+                    Inventario: <span id="itemCurrentInv"></span>
+                    <br> 
+                    Paquete: <span id="itemPackQty"></span>
+                </div>
+                <div id="chart_div" style="width:100%; height:100%;"></div>
                 <div id="chart_div2" style="width:100%; height:500;"></div>
         </div>
     </div>
