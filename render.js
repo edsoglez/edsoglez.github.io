@@ -165,6 +165,7 @@ export function ingressQty(id){
     get(child(ref(getDatabase()), `Items/${id}`)).then((snapshot) => {
         if (snapshot.exists()) {
             let currentOrderedQty = snapshot.val().Cantidad
+            let PackQty = snapshot.val().PackQty
 
             //Add qty reception
             set(ref(db,'Transactions/'+id+"/"+year+"_"+month+"_"+day+"_"+time+"_"+Math.floor(Math.random() * 99)),{
@@ -175,7 +176,7 @@ export function ingressQty(id){
             get(child(ref(getDatabase()), `Inventory/${id}`)).then((snapshot) => {
 
                 set(ref(db,'Inventory/'+id),{
-                    Cantidad: snapshot.val().Cantidad + currentOrderedQty,
+                    Cantidad: snapshot.val().Cantidad + currentOrderedQty*PackQty,
                     LastMod: new Date()
                 });
 
