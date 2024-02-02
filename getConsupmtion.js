@@ -1,7 +1,7 @@
 import {getDatabase, set, get, update, remove, ref, child, onValue} from "https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js"; 
 window.itemRef = ref(db,'Items/');
 window.transRef = ref(db,'Transactions/');
-
+let UOM = "";
 
 get(child(ref(getDatabase()), `Items/`)).then((snapshot) => {
     document.getElementById("item-choose").innerHTML += `<option value="${localStorage.getItem("graph-item")}">${localStorage.getItem("graph-item")}</option>`
@@ -10,15 +10,16 @@ get(child(ref(getDatabase()), `Items/`)).then((snapshot) => {
             console.log(Child.val())
             document.getElementById("item-choose").innerHTML += `<option value="${Child.key}">${Child.key}</option>`
             if(Child.key == localStorage.getItem("graph-item")){
-                document.getElementById("itemPackQty").innerHTML = Child.val().PackQty
+                UOM = Child.val().UOM
+                document.getElementById("itemPackQty").innerHTML = Child.val().PackQty +" "+UOM
                 document.getElementById("itemVendor").innerHTML = Child.val().Vendor
-                document.getElementById("itemPrice").innerHTML = Child.val().Costo
+                document.getElementById("itemPrice").innerHTML = "XX.XX"
             }
     })
   })
 
 get(child(ref(getDatabase()), `Inventory/${localStorage.getItem("graph-item")}`)).then((snapshot) => {
-    document.getElementById("itemCurrentInv").innerHTML = snapshot.val().Cantidad
+    document.getElementById("itemCurrentInv").innerHTML = snapshot.val().Cantidad +" "+ UOM
 })
 
 var datatoload = []
