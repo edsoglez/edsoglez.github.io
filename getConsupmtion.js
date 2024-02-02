@@ -12,6 +12,7 @@ get(child(ref(getDatabase()), `Items/`)).then((snapshot) => {
             if(Child.key == localStorage.getItem("graph-item")){
                 document.getElementById("itemPackQty").innerHTML = Child.val().PackQty
                 document.getElementById("itemVendor").innerHTML = Child.val().Vendor
+                document.getElementById("itemVendor").innerHTML = Child.val().Costo
             }
     })
   })
