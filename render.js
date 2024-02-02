@@ -170,6 +170,11 @@ export function ingressQty(id){
                 Cantidad: currentOrderedQty,
                 Modder: localStorage.getItem("USER")
             });
+
+            set(ref(db,'Inventory/'+id),{
+                Cantidad: snapshot.val().Cantidad + currentOrderedQty,
+                LastMod: new Date()
+            });
         
         } else {
           console.log("No data available");
