@@ -23,15 +23,17 @@ onValue(transRef,(snapshot)=>{
             let receiver = ""
              Child.forEach(
                  function(GChild){
+                    let año = Number(String(GChild.key).substring(0,4))
                     let mes = Number(String(GChild.key).substring(5,7))-1
                     let dia = Number(String(GChild.key).substring(8,9))
+                    console.log(año)
                     console.log(mes)
                     console.log(dia)
                     console.log(new Date(2024,mes,dia))
                     cantidadPedida = GChild.val().Cantidad
                     receiver = GChild.val().Modder
-                    datatoload.push([new Date(2024,mes,dia), cantidadPedida])
-                    datatoload2.push([new Date(2024,mes,dia), cantidadPedida, receiver])
+                    datatoload.push([new Date(año,mes,dia), cantidadPedida])
+                    datatoload2.push([new Date(año,mes,dia), cantidadPedida, receiver])
                  }
              )
             console.log(datatoload) 
