@@ -11,6 +11,7 @@ get(child(ref(getDatabase()), `Items/`)).then((snapshot) => {
             document.getElementById("item-choose").innerHTML += `<option value="${Child.key}">${Child.key}</option>`
             if(Child.key == localStorage.getItem("graph-item")){
                 document.getElementById("itemPackQty").innerHTML = Child.val().PackQty
+                document.getElementById("itemVendor").innerHTML = Child.val().Vendor
             }
     })
   })
