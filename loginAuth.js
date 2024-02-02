@@ -7,7 +7,7 @@ get(child(ref(db),`Users/`+_username)).then((snapshot) => {
         if (snapshot.exists()) {
             if(snapshot.val().password == hashing(_password)){
                 localStorage.setItem("USER",_username);
-                document.cookie = "USER="+_username;
+                window.USER = _username;
                 location.href = "order.html"
             }
             else{

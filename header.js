@@ -27,7 +27,7 @@ userButton.addEventListener('focus',()=>{
         <h3>${localStorage.getItem("USER")}</h3>
         <button id="usermenu-button" onmousedown="location.href='usermenu.html'">Contraseña</button>
         <br>
-        <button id="sign-off" onmousedown="localStorage.removeItem('USER');document.cookie='USER=';location.href = 'index.html'">Cerrar Sesión</button>
+        <button id="sign-off" onmousedown="localStorage.removeItem('USER');location.href = 'index.html'">Cerrar Sesión</button>
         <br>
         
         `

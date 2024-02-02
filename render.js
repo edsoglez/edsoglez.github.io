@@ -1,14 +1,14 @@
-localStorage.getItem("USER")==null&&document.cookie==""?location.href="index.html":null;
+import {getDatabase, set, get, update, remove, ref, child, onValue} from "https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js"; 
+
+localStorage.getItem("USER")==null ? location.href="index.html":null;
+
 let Filter = localStorage.getItem("Filter")
 Filter==null ? localStorage.setItem("Filter","All"):null;
-
 let Summary = localStorage.getItem("Summary")
 Summary==null ? localStorage.setItem("Summary",0):null;
-
 let FilterBy = localStorage.getItem("FilterBy")
 FilterBy==null ? Reload():null;
 
-import {getDatabase, set, get, update, remove, ref, child, onValue} from "https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js"; 
 window.itemRef = ref(db,'Items/');
 window.transRef = ref(db,'Transactions/');
 
@@ -43,7 +43,6 @@ function Reload(){
 }
 
 const List = document.getElementById('itemList')
-
 
     onValue(itemRef,(snapshot)=>{
         try{

@@ -3,18 +3,17 @@ window.itemRef = ref(db,'Items/');
 window.transRef = ref(db,'Transactions/');
 
 
-
-onValue(itemRef,(snapshot)=>{
-    document.getElementById("item-choose").innerHTML += `<option value="${localStorage.getItem('graph-item')}">${localStorage.getItem('graph-item')}</option>`
+get(child(ref(getDatabase()), `Items/`)).then((snapshot) => {
     snapshot.forEach(
         function(Child){
             document.getElementById("item-choose").innerHTML += `<option value="${Child.key}">${Child.key}</option>`
     })
-})
+  })
 
 var datatoload = []
 var datatoload2 = []
-onValue(transRef,(snapshot)=>{
+
+get(child(ref(getDatabase()), `Transactions/`)).then((snapshot) => {
     snapshot.forEach(
         function(Child){
             
