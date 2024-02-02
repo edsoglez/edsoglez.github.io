@@ -167,7 +167,7 @@ export function ingressQty(id){
         if (snapshot.exists()) {
             let currentOrderedQty = snapshot.val().Cantidad
 
-            set(ref(db,'Transactions/'+id+"/"+year+"_"+month+"_"+day+"_"+time+"_"+Math.floor(Math.random() * 99)),{
+            set(ref(db,'Transactions/'+ new Date()),{
                 Cantidad: currentOrderedQty,
                 Modder: localStorage.getItem("USER")
             });
