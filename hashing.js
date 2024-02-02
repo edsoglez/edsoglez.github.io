@@ -22,5 +22,6 @@ export function hashing(string) {
         Number(ch2)< 94 ? ch3 = String.fromCharCode(Number(ch2)+33) : ch3 = String.fromCharCode(Number(ch2))
         hash3 = hash3 + ch3;
     }
+    //console.log(hash3)
     return hash3;
 }
