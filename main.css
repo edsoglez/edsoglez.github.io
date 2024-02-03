@@ -331,3 +331,18 @@ h3{
 .beige-background {
  background-color: rgb(245, 221, 220);
 }
+
+.menu-page-button{
+    width: 400px;
+    height: 300px;
+    border: 1px rgb(0, 0, 0) solid;
+    border-radius: 20px;
+    background-color: transparent;
+    box-shadow: 0px 5px 7px 5px rgba(0, 0, 0, 0.12);
+    transition: 0.2s;
+}
+.menu-page-button:hover{
+    z-index: 10;
+    background-color: white;
+    box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.15);
+}
