@@ -8,7 +8,7 @@ get(child(ref(db),`Users/`+_username)).then((snapshot) => {
             if(snapshot.val().password == hashing(_password)){
                 localStorage.setItem("USER",_username);
                 window.USER = _username;
-                location.href = "order.html"
+                location.href = "menu.html"
             }
             else{
                 alert("Wrong password")
