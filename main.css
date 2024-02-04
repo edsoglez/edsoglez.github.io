@@ -333,7 +333,7 @@ h3{
 }
 
 .menu-page-button{
-    width: 370px;
+    width: 300px;
     height: 200px;
     border: 0px rgb(0, 0, 0) solid;
     border-radius: 20px;
@@ -343,7 +343,7 @@ h3{
     text-align: center;
     align-items: center;
     justify-content: center;
-    padding: 10px;
+    padding: 20px;
 }
 .menu-page-button:hover{
     z-index: 10;
