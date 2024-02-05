@@ -14,7 +14,7 @@
 
     <div id="header" style="display: flex ; z-index: 0;">
         <div id="header-left">
-            <button onclick="location.href='order.html'" class="logo-button" style="background-color: transparent; border: 0px; padding: 0px; text-align: left; margin: 0px;">
+            <button onmouseenter="document.getElementById('icon-1').style.width = '200px'" onclick="location.href='order.html'" class="logo-button" style="background-color: transparent; border: 0px; padding: 0px; text-align: left; margin: 0px;">
                 <h1 style="color:  white; margin-top: 0px;">CALESA</h1>
                 <h4 style="color: white;">coffee shop</h2>
             </button>
@@ -42,17 +42,17 @@
     <div id="main-container" class="container" style="z-index: 10; overflow: scroll; justify-self: center; align-items: center; text-align: center;">
         
         <div style="margin: 20px; text-align: right; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 20px;">
-            <div class="menu-page-button" onclick="location.href='sell.html'"><h3 style="margin: auto;">POS</h3>
-                <img width="180px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Card_Terminal_POS_Flat_Icon_Vector.svg/1024px-Card_Terminal_POS_Flat_Icon_Vector.svg.png?20180301080914" alt="">
+            <div class="menu-page-button" onmouseenter="document.getElementById('icon-1').style.width = '190px'" onmouseleave="document.getElementById('icon-1').style.width='180px'" onclick="location.href='sell.html'"><h3 style="margin: auto;">POS</h3>
+                <img id="icon-1" style="transition: 0.2s;" width="180px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Card_Terminal_POS_Flat_Icon_Vector.svg/1024px-Card_Terminal_POS_Flat_Icon_Vector.svg.png?20180301080914" alt="">
             </div>
-            <div class="menu-page-button" onclick="location.href='order.html'"><h3 style="margin: auto;">COMPRAS</h3>
-                <img width="180px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Shopping_Basket_Flat_Icon_Vector.svg/1200px-Shopping_Basket_Flat_Icon_Vector.svg.png" alt="">
+            <div class="menu-page-button" onmouseenter="document.getElementById('icon-2').style.width = '190px'"onmouseleave="document.getElementById('icon-2').style.width='180px'" onclick="location.href='order.html'"><h3 style="margin: auto;">COMPRAS</h3>
+                <img id="icon-2" style="transition: 0.2s;" width="180px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Shopping_Basket_Flat_Icon_Vector.svg/1200px-Shopping_Basket_Flat_Icon_Vector.svg.png" alt="">
             </div>
-            <div class="menu-page-button" onclick="location.href='inventario.html'"><h3 style="margin: auto;">INVENTARIO</h3>
-                <img width="140px" style="mix-blend-mode: darken; margin: 20px;" src="https://cdn-icons-png.flaticon.com/512/679/679922.png" alt="">
+            <div class="menu-page-button" onmouseenter="document.getElementById('icon-3').style.width = '150px'"onmouseleave="document.getElementById('icon-3').style.width='140px'" onclick="location.href='inventario.html'"><h3 style="margin: auto;">INVENTARIO</h3>
+                <img id="icon-3" style="transition: 0.2s; margin: 20px;" width="140px" src="https://cdn-icons-png.flaticon.com/512/679/679922.png" alt="">
             </div>
-            <div class="menu-page-button" onclick="location.href='consumos.html'"><h3 style="margin: auto;">CONSUMOS</h3>
-                <img width="180px" src="https://cdn-icons-png.freepik.com/512/5246/5246231.png" alt="">
+            <div class="menu-page-button" onmouseenter="document.getElementById('icon-4').style.width = '190px'"onmouseleave="document.getElementById('icon-4').style.width='180px'" onclick="location.href='consumos.html'"><h3 style="margin: auto;">CONSUMOS</h3>
+                <img id="icon-4" style="transition: 0.2s;" width="180px" src="https://cdn-icons-png.freepik.com/512/5246/5246231.png" alt="">
             </div>
         </div>
     </div> 
