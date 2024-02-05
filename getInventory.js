@@ -14,6 +14,7 @@ get(child(ref(getDatabase()), `Items/`)).then((snapshot) => {
 
                 document.getElementById("item-list-inv").innerHTML +=
                 `<li id="${Child.val().Text}">
+
                 <div style="display:flex" class="list-item">
                     <div style="width:50%; text-align: left; padding-left:10px">
                         <button class="item-button" onclick="localStorage.setItem('graph-item','${Child.val().Text}');location.href='consumos.html';">${Child.val().Text}</button>
