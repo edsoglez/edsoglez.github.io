@@ -45,31 +45,43 @@
     <div id="main-container" class="container">
         <div style="display: flex; padding: 20px; padding-bottom: 0px;">
             <div style="width: 100%; height: 80px; text-align: left; overflow: scroll; border: 0; box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.20); border-radius: 20px; background-color: rgb(240, 240, 240);">
-                <ul style="list-style: none;">
-                    <li class="selected-product">Item 1</li>
-                    <li class="selected-product">Item 1</li>
-                    <li class="selected-product">Item 1</li>
-                    <li class="selected-product">Item 1</li>
-                    <li class="selected-product">Item 1</li>
+                <ul style="list-style: none;" id="product-order">
+                    
                 </ul>
             </div>
             <div style="padding-left: 20px; width: 100px; text-align: left;"><h4>Total:</h4><h4 id="order-total">$100</span></div>
         </div>
         <div id="product-list" style="display: flex; flex-direction: row; flex-wrap: wrap; padding: 20px; overflow: scroll;"> 
-            <div class="product-item">Item 1</div>
-            <div class="product-item">Item 2</div>
-            <div class="product-item">Item 3</div>
-            <div class="product-item">Item 4</div>
-            <div class="product-item">Item 5</div>
-            <div class="product-item">Item 6</div>
-            <div class="product-item">Item 7</div>
-            <div class="product-item">Item 1</div>
-            <div class="product-item">Item 2</div>
-            <div class="product-item">Item 3</div>
-            <div class="product-item">Item 4</div>
-            <div class="product-item">Item 5</div>
-            <div class="product-item">Item 6</div>
-            <div class="product-item">Item 7</div>
+            <div class="product-item" onclick="document.getElementById('product-order').innerHTML += `<li class='selected-product'>${this.id}</li>` " id="Frappe">
+                <img width="100%"  height="80%" style="border-top-left-radius: 10px; border-top-right-radius: 10px;" src="https://i.blogs.es/25e8e5/como-preparar-frappe-de-cafe-con-moka-estilo-starbucks-su-sabor-y-rapidez-te-encantaran/1366_2000.jpg" alt="">
+                <h5>Frappe Natural</h5>
+                <div></div>
+            </div>
+            <div class="product-item" onclick="document.getElementById('product-order').innerHTML += `<li class='selected-product'>${this.id}</li>` " id="Frappe">
+                <img width="100%"  height="80%" style="border-top-left-radius: 10px; border-top-right-radius: 10px;" src="https://i.blogs.es/25e8e5/como-preparar-frappe-de-cafe-con-moka-estilo-starbucks-su-sabor-y-rapidez-te-encantaran/1366_2000.jpg" alt="">
+                <h5>Frappe Moka</h5>
+                <div></div>
+            </div>
+            <div class="product-item" onclick="document.getElementById('product-order').innerHTML += `<li class='selected-product'>${this.id}</li>` " id="Frappe">
+                <img width="100%"  height="80%" style="border-top-left-radius: 10px; border-top-right-radius: 10px;" src="https://i.blogs.es/25e8e5/como-preparar-frappe-de-cafe-con-moka-estilo-starbucks-su-sabor-y-rapidez-te-encantaran/1366_2000.jpg" alt="">
+                <h5>Frappe Cajeta</h5>
+                <div></div>
+            </div>
+            <div class="product-item" onclick="document.getElementById('product-order').innerHTML += `<li class='selected-product'>${this.id}</li>` " id="Frappe">
+                <img  height="80%" style="border-top-left-radius: 10px; border-top-right-radius: 10px;" src="https://i.blogs.es/25e8e5/como-preparar-frappe-de-cafe-con-moka-estilo-starbucks-su-sabor-y-rapidez-te-encantaran/1366_2000.jpg" alt="">
+                <h5>Frappe Natural</h5>
+                <div></div>
+            </div>
+            <div class="product-item" onclick="document.getElementById('product-order').innerHTML += `<li class='selected-product'>${this.id}</li>` " id="Frappe">
+                <img width="100%"  height="80%" style="border-top-left-radius: 10px; border-top-right-radius: 10px;" src="https://i.blogs.es/25e8e5/como-preparar-frappe-de-cafe-con-moka-estilo-starbucks-su-sabor-y-rapidez-te-encantaran/1366_2000.jpg" alt="">
+                <h5>Frappe Natural</h5>
+                <div></div>
+            </div>
+            <div class="product-item" onclick="document.getElementById('product-order').innerHTML += `<li class='selected-product'>${this.id}</li>` " id="Frappe">
+                <img width="100%"  height="80%" style="border-top-left-radius: 10px; border-top-right-radius: 10px;" src="https://i.blogs.es/25e8e5/como-preparar-frappe-de-cafe-con-moka-estilo-starbucks-su-sabor-y-rapidez-te-encantaran/1366_2000.jpg" alt="">
+                <h5>Frappe Natural</h5>
+                <div></div>
+            </div>
         </div>
     </div>
 
