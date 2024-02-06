@@ -3,11 +3,16 @@ window.itemRef = ref(db,'Items/');
 window.transRef = ref(db,'Transactions/');
 window.prodRef = ref(db,'Products/');
 let UOM = "";
+window.productPrices = {}
 window.itemsOrdered = {}
+let orderTotal = 0;
 
 get(child(ref(getDatabase()), `Products/`)).then((snapshot) => {
     snapshot.forEach(
         function(Child){
+                productPrices[Child.key] = Child.val().price
+                console.log(productPrices)
+
                 document.getElementById("product-list").innerHTML +=
                 `<li id="${Child.key}" class="product-list-item" onclick="addToOrder(this.id)">
                     <div class="product-item" id="Frappe">
@@ -28,7 +33,13 @@ function addToOrder(id) {
     else
         itemsOrdered[id] = itemsOrdered[id] + 1
 
-    document.getElementById("product-order").innerHTML += `<li class="selected-product">${id}</li>`
+    orderTotal += productPrices[id]
+    document.getElementById("order-total").textContent = orderTotal
+    document.getElementById("product-order").innerHTML += 
+    `<li class="selected-product" style="display: flex;">
+        <div style="width: 200px;">${id}</div>
+        <div style="width: 100px;">$ ${productPrices[id]}</div>
+    </li>`
     console.log(itemsOrdered)
 }
 
