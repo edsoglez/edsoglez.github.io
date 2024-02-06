@@ -355,7 +355,7 @@ h3{
     width: 100px;
     height: 80px;
     margin: 5px;
-    padding: 5px;
+    padding-bottom: 10px;
     border-radius: 10px;
     background-color:rgb(222, 222, 222);
     justify-content: center;
