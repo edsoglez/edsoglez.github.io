@@ -44,7 +44,21 @@ function addToOrder(id) {
     console.log(itemsOrdered)
 }
 
+function addOrderToDB(){
+    
+}
+
+function resetOrder(method) {
+    alert("Payed "+orderTotal+" with "+method)
+    itemsOrdered = {}
+    orderTotal = 0
+    document.getElementById("order-total").textContent = orderTotal
+    document.getElementById("product-order").innerHTML = ""
+    console.log(itemsOrdered)
+}
+
 window.addToOrder = addToOrder;
+window.resetOrder = resetOrder;
 
 
 
