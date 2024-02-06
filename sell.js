@@ -13,7 +13,7 @@ get(child(ref(getDatabase()), `Products/`)).then((snapshot) => {
                 `<li id="${Child.key}" class="product-list-item">
                     <div class="product-item" id="Frappe">
                         <img width="100%"  height="80%" style="border-top-left-radius: 10px; border-top-right-radius: 10px;" src="https://i.blogs.es/25e8e5/como-preparar-frappe-de-cafe-con-moka-estilo-starbucks-su-sabor-y-rapidez-te-encantaran/1366_2000.jpg" alt="">
-                        <h5>Frappe Natural</h5>
+                        <h5>${Child.key}</h5>
                         <div></div>
                     </div>
                 </li>`
