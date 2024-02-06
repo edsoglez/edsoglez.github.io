@@ -38,8 +38,8 @@ function addToOrder(id) {
 
     document.getElementById("product-order").innerHTML += 
     `<li class="selected-product" style="display: flex;">
-        <div style="width: 150px;">${id}</div>
-        <div style="width: 50px;">$ ${productPrices[id]}</div>
+        <div style="width: 80%;">${id}</div>
+        <div style="width: 20%; text-align: right; padding-right: 20px;">$ ${productPrices[id]}</div>
     </li>`
     console.log(itemsOrdered)
 }
