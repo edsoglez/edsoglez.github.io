@@ -3,21 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Calesa Items</title>
+    <title>Calesa Sell</title>
     <link rel="stylesheet" href="main.css">
-    <script type="module" src="dbconfig.js"></script>
     <link rel="stylesheet" href="headerfooter.css">
+    <script type="module" src="dbconfig.js"></script>
     <script type="module" src="header.js"></script>
-    <script type="module" src="getConsupmtion.js"></script>
 
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-
-        
-
-</script>
-
- 
 </head>
 <body>
     
@@ -25,7 +16,7 @@
     <div id="header" style="display: flex ; z-index: 0;">
         <div id="header-left">
             <button onclick="location.href='menu.html'" class="logo-button" style="background-color: transparent; border: 0px; padding: 0px; text-align: left; margin: 0px;">
-                <h1 style="color:  white; margin-top: 0px;">CALESA</h1>
+                <h1 style="color: white; margin-top: 0px;">CALESA</h1>
                 <h4 style="color: white;">coffee shop</h2>
             </button>
         </div>
@@ -49,29 +40,39 @@
         
     </div>
     
-    <div id="main-container" class="container" style="display: flex; text-align: center; flex-direction: column;">
-        <div style="padding: 0px; width: 100%; display: flex; flex-shrink: 10;">
-            <select name="item-choose" id="item-choose" onchange="localStorage.setItem('graph-item',this.value); location.reload()" style="background-color:#cc3333; color:whitesmoke; height: 50px; width: 100%; border-radius: 25px; border: 0px solid rgb(150, 150, 150); font-size: 18px;">
-            </select>
+    
+
+    <div id="main-container" class="container">
+        <div style="display: flex; padding: 20px; padding-bottom: 0px;">
+            <div style="width: 100%; height: 80px; text-align: left; overflow: scroll; border: 1px solid rgb(179, 179, 179); border-radius: 20px;">
+                <ul style="list-style: none;">
+                    <li class="selected-product">Item 1</li>
+                    <li class="selected-product">Item 1</li>
+                    <li class="selected-product">Item 1</li>
+                    <li class="selected-product">Item 1</li>
+                    <li class="selected-product">Item 1</li>
+                </ul>
+            </div>
+            <div style="padding-left: 10px; width: 100px; text-align: left;"><h4>Total:</h4><h4 id="order-total">$100</span></div>
         </div>
-
-        <div style="display: flex; flex-direction: column; text-align: center; padding: 0px; margin: 5px; overflow: scroll; padding-bottom: 20px;">
-                <div style="text-align: left; margin-left: auto; margin-right: auto; display: flex; flex-direction: row; gap: 20px;">
-                    <div>
-                        <b>Inventario: </b><span id="itemCurrentInv"></span>
-                        <br> 
-                        <b>Paquete: </b><span id="itemPackQty"></span>
-                    </div>
-                    <div>
-                        <b>Proveedor: </b><span id="itemVendor"></span><br>
-                        <b>Costo Paq: </b>$ <span id="itemPrice"></span>
-                    </div>
-
-                </div>
-                <div id="chart_div" style="width:100%; height:100%;"></div>
-                <div id="chart_div2" style="width:100%; height:500;"></div>
+        <div id="product-list" style="display: flex; flex-direction: row; flex-wrap: wrap; padding: 20px;"> 
+            <div class="product-item">Item 1</div>
+            <div class="product-item">Item 2</div>
+            <div class="product-item">Item 3</div>
+            <div class="product-item">Item 4</div>
+            <div class="product-item">Item 5</div>
+            <div class="product-item">Item 6</div>
+            <div class="product-item">Item 7</div>
+            <div class="product-item">Item 1</div>
+            <div class="product-item">Item 2</div>
+            <div class="product-item">Item 3</div>
+            <div class="product-item">Item 4</div>
+            <div class="product-item">Item 5</div>
+            <div class="product-item">Item 6</div>
+            <div class="product-item">Item 7</div>
         </div>
     </div>
+
     
 </body>
 </html>
