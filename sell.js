@@ -35,10 +35,11 @@ function addToOrder(id) {
 
     orderTotal += productPrices[id]
     document.getElementById("order-total").textContent = orderTotal
+
     document.getElementById("product-order").innerHTML += 
     `<li class="selected-product" style="display: flex;">
-        <div style="width: 200px;">${id}</div>
-        <div style="width: 100px;">$ ${productPrices[id]}</div>
+        <div style="width: 150px;">${id}</div>
+        <div style="width: 50px;">$ ${productPrices[id]}</div>
     </li>`
     console.log(itemsOrdered)
 }

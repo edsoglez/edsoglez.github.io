@@ -389,6 +389,11 @@ h3{
     display: inline-block;
 }
 
+#product-order{
+    padding: 10px;
+    padding-left: 10px;
+}
+
 .cash-button,.card-button{
     background-color: rgb(240, 240, 240);
     color: rgb(42, 42, 42);
