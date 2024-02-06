@@ -26,8 +26,9 @@ get(child(ref(getDatabase()), `Items/`)).then((snapshot) => {
                         <div style="width:100px; text-align: right">${ordQty*packQty}</div>
                     </div>
             
-                    </div>
+                </div>
                 <span id="${Child.val().Text}-date" class="date-container"></span>
+                
                 </li>`
 
             })
