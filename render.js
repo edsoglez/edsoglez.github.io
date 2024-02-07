@@ -206,7 +206,7 @@ export function addItemToDB(id,categoria,vendor){
         Categoria: categoria,
         Vendor: vendor,
         Modder: localStorage.getItem("USER")
-        });
+    });
 
     set(ref(db,'Inventory/'+id),{
             Cantidad: 0,

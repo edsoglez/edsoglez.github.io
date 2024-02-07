@@ -11,7 +11,7 @@ get(child(ref(getDatabase()), `Items/`)).then((snapshot) => {
                 let invQty = snapshot.val().Cantidad
                 let ordQty = Child.val().Cantidad
                 let packQty = Child.val().PackQty
-
+ 
                 document.getElementById("item-list-inv").innerHTML +=
                 `<li id="${Child.val().Text}">
 
