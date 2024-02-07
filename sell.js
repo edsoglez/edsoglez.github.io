@@ -78,13 +78,16 @@ function deductFromInventory(){
 }
 
 function resetOrder(paymentMethod) {
-    deductFromInventory()
-    //alert("Payed "+orderTotal+" with "+paymentMethod)
-    itemsOrdered = {}
-    orderTotal = 0
-    document.getElementById("order-total").textContent = orderTotal
-    document.getElementById("product-order").innerHTML = ""
-    console.log(itemsOrdered)
+    if(confirm(Object.entries(itemsOrdered))){
+        deductFromInventory()
+        //alert("Payed "+orderTotal+" with "+paymentMethod)
+        itemsOrdered = {}
+        
+        orderTotal = 0
+        document.getElementById("order-total").textContent = orderTotal
+        document.getElementById("product-order").innerHTML = ""
+        console.log(itemsOrdered)
+    }
 }
 
 window.addItemToOrder = addItemToOrder;
