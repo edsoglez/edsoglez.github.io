@@ -44,15 +44,6 @@ function registerSales(){
 }
 
 function deductFromInventory(){
-    /*
-    Steps: (seudo algo)
-        -Get all products ordered
-            -for each product
-            -get(product recipe items)
-                -foreach item
-                -get(current item inv qty)
-                    -update(current item invQty - recipeQty*productQty)
-    */
 
     for (const itemsOrderedArray of Object.entries(itemsOrdered)) {
         console.log(itemsOrderedArray[0],itemsOrderedArray[1]);
@@ -66,7 +57,7 @@ function deductFromInventory(){
                     console.log("Deduct: ",recipeQty*qtyOrdered, "from", Child.key)
 
                     get(child(ref(db),'Inventory/'+Child.key+'/')).then((snapshot) => {
-                        set(ref(db,'Inventory/'+item+"/"),{
+                        set(ref(db,'Inventory/'+Child.key+"/"),{
                             Cantidad: Number(snapshot.val().Cantidad) - qtyOrdered*recipeQty
                         });
                     })
