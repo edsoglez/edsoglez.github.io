@@ -63,8 +63,9 @@ function deductFromInventory(){
             snapshot.forEach(
                 function(Child){
                     let recipeQty = Child.val()
+                    console.log("Deduct: ",recipeQty*qtyOrdered, "from", Child.key)
 
-                    get(child(ref(db),'Inventory/'+item+'/')).then((snapshot) => {
+                    get(child(ref(db),'Inventory/'+Child.key+'/')).then((snapshot) => {
                         set(ref(db,'Inventory/'+item+"/"),{
                             Cantidad: Number(snapshot.val().Cantidad) - qtyOrdered*recipeQty
                         });
@@ -78,7 +79,7 @@ function deductFromInventory(){
 }
 
 function resetOrder(paymentMethod) {
-    if(confirm(Object.entries(itemsOrdered))){
+    if(confirm(Object.entries(itemsOrdered).join('\n'))){
         deductFromInventory()
         //alert("Payed "+orderTotal+" with "+paymentMethod)
         itemsOrdered = {}
