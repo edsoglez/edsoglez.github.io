@@ -25,9 +25,8 @@ function renderCards(){
                     `<li id="${Product.key}" class="product-list-item">
                         <div style="display:flex; flex-direction:row;">
                         <div class="product-item">
-                            <img width="100%" height="60%" style="object-fit: cover; border-top-left-radius: 10px; border-top-right-radius: 10px;" src="${Product.val().imgURL}" alt="">
-                            <h5 style=" font-size: 20px; font-weight: bolder; -webkit-text-stroke-width: 1px;
-                            -webkit-text-stroke-color: black; height:0px; padding:2px; transform: translateY(-60px); color: white; ">${Product.key}</h5>   
+                            <img width="100%" height="60%" style="object-fit: cover; filter: contrast(40%) brightness(120%); border-top-left-radius: 10px; border-top-right-radius: 10px;" src="${Product.val().imgURL}" alt="">
+                            <h5 style=" font-size: 24px; font-weight: bolder; height:0px; padding:2px; transform: translateY(-70px); color: white; -webkit-text-stroke: 1px black;">${Product.key}</h5>   
                             <div style="width:100%; heigh:50px">
                                     <button class="size-button" onClick="addItemToOrder('${Product.key}','CH');" >CH</button>
                                     <button class="size-button" onClick="addItemToOrder('${Product.key}','M');" >M</button>
@@ -46,6 +45,9 @@ function renderCards(){
 
 //If card is clicked, add product to temp order
 function addItemToOrder(id,size) {
+    //Check if size for product exists
+    if(productPrices[id+"_"+size]==null)
+        return
     //check if produc already in order, to increase qty only if so
     if(itemsOrdered[id+"_"+size] == null){
         itemsOrdered[id+"_"+size] = 1
@@ -61,9 +63,9 @@ function addItemToOrder(id,size) {
     //render product in order list
     document.getElementById("product-order").innerHTML += 
     `<li class="selected-product" style="display: flex;">
-        <div style="width: 30%; padding-left: 10px; font-weight: bold;">${id}</div>
-        <div style="width: 20%; padding-left: 10px; font-weight: bold;">${size}</div>
-        <div style="width: 40px; text-align: right; padding-right: 10px;">$ ${productPrices[id+"_"+size]}</div>
+        <div style="width: 55%; padding-left: 10px; font-weight: bold;">${id}</div>
+        <div style="width: 30px; font-weight: bold;">${size}</div>
+        <div style="width: 40px; text-align: right; padding-right: 5px;">$ ${productPrices[id+"_"+size]}</div>
     </li>`
     console.log(itemsOrdered)
 }
