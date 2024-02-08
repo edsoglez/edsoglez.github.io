@@ -143,6 +143,15 @@ function deductFromInventory(){
 }
 
 function resetOrder(paymentMethod) {
+    if(paymentMethod == "none"){
+        itemsOrdered = {}
+        orderTotal = 0
+        document.getElementById("order-total").textContent = orderTotal
+        document.getElementById("product-order").innerHTML = ""
+        console.log(itemsOrdered)
+        return
+    }
+
     if(confirm(Object.entries(itemsOrdered).join('\n'))){
         deductFromInventory()
         //alert("Payed "+orderTotal+" with "+paymentMethod)
