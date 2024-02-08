@@ -20,71 +20,28 @@ function renderCards(){
                         function(Size){
                             if(Size.key=="CH"||Size.key=="M"||Size.key=="G")
                             productPrices[Product.key+"_"+Size.key] = Size.val().price
-                            
                     })
-                    
                     document.getElementById("product-list").innerHTML +=
-                    `<li id="${Product.key}" class="product-list-item" onclick="getSizeOption(this.id);">
+                    `<li id="${Product.key}" class="product-list-item">
+                        <div style="display:flex; flex-direction:row;">
                         <div class="product-item">
-                            <img width="100%" height="80%" style="object-fit: cover; border-top-left-radius: 10px; border-top-right-radius: 10px;" src="${Product.val().imgURL}" alt="">
-                            <h5 style=" font-size: 12px">${Product.key}</h5>
-                            <div></div>
+                            <img width="100%" height="60%" style="object-fit: cover; border-top-left-radius: 10px; border-top-right-radius: 10px;" src="${Product.val().imgURL}" alt="">
+                            <h5 style=" font-size: 20px; font-weight: bolder; -webkit-text-stroke-width: 1px;
+                            -webkit-text-stroke-color: black; height:0px; padding:2px; transform: translateY(-60px); color: white; ">${Product.key}</h5>   
+                            <div style="width:100%; heigh:50px">
+                                    <button class="size-button" onClick="addItemToOrder('${Product.key}','CH');" >CH</button>
+                                    <button class="size-button" onClick="addItemToOrder('${Product.key}','M');" >M</button>
+                                    <button class="size-button" onClick="addItemToOrder('${Product.key}','G');" >G</button>
+                            <div>
+                            
+                        </div>
                         </div>
                     </li>`
+                    
+                    
         })
         console.log(productPrices)
       })
-}
-
-function reRenderCard(item){
-
-    get(child(ref(getDatabase()), `Products/${item}`)).then((snapshot) => {
-        document.getElementById(item).innerHTML = 
-        `<div class="product-item">
-        <img width="100%" height="80%" style="object-fit: cover; border-top-left-radius: 10px; border-top-right-radius: 10px;" src="${snapshot.val().imgURL}" alt="">
-        <h5 style=" font-size: 12px">${item}</h5>
-        <div></div>
-        </div>`
-    })
-
-    
-    
-}
-
-
-function getSizeOption(item,imgURL){
-    let productCard = document.getElementById(item)
-    let originalState = productCard.innerHTML
-
-    if(productPrices[item+"_M"]!=null){
-        productCard.innerHTML = 
-        `<li id="${item}" class="product-list-item" >
-            <div class="product-item" id="Frappe">
-                <button class="size-button" onClick="addItemToOrder('${item}','CH'); reRenderCard('${item}')" >CH</button>
-                <button class="size-button" onClick="addItemToOrder('${item}','M'); reRenderCard('${item}')" >M</button>
-                <button class="size-button" onClick="addItemToOrder('${item}','G'); reRenderCard('${item}')" >G</button>
-            </div>
-        </li>`
-    }
-    else{
-        if(productPrices[item+"_G"]!=null){
-            `<li id="${item}" class="product-list-item" >
-            <div class="product-item" id="Frappe">
-                <button class="size-button" onClick="addItemToOrder('${item}','CH'); reRenderCard('${item}')" >CH</button>
-                <button class="size-button" onClick="addItemToOrder('${item}','M'); reRenderCard('${item}')" >G</button>
-            </div>
-            </li>`
-        }
-        else{
-        productCard.innerHTML = 
-            `<li id="${item}" class="product-list-item" >
-                <div class="product-item" id="Frappe">
-                    <button class="size-button" onClick="addItemToOrder('${item}','CH'); reRenderCard('${item}')" >CH</button>
-                </div>
-            </li>`
-        }
-    }
-
 }
 
 //If card is clicked, add product to temp order
@@ -104,7 +61,7 @@ function addItemToOrder(id,size) {
     //render product in order list
     document.getElementById("product-order").innerHTML += 
     `<li class="selected-product" style="display: flex;">
-        <div style="width: 50%; padding-left: 10px; font-weight: bold;">${id}</div>
+        <div style="width: 30%; padding-left: 10px; font-weight: bold;">${id}</div>
         <div style="width: 20%; padding-left: 10px; font-weight: bold;">${size}</div>
         <div style="width: 40px; text-align: right; padding-right: 10px;">$ ${productPrices[id+"_"+size]}</div>
     </li>`
@@ -156,9 +113,7 @@ function resetOrder(paymentMethod) {
     }
 }
 
-window.getSizeOption = getSizeOption;
 window.renderCards = renderCards;
-window.reRenderCard = reRenderCard;
 window.addItemToOrder = addItemToOrder;
 window.resetOrder = resetOrder;
 
