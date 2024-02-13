@@ -110,8 +110,13 @@ function addItemToOrder(id,size) {
 }
 
 //create sale record with timestamp, products sold and order total
-function registerSales(){
-
+function registerSales(method){
+    set(ref(db,'Sales/'+new Date()+"/"),{
+        Date: new Date(),
+        Items: itemsOrdered,
+        Total: orderTotal,
+        Method: method
+    });
 }
 
 //on sale, deduct ordered qty from inventory
@@ -153,6 +158,7 @@ function resetOrder(paymentMethod) {
     }
 
     if(confirm(Object.entries(itemsOrdered).join('\n'))){
+        registerSales(paymentMethod)
         deductFromInventory()
         //alert("Payed "+orderTotal+" with "+paymentMethod)
         itemsOrdered = {}
@@ -163,7 +169,7 @@ function resetOrder(paymentMethod) {
         console.log(itemsOrdered)
     }
 }
-
+window.registerSales = registerSales;
 window.renderCards = renderCards;
 window.addItemToOrder = addItemToOrder;
 window.resetOrder = resetOrder;
