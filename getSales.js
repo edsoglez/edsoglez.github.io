@@ -28,6 +28,10 @@ let Months = {
     'Dec' : '12',
 }
 
+onValue(salesRef,(snapshot)=>{
+    renderSales(String(fromDateVal.value).replace(/-/g,""),String(toDateVal.value).replace(/-/g,""))
+})
+
 fromDateVal.value = date[3]+"-"+month.slice(-2)+"-01"       //from Date is start current month 
 toDateVal.value =  date[3]+"-"+month.slice(-2)+"-"+date[2]  //to Date is today
 
