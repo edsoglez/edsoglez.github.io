@@ -9,9 +9,7 @@ let salesTotalDisp = document.getElementById('sales-total')
 let salesTotalCashDisp = document.getElementById('sales-total-cash')
 let salesTotalCardDisp = document.getElementById('sales-total-card')
 let salesList = document.getElementById('sales-list')
-let salesTotal = 0;
-let salesTotalCash = 0;
-let salesTotalCard = 0;
+
 
 fromDateVal.value = "2024-02-01"
 toDateVal.value =  "2024-02-29"
@@ -25,6 +23,9 @@ toDateVal.addEventListener('change',()=>{
 
 
 onValue(salesRef,(snapshot)=>{
+    let salesTotal = 0;
+    let salesTotalCash = 0;
+    let salesTotalCard = 0;
     salesList.innerHTML = ""
     snapshot.forEach(
     function(year){
@@ -32,7 +33,6 @@ onValue(salesRef,(snapshot)=>{
             function(month){
                 month.forEach(
                     function(sale){
-                        console.log(sale.key)
                         salesTotal += sale.val().Total
                         if(sale.val().Method == 'cash'){
                             salesTotalCash += sale.val().Total
