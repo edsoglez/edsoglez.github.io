@@ -45,6 +45,9 @@ toDateVal.addEventListener('change',()=>{
 })
 
 function renderSales(fromDate,toDate){
+    let lastUpdate = String(new Date()).substring(0,25)
+    document.getElementById('last-update').innerHTML = lastUpdate
+
     console.log("Rendering sales from",fromDate.replace(/-/g,""),"to",toDate.replace(/-/g,"")) //SERIALIZE DATE TO LATER COMPARE GREATER AND LESS THAN
     let fromDateSerial = Number(fromDate.replace(/-/g,""))
     let toDateSerial = Number(toDate.replace(/-/g,""))
