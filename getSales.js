@@ -142,7 +142,8 @@ function drawChart() {
                     'aggregationTarget': 'category',
                     'backgroundColor':'transparent',
                     'curveType': 'function',
-                    'legend': { position: "none" },};
+                    'legend': { position: "none" },
+                };
     
      // Instantiate and draw our chart, passing in some options.
     var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
