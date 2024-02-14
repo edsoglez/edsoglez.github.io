@@ -11,13 +11,14 @@
 </head>
 <body>
     <div id="header-banner">
-        <div class="header-logo-container" style="padding: 20px;"> 
-            <img src="calesa_logo_black.png" alt="" class="header-logo" height="50px">
+        <div class="header-logo-container" style="padding: 20px; height: 50px; z-index: 1;"> 
+            <img src="calesa_logo_black.png" alt="" class="header-logo" height="50px" style="z-index: 1; position: fixed;">
         </div>
 
         
     </div>
-    <div style="display: flex; flex-direction: column; text-align: center; margin-left: auto; margin-right: auto; border-radius: 20px; background-color: #FAFAFA; height: 90%; width: auto; padding: 24px; box-shadow: 0px -5px 8px 0px rgba(0, 0, 0, 0.08);">
+  
+    <div style="z-index: 20; display: flex; flex-direction: column; text-align: center; margin-left: auto; margin-right: auto; border-radius: 20px; background-color: #FAFAFA; height: 100%; width: auto; padding: 24px; box-shadow: 0px -5px 8px 0px rgba(0, 0, 0, 0.08); position: relative;">
         <h3>Ventas</h3>
         <h4>Resumen de ventas, selecciona fechas:</h6>
             <br>
@@ -33,6 +34,28 @@
                 <div style="display: flex; justify-content: left; width: 100%; text-align: right;">
                     <button>Buscar</button>
                 </div>
+            
+                <div style="margin-top: 0px; text-align: right; width: 100%;">
+                    <h3 style="text-align: right;">Total:</h3>
+                    <h3 id="sales-total-from-dates" style="font-weight: 100; font-size: 20px; text-align: right;">$ 3,000</h3>
+                </div>
+                <ul id="sales-from-dates" style="height: 250px; background-color: rgb(230, 230, 230); width: 100%; border-radius: 10px; overflow: scroll; padding: 10px;"> 
+                    <li>10000</li>
+                    <li>10000</li>
+                    <li>10000</li>
+                    <li>10000</li>
+                    <li>10000</li>
+                    <li>10000</li>
+                    <li>10000</li>
+                    <li>10000</li>
+                    <li>10000</li>
+                    <li>10000</li>
+                    <li>10000</li>
+                    <li>10000</li>
+                    <li>10000</li>
+                    <li>10000</li>
+                    <li>10000</li>
+                </ul>
                 
             </div>
     </div>
