@@ -28,26 +28,35 @@ let Months = {
     'Dec' : '12',
 }
 
+var datatoload = []
+
+
 onValue(salesRef,(snapshot)=>{
     renderSales(String(fromDateVal.value).replace(/-/g,""),String(toDateVal.value).replace(/-/g,""))
 })
 
-fromDateVal.value = date[3]+"-"+month.slice(-2)+"-01"       //from Date is start current month 
+fromDateVal.value = date[3]+"-"+month.slice(-2)+"-01"    //from Date is start current month 
 toDateVal.value =  date[3]+"-"+month.slice(-2)+"-"+date[2]  //to Date is today
 
 renderSales(date[3]+"-"+month.slice(-2)+"-01",date[3]+"-"+month.slice(-2)+"-"+date[2]) //Default renders from current month day 1 to today
 
 fromDateVal.addEventListener('change',()=>{
     renderSales(String(fromDateVal.value).replace(/-/g,""),String(toDateVal.value).replace(/-/g,""))
+    drawChart()
 })
 toDateVal.addEventListener('change',()=>{
     renderSales(String(fromDateVal.value).replace(/-/g,""),String(toDateVal.value).replace(/-/g,""))
+    drawChart()
+})
+
+document.getElementById('search').addEventListener('click',()=>{
+    renderSales(String(fromDateVal.value).replace(/-/g,""),String(toDateVal.value).replace(/-/g,""))
+    drawChart()
 })
 
 function renderSales(fromDate,toDate){
     let lastUpdate = String(new Date()).substring(0,25)
     document.getElementById('last-update').innerHTML = lastUpdate
-
     console.log("Rendering sales from",fromDate.replace(/-/g,""),"to",toDate.replace(/-/g,"")) //SERIALIZE DATE TO LATER COMPARE GREATER AND LESS THAN
     let fromDateSerial = Number(fromDate.replace(/-/g,""))
     let toDateSerial = Number(toDate.replace(/-/g,""))
@@ -56,6 +65,7 @@ function renderSales(fromDate,toDate){
         let salesTotal = 0;
         let salesTotalCash = 0;
         let salesTotalCard = 0;
+        datatoload = []
         salesList.innerHTML = ""
         snapshot.forEach(
         function(year){
@@ -63,11 +73,12 @@ function renderSales(fromDate,toDate){
                 function(month){
                     month.forEach(
                         function(sale){
-                            let saleDate = Number(sale.key.substring(11,15) + Months[sale.key.substring(4,7)] + sale.key.substring(8,10) )
-                            console.log(saleDate)
+                            let saleDate = Number(sale.key.substring(11,15) + Months[sale.key.substring(4,7)] + sale.key.substring(8,10) )    
 
                             if(saleDate >= fromDateSerial && saleDate <= toDateSerial){
                                 salesTotal += sale.val().Total
+                                datatoload.push([new Date(sale.key), salesTotal])
+
                                 if(sale.val().Method == 'cash'){
                                     salesTotalCash += sale.val().Total
                                 }
@@ -98,4 +109,46 @@ function renderSales(fromDate,toDate){
             )            
         })
     })
+    console.log(datatoload)
+}
+
+ // Load the Visualization API and the piechart package.
+ google.charts.load('current', {'packages':['corechart']});
+ google.charts.load('current', {'packages':['table']});
+ // Set a callback to run when the Google Visualization API is loaded.
+ google.charts.setOnLoadCallback(drawChart);
+
+ // Callback that creates and populates a data table, 
+ // instantiates the pie chart, passes in the data and
+ // draws it.
+function drawChart() {
+
+    setTimeout(() => {
+    
+     // Create the data table.
+    var data = new google.visualization.DataTable();
+    data.addColumn('date', 'Fecha');
+    data.addColumn('number', 'Sales');       
+    data.addRows(datatoload);
+    
+     // Set chart options
+    var options = {
+                    'height':'300',
+                    'hAxis.format':{format:"#"},
+                    'vAxis': {minValue: 0, maxValue: 10, gridlines: {
+                        count: 5
+                      }},
+                    'colors':['#009900'],
+                    'aggregationTarget': 'category',
+                    'backgroundColor':'transparent',
+                    'curveType': 'function',
+                    'legend': { position: "none" },};
+    
+     // Instantiate and draw our chart, passing in some options.
+    var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+     
+    chart.draw(data, options);
+    }, "1000");
+    
+    
 }
