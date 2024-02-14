@@ -26,7 +26,7 @@
         document.getElementById('last-update').innerHTML = lastUpdate
     </script>
   
-    <div style="z-index: 20; display: flex; flex-direction: column; text-align: center; margin-left: auto; margin-right: auto; border-radius: 20px; background-color: #FAFAFA; height: 100%; width: auto; padding: 24px; box-shadow: 0px -5px 8px 0px rgba(0, 0, 0, 0.08); position: relative;">
+    <div style="z-index: 20; display: flex; flex-direction: column; text-align: center; margin-left: auto; margin-right: auto; border-radius: 20px; background-color: #FAFAFA; height: 100%; width: auto; padding: 24px; box-shadow: 0px -5px 8px 0px rgba(0, 0, 0, 0.08); position: relative; overflow: hidden;">
         <h3>Ventas</h3>
         <h4>Resumen de ventas, selecciona fechas:</h6>
             <br>
@@ -43,24 +43,24 @@
                     <button>Buscar</button>
                 </div>
 
-                <div style="display: flex; width: 100%; align-items: center;">
+                <div style="display: flex; width: 100%; align-items: center; margin-top: 36px;">
                     <div style="margin-top: 0px; text-align: center; width: 33%;">
-                        <h3 style="text-align: center;">Total:</h3>
-                        <h3 id="sales-total" style="font-weight: 300; font-size: 18px; text-align: center;"></h3>
+                        <h4 style="text-align: center; font-weight: 500;">Total:</h3>
+                        <h4 id="sales-total" style="font-weight: 300; font-size: 16px; text-align: center;"></h3>
                     </div>
     
                     <div style="margin-top: 0px; text-align: center; width: 33%;">
-                        <h3 style="text-align: center;">Cash:</h3>
-                        <h3 id="sales-total-cash" style="font-weight: 300; font-size: 18px; text-align: center;"></h3>
+                        <h4 style="text-align: center; font-weight: 500;">Efectivo:</h3>
+                        <h4 id="sales-total-cash" style="font-weight: 300; font-size: 16px; text-align: center;"></h3>
                     </div>
     
                     <div style="margin-top: 0px; text-align: center; width: 33%;">
-                        <h3 style="text-align: center;">Card:</h3>
-                        <h3 id="sales-total-card" style="font-weight: 300; font-size: 18px; text-align: center;"></h3>
+                        <h4 style="text-align: center; font-weight: 500;">Tarjeta:</h3>
+                        <h4 id="sales-total-card" style="font-weight: 300; font-size: 16px; text-align: center;"></h3>
                     </div>
                 </div>
             
-                <ul id="sales-list" style="height: 250px; background-color: rgb(240, 240, 240); width: 100%; border-radius: 10px; overflow: scroll; padding: 10px;"> 
+                <ul id="sales-list" style="height: 250px; background-color: rgb(240, 240, 240); width: 100%; border-radius: 10px; overflow: scroll; padding: 10px; margin-top: 0px;"> 
                     
                 </ul>
                 
