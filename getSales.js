@@ -28,9 +28,10 @@ let Months = {
     'Dec' : '12',
 }
 
-
 fromDateVal.value = date[3]+"-"+month.slice(-2)+"-01"       //from Date is start current month 
 toDateVal.value =  date[3]+"-"+month.slice(-2)+"-"+date[2]  //to Date is today
+
+renderSales(date[3]+"-"+month.slice(-2)+"-01",date[3]+"-"+month.slice(-2)+"-"+date[2]) //Default renders from current month day 1 to today
 
 fromDateVal.addEventListener('change',()=>{
     renderSales(String(fromDateVal.value).replace(/-/g,""),String(toDateVal.value).replace(/-/g,""))
@@ -38,8 +39,6 @@ fromDateVal.addEventListener('change',()=>{
 toDateVal.addEventListener('change',()=>{
     renderSales(String(fromDateVal.value).replace(/-/g,""),String(toDateVal.value).replace(/-/g,""))
 })
-
-renderSales(date[3]+"-"+month.slice(-2)+"-01",date[3]+"-"+month.slice(-2)+"-"+date[2]) //Default renders from current month day 1 to today
 
 function renderSales(fromDate,toDate){
     console.log("Rendering sales from",fromDate.replace(/-/g,""),"to",toDate.replace(/-/g,"")) //SERIALIZE DATE TO LATER COMPARE GREATER AND LESS THAN
