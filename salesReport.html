@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calesa Sales Report</title>
+    <script type="module" src="dbconfig.js"></script>
+    <script type="module" src="getSales.js"></script>
     <link rel="stylesheet" href="salesReport.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,27 +42,26 @@
                 <div style="display: flex; justify-content: left; width: 100%; text-align: right;">
                     <button>Buscar</button>
                 </div>
-            
-                <div style="margin-top: 0px; text-align: right; width: 100%;">
-                    <h3 style="text-align: right;">Total:</h3>
-                    <h3 id="sales-total-from-dates" style="font-weight: 300; font-size: 18px; text-align: right;">$ 3,000</h3>
+
+                <div style="display: flex; width: 100%; align-items: center;">
+                    <div style="margin-top: 0px; text-align: center; width: 33%;">
+                        <h3 style="text-align: center;">Total:</h3>
+                        <h3 id="sales-total" style="font-weight: 300; font-size: 18px; text-align: center;"></h3>
+                    </div>
+    
+                    <div style="margin-top: 0px; text-align: center; width: 33%;">
+                        <h3 style="text-align: center;">Cash:</h3>
+                        <h3 id="sales-total-cash" style="font-weight: 300; font-size: 18px; text-align: center;"></h3>
+                    </div>
+    
+                    <div style="margin-top: 0px; text-align: center; width: 33%;">
+                        <h3 style="text-align: center;">Card:</h3>
+                        <h3 id="sales-total-card" style="font-weight: 300; font-size: 18px; text-align: center;"></h3>
+                    </div>
                 </div>
-                <ul id="sales-from-dates" style="height: 250px; background-color: rgb(230, 230, 230); width: 100%; border-radius: 10px; overflow: scroll; padding: 10px;"> 
-                    <li>10000</li>
-                    <li>10000</li>
-                    <li>10000</li>
-                    <li>10000</li>
-                    <li>10000</li>
-                    <li>10000</li>
-                    <li>10000</li>
-                    <li>10000</li>
-                    <li>10000</li>
-                    <li>10000</li>
-                    <li>10000</li>
-                    <li>10000</li>
-                    <li>10000</li>
-                    <li>10000</li>
-                    <li>10000</li>
+            
+                <ul id="sales-list" style="height: 250px; background-color: rgb(240, 240, 240); width: 100%; border-radius: 10px; overflow: scroll; padding: 10px;"> 
+                    
                 </ul>
                 
             </div>

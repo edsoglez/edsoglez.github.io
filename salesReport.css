@@ -56,3 +56,7 @@ h5{
     font-weight: 400;
     text-align: left;
 }
+
+
+.sale-item-li{margin: 10px; list-style: none;}
+.sale-item-div{display:flex; flex-direction: row; background-color: rgb(227, 227, 227); padding: 10px; border-radius: 8px;}
