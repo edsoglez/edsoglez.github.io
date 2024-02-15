@@ -80,11 +80,11 @@ function renderSales(fromDate,toDate){
                             if(saleDate >= fromDateSerial && saleDate <= toDateSerial){
                                 salesTotal += sale.val().Total
                                 let years = sale.key.substring(0,4)
-                                let monthIndex = sale.key.substring(4,6)
+                                let monthIndex = Number(sale.key.substring(4,6))-1
                                 let day = sale.key.substring(6,8)
-                                let hours = Number(sale.key.substring(8,10))-6
-                                let minutes = sale.key.substring(10,12)
-                                let seconds = sale.key.substring(12,14)
+                                let hours = sale.val().Time.substring(0,2)
+                                let minutes = sale.val().Time.substring(3,5)
+                                let seconds = sale.val().Time.substring(6,8)
                                 console.log(years)
                                 console.log(monthIndex)
                                 console.log(day)
