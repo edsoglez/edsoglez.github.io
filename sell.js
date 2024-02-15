@@ -111,8 +111,9 @@ function addItemToOrder(id,size) {
 
 //create sale record with timestamp, products sold and order total
 function registerSales(method){
-    set(ref(db,'Sales/'+new Date().getFullYear()+"/"+(new Date().getMonth()+1)+"/"+ new Date()),{
-        Date: new Date(),
+    console.log(new Date().toISOString().replace(/\D/g,''))
+    set(ref(db,'Sales/'+new Date().getFullYear()+"/"+(new Date().getMonth()+1)+"/"+ new Date().toISOString().replace(/\D/g,'')),{
+        Time: String(new Date()).substring(16,24),
         Items: itemsOrdered,
         Total: orderTotal,
         Method: method

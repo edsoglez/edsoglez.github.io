@@ -67,17 +67,32 @@ function renderSales(fromDate,toDate){
         let salesTotalCard = 0;
         datatoload = []
         salesList.innerHTML = ""
+
         snapshot.forEach(
         function(year){
             year.forEach(
                 function(month){
                     month.forEach(
                         function(sale){
-                            let saleDate = Number(sale.key.substring(11,15) + Months[sale.key.substring(4,7)] + sale.key.substring(8,10) )    
+                            let saleDate = Number(sale.key.substring(0,8))    
+                            
 
                             if(saleDate >= fromDateSerial && saleDate <= toDateSerial){
                                 salesTotal += sale.val().Total
-                                datatoload.push([new Date(sale.key), salesTotal])
+                                let years = sale.key.substring(0,4)
+                                let monthIndex = sale.key.substring(4,6)
+                                let day = sale.key.substring(6,8)
+                                let hours = Number(sale.key.substring(8,10))-6
+                                let minutes = sale.key.substring(10,12)
+                                let seconds = sale.key.substring(12,14)
+                                console.log(years)
+                                console.log(monthIndex)
+                                console.log(day)
+                                console.log(hours)
+                                console.log(minutes)
+                                console.log(seconds)
+                                datatoload.push([new Date(years, monthIndex, day, hours, minutes, seconds), salesTotal])
+                                console.log(datatoload)
 
                                 if(sale.val().Method == 'cash'){
                                     salesTotalCash += sale.val().Total
@@ -93,8 +108,8 @@ function renderSales(fromDate,toDate){
                                 salesList.innerHTML += `
                                     <li class="sale-item-li">
                                         <div class="sale-item-div" style="">
-                                            <div style="width: 30%; text-align: left;">${String(sale.key).substring(4, 10)}</div>
-                                            <div style="width: 30%; text-align: left;">${String(sale.key).substring(16,24)}</div>
+                                            <div style="width: 30%; text-align: left;">${String(sale.key).substring(4, 6)+"/"+String(sale.key).substring(6, 8)}</div>
+                                            <div style="width: 30%; text-align: left;">${String(sale.val().Time)}</div>
                                             <div style="width: 5%"; text-align: right>$</div>
                                             <div style="width: 15%"; text-align: left>${+sale.val().Total}</div>
                                             <div style="width: 20%"; text-align: left>${sale.val().Method}</div>
