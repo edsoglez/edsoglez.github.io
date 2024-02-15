@@ -149,8 +149,8 @@ function drawChart() {
      // Set chart options
     var options = {
                     'height':'300',
-                    'hAxis.format':{format:"#"},
-                    'vAxis': {minValue: 0, maxValue: 10, gridlines: {
+                    'hAxis':{format:"M/d HH:mm"},
+                    'vAxis': {format:"$ ",minValue: 0, maxValue: 10, gridlines: {
                         count: 5
                       }},
                     'colors':['#009900'],
