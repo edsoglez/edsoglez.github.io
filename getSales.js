@@ -158,6 +158,10 @@ function drawChart() {
                     'backgroundColor':'transparent',
                     'curveType': 'function',
                     'legend': { position: "none" },
+                    'trendlines':{ 0: {'color': 'red',
+                                        'type': 'polynomial',
+                                        'degree': '2'}
+                                    }
                 };
     
      // Instantiate and draw our chart, passing in some options.
