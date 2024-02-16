@@ -19,16 +19,29 @@ let cashSelector = document.getElementById('cash-selector')
 let cardSelector = document.getElementById('card-selector')
 
 totalSelector.addEventListener('mouseover',()=>{
-    totalSelector.focus()
+    
     renderSales(String(fromDateVal.value).replace(/-/g,""),String(toDateVal.value).replace(/-/g,""))
 })
 cashSelector.addEventListener('mouseover',()=>{
-    cashSelector.focus()
+    
     renderSales(String(fromDateVal.value).replace(/-/g,""),String(toDateVal.value).replace(/-/g,""),'cash')
 })
 cardSelector.addEventListener('mouseover',()=>{
-    cardSelector.focus()
+   
     renderSales(String(fromDateVal.value).replace(/-/g,""),String(toDateVal.value).replace(/-/g,""),'card')
+})
+
+totalSelector.addEventListener('blur',()=>{
+
+    renderSales(String(fromDateVal.value).replace(/-/g,""),String(toDateVal.value).replace(/-/g,""))
+})
+cashSelector.addEventListener('blur',()=>{
+
+    renderSales(String(fromDateVal.value).replace(/-/g,""),String(toDateVal.value).replace(/-/g,""))
+})
+cardSelector.addEventListener('blur',()=>{
+
+    renderSales(String(fromDateVal.value).replace(/-/g,""),String(toDateVal.value).replace(/-/g,""))
 })
 
 let salesList = document.getElementById('sales-list')
