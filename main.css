@@ -397,6 +397,7 @@ h3{
 }
 
 #product-order{
+    width: 100px;
     padding: 10px;
     padding-left: 10px;
 }

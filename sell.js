@@ -88,8 +88,8 @@ function renderOrderedItems(){
     Object.entries(itemsOrdered).forEach(val =>{
         console.log(val[0], val[1], productPrices[val[0]])
         document.getElementById("product-order").innerHTML += 
-            `<li class="selected-product" style="display: flex;">
-                <div style="width: 60%; padding-left: 10px; font-weight: bold;">${val[0]}</div>
+            `<li class="selected-product" style="display: flex; width:auto;">
+                <div style="width: 59%; padding-left: 10px; font-weight: bold;">${val[0]}</div>
                 <div style="width: 30px; font-weight: bold;">${val[1]}x</div>
                 <div style="width: 40px; text-align: right; padding-right: 5px;">$ ${productPrices[val[0]]}</div>
             </li>`
