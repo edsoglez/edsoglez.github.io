@@ -90,7 +90,7 @@ function renderOrderedItems(){
         document.getElementById("product-order").innerHTML += 
             `<li class="selected-product" style="display: flex;">
                 <div style="width: 55%; padding-left: 10px; font-weight: bold;">${val[0]}</div>
-                <div style="width: 30px; font-weight: bold;">${val[1]}</div>
+                <div style="width: 30px; font-weight: bold;">${val[1]} x</div>
                 <div style="width: 40px; text-align: right; padding-right: 5px;">$ ${productPrices[val[0]]}</div>
             </li>`
     })
@@ -149,6 +149,11 @@ function addItemToOrder(id,size) {
 
 //create sale record with timestamp, products sold and order total
 function registerSales(method){
+    if(orderIndexes.length < 1){
+        alert("Orden vacia")
+        return
+    }
+
     console.log(new Date().toISOString().replace(/\D/g,''))
     set(ref(db,'Sales/'+new Date().getFullYear()+"/"+(new Date().getMonth()+1)+"/"+ new Date().toISOString().replace(/\D/g,'')),{
         Time: String(new Date()).substring(16,24),
@@ -187,6 +192,11 @@ function deductFromInventory(){
 }
 
 function resetOrder(paymentMethod) {
+    if(orderIndexes.length < 1){
+        alert("Orden vacia")
+        return
+    }
+
     if(paymentMethod == "none"){
         itemsOrdered = {}
         orderTotal = 0
@@ -196,7 +206,7 @@ function resetOrder(paymentMethod) {
         console.log(itemsOrdered)
         return
     }
-
+    
     if(confirm(Object.entries(itemsOrdered).join('\n'))){
         registerSales(paymentMethod)
         deductFromInventory()
