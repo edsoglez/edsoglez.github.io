@@ -8,6 +8,13 @@ window.itemsOrdered = {}
 let orderTotal = 0;
 window.orderIndexes = []
 
+
+let month = "0"+String(new Date().getMonth()+1)
+let date = String(new Date()).split(" ")
+let fromDateVal = date[3]+"-"+month.slice(-2)+"-"+date[2]  //to Date is today
+let toDateVal =  date[3]+"-"+month.slice(-2)+"-"+date[2]  //to Date is today
+
+
 renderCards()
 
 //Render all product cards
@@ -147,6 +154,63 @@ function addItemToOrder(id,size) {
     renderOrderedItems()
 }
 
+function getCorte(){
+    let fromDate = String(fromDateVal).replace(/-/g,"")
+    let toDate = String(toDateVal).replace(/-/g,"")
+    let fromDateSerial = Number(fromDate.replace(/-/g,""))
+    let toDateSerial = Number(toDate.replace(/-/g,""))
+
+    get(child(ref(db),'Sales/')).then((snapshot) => {
+        let salesTotal = 0;
+        let salesTotalCash = 0;
+        let salesTotalCard = 0;
+
+
+        snapshot.forEach(
+        function(year){
+            year.forEach(
+                function(month){
+                    month.forEach(
+                        function(sale){
+                            let saleDate = Number(sale.key.substring(0,8))    
+                            
+
+                            if(saleDate >= fromDateSerial && saleDate <= toDateSerial){
+                                salesTotal += sale.val().Total
+                    
+
+                                if(sale.val().Method == 'cash'){
+                                    salesTotalCash += sale.val().Total
+                                }
+                                    
+                                if(sale.val().Method == 'card'){
+                                    salesTotalCard += sale.val().Total
+                                }
+                            
+                                
+                            }
+                        
+                        }
+                    )
+                }
+            )            
+        })
+        alert(
+            "Total: "+salesTotal+'\n'+
+            "Efectivo: "+salesTotalCash+'\n'+
+            "Tarejta: "+salesTotalCard+'\n'
+        )
+        set(ref(db,'Cortes/'+new Date().getFullYear()+"/"+(new Date().getMonth()+1)+"/"+ new Date().toISOString().replace(/\D/g,'_')),{
+            Time: String(new Date()).substring(16,24),
+            Total: salesTotal,
+            Efectivo: salesTotalCash,
+            Tarjeta: salesTotalCard
+        });
+        location.href = "index.html"
+    })
+
+}
+
 //create sale record with timestamp, products sold and order total
 function registerSales(method){
     if(orderIndexes.length < 1){
@@ -224,5 +288,5 @@ window.renderCards = renderCards;
 window.addItemToOrder = addItemToOrder;
 window.resetOrder = resetOrder;
 window.removeLastItem = removeLastItem;
-
+window.getCorte = getCorte;
 
