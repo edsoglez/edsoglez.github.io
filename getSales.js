@@ -14,6 +14,23 @@ let salesTotalDisp = document.getElementById('sales-total')
 let salesTotalCashDisp = document.getElementById('sales-total-cash')
 let salesTotalCardDisp = document.getElementById('sales-total-card')
 
+let totalSelector = document.getElementById('total-selector')
+let cashSelector = document.getElementById('cash-selector')
+let cardSelector = document.getElementById('card-selector')
+
+totalSelector.addEventListener('mouseover',()=>{
+    totalSelector.focus()
+    renderSales(String(fromDateVal.value).replace(/-/g,""),String(toDateVal.value).replace(/-/g,""))
+})
+cashSelector.addEventListener('mouseover',()=>{
+    cashSelector.focus()
+    renderSales(String(fromDateVal.value).replace(/-/g,""),String(toDateVal.value).replace(/-/g,""),'cash')
+})
+cardSelector.addEventListener('mouseover',()=>{
+    cardSelector.focus()
+    renderSales(String(fromDateVal.value).replace(/-/g,""),String(toDateVal.value).replace(/-/g,""),'card')
+})
+
 let salesList = document.getElementById('sales-list')
 let Months = {
     'Jan' : '01',
@@ -55,7 +72,7 @@ document.getElementById('search').addEventListener('click',()=>{
     drawChart()
 })
 
-function renderSales(fromDate,toDate){
+function renderSales(fromDate,toDate,method){
     let lastUpdate = String(new Date()).substring(0,25)
     document.getElementById('last-update').innerHTML = lastUpdate
     console.log("Rendering sales from",fromDate.replace(/-/g,""),"to",toDate.replace(/-/g,"")) //SERIALIZE DATE TO LATER COMPARE GREATER AND LESS THAN
@@ -77,47 +94,53 @@ function renderSales(fromDate,toDate){
                         function(sale){
                             let saleDate = Number(sale.key.substring(0,8))    
                             
-
-                            if(saleDate >= fromDateSerial && saleDate <= toDateSerial){
-                                salesTotal += sale.val().Total
-                                let years = sale.key.substring(0,4)
-                                let monthIndex = Number(sale.key.substring(4,6))-1
-                                let day = sale.key.substring(6,8)
-                                let hours = sale.val().Time.substring(0,2)
-                                let minutes = sale.val().Time.substring(3,5)
-                                let seconds = sale.val().Time.substring(6,8)
-                                console.log(years)
-                                console.log(monthIndex)
-                                console.log(day)
-                                console.log(hours)
-                                console.log(minutes)
-                                console.log(seconds)
-                                datatoload.push([new Date(years, monthIndex, day, hours, minutes, seconds), salesTotal])
-                                console.log(datatoload)
-
-                                if(sale.val().Method == 'cash'){
-                                    salesTotalCash += sale.val().Total
-                                }
+                           
+                                if(saleDate >= fromDateSerial && saleDate <= toDateSerial){
+                                    salesTotal += sale.val().Total
+                                    let years = sale.key.substring(0,4)
+                                    let monthIndex = Number(sale.key.substring(4,6))-1
+                                    let day = sale.key.substring(6,8)
+                                    let hours = sale.val().Time.substring(0,2)
+                                    let minutes = sale.val().Time.substring(3,5)
+                                    let seconds = sale.val().Time.substring(6,8)
+                                    console.log(years)
+                                    console.log(monthIndex)
+                                    console.log(day)
+                                    console.log(hours)
+                                    console.log(minutes)
+                                    console.log(seconds)
+                                    datatoload.push([new Date(years, monthIndex, day, hours, minutes, seconds), salesTotal])
+                                    console.log(datatoload)
+    
+                                    if(sale.val().Method == 'cash'){
+                                        salesTotalCash += sale.val().Total
+                                    }
+                                        
+                                    if(sale.val().Method == 'card'){
+                                        salesTotalCard += sale.val().Total
+                                    }
+                                        
+                                    salesTotalDisp.innerHTML = "$ "+ salesTotal
+                                    salesTotalCashDisp.innerHTML = "$ "+ salesTotalCash
+                                    salesTotalCardDisp.innerHTML = "$ "+ salesTotalCard
                                     
-                                if(sale.val().Method == 'card'){
-                                    salesTotalCard += sale.val().Total
+                                    if(sale.val().Method == method || method == null){
+                                    salesList.innerHTML += `
+                                        <li class="sale-item-li">
+                                            <div class="sale-item-div" style="">
+                                                <div style="width: 30%; text-align: left;">${String(sale.key).substring(4, 6)+"/"+String(sale.key).substring(6, 8)}</div>
+                                                <div style="width: 30%; text-align: left;">${String(sale.val().Time)}</div>
+                                                <div style="width: 5%"; text-align: right>$</div>
+                                                <div style="width: 15%"; text-align: left>${+sale.val().Total}</div>
+                                                <div style="width: 20%"; text-align: left>${sale.val().Method}</div>
+                                            <div>
+                                        </li>
+                                    `
+                                    }
                                 }
-                                    
-                                salesTotalDisp.innerHTML = "$ "+ salesTotal
-                                salesTotalCashDisp.innerHTML = "$ "+ salesTotalCash
-                                salesTotalCardDisp.innerHTML = "$ "+ salesTotalCard
-                                salesList.innerHTML += `
-                                    <li class="sale-item-li">
-                                        <div class="sale-item-div" style="">
-                                            <div style="width: 30%; text-align: left;">${String(sale.key).substring(4, 6)+"/"+String(sale.key).substring(6, 8)}</div>
-                                            <div style="width: 30%; text-align: left;">${String(sale.val().Time)}</div>
-                                            <div style="width: 5%"; text-align: right>$</div>
-                                            <div style="width: 15%"; text-align: left>${+sale.val().Total}</div>
-                                            <div style="width: 20%"; text-align: left>${sale.val().Method}</div>
-                                        <div>
-                                    </li>
-                                `
-                            }
+                            
+
+                            
                         
                         }
                     )

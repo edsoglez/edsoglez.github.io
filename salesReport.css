@@ -61,3 +61,15 @@ h5{
 
 .sale-item-li{margin: 10px; list-style: none;}
 .sale-item-div{display:flex; flex-direction: row; background-color: rgb(227, 227, 227); padding: 10px; border-radius: 8px;}
+
+#total-selector,#cash-selector,#card-selector{
+    color: black;
+    background-color: #fafafa;
+    width: 100px;
+    border-radius: 15px; 
+}
+
+#total-selector:hover,#cash-selector:hover,#card-selector:hover{
+    color: green;
+    background-color: rgb(240, 255, 223) !important;
+}
