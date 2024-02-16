@@ -6,6 +6,7 @@ let UOM = "";
 window.productPrices = {}
 window.itemsOrdered = {}
 let orderTotal = 0;
+window.orderIndexes = []
 
 renderCards()
 
@@ -82,8 +83,50 @@ function renderCards(){
       })
 }
 
+function renderOrderedItems(){
+    document.getElementById("product-order").innerHTML = ""
+    Object.entries(itemsOrdered).forEach(val =>{
+        console.log(val[0], val[1], productPrices[val[0]])
+        document.getElementById("product-order").innerHTML += 
+            `<li class="selected-product" style="display: flex;">
+                <div style="width: 55%; padding-left: 10px; font-weight: bold;">${val[0]}</div>
+                <div style="width: 30px; font-weight: bold;">${val[1]}</div>
+                <div style="width: 40px; text-align: right; padding-right: 5px;">$ ${productPrices[val[0]]}</div>
+            </li>`
+    })
+}
+
+function removeLastItem(){
+    console.log(orderIndexes)
+    if(orderIndexes.length < 1){
+        alert("Orden vacia")
+        return
+    }
+
+    console.log(itemsOrdered)
+    console.log(orderIndexes)
+
+    let lastItem = orderIndexes[orderIndexes.length-1]
+    orderTotal = orderTotal - productPrices[lastItem]
+    document.getElementById("order-total").textContent = orderTotal
+    //subtract current item qty - 1 from object, if current qty is 1, remove item from object
+    if(itemsOrdered[lastItem] == 1){
+        delete itemsOrdered[lastItem]
+    }else{
+        itemsOrdered[lastItem] = itemsOrdered[lastItem] - 1
+    }
+
+    orderIndexes.pop(orderIndexes.length)
+
+    console.log(itemsOrdered)
+    console.log(orderIndexes)
+    renderOrderedItems()
+}
+
 //If card is clicked, add product to temp order
 function addItemToOrder(id,size) {
+    //orderIndex will be used to be able to subtract items in the order they were added
+    orderIndexes.push(id+"_"+size)
     //Check if size for product exists
     if(productPrices[id+"_"+size]==null)
         return
@@ -100,13 +143,8 @@ function addItemToOrder(id,size) {
     document.getElementById("order-total").textContent = orderTotal
 
     //render product in order list
-    document.getElementById("product-order").innerHTML += 
-    `<li class="selected-product" style="display: flex;">
-        <div style="width: 55%; padding-left: 10px; font-weight: bold;">${id}</div>
-        <div style="width: 30px; font-weight: bold;">${size}</div>
-        <div style="width: 40px; text-align: right; padding-right: 5px;">$ ${productPrices[id+"_"+size]}</div>
-    </li>`
     console.log(itemsOrdered)
+    renderOrderedItems()
 }
 
 //create sale record with timestamp, products sold and order total
@@ -152,6 +190,7 @@ function resetOrder(paymentMethod) {
     if(paymentMethod == "none"){
         itemsOrdered = {}
         orderTotal = 0
+        orderIndexes = []
         document.getElementById("order-total").textContent = orderTotal
         document.getElementById("product-order").innerHTML = ""
         console.log(itemsOrdered)
@@ -163,7 +202,7 @@ function resetOrder(paymentMethod) {
         deductFromInventory()
         //alert("Payed "+orderTotal+" with "+paymentMethod)
         itemsOrdered = {}
-        
+        orderIndexes = []
         orderTotal = 0
         document.getElementById("order-total").textContent = orderTotal
         document.getElementById("product-order").innerHTML = ""
@@ -174,6 +213,6 @@ window.registerSales = registerSales;
 window.renderCards = renderCards;
 window.addItemToOrder = addItemToOrder;
 window.resetOrder = resetOrder;
-
+window.removeLastItem = removeLastItem;
 
 
