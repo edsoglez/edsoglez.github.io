@@ -29,7 +29,7 @@ function renderCards(){
                             `<li id="${Product.key}" class="product-list-item">
                                 <div style="display:flex; flex-direction:row;">
                                 <div class="product-item">
-                                    <img class="product-image" src="${Product.val().imgURL}" alt="">
+                                    <img class="product-image" src="${Product.val().imgURL}" alt="" style="z-indez: 0">
                                     <h5 style=" font-size: 24px; font-weight: bolder; height:0px; padding:2px; transform: translateY(-70px); color: white; -webkit-text-stroke: 1px black;">${Product.key}</h5>   
                                     <div style="width:100%; heigh:50px">
                                             <button class="size-button" onClick="addItemToOrder('${Product.key}','CH');" >CH</button>
