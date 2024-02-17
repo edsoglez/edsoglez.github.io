@@ -30,6 +30,7 @@ function renderCards(){
                             if(Size.key=="CH"||Size.key=="M"||Size.key=="G")
                             productPrices[Product.key+"_"+Size.key] = Size.val().price
                     })
+                    
                     localStorage.products = JSON.stringify(productPrices);
 
                     if(Product.val().G){
