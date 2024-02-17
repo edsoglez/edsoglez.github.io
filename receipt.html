@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recibo</title>
+    <link rel="stylesheet" href="receipt.css">
+</head>
+<body>
+    <div style="text-align: center;">
+        <img src="calesa_logo_black.png" height="50px" alt="">
+    </div>
+
+    <br>
+    
+    <div style=" text-align: center;">
+        RFC: CAGC0007132L3 <br>
+        Tel: 449 606 1487 <br>
+        info@calesa.cafe <br>
+        <br>
+        <span id="date-time"></span>
+    </div>
+
+    <div>
+        <ul id="ordered-items" style="list-style: none; padding: 10px;">
+
+        </ul>
+    </div>
+
+    <div style="text-align: right; padding-right: 20px; font-weight: 800;">
+        Total: $<span id="order-total"></span>
+    </div><br>
+
+    <script>
+        document.getElementById('date-time').textContent = String(new Date()).substring(3,24)
+        window.orderedItems = JSON.parse(localStorage.myArray)
+        window.prices = JSON.parse(localStorage.products)
+       
+        document.getElementById('order-total').textContent = localStorage.getItem("orderTotal")
+
+        for (const [item, cuant] of Object.entries(orderedItems)) {
+        console.log(`${item} x${cuant}`);
+        document.getElementById('ordered-items').innerHTML += 
+       `<li>
+            <div style="width: 100%; display:flex;">
+                <div style="width: 60%;">
+                    ${item} 
+                </div>
+
+                <div style="width: 20%;">
+                    x${cuant}
+                </div>
+
+                <div style="width: 20%;">
+                $ ${prices[item]}
+                </div>
+          
+            </div>
+        </li>`
+        }
+
+        print()
+       
+    </script>
+
+    
+    
+</body>
+</html>

@@ -4,6 +4,7 @@ window.transRef = ref(db,'Transactions/');
 window.prodRef = ref(db,'Products/');
 let UOM = "";
 window.productPrices = {}
+
 window.itemsOrdered = {}
 let orderTotal = 0;
 window.orderIndexes = []
@@ -29,6 +30,7 @@ function renderCards(){
                             if(Size.key=="CH"||Size.key=="M"||Size.key=="G")
                             productPrices[Product.key+"_"+Size.key] = Size.val().price
                     })
+                    localStorage.products = JSON.stringify(productPrices);
 
                     if(Product.val().G){
                         if(Product.val().M){
@@ -200,6 +202,10 @@ function getCorte(){
             "Efectivo: "+salesTotalCash+'\n'+
             "Tarejta: "+salesTotalCard+'\n'
         )
+
+        
+
+        print()
         set(ref(db,'Cortes/'+new Date().getFullYear()+"/"+(new Date().getMonth()+1)+"/"+ new Date().toISOString().replace(/\D/g,'_')),{
             Time: String(new Date()).substring(16,24),
             Total: salesTotal,
@@ -213,6 +219,9 @@ function getCorte(){
 
 //create sale record with timestamp, products sold and order total
 function registerSales(method){
+    localStorage.myArray = JSON.stringify(itemsOrdered);
+    localStorage.setItem("orderTotal",orderTotal);
+
     if(orderIndexes.length < 1){
         alert("Orden vacia")
         return
@@ -225,6 +234,11 @@ function registerSales(method){
         Total: orderTotal,
         Method: method
     });
+
+    if(confirm("Necesita recibo?")){
+        location.href = "receipt.html"
+    }
+   
 }
 
 //on sale, deduct ordered qty from inventory
