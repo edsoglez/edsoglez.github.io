@@ -1,12 +1,13 @@
 html{
     padding: 0;
     background-color: white;
+    width: 300px;
 }
 *{
     font-family: "DM Sans", sans-serif;
     font-optical-sizing: auto;
     font-style: normal;
-    font-size: 10px;
+    font-size: 16px;
 }
 
 body{
