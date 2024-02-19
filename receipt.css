@@ -1,7 +1,7 @@
 html{
     padding: 5px;
     background-color: white;
-    width: 300px;
+    
 }
 *{
     font-family: "DM Sans", sans-serif;
@@ -11,6 +11,7 @@ html{
 }
 
 body{
+    width: 250px;
     margin: 0;
     padding: 10px;
     padding-left: 30px;
