@@ -31,56 +31,38 @@ function renderProductCards(){
                     
                     localStorage.products = JSON.stringify(productPrices);
 
+                    document.getElementById("product-list").innerHTML +=
+                            `<li id="${Product.key}" class="product-list-item">
+                                <div style="display:flex; flex-direction:row;">
+                                <div class="product-item" >
+                                    <img class="product-image" src="${Product.val().imgURL}" alt="" style="z-indez: 2">
+                                    <h5 style=" font-size: 24px; font-weight: bolder; height:0px; padding:2px; transform: translateY(-70px); color: white; -webkit-text-stroke: 1px black; text-align: left">${Product.key}</h5>   
+                                    <div style="width:100%; heigh:50px" id="${Product.key}-sizes">
+                                            
+                                    <div>
+                                    
+                                </div>
+                                </div>
+                            </li>`
+
+                    //Render size buttons
                     if(Product.val().G){
                         if(Product.val().M){
-                            document.getElementById("product-list").innerHTML +=
-                            `<li id="${Product.key}" class="product-list-item">
-                                <div style="display:flex; flex-direction:row;">
-                                <div class="product-item">
-                                    <img class="product-image" src="${Product.val().imgURL}" alt="" style="z-indez: 0">
-                                    <h5 style=" font-size: 24px; font-weight: bolder; height:0px; padding:2px; transform: translateY(-70px); color: white; -webkit-text-stroke: 1px black; text-align: left">${Product.key}</h5>   
-                                    <div style="width:100%; heigh:50px">
-                                            <button class="size-button" onClick="addItemToOrder('${Product.key}','CH');" >CH</button>
-                                            <button class="size-button" onClick="addItemToOrder('${Product.key}','M');" >M</button>
-                                            <button class="size-button" onClick="addItemToOrder('${Product.key}','G');" >G</button>
-                                    <div>
-                                    
-                                </div>
-                                </div>
-                            </li>`
+                            document.getElementById(String(Product.key)+ "-sizes").innerHTML +=
+                           `<button class="size-button" onClick="addItemToOrder('${Product.key}','CH');" >CH</button>
+                            <button class="size-button" onClick="addItemToOrder('${Product.key}','M');" >M</button>
+                            <button class="size-button" onClick="addItemToOrder('${Product.key}','G');" >G</button>`
                         }
                         else{
-                            document.getElementById("product-list").innerHTML +=
-                            `<li id="${Product.key}" class="product-list-item">
-                                <div style="display:flex; flex-direction:row;">
-                                <div class="product-item">
-                                    <img class="product-image" src="${Product.val().imgURL}" alt="">
-                                    <h5 style=" font-size: 24px; font-weight: bolder; height:0px; padding:2px; transform: translateY(-70px); color: white; -webkit-text-stroke: 1px black;">${Product.key}</h5>   
-                                    <div style="width:100%; heigh:50px">
-                                            <button class="size-button" onClick="addItemToOrder('${Product.key}','CH');" style="width: 45%">CH</button>
-                                            <button class="size-button" onClick="addItemToOrder('${Product.key}','G');"style="width: 45%" >G</button>
-                                    <div>
-                                    
-                                </div>
-                                </div>
-                            </li>`
+                            document.getElementById(String(Product.key)+ "-sizes").innerHTML +=
+                           `<button class="size-button" onClick="addItemToOrder('${Product.key}','CH');" style="width: 45%">CH</button>
+                            <button class="size-button" onClick="addItemToOrder('${Product.key}','G');"style="width: 45%" >G</button>`
                         }
                         
                     }
                     else{
-                        document.getElementById("product-list").innerHTML +=
-                            `<li id="${Product.key}" class="product-list-item">
-                                <div style="display:flex; flex-direction:row;">
-                                <div class="product-item">
-                                    <img class="product-image" src="${Product.val().imgURL}" alt="">
-                                    <h5 style=" font-size: 24px; font-weight: bolder; height:0px; padding:2px; transform: translateY(-70px); color: white; -webkit-text-stroke: 1px black;">${Product.key}</h5>   
-                                    <div style="width:100%; heigh:50px">
-                                            <button class="size-button" onClick="addItemToOrder('${Product.key}','CH');" style="width: 95%">UN</button>
-                                    <div>
-                                    
-                                </div>
-                                </div>
-                            </li>`
+                        document.getElementById(String(Product.key)+ "-sizes").innerHTML +=
+                            `<button class="size-button" onClick="addItemToOrder('${Product.key}','CH');" style="width: 95%">UN</button>`
                     }
                     
                     
