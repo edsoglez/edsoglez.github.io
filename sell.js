@@ -13,8 +13,10 @@ let month = "0"+String(new Date().getMonth()+1)
 let date = String(new Date()).split(" ")
 
 //on page load reset order to 0 and render product cards
+onValue(prodRef,(snapshot)=>{
+    renderProductCards()    
+})
 resetOrder()
-renderProductCards()
 
 
 function renderProductCards(){
