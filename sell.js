@@ -157,6 +157,21 @@ function addItemToOrder(id,size) {
     renderOrderedItems()
 }
 
+function registerExpense(){
+    let vendor = prompt("Proveedor/Concepto:")
+        if(vendor==null ||vendor == ""){alert("Gasto no registrado"); return}
+    let amount = Number(prompt("Monto:"))
+        if(amount==null || amount == ""){alert("Gasto no registrado"); return}
+
+    
+    set(ref(db,'Gastos/'+new Date().getFullYear()+"/"+(new Date().getMonth()+1)+"/"+ new Date().toISOString().replace(/\D/g,'_')),{
+        Time: String(new Date()).substring(16,24),
+        Total: -amount,
+        Vendor: vendor
+        });
+   
+}
+
 function getCorte(){
     let fromDate = String(fromDateVal).replace(/-/g,"")
     let toDate = String(toDateVal).replace(/-/g,"")
@@ -305,3 +320,4 @@ window.resetOrder = resetOrder;
 window.removeLastItem = removeLastItem;
 window.getCorte = getCorte;
 
+window.registerExpense = registerExpense;
