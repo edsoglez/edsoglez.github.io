@@ -205,6 +205,9 @@ function deductFromInventory(){
 }//end of deductFromInventory fucntion
 
 function getCorte(){
+    if(!confirm("Seguro que quieres cerrar corte?")){
+        return
+    }
     //TODO: need to do a sweep of expenses and subtract from cash total
     let fromDateVal = date[3]+"-"+month.slice(-2)+"-"+date[2]  //from Date is today
     let toDateVal =  date[3]+"-"+month.slice(-2)+"-"+date[2]  //to Date is today
@@ -237,24 +240,55 @@ function getCorte(){
                         })
                 })            
         })
-        //displays data
+        let gastosTotal = 0;
+        get(child(ref(db),'Gastos/')).then((snapshot) => {
+            //sets sum to zero
+            
+    
+            //will get all data but only data in range will be added
+            snapshot.forEach(
+            function(year){
+                year.forEach(
+                    function(month){
+                        month.forEach(
+                            function(gasto){
+                                let saleDate = Number(gasto.key.substring(0,8))    
+                                
+                                if(saleDate >= fromDateSerial && saleDate <= toDateSerial){
+                                    gastosTotal += gasto.val().Total
+                                }
+                            
+                            })
+                    })            
+            })
+            
+            //displays data
         alert(
+            "Corte \n\n"+
             "Total: "+salesTotal+'\n'+
             "Efectivo: "+salesTotalCash+'\n'+
-            "Tarejta: "+salesTotalCard+'\n'
-        )
+            "Tarejta: "+salesTotalCard+'\n\n'+
+            "Gastos: "+gastosTotal+'\n\n'+
+            "Efectivo restante: "+ (Number(salesTotalCash) + Number(gastosTotal))
+        )   
 
         //adds record of when corte was done and total in that moment
         set(ref(db,'Cortes/'+new Date().getFullYear()+"/"+(new Date().getMonth()+1)+"/"+ new Date().toISOString().replace(/\D/g,'_')),{
             Time: String(new Date()).substring(16,24),
             Total: salesTotal,
             Efectivo: salesTotalCash,
-            Tarjeta: salesTotalCard
+            Tarjeta: salesTotalCard,
+            Gastos: Number(gastosTotal),
+            Restante: (Number(salesTotalCash) + Number(gastosTotal))
         });
 
-        location.href = "index.html"
+        //location.href = "index.html"
+            
+        })
     })
 
+    
+    
 }
 
 function resetOrder() {

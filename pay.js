@@ -8,7 +8,7 @@ function registerExpense(){
         if(amount==null || amount == ""){alert("Gasto no registrado"); return}
 
     
-    set(ref(db,'Gastos/'+new Date().getFullYear()+"/"+(new Date().getMonth()+1)+"/"+ new Date().toISOString().replace(/\D/g,'_')),{
+    set(ref(db,'Gastos/'+new Date().getFullYear()+"/"+(new Date().getMonth()+1)+"/"+ new Date().toISOString().replace(/\D/g,'')),{
         Time: String(new Date()).substring(16,24),
         Total: -Number(amount),
         Vendor: vendor
