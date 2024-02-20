@@ -1,8 +1,4 @@
 import {getDatabase, set, get, update, remove, ref, child, onValue} from "https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js"; 
-window.itemRef = ref(db,'Items/');
-window.transRef = ref(db,'Transactions/');
-window.prodRef = ref(db,'Products/');
-let UOM = "";
 
 function registerExpense(){
     let vendor = prompt("Proveedor/Concepto:")
@@ -17,6 +13,5 @@ function registerExpense(){
         Vendor: vendor
         });
 }
-
 
 window.registerExpense = registerExpense;
