@@ -177,6 +177,7 @@ function registerSales(method){
         if(confirm("Necesita recibo?")){
             location.href = "receipt.html"
         }
+        resetOrder()
     }
 
 
