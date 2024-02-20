@@ -49,7 +49,7 @@ function renderProductCards(){
                     //Render size buttons depending on available sizing
                     if(Product.val().CH){
                         document.getElementById(String(Product.key)+ "-sizes").innerHTML +=
-                            `<button class="size-button" onClick="addItemToOrder('${Product.key}','CH');" id="${Product.key}-CH" style="width: 95%">CH</button>`
+                            `<button class="size-button" onClick="addItemToOrder('${Product.key}','CH');" id="${Product.key}-CH" style="width: 95%">UN</button>`
                         }
 
                     if(Product.val().M){
@@ -62,6 +62,7 @@ function renderProductCards(){
                         document.getElementById(String(Product.key)+ "-sizes").innerHTML +=
                         `<button class="size-button" onClick="addItemToOrder('${Product.key}','G');" id="${Product.key}-G" style="width: 45%">G</button>`
                         document.getElementById(String(Product.key)+ "-CH").style.width = '45%'  
+                        document.getElementById(String(Product.key)+ "-CH").textContent = 'CH'  
                            
                         //since not all products have a medium size, we will render considering product does not have it
                         //Only in the case it does, we risize all buttons to fil
