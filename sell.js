@@ -77,7 +77,7 @@ function renderCards(){
                                     <img class="product-image" src="${Product.val().imgURL}" alt="">
                                     <h5 style=" font-size: 24px; font-weight: bolder; height:0px; padding:2px; transform: translateY(-70px); color: white; -webkit-text-stroke: 1px black;">${Product.key}</h5>   
                                     <div style="width:100%; heigh:50px">
-                                            <button class="size-button" onClick="addItemToOrder('${Product.key}','CH');" style="width: 95%">CH</button>
+                                            <button class="size-button" onClick="addItemToOrder('${Product.key}','CH');" style="width: 95%">UN</button>
                                     <div>
                                     
                                 </div>
@@ -99,7 +99,7 @@ function renderOrderedItems(){
         console.log(val[0], val[1], productPrices[val[0]])
         document.getElementById("product-order").innerHTML += 
             `<li class="selected-product" style="display: flex; width:auto;">
-                <div style="width: 59%; padding-left: 10px; font-weight: bold;">${val[0]}</div>
+                <div style="width: 60%; padding-left: 10px; font-weight: bold; font-size:14px">${val[0]}</div>
                 <div style="width: 30px; font-weight: bold;">${val[1]}x</div>
                 <div style="width: 40px; text-align: right; padding-right: 5px;">$ ${productPrices[val[0]]}</div>
             </li>`
@@ -107,29 +107,30 @@ function renderOrderedItems(){
 }
 
 function removeLastItem(){
-    console.log(orderIndexes)
+    //check if order is empty
     if(orderIndexes.length < 1){
         alert("Orden vacia")
         return
     }
-
-    console.log(itemsOrdered)
-    console.log(orderIndexes)
-
+    //last item added is the last one in order array
     let lastItem = orderIndexes[orderIndexes.length-1]
+
+    //substract last items price from order total
     orderTotal = orderTotal - productPrices[lastItem]
+    //update total in view
     document.getElementById("order-total").textContent = orderTotal
-    //subtract current item qty - 1 from object, if current qty is 1, remove item from object
+
+    //subtract current item qty - 1 from order OBJECT, if current qty is 1, remove item from object
     if(itemsOrdered[lastItem] == 1){
+        //instead of leaving item with qty = 0, remove from list
         delete itemsOrdered[lastItem]
     }else{
         itemsOrdered[lastItem] = itemsOrdered[lastItem] - 1
     }
-
+    //remove last item from ARRAY
     orderIndexes.pop(orderIndexes.length)
 
-    console.log(itemsOrdered)
-    console.log(orderIndexes)
+    //re-render items ordered list
     renderOrderedItems()
 }
 
@@ -137,9 +138,11 @@ function removeLastItem(){
 function addItemToOrder(id,size) {
     //orderIndex will be used to be able to subtract items in the order they were added
     orderIndexes.push(id+"_"+size)
+
     //Check if size for product exists
     if(productPrices[id+"_"+size]==null)
         return
+
     //check if produc already in order, to increase qty only if so
     if(itemsOrdered[id+"_"+size] == null){
         itemsOrdered[id+"_"+size] = 1
