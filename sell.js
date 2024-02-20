@@ -87,19 +87,20 @@ function renderProductCards(){
                     
                     
         })
-        console.log(productPrices)
+        
       })
 }
 
 function renderOrderedItems(){
     document.getElementById("product-order").innerHTML = ""
     Object.entries(itemsOrdered).forEach(val =>{
-        console.log(val[0], val[1], productPrices[val[0]])
+        let item = val[0]
+        let cant = val[1]
         document.getElementById("product-order").innerHTML += 
             `<li class="selected-product" style="display: flex; width:auto;">
-                <div style="width: 60%; padding-left: 10px; font-weight: bold; font-size:14px">${val[0]}</div>
-                <div style="width: 30px; font-weight: bold;">${val[1]}x</div>
-                <div style="width: 40px; text-align: right; padding-right: 5px;">$ ${productPrices[val[0]]}</div>
+                <div style="width: 60%; padding-left: 10px; font-weight: bold; font-size:14px">${item}</div>
+                <div style="width: 30px; font-weight: bold; font-size:14px">${cant}x</div>
+                <div style="width: 40px; text-align: right; padding-right: 5px; font-size:14px">$ ${productPrices[item]}</div>
             </li>`
     })
 }
@@ -199,7 +200,6 @@ function deductFromInventory(){
             snapshot.forEach(
                 function(Child){
                     let recipeQty = Child.val()
-                    console.log("Deduct: ",recipeQty*qtyOrdered, "from", Child.key)
 
                     get(child(ref(db),'Inventory/'+Child.key+'/')).then((snapshot) => {
                         set(ref(db,'Inventory/'+Child.key+"/"),{
@@ -278,7 +278,7 @@ function resetOrder() {
 
 
 window.registerSales = registerSales;
-window.renderCards = renderCards;
+window.renderProductCards = renderProductCards;
 window.addItemToOrder = addItemToOrder;
 window.resetOrder = resetOrder;
 window.removeLastItem = removeLastItem;
