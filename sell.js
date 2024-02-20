@@ -15,7 +15,7 @@ let date = String(new Date()).split(" ")
 let fromDateVal = date[3]+"-"+month.slice(-2)+"-"+date[2]  //to Date is today
 let toDateVal =  date[3]+"-"+month.slice(-2)+"-"+date[2]  //to Date is today
 
-
+resetOrder()
 renderCards()
 
 //Render all product cards
@@ -153,37 +153,26 @@ function addItemToOrder(id,size) {
     document.getElementById("order-total").textContent = orderTotal
 
     //render product in order list
-    console.log(itemsOrdered)
     renderOrderedItems()
 }
 
-function registerExpense(){
-    let vendor = prompt("Proveedor/Concepto:")
-        if(vendor==null ||vendor == ""){alert("Gasto no registrado"); return}
-    let amount = Number(prompt("Monto:"))
-        if(amount==null || amount == ""){alert("Gasto no registrado"); return}
 
-    
-    set(ref(db,'Gastos/'+new Date().getFullYear()+"/"+(new Date().getMonth()+1)+"/"+ new Date().toISOString().replace(/\D/g,'_')),{
-        Time: String(new Date()).substring(16,24),
-        Total: -amount,
-        Vendor: vendor
-        });
-   
-}
 
 function getCorte(){
+    //TODO: need to do a sweep of expenses and subtract from cash total
+
     let fromDate = String(fromDateVal).replace(/-/g,"")
     let toDate = String(toDateVal).replace(/-/g,"")
     let fromDateSerial = Number(fromDate.replace(/-/g,""))
     let toDateSerial = Number(toDate.replace(/-/g,""))
 
     get(child(ref(db),'Sales/')).then((snapshot) => {
+        //sets sum to zero
         let salesTotal = 0;
         let salesTotalCash = 0;
         let salesTotalCard = 0;
 
-
+        //will get all data but only data in range will be added
         snapshot.forEach(
         function(year){
             year.forEach(
@@ -192,42 +181,30 @@ function getCorte(){
                         function(sale){
                             let saleDate = Number(sale.key.substring(0,8))    
                             
-
                             if(saleDate >= fromDateSerial && saleDate <= toDateSerial){
                                 salesTotal += sale.val().Total
-                    
-
-                                if(sale.val().Method == 'cash'){
-                                    salesTotalCash += sale.val().Total
-                                }
-                                    
-                                if(sale.val().Method == 'card'){
-                                    salesTotalCard += sale.val().Total
-                                }
-                            
-                                
+                                if(sale.val().Method == 'cash'){ salesTotalCash += sale.val().Total }
+                                if(sale.val().Method == 'card'){ salesTotalCard += sale.val().Total }
                             }
                         
-                        }
-                    )
-                }
-            )            
+                        })
+                })            
         })
+        //displays data
         alert(
             "Total: "+salesTotal+'\n'+
             "Efectivo: "+salesTotalCash+'\n'+
             "Tarejta: "+salesTotalCard+'\n'
         )
 
-        
-
-        print()
+        //adds record of when corte was done and total in that moment
         set(ref(db,'Cortes/'+new Date().getFullYear()+"/"+(new Date().getMonth()+1)+"/"+ new Date().toISOString().replace(/\D/g,'_')),{
             Time: String(new Date()).substring(16,24),
             Total: salesTotal,
             Efectivo: salesTotalCash,
             Tarjeta: salesTotalCard
         });
+
         location.href = "index.html"
     })
 
@@ -235,26 +212,34 @@ function getCorte(){
 
 //create sale record with timestamp, products sold and order total
 function registerSales(method){
-    localStorage.myArray = JSON.stringify(itemsOrdered);
-    localStorage.setItem("orderTotal",orderTotal);
-
+    //protection to not register empty sales
     if(orderIndexes.length < 1){
         alert("Orden vacia")
         return
     }
+    //user must confirm if data is correct
+    if(confirm(Object.entries(itemsOrdered).join('\n') +'\n\n'+ "Es correcto?")){
+        //if confirmed, register sale in db
+        set(ref(db,'Sales/'+new Date().getFullYear()+"/"+(new Date().getMonth()+1)+"/"+ new Date().toISOString().replace(/\D/g,'')),{
+            Time: String(new Date()).substring(16,24),
+            Items: itemsOrdered,
+            Total: orderTotal,
+            Method: method
+        });
+        //calls deduct from Inventory
+        deductFromInventory()
 
-    console.log(new Date().toISOString().replace(/\D/g,''))
-    set(ref(db,'Sales/'+new Date().getFullYear()+"/"+(new Date().getMonth()+1)+"/"+ new Date().toISOString().replace(/\D/g,'')),{
-        Time: String(new Date()).substring(16,24),
-        Items: itemsOrdered,
-        Total: orderTotal,
-        Method: method
-    });
+        //saves current order to memory to pass to receipt html page
+        localStorage.myArray = JSON.stringify(itemsOrdered);
+        localStorage.setItem("orderTotal",orderTotal);
 
-    if(confirm("Necesita recibo?")){
-        location.href = "receipt.html"
+        //if user wants receipt will be redirected, data is already in memory for fast load
+        if(confirm("Necesita recibo?")){
+            location.href = "receipt.html"
+        }
     }
-   
+
+
 }
 
 //on sale, deduct ordered qty from inventory
@@ -275,49 +260,29 @@ function deductFromInventory(){
                     get(child(ref(db),'Inventory/'+Child.key+'/')).then((snapshot) => {
                         set(ref(db,'Inventory/'+Child.key+"/"),{
                             Cantidad: Number(snapshot.val().Cantidad) - qtyOrdered*recipeQty
-                        });
-                    })
-                    
-                }
-            )
-        })
+                        }); //end of set
+                    })//end of get
+                })//end of for each function
+        }) //end of promise
+    } //end of for
+}//end of deductFromInventory fucntion
 
-    }
+function resetOrder() {
+    //resets data
+    itemsOrdered = {}
+    orderIndexes = []
+    orderTotal = 0
+
+    //upadates view
+    document.getElementById("order-total").textContent = orderTotal
+    document.getElementById("product-order").innerHTML = ""
+
 }
 
-function resetOrder(paymentMethod) {
-    if(orderIndexes.length < 1){
-        alert("Orden vacia")
-        return
-    }
 
-    if(paymentMethod == "none"){
-        itemsOrdered = {}
-        orderTotal = 0
-        orderIndexes = []
-        document.getElementById("order-total").textContent = orderTotal
-        document.getElementById("product-order").innerHTML = ""
-        console.log(itemsOrdered)
-        return
-    }
-    
-    if(confirm(Object.entries(itemsOrdered).join('\n'))){
-        registerSales(paymentMethod)
-        deductFromInventory()
-        //alert("Payed "+orderTotal+" with "+paymentMethod)
-        itemsOrdered = {}
-        orderIndexes = []
-        orderTotal = 0
-        document.getElementById("order-total").textContent = orderTotal
-        document.getElementById("product-order").innerHTML = ""
-        console.log(itemsOrdered)
-    }
-}
 window.registerSales = registerSales;
 window.renderCards = renderCards;
 window.addItemToOrder = addItemToOrder;
 window.resetOrder = resetOrder;
 window.removeLastItem = removeLastItem;
 window.getCorte = getCorte;
-
-window.registerExpense = registerExpense;
