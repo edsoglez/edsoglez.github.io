@@ -36,10 +36,9 @@ function renderProductCards(){
                             `<li id="${Product.key}" class="product-list-item">
                                 <div style="display:flex; flex-direction:row;">
                                 <div class="product-item" >
-                                    <img class="product-image" src="${Product.val().imgURL}" alt="" style="z-indez: 2">
-                                    <h5 style=" font-size: 24px; font-weight: bolder; height:0px; padding:2px; transform: translateY(-70px); color: white; -webkit-text-stroke: 1px black; text-align: left">${Product.key}</h5>   
-                                    <div style="width:100%; heigh:50px" id="${Product.key}-sizes">
-                                            
+                                    <h5 class="product-text">${Product.key}</h5>   
+                                    <img class="product-image" src="${Product.val().imgURL}" alt="">
+                                    <div style="width:100%; heigh:50px" id="${Product.key}-sizes">     
                                     <div>
                                 </div>
                                 </div>
