@@ -116,14 +116,9 @@ function renderSales(fromDate,toDate,method){
                                     let hours = sale.val().Time.substring(0,2)
                                     let minutes = sale.val().Time.substring(3,5)
                                     let seconds = sale.val().Time.substring(6,8)
-                                    console.log(years)
-                                    console.log(monthIndex)
-                                    console.log(day)
-                                    console.log(hours)
-                                    console.log(minutes)
-                                    console.log(seconds)
+                                   
                                     datatoload.push([new Date(years, monthIndex, day, hours, minutes, seconds), salesTotal])
-                                    console.log(datatoload)
+                                
     
                                     if(sale.val().Method == 'cash'){
                                         salesTotalCash += sale.val().Total
@@ -161,7 +156,7 @@ function renderSales(fromDate,toDate,method){
             )            
         })
     })
-    console.log(datatoload)
+
 }
 
  // Load the Visualization API and the piechart package.
