@@ -3,8 +3,8 @@ import {getDatabase, set, get, update, remove, ref, child, onValue} from "https:
 function registerExpense(){
     let vendor = prompt("Proveedor/Concepto:")
         if(vendor==null ||vendor == ""){alert("Gasto no registrado"); return}
-    let amount = prompt("Monto:")
-        if(!isNumber(amount)){alert("Ingresaste un valor no numerico"); return}
+    let amount = Number(prompt("Monto:"))
+        if(amount===NaN){alert("Ingresaste un valor no numerico"); return}
         if(amount==null || amount == ""){alert("Gasto no registrado"); return}
 
     
