@@ -31,6 +31,7 @@ function renderProductCards(){
                     
                     localStorage.products = JSON.stringify(productPrices);
 
+                    //render basic card layout without size buttons
                     document.getElementById("product-list").innerHTML +=
                             `<li id="${Product.key}" class="product-list-item">
                                 <div style="display:flex; flex-direction:row;">
@@ -40,12 +41,11 @@ function renderProductCards(){
                                     <div style="width:100%; heigh:50px" id="${Product.key}-sizes">
                                             
                                     <div>
-                                    
                                 </div>
                                 </div>
                             </li>`
 
-                    //Render size buttons
+                    //Render size buttons depending on available sizing
                     if(Product.val().G){
                         if(Product.val().M){
                             document.getElementById(String(Product.key)+ "-sizes").innerHTML +=
