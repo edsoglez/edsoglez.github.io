@@ -46,24 +46,34 @@ function renderProductCards(){
                             </li>`
 
                     //Render size buttons depending on available sizing
-                    if(Product.val().G){
-                        if(Product.val().M){
-                            document.getElementById(String(Product.key)+ "-sizes").innerHTML +=
-                           `<button class="size-button" onClick="addItemToOrder('${Product.key}','CH');" >CH</button>
-                            <button class="size-button" onClick="addItemToOrder('${Product.key}','M');" >M</button>
-                            <button class="size-button" onClick="addItemToOrder('${Product.key}','G');" >G</button>`
-                        }
-                        else{
-                            document.getElementById(String(Product.key)+ "-sizes").innerHTML +=
-                           `<button class="size-button" onClick="addItemToOrder('${Product.key}','CH');" style="width: 45%">CH</button>
-                            <button class="size-button" onClick="addItemToOrder('${Product.key}','G');"style="width: 45%" >G</button>`
-                        }
-                        
-                    }
-                    else{
+                    if(Product.val().CH){
                         document.getElementById(String(Product.key)+ "-sizes").innerHTML +=
-                            `<button class="size-button" onClick="addItemToOrder('${Product.key}','CH');" style="width: 95%">UN</button>`
+                            `<button class="size-button" onClick="addItemToOrder('${Product.key}','CH');" id="${Product.key}-CH" style="width: 95%">CH</button>`
+                        }
+
+                    if(Product.val().M){
+                            document.getElementById(String(Product.key)+ "-sizes").innerHTML +=
+                           `<button class="size-button" onClick="addItemToOrder('${Product.key}','M');" id="${Product.key}-M" style="width: 30%">M</button>`
+                            document.getElementById(String(Product.key)+ "-CH").style.width = '30%'
                     }
+
+                    if(Product.val().G){
+                        document.getElementById(String(Product.key)+ "-sizes").innerHTML +=
+                        `<button class="size-button" onClick="addItemToOrder('${Product.key}','G');" id="${Product.key}-G" style="width: 45%">G</button>`
+                        document.getElementById(String(Product.key)+ "-CH").style.width = '45%'  
+                           
+                        //since not all products have a medium size, we will render considering product does not have it
+                        //Only in the case it does, we risize all buttons to fil
+                        if(Product.val().M){
+                            document.getElementById(String(Product.key)+ "-CH").style.width = '30%'
+                            document.getElementById(String(Product.key)+ "-M").style.width = '30%'
+                            document.getElementById(String(Product.key)+ "-G").style.width = '30%'
+                        }
+                       
+
+                    }
+                        
+                   
                     
                     
                     
