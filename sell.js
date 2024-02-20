@@ -284,7 +284,7 @@ function getCorte(){
             Restante: (Number(salesTotalCash) + Number(gastosTotal))
         });
 
-        localStorage.href="index.html"
+        location.href="index.html"
         })
     })
 
