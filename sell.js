@@ -2,24 +2,22 @@ import {getDatabase, set, get, update, remove, ref, child, onValue} from "https:
 window.itemRef = ref(db,'Items/');
 window.transRef = ref(db,'Transactions/');
 window.prodRef = ref(db,'Products/');
-let UOM = "";
-window.productPrices = {}
 
+//order variable define
+window.productPrices = {}
 window.itemsOrdered = {}
 let orderTotal = 0;
 window.orderIndexes = []
-
-
+//do not change below date defintions
 let month = "0"+String(new Date().getMonth()+1)
 let date = String(new Date()).split(" ")
-let fromDateVal = date[3]+"-"+month.slice(-2)+"-"+date[2]  //to Date is today
-let toDateVal =  date[3]+"-"+month.slice(-2)+"-"+date[2]  //to Date is today
 
+//on page load reset order to 0 and render product cards
 resetOrder()
-renderCards()
+renderProductCards()
 
-//Render all product cards
-function renderCards(){
+
+function renderProductCards(){
     document.getElementById("product-list").innerHTML = ""
     get(child(ref(getDatabase()), `Products/`)).then((snapshot) => {
         snapshot.forEach(
@@ -105,6 +103,30 @@ function renderOrderedItems(){
             </li>`
     })
 }
+//If card is clicked, add product to temp order
+function addItemToOrder(id,size) {
+    //orderIndex will be used to be able to subtract items in the order they were added
+    orderIndexes.push(id+"_"+size)
+
+    //Check if size for product exists
+    if(productPrices[id+"_"+size]==null)
+        return
+
+    //check if produc already in order, to increase qty only if so
+    if(itemsOrdered[id+"_"+size] == null){
+        itemsOrdered[id+"_"+size] = 1
+    }
+    else{
+        itemsOrdered[id+"_"+size] = itemsOrdered[id+"_"+size] + 1
+    }
+
+    //increase order total cost by product clicked price
+    orderTotal += productPrices[id+"_"+size]
+    document.getElementById("order-total").textContent = orderTotal
+
+    //render product in order list
+    renderOrderedItems()
+}
 
 function removeLastItem(){
     //check if order is empty
@@ -133,37 +155,66 @@ function removeLastItem(){
     //re-render items ordered list
     renderOrderedItems()
 }
-
-//If card is clicked, add product to temp order
-function addItemToOrder(id,size) {
-    //orderIndex will be used to be able to subtract items in the order they were added
-    orderIndexes.push(id+"_"+size)
-
-    //Check if size for product exists
-    if(productPrices[id+"_"+size]==null)
+//create sale record with timestamp, products sold and order total
+function registerSales(method){
+    //protection to not register empty sales
+    if(orderIndexes.length < 1){
+        alert("Orden vacia")
         return
-
-    //check if produc already in order, to increase qty only if so
-    if(itemsOrdered[id+"_"+size] == null){
-        itemsOrdered[id+"_"+size] = 1
     }
-    else{
-        itemsOrdered[id+"_"+size] = itemsOrdered[id+"_"+size] + 1
+    //user must confirm if data is correct
+    if(confirm(Object.entries(itemsOrdered).join('\n') +'\n\n'+ "Es correcto?")){
+        //if confirmed, register sale in db
+        set(ref(db,'Sales/'+new Date().getFullYear()+"/"+(new Date().getMonth()+1)+"/"+ new Date().toISOString().replace(/\D/g,'')),{
+            Time: String(new Date()).substring(16,24),
+            Items: itemsOrdered,
+            Total: orderTotal,
+            Method: method
+        });
+        //calls deduct from Inventory
+        deductFromInventory()
+
+        //saves current order to memory to pass to receipt html page
+        localStorage.myArray = JSON.stringify(itemsOrdered);
+        localStorage.setItem("orderTotal",orderTotal);
+
+        //if user wants receipt will be redirected, data is already in memory for fast load
+        if(confirm("Necesita recibo?")){
+            location.href = "receipt.html"
+        }
     }
 
-    //increase order total cost by product clicked price
-    orderTotal += productPrices[id+"_"+size]
-    document.getElementById("order-total").textContent = orderTotal
 
-    //render product in order list
-    renderOrderedItems()
 }
+//on sale, deduct ordered qty from inventory
+function deductFromInventory(){
+    //go product by product on sale
+    for (const itemsOrderedArray of Object.entries(itemsOrdered)) {
+        let item = String(itemsOrderedArray[0]).split('_')[0]
+        let size = String(itemsOrderedArray[0]).split('_')[1]
+        let qtyOrdered = itemsOrderedArray[1]
+        //get current item recipe items
+        get(child(ref(db),'Products/'+item+"/"+size+'/recipe/')).then((snapshot) => {
+            //for each recipe item
+            snapshot.forEach(
+                function(Child){
+                    let recipeQty = Child.val()
+                    console.log("Deduct: ",recipeQty*qtyOrdered, "from", Child.key)
 
-
+                    get(child(ref(db),'Inventory/'+Child.key+'/')).then((snapshot) => {
+                        set(ref(db,'Inventory/'+Child.key+"/"),{
+                            Cantidad: Number(snapshot.val().Cantidad) - qtyOrdered*recipeQty
+                        }); //end of set
+                    })//end of get
+                })//end of for each function
+        }) //end of promise
+    } //end of for
+}//end of deductFromInventory fucntion
 
 function getCorte(){
     //TODO: need to do a sweep of expenses and subtract from cash total
-
+    let fromDateVal = date[3]+"-"+month.slice(-2)+"-"+date[2]  //from Date is today
+    let toDateVal =  date[3]+"-"+month.slice(-2)+"-"+date[2]  //to Date is today
     let fromDate = String(fromDateVal).replace(/-/g,"")
     let toDate = String(toDateVal).replace(/-/g,"")
     let fromDateSerial = Number(fromDate.replace(/-/g,""))
@@ -212,63 +263,6 @@ function getCorte(){
     })
 
 }
-
-//create sale record with timestamp, products sold and order total
-function registerSales(method){
-    //protection to not register empty sales
-    if(orderIndexes.length < 1){
-        alert("Orden vacia")
-        return
-    }
-    //user must confirm if data is correct
-    if(confirm(Object.entries(itemsOrdered).join('\n') +'\n\n'+ "Es correcto?")){
-        //if confirmed, register sale in db
-        set(ref(db,'Sales/'+new Date().getFullYear()+"/"+(new Date().getMonth()+1)+"/"+ new Date().toISOString().replace(/\D/g,'')),{
-            Time: String(new Date()).substring(16,24),
-            Items: itemsOrdered,
-            Total: orderTotal,
-            Method: method
-        });
-        //calls deduct from Inventory
-        deductFromInventory()
-
-        //saves current order to memory to pass to receipt html page
-        localStorage.myArray = JSON.stringify(itemsOrdered);
-        localStorage.setItem("orderTotal",orderTotal);
-
-        //if user wants receipt will be redirected, data is already in memory for fast load
-        if(confirm("Necesita recibo?")){
-            location.href = "receipt.html"
-        }
-    }
-
-
-}
-
-//on sale, deduct ordered qty from inventory
-function deductFromInventory(){
-    //go product by product on sale
-    for (const itemsOrderedArray of Object.entries(itemsOrdered)) {
-        let item = String(itemsOrderedArray[0]).split('_')[0]
-        let size = String(itemsOrderedArray[0]).split('_')[1]
-        let qtyOrdered = itemsOrderedArray[1]
-        //get current item recipe items
-        get(child(ref(db),'Products/'+item+"/"+size+'/recipe/')).then((snapshot) => {
-            //for each recipe item
-            snapshot.forEach(
-                function(Child){
-                    let recipeQty = Child.val()
-                    console.log("Deduct: ",recipeQty*qtyOrdered, "from", Child.key)
-
-                    get(child(ref(db),'Inventory/'+Child.key+'/')).then((snapshot) => {
-                        set(ref(db,'Inventory/'+Child.key+"/"),{
-                            Cantidad: Number(snapshot.val().Cantidad) - qtyOrdered*recipeQty
-                        }); //end of set
-                    })//end of get
-                })//end of for each function
-        }) //end of promise
-    } //end of for
-}//end of deductFromInventory fucntion
 
 function resetOrder() {
     //resets data
