@@ -416,7 +416,7 @@ h3{
     width: 100%;
     height: 60%; 
     object-fit: cover; 
-    filter: contrast(60%) brightness(100%); 
+    filter: contrast(75%) brightness(90%); 
     mix-blend-mode: darken;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
@@ -431,9 +431,9 @@ h3{
     font-size: 20px; 
     font-weight: bolder;
     color: rgb(255, 255, 255); 
-    -webkit-text-stroke: rgba(0, 0, 0, 0.2) 1px;
+    -webkit-text-stroke: rgba(0, 0, 0, 0.3) 1px;
     text-align: center; 
-    transform: translateY(4px);
+    transform: translateY(10px);
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     z-index: 10;
