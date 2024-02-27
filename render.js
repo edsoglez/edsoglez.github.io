@@ -69,63 +69,71 @@ function playSound() {
 
 
 function Render(Child,filter){
+     if(FilterBy=="Categoria"){
+        if((Child.val().Categoria==filter||filter=="All")&&(Child.val().Cantidad>0||!Boolean(Number(Summary)))){
+            renderListItem(Child)
+        }
+    }
+        
+    if(FilterBy=="Vendor"){
+        if(Child.val().Vendor==filter&&(Child.val().Cantidad>0||!Boolean(Number(Summary)))){
+            renderListItem(Child)
+        }
+    }
+}
+
+function renderListItem(Child){
     let Summarize = localStorage.getItem("Summary")
     let day = date.substring(8,10)
     let DateMod = Child.val().Date
-
     let DaysSince = Number(day - DateMod.substring(7,10))
-
     if(DaysSince < 0){
         DaysSince = (30 - Number(DateMod.substring(7,10))) + Number(day)
     }
-        
     let urgente = null
+
     Child.val().Cantidad!=0? urgente=Child.val().Urgente: null;
-    
-    try{
-        
-            if(FilterBy=="Categoria"){
-                if((Child.val().Categoria==filter||filter=="All")&&(Child.val().Cantidad>0||!Boolean(Number(Summary)))){
-                    List.innerHTML += 
-                        `<li id="${Child.val().Text}">
+
+    List.innerHTML += 
+                       `<li id="${Child.val().Text}">
                         <div style="display:flex" class="list-item">
                             <div style="width:100%; text-align: left; padding-left:10px">
-                                <button class="item-button" onclick="localStorage.setItem('graph-item','${Child.val().Text}');location.href='consumos.html';">${Child.val().Text}</button>
+                                <button class="item-button" onclick="document.getElementById('${Child.key}-hidden').style.visibility = 'visible'">${Child.val().Text}</button>
                             </div>
-                            <div style="display:flex; flex-direction: row;">
-                                <button class="quant-control" onclick="playSound(); decreaseQty('${Child.key}',${Child.val().Cantidad})">-</button>
-                                <button class="quant-control" onclick="playSound();  increaseQty('${Child.key}',${Child.val().Cantidad})">+</button>
-                            </div>
-                            <div style="width:80px"><button class="quant-button" onclick="playSound(); zeroQty('${Child.key}')">${Child.val().Cantidad}</button></div>
-                            <div><button class="urgente-${urgente}" onclick="playSound(); urgentToggle('${Child.key}',${Child.val().Urgente})">${DaysSince}D</button></div>
-                        </div>
-                        <span id="${Child.val().Text}-date" class="date-container"></span>
-                        </li>`
-            }}
-            if(FilterBy=="Vendor"){
-                if(Child.val().Vendor==filter&&(Child.val().Cantidad>0||!Boolean(Number(Summary)))){
-                    List.innerHTML += 
-                        `<li id="${Child.val().Text}">
-                        <div style="display:flex" class="list-item">
-                        <div style="width:100%; text-align: left; padding-left:10px">
-                                <button class="item-button" onclick="localStorage.setItem('graph-item','${Child.val().Text}');location.href='consumos.html';")'>${Child.val().Text}</button>
-                            </div>
+                            <div style="width:0">
+                                <div class="hidden-menu" id="${Child.key}-hidden">
+
+                                    <div style="display:flex; height: 30px;">   
+                                        <div style="width:80%; height:30px; text-align: left;">
+                                            <H3>${Child.key} </h3>
+                                        </div>  
+                                        <div style="width:20%; height:30px; text-align: right; display: inline-block">
+                                            <button class="close-button" onclick="document.getElementById('${Child.key}-hidden').style.visibility = 'hidden'">X</button>
+                                        </div>      
+                                    </div>
+
+                                    
+                                    <div style="width:100%; text-align: left;">Last Mod: ${Child.val().Date.substring(3,10)}</div>
+                                    <div style="width:100%; text-align: left;">Last Modder: ${Child.val().Modder}</div>
+                                    <div style="width:100%; text-align: left;">Urgente: ${Child.val().Urgente}</div>
+
+                                    <div style="width:100%; height:0px; text-align: right; display: flex; align-items: center; justify-content: right">
+                                            <button class="receive-button" onclick="zeroQty('${Child.key}')">Recibir ${Child.val().Cantidad}</button>
+                                    </div>    
+                                </div>
+                            </div> 
+
                             <div style="display:flex; flex-direction: row;">
                                 <button class="quant-control" onclick="decreaseQty('${Child.key}',${Child.val().Cantidad})">-</button>
                                 <button class="quant-control" onclick="increaseQty('${Child.key}',${Child.val().Cantidad})">+</button>
                             </div>
-                            <div style="width:80px"><button class="quant-button" onclick="zeroQty('${Child.key}')">${Child.val().Cantidad}</button></div>
+
+                            <div style="width:80px"><button class="quant-button" onclick="">${Child.val().Cantidad}</button></div>
                             <div><button class="urgente-${urgente}" onclick="urgentToggle('${Child.key}',${Child.val().Urgente})">${DaysSince}D</button></div>
                         </div>
                         <span id="${Child.val().Text}-date" class="date-container"></span>
                         </li>`
-                }
-            }
-        
-    }catch(e){}
-
 }
-
 
 
 export function increaseQty(id,current){
