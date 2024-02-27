@@ -52,6 +52,8 @@ filterButton.addEventListener('focus',()=>{
     filterButton.style.backgroundColor= 'rgba(0, 0, 0, 0.9)'; 
     filterButton.style.color= 'white'; 
     filterButton.style.border= '0'; 
+    filterButton.style.zIndex= '10'; 
+    
 
     setTimeout(()=>{
         filterButton.innerHTML = `

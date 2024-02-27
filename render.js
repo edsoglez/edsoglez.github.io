@@ -115,7 +115,8 @@ function renderListItem(Child){
                                     
                                     <div style="width:100%; text-align: left;">Fecha Orden: ${Child.val().Date.substring(3,10)}</div>
                                     <div style="width:100%; text-align: left;">Pide: ${Child.val().Modder}</div>
-                                    <div style="width:100%; text-align: left;">Urgente: ${ Boolean(Child.val().Urgente)?"Si":"No"}</div>
+                                    <div style="width:100%; text-align: left;">Unidades /Cant: ${Child.val().PackQty}</div>
+                                    <div style="width:100%; text-align: left;">Unidad med: ${Child.val().UOM}</div>
 
                                     <div style="width:100%; height:0px; text-align: right; display: flex; align-items: center; justify-content: right">
                                             <button class="receive-button" onclick="zeroQty('${Child.key}')">Recibir ${Child.val().Cantidad}</button>
