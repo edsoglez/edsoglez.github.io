@@ -160,6 +160,10 @@ function registerSales(method){
     //user must confirm if data is correct
     if(confirm(Object.entries(itemsOrdered).join('\n') +'\n\n'+ "Es correcto?")){
         //if confirmed, register sale in db
+
+
+         //NOTE, need to sort out correct key name for sequential
+         
         set(ref(db,'Sales/'+new Date().getFullYear()+"/"+(new Date().getMonth()+1)+"/"+ new Date().toISOString().replace(/\D/g,'')),{
             Time: String(new Date()).substring(16,24),
             Items: itemsOrdered,

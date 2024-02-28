@@ -37,7 +37,6 @@ padding-bottom: 0px;
     list-style: none;
     margin: 0px;
     padding: 10px;
-    overflow: scroll;
 }
 
 li{
@@ -58,8 +57,8 @@ li{
     transition: 0.2s;
 }
 .list-item:hover{
-    box-shadow: 2px 2px 10px 0px rgba(0, 0, 0, 0.25);
-    border: 2px solid rgb(200, 59, 59);
+    transform: scale(1.05);
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.25);
 }
 
 .urgente-null{
@@ -70,7 +69,7 @@ li{
     background-color: rgb(176, 176, 176);
     border: 0;
 
-    box-shadow: 2px 1px 1px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.2);
 }
 .urgente-true{
     padding: 0px;
@@ -86,7 +85,7 @@ li{
     height: 35px;
     background-color: rgb(222, 45, 45);
 
-    box-shadow: 2px 1px 1px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.2);
 }
 .urgente-false{
     padding: 0px;
@@ -102,7 +101,7 @@ li{
     height: 35px;
     background-color: rgb(255, 204, 0);
 
-    box-shadow: 2px 1px 1px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.2);
 }
 
 .date-container{
@@ -121,7 +120,7 @@ li{
     color: black;
     background-color: rgb(255, 255, 255);
     border: 0px;
-    box-shadow: 1px 2px 3px 0px rgba(0, 0, 0, 0.2) inset;
+    box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.2) inset;
 
 }
 
@@ -129,14 +128,14 @@ li{
     margin: 2px;
     width: 30px;
     height: 30px;
-    border-radius: 15px;
+    border-radius: 10px;
     font-size: 20px;
     font-weight: bold;
     color: black;
     background-color: rgb(245, 245, 245);
     border: 0px;
     padding: 0px;
-    box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 2px 3px 1px rgba(0, 0, 0, 0.2);
  
 }
 
@@ -439,39 +438,10 @@ h3{
     transform: translateY(10px);
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    z-index: 10;
+    z-index: 1;
 }
 
-.receive-button{
-    background-color: rgb(87, 179, 87);
-    font-size: 16px;
-    font-weight: bold;
-    color: rgb(255, 255, 255);
-    border: 1px green;
-    border-radius: 10px;
-    padding: 8px;
-    width: 100px;
-    height: 35px;
-    transform: translateY(-20px);
-    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.3);
-}
 
-.hidden-menu{
-    transition: 0.2s;
-    background-color: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    box-shadow: 0px 5px 10px 5px rgba(0, 0, 0, 0.2);
-    width: 320px;
-    height: auto;
-    z-index: 30;
-    position: relative;
-    border-radius: 20px;
-    left: -152px;
-    transform: translateY(30px);
-    visibility: hidden;
-    padding: 10px;
-}
 
 .size-button{
     color: rgb(49, 49, 49);

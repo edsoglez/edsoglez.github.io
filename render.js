@@ -83,7 +83,6 @@ function Render(Child,filter){
 }
 
 function renderListItem(Child){
-    let Summarize = localStorage.getItem("Summary")
     let day = date.substring(8,10)
     let DateMod = Child.val().Date
     let DaysSince = Number(day - DateMod.substring(7,10))
@@ -111,15 +110,14 @@ function renderListItem(Child){
                                             <button class="close-button" onclick="document.getElementById('${Child.key}-hidden').style.visibility = 'hidden'">X</button>
                                         </div>      
                                     </div>
-
-                                    
+                                    <div style="width:100%; text-align: left;">
+                                        Unidades: <input id="${Child.key}-packQty" value="${Child.val().PackQty}" class="packQty-input" type="number" placeholder="${Child.val().PackQty}">${Child.val().UOM}
+                                    </div>
                                     <div style="width:100%; text-align: left;">Fecha Orden: ${Child.val().Date.substring(3,10)}</div>
                                     <div style="width:100%; text-align: left;">Pide: ${Child.val().Modder}</div>
-                                    <div style="width:100%; text-align: left;">Unidades /Cant: ${Child.val().PackQty}</div>
-                                    <div style="width:100%; text-align: left;">Unidad med: ${Child.val().UOM}</div>
-
+                                    
                                     <div style="width:100%; height:0px; text-align: right; display: flex; align-items: center; justify-content: right">
-                                            <button class="receive-button" onclick="zeroQty('${Child.key}')">Recibir ${Child.val().Cantidad}</button>
+                                            <button class="receive-button" onclick="zeroQty('${Child.key}','${Child.val().Cantidad}')">Recibir ${Child.val().Cantidad}</button>
                                     </div>    
                                 </div>
                             </div> 
@@ -129,13 +127,23 @@ function renderListItem(Child){
                                 <button class="quant-control" onclick="increaseQty('${Child.key}',${Child.val().Cantidad})">+</button>
                             </div>
 
-                            <div style="width:80px"><button class="quant-button" onclick="">${Child.val().Cantidad}</button></div>
+                            <div style="width:80px"><input type="number" class="quant-button" value="${Child.val().Cantidad}" style="text-align: center" onchange="changeQty('${Child.key}',this.value)"></div>
                             <div><button class="urgente-${urgente}" onclick="urgentToggle('${Child.key}',${Child.val().Urgente})">${DaysSince}D</button></div>
                         </div>
                         <span id="${Child.val().Text}-date" class="date-container"></span>
                         </li>`
+
+                   
+
 }
 
+export function changeQty(id,newVal){
+    update(ref(db,'Items/'+id),{
+        Cantidad: newVal,
+        Date: date,
+        Modder: localStorage.getItem("USER")
+        });
+}
 
 export function increaseQty(id,current){
     update(ref(db,'Items/'+id),{
@@ -152,7 +160,12 @@ export function decreaseQty(id,current){
     Modder: localStorage.getItem("USER")
     });
 }
-export function zeroQty(id){
+export function zeroQty(id,currentQty){
+    if(currentQty == 0){
+        alert("Cantidad esta en 0")
+        return
+    }
+
     if(confirm('Recibir articulo a inventario? (si deseas bajar la cantidad usa los controles de -/+)')){
         ingressQty(id)
         update(ref(db,'Items/'+id),{
@@ -174,7 +187,7 @@ export function ingressQty(id){
     get(child(ref(getDatabase()), `Items/${id}`)).then((snapshot) => {
         if (snapshot.exists()) {
             let currentOrderedQty = snapshot.val().Cantidad
-            let PackQty = snapshot.val().PackQty
+            let PackQty = document.getElementById(id+"-packQty").value
 
             //Add qty reception
             set(ref(db,'Transactions/'+id+"/"+year+"_"+month+"_"+day+"_"+time+"_"+Math.floor(Math.random() * 99)),{
@@ -235,4 +248,5 @@ window.decreaseQty = decreaseQty;
 window.zeroQty = zeroQty;
 window.urgentToggle = urgentToggle;
 window.playSound = playSound;
+window.changeQty = changeQty;
 
