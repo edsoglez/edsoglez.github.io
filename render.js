@@ -111,7 +111,7 @@ function renderListItem(Child){
                                         </div>      
                                     </div>
                                     <div style="width:100%; text-align: left;">
-                                        Unidades: <input id="${Child.key}-packQty" value="${Child.val().PackQty}" class="packQty-input" type="number" placeholder="${Child.val().PackQty}">${Child.val().UOM}
+                                        Unidades: <input id="${Child.key}-packQty-input" value="${Child.val().PackQty}" class="packQty-input" type="number" placeholder="${Child.val().PackQty}">${Child.val().UOM}
                                     </div>
                                     <div style="width:100%; text-align: left;">Fecha Orden: ${Child.val().Date.substring(3,10)}</div>
                                     <div style="width:100%; text-align: left;">Pide: ${Child.val().Modder}</div>
@@ -171,9 +171,9 @@ export function zeroQty(id,currentQty){
     if(currentQty == 0){
         return
     }
-
-    if(confirm('Seguro de recibir? \nRecibiras '+currentQty+' paquete de '+document.getElementById(id+'-packQty').value)){
-        ingressQty(id)
+    let updatedPackQty = document.getElementById(id+'-packQty-input').value
+    if(confirm('Seguro de recibir? \nRecibiras '+currentQty+' paquete de '+updatedPackQty)){
+        ingressQty(id,updatedPackQty)
         update(ref(db,'Items/'+id),{
         Cantidad: 0,
         Date: date,
@@ -188,12 +188,12 @@ export function urgentToggle(id,current){
     });
 }
 
-export function ingressQty(id){
+export function ingressQty(id,updatedPackQty){
     //get current item's ordered cuantity
     get(child(ref(getDatabase()), `Items/${id}`)).then((snapshot) => {
         if (snapshot.exists()) {
             let currentOrderedQty = snapshot.val().Cantidad
-            let actualPackQty = document.getElementById(id+"-packQty").value
+            let actualPackQty = updatedPackQty
             console.log(actualPackQty)
 
             //Add qty reception
@@ -203,8 +203,6 @@ export function ingressQty(id){
             });
             //get and update current inventory + received
             get(child(ref(getDatabase()), `Inventory/${id}`)).then((snapshot) => {
-
-                let actualPackQty = document.getElementById(id+'-packQty').value
 
                 set(ref(db,'Inventory/'+id),{
                     Cantidad: snapshot.val().Cantidad + currentOrderedQty*actualPackQty,

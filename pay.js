@@ -8,7 +8,7 @@ function registerExpense(){
         if(amount==null || amount == ""){alert("Gasto no registrado"); return}
 
     let dateFormatedID = new Date().toISOString().replace(/\D/g,'').substring(0,8)+new Date().toTimeString().replace(/\D/g,'');
-    //Example of format YYYYMMDDHHMMSSmmmm
+    //Example of format YYYYMMDDHHMMSS
 
     set(ref(db,'Gastos/'+new Date().getFullYear()+"/"+(new Date().getMonth()+1)+"/"+ dateFormatedID),{
         Time: String(new Date()).substring(16,24),
