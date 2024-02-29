@@ -162,9 +162,12 @@ function registerSales(method){
         //if confirmed, register sale in db
 
 
-         //NOTE, need to sort out correct key name for sequential
-         
-        set(ref(db,'Sales/'+new Date().getFullYear()+"/"+(new Date().getMonth()+1)+"/"+ new Date().toISOString().replace(/\D/g,'')),{
+        //NOTE, need to sort out correct key name for sequential read
+
+        let dateFormatedID = new Date().toISOString().replace(/\D/g,'').substring(0,8)+new Date().toTimeString().replace(/\D/g,'');
+        //Example of format YYYYMMDDHHMMSSmmmm
+        
+        set(ref(db,'Sales/'+new Date().getFullYear()+"/"+(new Date().getMonth()+1)+"/"+ dateFormatedID),{
             Time: String(new Date()).substring(16,24),
             Items: itemsOrdered,
             Total: orderTotal,

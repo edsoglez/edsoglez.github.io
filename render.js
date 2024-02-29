@@ -193,18 +193,21 @@ export function ingressQty(id){
     get(child(ref(getDatabase()), `Items/${id}`)).then((snapshot) => {
         if (snapshot.exists()) {
             let currentOrderedQty = snapshot.val().Cantidad
-            let PackQty = document.getElementById(id+"-packQty").value
+            let actualPackQty = document.getElementById(id+"-packQty").value
+            console.log(actualPackQty)
 
             //Add qty reception
             set(ref(db,'Transactions/'+id+"/"+year+"_"+month+"_"+day+"_"+time+"_"+Math.floor(Math.random() * 99)),{
-                Cantidad: currentOrderedQty*PackQty,
+                Cantidad: currentOrderedQty*actualPackQty,
                 Modder: localStorage.getItem("USER")
             });
             //get and update current inventory + received
             get(child(ref(getDatabase()), `Inventory/${id}`)).then((snapshot) => {
 
+                let actualPackQty = document.getElementById(id+'-packQty').value
+
                 set(ref(db,'Inventory/'+id),{
-                    Cantidad: snapshot.val().Cantidad + currentOrderedQty*PackQty,
+                    Cantidad: snapshot.val().Cantidad + currentOrderedQty*actualPackQty,
                     LastMod: new Date()
                 });
 
@@ -233,7 +236,8 @@ export function addItemToDB(id,categoria,vendor){
         Cantidad: 0,
         Categoria: categoria,
         Vendor: vendor,
-        Modder: localStorage.getItem("USER")
+        Modder: localStorage.getItem("USER"),
+        PackQty: 1
     });
 
     set(ref(db,'Inventory/'+id),{

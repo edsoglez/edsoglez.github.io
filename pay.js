@@ -7,8 +7,10 @@ function registerExpense(){
         if(amount===NaN){alert("Ingresaste un valor no numerico"); return}
         if(amount==null || amount == ""){alert("Gasto no registrado"); return}
 
-    
-    set(ref(db,'Gastos/'+new Date().getFullYear()+"/"+(new Date().getMonth()+1)+"/"+ new Date().toISOString().replace(/\D/g,'')),{
+    let dateFormatedID = new Date().toISOString().replace(/\D/g,'').substring(0,8)+new Date().toTimeString().replace(/\D/g,'');
+    //Example of format YYYYMMDDHHMMSSmmmm
+
+    set(ref(db,'Gastos/'+new Date().getFullYear()+"/"+(new Date().getMonth()+1)+"/"+ dateFormatedID),{
         Time: String(new Date()).substring(16,24),
         Total: -Number(amount),
         Vendor: vendor
