@@ -18,7 +18,7 @@ body{
     touch-action: manipulation;
 }
 
-div{
+div,button,li,input{
     touch-action: manipulation;
 }
 
