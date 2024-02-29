@@ -117,7 +117,7 @@ function renderListItem(Child){
                                     <div style="width:100%; text-align: left;">Pide: ${Child.val().Modder}</div>
                                     
                                     <div style="width:100%; height:0px; text-align: right; display: flex; align-items: center; justify-content: right">
-                                            <button class="receive-button" onclick="zeroQty('${Child.key}','${Child.val().Cantidad}')">Recibir ${Child.val().Cantidad}</button>
+                                            <button class="receive-button-${Child.val().Cantidad>0?'on':'off'}" onclick="zeroQty('${Child.key}','${Child.val().Cantidad}')">Recibir ${Child.val().Cantidad}</button>
                                     </div>    
                                 </div>
                             </div> 
@@ -138,6 +138,13 @@ function renderListItem(Child){
 }
 
 export function changeQty(id,newVal){
+    let regex = /^[0-9]+$/;
+    if (newVal.replace(/\D/g,'') == "")
+    {
+        alert("Solo ingresar numeros");
+        return false;
+    }
+
     update(ref(db,'Items/'+id),{
         Cantidad: newVal,
         Date: date,
@@ -162,11 +169,10 @@ export function decreaseQty(id,current){
 }
 export function zeroQty(id,currentQty){
     if(currentQty == 0){
-        alert("Cantidad esta en 0")
         return
     }
 
-    if(confirm('Recibir articulo a inventario? (si deseas bajar la cantidad usa los controles de -/+)')){
+    if(confirm('Seguro de recibir? \nRecibiras '+currentQty+' paquete de '+document.getElementById(id+'-packQty').value)){
         ingressQty(id)
         update(ref(db,'Items/'+id),{
         Cantidad: 0,
