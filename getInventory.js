@@ -43,7 +43,7 @@ get(child(ref(getDatabase()), `Items/`)).then((snapshot) => {
                     </div> 
 
                     <div style="width:50%; text-align: right; display: flex; justify-content: right; text-align: right; align-items: right; padding-right: 10px">
-                        <div style="width:100px; text-align: right">${invQty}</div>
+                        <div id="${snapshot.key}-inv-qty" style="width:100px; text-align: right">${invQty}</div>
                         <div style="width:100px; text-align: right">${ordQty*packQty}</div>
                     </div>
             
@@ -63,7 +63,7 @@ function updateItemInventory(item,quant){
         });
     
         console.log(`Updated ${item} to ${quant}`)
-        location.href="Inventario.html"
+        document.getElementById(item+"-inv-qty").innerText = quant
     }
     
 }

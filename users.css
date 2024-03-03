@@ -1,0 +1,49 @@
+#add-new-user-button{
+    width: 100px;
+    background-color: rgb(43, 130, 237);
+    color: white;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 15px;
+    border: 0;
+    box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.3);
+}
+
+#add-new-user-button:hover{
+    transform: scale(0.99);
+    box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.4);
+}
+
+#user-list{
+    padding: 0px;
+    margin: 0;
+    background-color: rgb(243, 243, 243);
+    height: 65vh;
+    width: 100%;
+    border-radius: 20px;
+    border: 2px solid rgb(163, 163, 163);
+    list-style: none;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+    padding-bottom: 10px;
+}
+
+.user-li{
+    background-color: rgba(148, 204, 213, 0.364);
+    border-radius: 15px;
+    margin: 10px;
+    margin-bottom: 0px;
+    align-items: center;
+    text-align: left;
+    padding: 10px;
+    height: auto;
+}
+
+.user-image{
+    width: 50px;
+    height: 50px;
+    object-fit: cover; 
+    border-radius: 15px;
+}
