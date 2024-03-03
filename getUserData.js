@@ -21,9 +21,9 @@ onValue(userRef,(userdata)=>{
             <li class="user-li">
                 <div style="display: flex; align-items: center; gap: 20px">
                     <img class="user-image" src="${profile_img}">
-                    <div style="display: inline-block; font-size: 20px">${user.key}</div>
-                    <div style="display: inline-block; font-size: 20px">+
-                        <a>Edit</a>
+                    <div style="width: 100%; font-size: 20px">${user.key}</div>
+                    <div style="width: auto;font-size: 20px">
+                        <a href="user.html?editUser=${user.key}">Edit</a>
                     </div>
                 </div>
             </li>
