@@ -1,3 +1,70 @@
-userinfo.html
-+to change existing users permisions, name, etc
-or delete user
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Calesa User Info</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="users.css">
+    <link rel="stylesheet" href="headerfooter.css">
+    <script type="module" src="dbconfig.js"></script>
+ <script type="module" src="getUserInfo.js"></script>
+</head>
+<body>
+    
+
+    <div id="header" style="display: flex ; z-index: 0;">
+        <div id="header-left">
+            <button onclick="location.href='menu.html'" class="logo-button" style="background-color: transparent; border: 0px; padding: 10px; text-align: left; margin: 0px;">
+                <img src="calesa_logo_white.png" height="50px" alt="">
+            </button>
+        </div>
+        <div id="header-right" style="width: 50%;">
+            <div id="header-0">
+                
+            </div>
+            <div id="header-1">
+                
+            </div>
+            <div id="header-2">
+                <button class="header-icon-button" onclick="this.focus()" id="user-button" onmouseover="document.getElementById('user-icon').style.filter = 'invert()'" onmouseover="document.getElementById('user-icon').style.filter = 'invert()'" onmouseleave="document.getElementById('user-icon').style.filter = 'none'">
+                    <img class="icon" id="user-icon" width="20px" style="margin: 0px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAACP0lEQVR4nO3aT4hNURwH8MM0I4SJxdhMWVgoOyILyp+UhYWRBY2srFBWk42FJFPUpPxJNrKZrZJJSVZjJ4uJycLGGP9S5qFo/Pvo9t4Sw7jnvXOe+6lXb3EX5/ftnnvO+d0bQqVSqTQJ1uIkRjGBabzGGK6iD/NDu8F63PVn3uAY5oXcYU6jmG/+3gP0hlxhLob9m2dYGXKE08rxGN0hJ9iG78pzLWQ27+8rV/EMWRNygO3iGA45wKVIAdTQFVKHJ+LZGDKY/9MRA+gPKcMycQ2ElGFB5AAOhdRhKmIAu0Lq1E96saS/LcZApOIfhRxgBT5HCOB4yAUullx80TRZFHKBHrwoMYD9IdP218cSih8KucKOxh5+toqp1BFyhlWzOB6/xcHQLtTPCPsaQfyuUfISZ7A0tCv04kCxrOECTuEINhR9xFaPr1KpNG2jtBrrGr/if09oR+jA1sZ7gnsz7AtqjWuKa7dk/VDEcgxi0uxNNsLI5+5AN87hk/IUW+ohLAkpwx68Ek+xUdodUoOuiO8DfuY8OkMKsBC3NN+dlvcI1LvAMXuAMxlt2Rcl6svbiNa70ZIjs/ohJhUnml385ll+9hJLMZZNzXzij0vPw6asDDgqXYdjF9+Jp9I1EfUbAvRL396YAdyWvpFYxS/FV+n7gsUxAuiTj50xAjgrH4MxArgpH9djBDAuH2MxAnguHxMxAqjJx1SMAD7Ix/sqgLKp7gD//RR4Jx+1GFPgSmJdoF8pxni59AAqlUpoRz8ALkTf4bIRf58AAAAASUVORK5CYII=">
+                </button>
+            </div>
+        </div>
+        
+    </div>
+
+    <div id="main-container" class="container" style="z-index: 10; overflow: hidden; justify-self: center; align-items: center; text-align: center;">
+        <div id="add-new-bar" style="display: flex; align-items: center; padding: 20px;">
+            <div style="width: 50%; height: 40px; text-align: left;">
+                <h2 id="user-id"></h2>
+     <br>
+                <div style="display: flex; flex-direction: column; width: 100%;">
+                    <div style="width: 50%;">Can View:</div><div id="canView-button">Not determined</div>
+                </div>
+                <div style="display: flex; flex-direction: column;">
+                    <div style="width: 50%;">Can Edit:</div> <div id="canEdit-button">Not determined</div>
+                </div>
+                <div style="display: flex; flex-direction: column;"></div>
+                    <div style="width: 50%;">Can Add:</div><div id="canAdd-button">Not determined</div>
+                </div>
+                <div style="display: flex; flex-direction: column;"></div>
+                    <div style="width: 50%;">Can Delete:</div><div id="canDelete-button">Not determined</div>
+                </div>
+                <div style="display: flex; flex-direction: column;"></div>
+                    <div style="width: 50%;">Can Sell:</div><div id="canSell-button">Not determined</div>
+                </div>
+                <div style="display: flex; flex-direction: column;"></div>
+                    <div style="width: 50%;">Can Buy:</div><div id="canBuy-button">Not determined</div>
+
+                </div>
+            </div>
+            
+        </div>
+        <div style="padding: 10px;">
+            
+        </div>
+    </div> 
+</body>
+</html>
