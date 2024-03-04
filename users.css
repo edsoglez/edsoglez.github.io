@@ -21,7 +21,7 @@
     height: 65vh;
     width: 100%;
     border-radius: 20px;
-    border: 2px solid rgb(163, 163, 163);
+    border: 0px solid rgb(163, 163, 163);
     list-style: none;
     text-align: center;
     display: flex;
@@ -31,7 +31,7 @@
 }
 
 .user-li{
-    background-color: rgba(148, 204, 213, 0.364);
+    background-color: rgb(231, 231, 231);
     border-radius: 15px;
     margin: 10px;
     margin-bottom: 0px;
@@ -40,11 +40,17 @@
     padding: 10px;
     padding-right: 20px;
     height: auto;
+    box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.2);
 }
 
 .user-image{
     width: 50px;
     height: 50px;
     object-fit: cover; 
-    border-radius: 15px;
+    border-radius: 10px;
+}
+
+.edit-link{
+    color: rgb(80,80,80);
+    text-decoration: none;
 }

@@ -23,7 +23,7 @@ onValue(userRef,(userdata)=>{
                     <img class="user-image" src="${profile_img}">
                     <div style="width: 100%; font-size: 20px">${user.key}</div>
                     <div style="width: auto;font-size: 20px">
-                        <a href="user.html?editUser=${user.key}">Edit</a>
+                        <a class="edit-link" href="user.html?editUser=${user.key}">Edit</a>
                     </div>
                 </div>
             </li>
