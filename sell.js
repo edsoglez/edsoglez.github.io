@@ -164,7 +164,7 @@ function registerSales(method){
 
         //NOTE, need to sort out correct key name for sequential read
 
-        let dateFormatedID = new Date().toISOString().replace(/\D/g,'').substring(0,8)+new Date().toTimeString().replace(/\D/g,'');
+        let dateFormatedID = new Date().toISOString().replace(/\D/g,'').substring(0,8)-1+new Date().toTimeString().replace(/\D/g,'');
         //Example of format YYYYMMDDHHMMSSmmmm
         
         set(ref(db,'Sales/'+new Date().getFullYear()+"/"+(new Date().getMonth()+1)+"/"+ dateFormatedID),{
