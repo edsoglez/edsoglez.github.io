@@ -7,14 +7,12 @@ const userID = urlParams.get('editUser')
 
 document.getElementById("user-id").innerHTML = userID
 
-onValue(userRef,(snapshot)=>{
-    get(child(ref(db),`/Users/${userID}`)).then((snapshot)=>{
-        console.log(snapshot.key, snapshot.val())
-        snapshot.forEach(permission => {
+onValue(userRef,()=>{
+    get(child(ref(db),`/Users/${userID}`)).then((user)=>{
+        user.forEach(permission => {
             
             try{
                 let onOff = permission.val()
-                console.log(onOff)
                 document.getElementById(permission.key+"-toggle-container").innerHTML = `
                 <button id="${permission.key}-toggle" class="toggle-${onOff==true? 'on':'off'}" onmousedown="
                     togglePermission('${userID}','${permission.key}',${permission.val()})                        
@@ -24,7 +22,8 @@ onValue(userRef,(snapshot)=>{
                 </button>`
 
                 if(onOff == false){
-                    document.getElementById(permission.key+'-circle-push').remove()
+                    document.getElementById(permission.key+'-circle-push').style.transition = '.2s'
+                    document.getElementById(permission.key+'-circle-push').style.width = '2px'
                 }
     
                 document.getElementById(permission.key+"-button").innerHTML = " "+permission.val()
