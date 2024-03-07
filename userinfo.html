@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="headerfooter.css">
     <script type="module" src="dbconfig.js"></script>
  <script type="module" src="getUserInfo.js"></script>
+ <script type="module" src="header.js"></script>
 </head>
 <body>
     
@@ -37,20 +38,40 @@
 
     <div id="main-container" class="container" style="z-index: 10; overflow: hidden; justify-self: center; align-items: center; text-align: center;">
         <div id="add-new-bar" style="display: flex; align-items: center; padding: 20px;">
-            <div style="width: 50%; height: 40px; text-align: left;">
+            <div style="width: 100%; height: 40px; text-align: center; align-content: center;">
                 <h2 id="user-id"></h2>
                 <br>
-                Can View:<span id="canView-button">Not determined</span>
+
+                <div style="display: flex; flex-direction: row; align-items: center; align-content: center; width: 180px;">
+                    <div style="width: 100px; justify-content: center; text-align: left;"><span>Can View:</span></div> 
+                    <div style="width: 80px; height: 30px;" id="canView-toggle-container"></div>
+                </div>
                 <br>
-                Can Edit: <span id="canEdit-button">Not determined</span>
+                <div style="display: flex; flex-direction: row; align-items: center; align-content: center; width: 180px;">
+                    <div style="width: 100px; text-align: left;"><span>Can Edit:</span></div> 
+                    <div style="width: 80px; height: 30px;" id="canEdit-toggle-container"></div>
+                </div>
                 <br>
-                Can Add:<span id="canAdd-button">Not determined</span>
+                <div style="display: flex; flex-direction: row; align-items: center; align-content: center; width: 180px;">
+                    <div style="width: 100px; text-align: left;"><span>Can Add:</span></div> 
+                    <div style="width: 80px; height: 30px;" id="canAdd-toggle-container"></div>
+                </div>
                 <br>
-                Can Delete:<span id="canDelete-button">Not determined</span>
+                <div style="display: flex; flex-direction: row; align-items: center; align-content: center; width: 180px;">
+                    <div style="width: 100px; text-align: left;"><span>Can Delete:</span></div> 
+                    <div style="width: 80px; height: 30px;" id="canDelete-toggle-container"></div>
+                </div>
                 <br>
-                Can Sell:<span id="canSell-button">Not determined</span>
+                <div style="display: flex; flex-direction: row; align-items: center; align-content: center;width: 180px;">
+                    <div style="width: 100px; text-align: left;"><span>Can Sell:</span></div> 
+                    <div style="width: 80px; height: 30px;" id="canSell-toggle-container"></div>
+                </div>
                 <br>
-                Can Buy:<span id="canBuy-button">Not determined</span>
+                <div style="display: flex; flex-direction: row; align-items: center; align-content: center;width: 180px;">
+                    <div style="width: 100px; text-align: left;"><span>Can Buy:</span></div> 
+                    <div style="width: 80px; height: 30px;" id="canBuy-toggle-container"></div>
+                </div>
+                <br>
             </div>
             
         </div>

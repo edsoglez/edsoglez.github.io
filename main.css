@@ -340,8 +340,8 @@ h3{
 }
 
 .menu-page-button{
-    width: 300px;
-    height: 190px;
+    width: 100vw;
+    height: 25vh;
     border: 0px rgb(0, 0, 0) solid;
     border-radius: 20px;
     background-color: rgb(243, 243, 243);

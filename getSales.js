@@ -1,4 +1,15 @@
 import {getDatabase, set, get, update, remove, ref, child, onValue} from "https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js"; 
+
+get(child(ref(db),`Users/${localStorage.getItem("USER")}`)).then((user)=>{
+    console.log(user.key,user.val())
+    if(user.val().canView != true){
+        alert("No tiene permisos para visualizar")
+        location.href = "menu.html"
+    }
+})
+
+
+
 window.itemRef = ref(db,'Items/');
 window.transRef = ref(db,'Transactions/');
 window.salesRef = ref(db,'Sales/');
