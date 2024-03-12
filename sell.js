@@ -1,4 +1,4 @@
-import {getDatabase, set, get, update, remove, ref, child, onValue} from "https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js"; 
+import {getDatabase, set, get, update, remove, ref, child, onValue, orderByChild} from "https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js"; 
 window.itemRef = ref(db,'Items/');
 window.transRef = ref(db,'Transactions/');
 window.prodRef = ref(db,'Products/');
@@ -18,69 +18,95 @@ onValue(prodRef,(snapshot)=>{
 })
 resetOrder()
 
+function fillData(Product){
+    Product.forEach(
+        function(Size){
+            if(Size.key=="CH"||Size.key=="M"||Size.key=="G")
+            productPrices[Product.key+"_"+Size.key] = Size.val().price
+    })
+    
+    localStorage.products = JSON.stringify(productPrices);
+
+    //render basic card layout without size buttons
+    document.getElementById("product-list").innerHTML +=
+            `<li id="${Product.key}" class="product-list-item">
+                <div style="display:flex; flex-direction:row;">
+                <div class="product-item" >
+                    <h5 class="product-text">${Product.key}</h5>   
+                    <img class="product-image" src="${Product.val().imgURL}" alt="">
+                    <div style="width:100%; heigh:50px" id="${Product.key}-sizes">     
+                    <div>
+                </div>
+                </div>
+            </li>`
+
+    //Render size buttons depending on available sizing
+    if(Product.val().CH){
+        document.getElementById(String(Product.key)+ "-sizes").innerHTML +=
+            `<button class="size-button" onClick="addItemToOrder('${Product.key}','CH');" id="${Product.key}-CH" style="width: 95%">UN</button>`
+        }
+
+    if(Product.val().M){
+            document.getElementById(String(Product.key)+ "-sizes").innerHTML +=
+           `<button class="size-button" onClick="addItemToOrder('${Product.key}','M');" id="${Product.key}-M" style="width: 30%">M</button>`
+            document.getElementById(String(Product.key)+ "-CH").style.width = '30%'
+    }
+
+    if(Product.val().G){
+        document.getElementById(String(Product.key)+ "-sizes").innerHTML +=
+        `<button class="size-button" onClick="addItemToOrder('${Product.key}','G');" id="${Product.key}-G" style="width: 45%">G</button>`
+        document.getElementById(String(Product.key)+ "-CH").style.width = '45%'  
+        document.getElementById(String(Product.key)+ "-CH").textContent = 'CH'  
+           
+        //since not all products have a medium size, we will render considering product does not have it
+        //Only in the case it does, we risize all buttons to fil
+        if(Product.val().M){
+            document.getElementById(String(Product.key)+ "-CH").style.width = '30%'
+            document.getElementById(String(Product.key)+ "-M").style.width = '30%'
+            document.getElementById(String(Product.key)+ "-G").style.width = '30%'
+        }
+       
+
+    }
+}
 
 function renderProductCards(){
     document.getElementById("product-list").innerHTML = ""
+
+
     get(child(ref(getDatabase()), `Products/`)).then((snapshot) => {
+
+        //each forEach gets all products from certain category, to keep them grouped
+        
         snapshot.forEach(
             function(Product){
+                if(Product.val().index != "caliente"){return}
                     //get price for all products at their size options
-                    Product.forEach(
-                        function(Size){
-                            if(Size.key=="CH"||Size.key=="M"||Size.key=="G")
-                            productPrices[Product.key+"_"+Size.key] = Size.val().price
-                    })
-                    
-                    localStorage.products = JSON.stringify(productPrices);
-
-                    //render basic card layout without size buttons
-                    document.getElementById("product-list").innerHTML +=
-                            `<li id="${Product.key}" class="product-list-item">
-                                <div style="display:flex; flex-direction:row;">
-                                <div class="product-item" >
-                                    <h5 class="product-text">${Product.key}</h5>   
-                                    <img class="product-image" src="${Product.val().imgURL}" alt="">
-                                    <div style="width:100%; heigh:50px" id="${Product.key}-sizes">     
-                                    <div>
-                                </div>
-                                </div>
-                            </li>`
-
-                    //Render size buttons depending on available sizing
-                    if(Product.val().CH){
-                        document.getElementById(String(Product.key)+ "-sizes").innerHTML +=
-                            `<button class="size-button" onClick="addItemToOrder('${Product.key}','CH');" id="${Product.key}-CH" style="width: 95%">UN</button>`
-                        }
-
-                    if(Product.val().M){
-                            document.getElementById(String(Product.key)+ "-sizes").innerHTML +=
-                           `<button class="size-button" onClick="addItemToOrder('${Product.key}','M');" id="${Product.key}-M" style="width: 30%">M</button>`
-                            document.getElementById(String(Product.key)+ "-CH").style.width = '30%'
-                    }
-
-                    if(Product.val().G){
-                        document.getElementById(String(Product.key)+ "-sizes").innerHTML +=
-                        `<button class="size-button" onClick="addItemToOrder('${Product.key}','G');" id="${Product.key}-G" style="width: 45%">G</button>`
-                        document.getElementById(String(Product.key)+ "-CH").style.width = '45%'  
-                        document.getElementById(String(Product.key)+ "-CH").textContent = 'CH'  
-                           
-                        //since not all products have a medium size, we will render considering product does not have it
-                        //Only in the case it does, we risize all buttons to fil
-                        if(Product.val().M){
-                            document.getElementById(String(Product.key)+ "-CH").style.width = '30%'
-                            document.getElementById(String(Product.key)+ "-M").style.width = '30%'
-                            document.getElementById(String(Product.key)+ "-G").style.width = '30%'
-                        }
-                       
-
-                    }
-                        
-                   
-                    
-                    
-                    
-                    
+                fillData(Product) 
         })
+
+        snapshot.forEach(
+            function(Product){
+                    if(Product.val().index != "frio"){return}
+                    //get price for all products at their size options
+                    fillData(Product)                    
+        })
+
+        snapshot.forEach(
+            function(Product){
+                    if(Product.val().index != "postre"){return}
+                    //get price for all products at their size options
+                    fillData(Product)                    
+        })
+
+        snapshot.forEach(
+            function(Product){
+                    if(Product.val().index != "sabor"){return}
+                    //get price for all products at their size options
+                    fillData(Product)                    
+        })
+
+       
         
       })
 }
