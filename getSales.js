@@ -1,14 +1,11 @@
 import {getDatabase, set, get, update, remove, ref, child, onValue} from "https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js"; 
 
 get(child(ref(db),`Users/${localStorage.getItem("USER")}`)).then((user)=>{
-    console.log(user.key,user.val())
     if(user.val().canView != true){
         alert("No tiene permisos para visualizar")
         location.href = "menu.html"
     }
 })
-
-
 
 window.itemRef = ref(db,'Items/');
 window.transRef = ref(db,'Transactions/');
@@ -16,42 +13,39 @@ window.salesRef = ref(db,'Sales/');
 
 let fromDateVal = document.getElementById('from-date')
 let toDateVal = document.getElementById('to-date')
-let month = "0"+String(new Date().getMonth()+1)
-let date = String(new Date()).split(" ")
-fromDateVal.value = date[3]+"-"+month.slice(-2)+"-01"    //from Date is start current month 
-toDateVal.value =  date[3]+"-"+month.slice(-2)+"-"+date[2]  //to Date is today
-
 let salesTotalDisp = document.getElementById('sales-total')
 let salesTotalCashDisp = document.getElementById('sales-total-cash')
 let salesTotalCardDisp = document.getElementById('sales-total-card')
-
 let totalSelector = document.getElementById('total-selector')
 let cashSelector = document.getElementById('cash-selector')
 let cardSelector = document.getElementById('card-selector')
+let dailyAverage = document.getElementById('daily-average')
+let monthlyEstimate = document.getElementById('monthly-estimate')
+
+let month = "0"+String(new Date().getMonth()+1)
+let date = String(new Date()).split(" ")
+
+//Changing the value in the DOM divs
+fromDateVal.value = date[3]+"-"+month.slice(-2)+"-01"    //from Date is start current month 
+toDateVal.value =  date[3]+"-"+month.slice(-2)+"-"+date[2]  //to Date is today
+
 
 totalSelector.addEventListener('mouseover',()=>{
-    
     renderSales(String(fromDateVal.value).replace(/-/g,""),String(toDateVal.value).replace(/-/g,""))
 })
 cashSelector.addEventListener('mouseover',()=>{
-    
     renderSales(String(fromDateVal.value).replace(/-/g,""),String(toDateVal.value).replace(/-/g,""),'cash')
 })
 cardSelector.addEventListener('mouseover',()=>{
-   
     renderSales(String(fromDateVal.value).replace(/-/g,""),String(toDateVal.value).replace(/-/g,""),'card')
 })
-
 totalSelector.addEventListener('blur',()=>{
-
     renderSales(String(fromDateVal.value).replace(/-/g,""),String(toDateVal.value).replace(/-/g,""))
 })
 cashSelector.addEventListener('blur',()=>{
-
     renderSales(String(fromDateVal.value).replace(/-/g,""),String(toDateVal.value).replace(/-/g,""))
 })
 cardSelector.addEventListener('blur',()=>{
-
     renderSales(String(fromDateVal.value).replace(/-/g,""),String(toDateVal.value).replace(/-/g,""))
 })
 
@@ -73,12 +67,9 @@ let Months = {
 
 var datatoload = []
 
-
 onValue(salesRef,(snapshot)=>{
     renderSales(String(fromDateVal.value).replace(/-/g,""),String(toDateVal.value).replace(/-/g,""))
 })
-
-
 
 renderSales(date[3]+"-"+month.slice(-2)+"-01",date[3]+"-"+month.slice(-2)+"-"+date[2]) //Default renders from current month day 1 to today
 
@@ -102,6 +93,10 @@ function renderSales(fromDate,toDate,method){
     console.log("Rendering sales from",fromDate.replace(/-/g,""),"to",toDate.replace(/-/g,"")) //SERIALIZE DATE TO LATER COMPARE GREATER AND LESS THAN
     let fromDateSerial = Number(fromDate.replace(/-/g,""))
     let toDateSerial = Number(toDate.replace(/-/g,""))
+  
+    let monthsEvaluated = Number(toDate.replace(/-/g,"").substring(0,6)) - Number(fromDate.replace(/-/g,"").substring(0,6)) + 1
+    let days = Number(String(toDateSerial).substring(6,8)) - Number(String(fromDateSerial).substring(6,8))+1 + (monthsEvaluated-1)*30
+    
 
     get(child(ref(db),'Sales/')).then((snapshot) => {
         let salesTotal = 0;
@@ -156,18 +151,29 @@ function renderSales(fromDate,toDate,method){
                                         </li>
                                     `
                                     }
-                                }
-                            
 
-                            
-                        
+                                    
+                                }
+                                
                         }
                     )
+                    getDailyAverage(salesTotal,days,monthsEvaluated)
                 }
             )            
         })
     })
+}
 
+function getDailyAverage(total,days,monthsEvaluated){
+    console.log(total,days,monthsEvaluated)
+
+    let USDollar = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+    });
+
+    dailyAverage.textContent = USDollar.format(total/days)
+    monthlyEstimate.textContent = USDollar.format(total*30.41*monthsEvaluated/days)
 }
 
  // Load the Visualization API and the piechart package.
