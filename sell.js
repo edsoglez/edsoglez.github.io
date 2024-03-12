@@ -77,28 +77,41 @@ function renderProductCards(){
     get(child(ref(getDatabase()), `Products/`)).then((snapshot) => {
 
         //each forEach gets all products from certain category, to keep them grouped
-        
+        document.getElementById("product-list").innerHTML +=
+        `<li style="margin:10px; height: auto;"> 
+        <div class="product-separator">Calientes</div>
+        </li>`
         snapshot.forEach(
             function(Product){
                 if(Product.val().index != "caliente"){return}
                     //get price for all products at their size options
+                    
                 fillData(Product) 
         })
-
+        document.getElementById("product-list").innerHTML +=
+        `<li style="margin:10px; height: auto;"> 
+        <div class="product-separator">Frios</div>
+        </li>`
         snapshot.forEach(
             function(Product){
                     if(Product.val().index != "frio"){return}
                     //get price for all products at their size options
                     fillData(Product)                    
         })
-
+        document.getElementById("product-list").innerHTML +=
+        `<li style="margin:10px; height: auto;"> 
+        <div class="product-separator">Postres</div>
+        </li>`
         snapshot.forEach(
             function(Product){
                     if(Product.val().index != "postre"){return}
                     //get price for all products at their size options
                     fillData(Product)                    
         })
-
+        document.getElementById("product-list").innerHTML +=
+        `<li style="margin:10px; height: auto;"> 
+        <div class="product-separator">Sabores</div>
+        </li>`
         snapshot.forEach(
             function(Product){
                     if(Product.val().index != "sabor"){return}
