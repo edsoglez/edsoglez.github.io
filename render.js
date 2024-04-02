@@ -172,15 +172,14 @@ export function zeroQty(id,currentQty){
         return
     }
     let updatedPackQty = document.getElementById(id+'-packQty-input').value
-    if(confirm('Seguro de recibir? \nRecibiras '+currentQty+' paquete de '+updatedPackQty)){
         ingressQty(id,updatedPackQty)
         update(ref(db,'Items/'+id),{
         Cantidad: 0,
         Date: date,
         Modder: localStorage.getItem("USER")
         });
-    }
 }
+
 export function urgentToggle(id,current){
     update(ref(db,'Items/'+id),{
     Urgente: !current,
