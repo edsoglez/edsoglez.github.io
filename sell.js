@@ -321,7 +321,7 @@ function getCorte(){
                     })            
             })
 
-        let pastCorte = get(child(ref(db),'Cortes/'+new Date().getFullYear()+"/"+(new Date().getMonth()+1)+"/"+ new Date().toISOString().replace(/\D/g,'_').substring(8,10))).then(function(data){
+        window.pastCorte = get(child(ref(db),'Cortes/'+new Date().getFullYear()+"/"+(new Date().getMonth()+1)+"/"+ new Date().toISOString().replace(/\D/g,'_').substring(8,10))).then(function(data){
             console.log(data.val())
             return data.val();
         });
