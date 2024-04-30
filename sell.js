@@ -321,10 +321,19 @@ function getCorte(){
                     })            
             })
 
+        try{
         get(child(ref(db),'Cortes/'+new Date().getFullYear()+"/"+(new Date().getMonth()+1)+"/"+ new Date().toISOString().replace(/\D/g,'_').substring(8,10))).then(function(data){
             console.log(data.val())
             window.pastCorte = data.val();
         });
+        }catch(e){
+            console.log("no hay corte previo")
+            window.pastCorte = {
+                Efectivo: 0,
+                Tarjeta: 0,
+                Gastos: 0
+            }
+        }
             
             //displays data
         alert(
