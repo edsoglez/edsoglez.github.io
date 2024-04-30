@@ -326,12 +326,13 @@ function getCorte(){
             console.log(data.val())
             window.pastCorte = data.val();
         });
-        }catch(e){
+        }catch(error){
             console.log("no hay corte previo")
             window.pastCorte = {
                 Efectivo: 0,
                 Tarjeta: 0,
-                Gastos: 0
+                Gastos: 0,
+                Total: 0
             }
         }
             
