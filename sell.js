@@ -118,7 +118,16 @@ function renderProductCards(){
                     //get price for all products at their size options
                     fillData(Product)                    
         })
-
+        document.getElementById("product-list").innerHTML +=
+        `<li style="margin:10px; height: auto;"> 
+        <div class="product-separator">Extras</div>
+        </li>`
+        snapshot.forEach(
+            function(Product){
+                    if(Product.val().index != "extras"){return}
+                    //get price for all products at their size options
+                    fillData(Product)                    
+        })
        
         
       })

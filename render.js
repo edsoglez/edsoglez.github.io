@@ -194,7 +194,7 @@ export function ingressQty(id,updatedPackQty){
             let currentOrderedQty = snapshot.val().Cantidad
             let actualPackQty = updatedPackQty
             console.log(actualPackQty)
-
+            
             //Add qty reception
             set(ref(db,'Transactions/'+id+"/"+year+"_"+month+"_"+day+"_"+time+"_"+Math.floor(Math.random() * 99)),{
                 Cantidad: currentOrderedQty*actualPackQty,
