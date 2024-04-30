@@ -325,31 +325,33 @@ function getCorte(){
         get(child(ref(db),'Cortes/'+new Date().getFullYear()+"/"+(new Date().getMonth()+1)+"/"+ new Date().toISOString().replace(/\D/g,'_').substring(8,10))).then(function(data){
             console.log(data.val())
             window.pastCorte = data.val();
+
+            if(pastCorte == undefined){
+                alert(
+                    "Corte \n\n"+
+                    "Total: " + (Number(salesTotal))+'\n'+
+                    "Efectivo: " + (Number(salesTotalCash))+'\n'+
+                    "Tarjeta: " + (Number(salesTotalCard))+'\n\n'+
+                    "Gastos: " + (Number(gastosTotal))+'\n\n'+
+                    "Efectivo restante: " + ((Number(salesTotalCash) + Number(gastosTotal)))
+                )  
+            }else{
+                alert(
+                    "Corte \n\n"+
+                    "Total: " + (Number(salesTotal) - Number(pastCorte.Total))+'\n'+
+                    "Efectivo: " + (Number(salesTotalCash) - Number(pastCorte.Efectivo))+'\n'+
+                    "Tarjeta: " + (Number(salesTotalCard) - Number(pastCorte.Tarjeta))+'\n\n'+
+                    "Gastos: " + (Number(gastosTotal) - Number(pastCorte.Gastos))+'\n\n'+
+                    "Efectivo restante: " + ((Number(salesTotalCash)-Number(pastCorte.Efectivo) + Number(gastosTotal) - Number(pastCorte.Gastos)))
+                )   
+            }
             
         });
         }catch(error){
             console.log("no hay corte previo")
         }        
 
-        if(pastCorte == null){
-            alert(
-                "Corte \n\n"+
-                "Total: " + (Number(salesTotal))+'\n'+
-                "Efectivo: " + (Number(salesTotalCash))+'\n'+
-                "Tarjeta: " + (Number(salesTotalCard))+'\n\n'+
-                "Gastos: " + (Number(gastosTotal))+'\n\n'+
-                "Efectivo restante: " + ((Number(salesTotalCash) + Number(gastosTotal)))
-            )  
-        }else{
-            alert(
-                "Corte \n\n"+
-                "Total: " + (Number(salesTotal) - Number(pastCorte.Total))+'\n'+
-                "Efectivo: " + (Number(salesTotalCash) - Number(pastCorte.Efectivo))+'\n'+
-                "Tarjeta: " + (Number(salesTotalCard) - Number(pastCorte.Tarjeta))+'\n\n'+
-                "Gastos: " + (Number(gastosTotal) - Number(pastCorte.Gastos))+'\n\n'+
-                "Efectivo restante: " + ((Number(salesTotalCash)-Number(pastCorte.Efectivo) + Number(gastosTotal) - Number(pastCorte.Gastos)))
-            )   
-        }
+        
         
         //adds record of when corte was done and total in that moment
         set(ref(db,'Cortes/'+new Date().getFullYear()+"/"+(new Date().getMonth()+1)+"/"+ new Date().toISOString().replace(/\D/g,'_').substring(8,10)),{
