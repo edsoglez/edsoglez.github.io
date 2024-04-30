@@ -274,8 +274,9 @@ function getCorte(){
     let toDateSerial = Number(toDate.replace(/-/g,""))
 
     let pastCorte = get(child(ref(db),'Cortes/'+new Date().getFullYear()+"/"+(new Date().getMonth()+1)+"/"+ new Date().toISOString().replace(/\D/g,'_').substring(8,10))).then(function(data){
-        console.log(data)
-        return data;});
+        console.log(data.val())
+        return data.val();
+    });
 
     get(child(ref(db),'Sales/')).then((snapshot) => {
         //sets sum to zero
