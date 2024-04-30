@@ -326,12 +326,13 @@ function getCorte(){
             
             //displays data
         alert(
+            pastCorte
             "Corte \n\n"+
-            "Total: "+(Number(salesTotal)-Number(pastCorte.Total))+'\n'+
-            "Efectivo: "+(Number(salesTotalCash)-Number(pastCorte.Efectivo))+'\n'+
-            "Tarjeta: "+(Number(salesTotalCard)-Number(pastCorte.Tarjeta))+'\n\n'+
-            "Gastos: "+(Number(gastosTotal)-Number(pastCorte.Gastos))+'\n\n'+
-            "Efectivo restante: "+((Number(salesTotalCash)-Number(pastCorte.Efectivo) + Number(gastosTotal)-Number(pastCorte.Gastos)))
+            "Total: " + (Number(salesTotal) - Number(pastCorte.Total))+'\n'+
+            "Efectivo: " + (Number(salesTotalCash) - Number(pastCorte.Efectivo))+'\n'+
+            "Tarjeta: " + (Number(salesTotalCard) - Number(pastCorte.Tarjeta))+'\n\n'+
+            "Gastos: " + (Number(gastosTotal) - Number(pastCorte.Gastos))+'\n\n'+
+            "Efectivo restante: " + ((Number(salesTotalCash)-Number(pastCorte.Efectivo) + Number(gastosTotal) - Number(pastCorte.Gastos)))
         )   
 
         //adds record of when corte was done and total in that moment
