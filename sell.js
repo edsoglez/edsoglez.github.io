@@ -325,6 +325,22 @@ function getCorte(){
         get(child(ref(db),'Cortes/'+new Date().getFullYear()+"/"+(new Date().getMonth()+1)+"/"+ new Date().toISOString().replace(/\D/g,'_').substring(8,10))).then(function(data){
             console.log(data.val())
             window.pastCorte = data.val();
+            
+        });
+        }catch(error){
+            console.log("no hay corte previo")
+        }        
+
+        if(pastCorte.Efectivo == undefined){
+            alert(
+                "Corte \n\n"+
+                "Total: " + (Number(salesTotal))+'\n'+
+                "Efectivo: " + (Number(salesTotalCash))+'\n'+
+                "Tarjeta: " + (Number(salesTotalCard))+'\n\n'+
+                "Gastos: " + (Number(gastosTotal))+'\n\n'+
+                "Efectivo restante: " + ((Number(salesTotalCash) + Number(gastosTotal)))
+            )  
+        }else{
             alert(
                 "Corte \n\n"+
                 "Total: " + (Number(salesTotal) - Number(pastCorte.Total))+'\n'+
@@ -333,22 +349,8 @@ function getCorte(){
                 "Gastos: " + (Number(gastosTotal) - Number(pastCorte.Gastos))+'\n\n'+
                 "Efectivo restante: " + ((Number(salesTotalCash)-Number(pastCorte.Efectivo) + Number(gastosTotal) - Number(pastCorte.Gastos)))
             )   
-        });
-        }catch(error){
-            console.log("no hay corte previo")
-            alert(
-                "Corte \n\n"+
-                "Total: " + (Number(salesTotal))+'\n'+
-                "Efectivo: " + (Number(salesTotalCash))+'\n'+
-                "Tarjeta: " + (Number(salesTotalCard))+'\n\n'+
-                "Gastos: " + (Number(gastosTotal))+'\n\n'+
-                "Efectivo restante: " + ((Number(salesTotalCash) + Number(gastosTotal)))
-            )   
         }
-            
-            //displays data
         
-
         //adds record of when corte was done and total in that moment
         set(ref(db,'Cortes/'+new Date().getFullYear()+"/"+(new Date().getMonth()+1)+"/"+ new Date().toISOString().replace(/\D/g,'_').substring(8,10)),{
             Time: String(new Date()).substring(16,24),
