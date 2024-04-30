@@ -330,7 +330,7 @@ function getCorte(){
         )   
 
         //adds record of when corte was done and total in that moment
-        set(ref(db,'Cortes/'+new Date().getFullYear()+"/"+(new Date().getMonth()+1)+"/"+ new Date().toISOString().replace(/\D/g,'_')),{
+        set(ref(db,'Cortes/'+new Date().getFullYear()+"/"+(new Date().getMonth()+1)+"/"+ new Date().toISOString().replace(/\D/g,'_').substring(8,10)),{
             Time: String(new Date()).substring(16,24),
             Total: salesTotal,
             Efectivo: salesTotalCash,
