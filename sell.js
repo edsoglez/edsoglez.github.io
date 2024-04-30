@@ -331,7 +331,7 @@ function getCorte(){
             console.log("no hay corte previo")
         }        
 
-        if(pastCorte.Efectivo == undefined){
+        if(pastCorte == null){
             alert(
                 "Corte \n\n"+
                 "Total: " + (Number(salesTotal))+'\n'+
