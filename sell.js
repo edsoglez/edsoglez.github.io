@@ -342,7 +342,7 @@ function getCorte(){
             Restante: (Number(salesTotalCash) + Number(gastosTotal))
         });
 
-        location.href="index.html"
+        
         })
     })
 
