@@ -34,6 +34,18 @@ let resumenPasteles = document.getElementById('resumen-pastel')
 let resumenBebidas = document.getElementById('resumen-bebidas')
 let resumenVarios = document.getElementById('resumen-varios')
 
+let resumen10 = document.getElementById('resumen-10')
+let resumen11 = document.getElementById('resumen-11')
+let resumen12 = document.getElementById('resumen-12')
+let resumen13 = document.getElementById('resumen-13')
+let resumen14 = document.getElementById('resumen-14')
+let resumen15 = document.getElementById('resumen-15')
+let resumen16 = document.getElementById('resumen-16')
+let resumen17 = document.getElementById('resumen-17')
+let resumen18 = document.getElementById('resumen-18')
+let resumen19 = document.getElementById('resumen-19')
+let resumen20 = document.getElementById('resumen-20')
+
 let month = "0"+String(new Date().getMonth()+1)
 let date = String(new Date()).split(" ")
 
@@ -106,6 +118,8 @@ document.getElementById('search').addEventListener('click',()=>{
 })
 
 function renderSales(fromDate,toDate,method){
+    resumen10.textContent = resumen11.textContent = resumen12.textContent = resumen13.textContent = resumen14.textContent = resumen15.textContent = resumen16.textContent = resumen17.textContent = resumen18.textContent = resumen19.textContent = resumen20.textContent = 0; 
+
     let lastUpdate = String(new Date()).substring(0,25)
     document.getElementById('last-update').innerHTML = lastUpdate
     console.log("Rendering sales from",fromDate.replace(/-/g,""),"to",toDate.replace(/-/g,"")) //SERIALIZE DATE TO LATER COMPARE GREATER AND LESS THAN
@@ -114,12 +128,12 @@ function renderSales(fromDate,toDate,method){
   
     let monthsEvaluated = Number(toDate.replace(/-/g,"").substring(0,6)) - Number(fromDate.replace(/-/g,"").substring(0,6)) + 1
     let days = Number(String(toDateSerial).substring(6,8)) - Number(String(fromDateSerial).substring(6,8))+1 + (monthsEvaluated-1)*30
-    
 
     get(child(ref(db),'Sales/')).then((snapshot) => {
         let salesTotal = 0;
         let salesTotalCash = 0;
         let salesTotalCard = 0;
+
         resumenFrios.textContent = 0;
         resumenCalientes.textContent = 0;
         resumenPasteles.textContent = 0;
