@@ -47,9 +47,12 @@ h4{
     margin: 0;
     padding-left: 0px;
     font-size: 16px;
-    font-weight: 300;
+    font-weight: 500;
     text-align: left;}
 
+    span{
+        font-weight: 200;
+    }
 h5{
     margin: 0;
     padding-left: 0px;
