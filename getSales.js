@@ -7,6 +7,12 @@ get(child(ref(db),`Users/${localStorage.getItem("USER")}`)).then((user)=>{
     }
 })
 
+window.productIndexes = {}
+
+
+
+
+
 window.itemRef = ref(db,'Items/');
 window.transRef = ref(db,'Transactions/');
 window.salesRef = ref(db,'Sales/');
@@ -22,6 +28,12 @@ let cardSelector = document.getElementById('card-selector')
 let dailyAverage = document.getElementById('daily-average')
 let monthlyEstimate = document.getElementById('monthly-estimate')
 
+let resumenCalientes = document.getElementById('resumen-caliente')
+let resumenFrios = document.getElementById('resumen-frio')
+let resumenPasteles = document.getElementById('resumen-postre')
+let resumenBebidas = document.getElementById('resumen-bebidas')
+let resumenVarios = document.getElementById('resumen-extras')
+
 let month = "0"+String(new Date().getMonth()+1)
 let date = String(new Date()).split(" ")
 
@@ -29,6 +41,17 @@ let date = String(new Date()).split(" ")
 fromDateVal.value = date[3]+"-"+month.slice(-2)+"-01"    //from Date is start current month 
 toDateVal.value =  date[3]+"-"+month.slice(-2)+"-"+date[2]  //to Date is today
 
+get(child(ref(getDatabase()), `Products/`)).then((Products) => {
+    Products.forEach((Product) => {
+        productIndexes[Product.key] = Product.val().index
+    })
+
+    onValue(salesRef,(snapshot)=>{
+        renderSales(String(fromDateVal.value).replace(/-/g,""),String(toDateVal.value).replace(/-/g,""))
+    })
+    
+    renderSales(date[3]+"-"+month.slice(-2)+"-01",date[3]+"-"+month.slice(-2)+"-"+date[2]) //Default renders from current month day 1 to today
+})
 
 totalSelector.addEventListener('mouseover',()=>{
     renderSales(String(fromDateVal.value).replace(/-/g,""),String(toDateVal.value).replace(/-/g,""))
@@ -67,11 +90,6 @@ let Months = {
 
 var datatoload = []
 
-onValue(salesRef,(snapshot)=>{
-    renderSales(String(fromDateVal.value).replace(/-/g,""),String(toDateVal.value).replace(/-/g,""))
-})
-
-renderSales(date[3]+"-"+month.slice(-2)+"-01",date[3]+"-"+month.slice(-2)+"-"+date[2]) //Default renders from current month day 1 to today
 
 fromDateVal.addEventListener('change',()=>{
     renderSales(String(fromDateVal.value).replace(/-/g,""),String(toDateVal.value).replace(/-/g,""))
@@ -102,6 +120,12 @@ function renderSales(fromDate,toDate,method){
         let salesTotal = 0;
         let salesTotalCash = 0;
         let salesTotalCard = 0;
+        resumenFrios.textContent = 0;
+        resumenCalientes.textContent = 0;
+        resumenPasteles.textContent = 0;
+        resumenBebidas.textContent = 0;
+        resumenVarios.textContent = 0;
+        
         datatoload = []
         salesList.innerHTML = ""
 
@@ -150,7 +174,20 @@ function renderSales(fromDate,toDate,method){
                                             <div>
                                         </li>
                                     `
-                                    }
+                                    //breaks down order and gets individual item category for summary
+                                    Object.entries(sale.val().Items).forEach((item)=>{
+                                        try{
+                                        let product = item[0].split('_')[0]
+                                        let category = productIndexes[item[0].split('_')[0]]
+                                        console.log(product,category)
+                                        document.getElementById(`resumen-${category}`).textContent = Number(document.getElementById(`resumen-${category}`).textContent) + item[1]
+                                        }
+                                        catch(error){
+                                            console.log(item[0].split('_')[0])
+                                        }
+                                    })
+                                }
+                                    
 
                                     
                                 }
@@ -165,7 +202,7 @@ function renderSales(fromDate,toDate,method){
 }
 
 function getDailyAverage(total,days,monthsEvaluated){
-    console.log(total,days,monthsEvaluated)
+   
 
     let USDollar = new Intl.NumberFormat('en-US', {
         style: 'currency',

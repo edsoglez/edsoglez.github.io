@@ -33,22 +33,37 @@
         <h4>Resumen de ventas, selecciona fechas:</h6>
             <br>
             <div style="display: flex; margin-left: auto; margin-right: auto; flex-wrap: wrap; width: 100%; column-gap: 8px; row-gap: 16px;">
-                <div style="width: 46%; max-width: 300px; height: auto; align-items: left; justify-content: left; padding: 0; text-align: left;">
-                    <h5>Desde:</h5>
-                    <input type="date" name="" id="from-date">
-                </div>
-                <div style="width: 46%; max-width: 300px; height: auto; align-items: left; justify-content: left; padding: 0; text-align: left;">
-                    <h5>Hasta:</h5>
-                    <input type="date" name="" id="to-date">
-                </div>
-                <div style="display: flex; justify-content: left; width: 100%; text-align: right;">
-                    <button id="search">Actualizar</button>
+                
+                <div style="width: 50%;">
+                    <div style="width: 490%; max-width: 500px; height: auto; align-items: left; justify-content: left; padding: 0; text-align: left;">
+                        <h5>Desde:</h5>
+                        <input type="date" name="" id="from-date">
+                    </div>
+                    <div style="width: 49%; max-width: 5 500px; height: auto; align-items: left; justify-content: left; padding: 0; text-align: left;">
+                        <h5>Hasta:</h5>
+                        <input type="date" name="" id="to-date">
+                    </div> <br>
+                    <div style="display: flex; justify-content: left; width: 100%; text-align: right;">
+                        <button id="search">Actualizar</button>
+                    </div>
+                    <br>
+                    <div id="promedios">
+                        <h4>Promedio Diario: <span id="daily-average"></span></h4>
+                        <h4>Est. Fin de mes: <span id="monthly-estimate"></span></h4>
+                    </div>
                 </div>
 
-                <div id="promedios">
-                    <h4>Promedio Diario: <span id="daily-average"></span></h4>
-                    <h4>Est. Fin de mes: <span id="monthly-estimate"></span></h4>
+                <div style="display: inline; width: 45%; height: 300px;">
+                    <br>    
+                    <div>
+                            <h5>Calientes: <span id="resumen-caliente"></span></h5>
+                            <h5>Frios: <span id="resumen-frio"></span></h5>
+                            <h5>Pasteles: <span id="resumen-postre"></span></h5>
+                            <h5>Bebidas: <span id="resumen-bebidas"></span></h5>
+                            <h5>Varios: <span id="resumen-extras"></span></h5>
+                        </div>
                 </div>
+                
 
                 <div id="chart_div" style="width:120%; height:300px;"></div>
 

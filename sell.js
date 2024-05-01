@@ -9,10 +9,13 @@ window.itemsOrdered = {}
 let orderTotal = 0;
 window.orderIndexes = []
 //do not change below date defintions
-let month = "0"+String(new Date().getMonth()+1)
+let month = "0"+String(new Date().getUTCMonth())
 let date = String(new Date()).split(" ")
-
+let day = String(new Date().getDate()).padStart(2,'0')
+let year = new Date().getUTCFullYear()
 //on page load reset order to 0 and render product cards
+let dateFormatedID = year+month+day+new Date().toTimeString().replace(/\D/g,'');
+
 onValue(prodRef,(snapshot)=>{
     renderProductCards()    
 })
@@ -212,10 +215,10 @@ function registerSales(method){
 
         //NOTE, need to sort out correct key name for sequential read
 
-        let dateFormatedID = new Date().toISOString().replace(/\D/g,'').substring(0,8)+new Date().toTimeString().replace(/\D/g,'');
+        let dateFormatedID = year+month+day+new Date().toTimeString().replace(/\D/g,'');
         //Example of format YYYYMMDDHHMMSSmmmm
         
-        set(ref(db,'Sales/'+new Date().getFullYear()+"/"+(new Date().getMonth()+1)+"/"+ dateFormatedID),{
+        set(ref(db,'Sales/'+new Date().getFullYear()+"/"+(new Date().getUTCMonth())+"/"+ dateFormatedID),{
             Time: String(new Date()).substring(16,24),
             Items: itemsOrdered,
             Total: orderTotal,
@@ -322,7 +325,7 @@ function getCorte(){
             })
 
         try{
-        get(child(ref(db),'Cortes/'+new Date().getFullYear()+"/"+(new Date().getMonth()+1)+"/"+ new Date().toISOString().replace(/\D/g,'_').substring(8,10))).then(function(data){
+        get(child(ref(db),'Cortes/'+new Date().getFullYear()+"/"+(new Date().getUTCMonth())+"/"+ day)).then(function(data){
             console.log(data.val())
             window.pastCorte = data.val();
 
@@ -354,7 +357,7 @@ function getCorte(){
         
         
         //adds record of when corte was done and total in that moment
-        set(ref(db,'Cortes/'+new Date().getFullYear()+"/"+(new Date().getMonth()+1)+"/"+ new Date().toISOString().replace(/\D/g,'_').substring(8,10)),{
+        set(ref(db,'Cortes/'+new Date().getFullYear()+"/"+(new Date().getUTCMonth())+"/"+ day),{
             Time: String(new Date()).substring(16,24),
             Total: salesTotal,
             Efectivo: salesTotalCash,
