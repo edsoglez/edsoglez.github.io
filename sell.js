@@ -103,11 +103,11 @@ function renderProductCards(){
         })
         document.getElementById("product-list").innerHTML +=
         `<li style="margin:10px; height: auto;"> 
-        <div class="product-separator">Postres</div>
+        <div class="product-separator">Pasteles</div>
         </li>`
         snapshot.forEach(
             function(Product){
-                    if(Product.val().index != "postre"){return}
+                    if(Product.val().index != "pastel"){return}
                     //get price for all products at their size options
                     fillData(Product)                    
         })
@@ -123,11 +123,21 @@ function renderProductCards(){
         })
         document.getElementById("product-list").innerHTML +=
         `<li style="margin:10px; height: auto;"> 
-        <div class="product-separator">Extras</div>
+        <div class="product-separator">Varios</div>
         </li>`
         snapshot.forEach(
             function(Product){
-                    if(Product.val().index != "extras"){return}
+                    if(Product.val().index != "varios"){return}
+                    //get price for all products at their size options
+                    fillData(Product)                    
+        })
+        document.getElementById("product-list").innerHTML +=
+        `<li style="margin:10px; height: auto;"> 
+        <div class="product-separator">Bebidas</div>
+        </li>`
+        snapshot.forEach(
+            function(Product){
+                    if(Product.val().index != "bebidas"){return}
                     //get price for all products at their size options
                     fillData(Product)                    
         })

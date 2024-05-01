@@ -30,9 +30,9 @@ let monthlyEstimate = document.getElementById('monthly-estimate')
 
 let resumenCalientes = document.getElementById('resumen-caliente')
 let resumenFrios = document.getElementById('resumen-frio')
-let resumenPasteles = document.getElementById('resumen-postre')
+let resumenPasteles = document.getElementById('resumen-pastel')
 let resumenBebidas = document.getElementById('resumen-bebidas')
-let resumenVarios = document.getElementById('resumen-extras')
+let resumenVarios = document.getElementById('resumen-varios')
 
 let month = "0"+String(new Date().getMonth()+1)
 let date = String(new Date()).split(" ")
