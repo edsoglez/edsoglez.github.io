@@ -9,7 +9,7 @@ window.itemsOrdered = {}
 let orderTotal = 0;
 window.orderIndexes = []
 //do not change below date defintions
-let month = "0"+String(new Date().getUTCMonth())
+let month = "0"+String(new Date().getUTCMonth()+1)
 let date = String(new Date()).split(" ")
 let day = String(new Date().getDate()).padStart(2,'0')
 let year = new Date().getUTCFullYear()
@@ -228,7 +228,7 @@ function registerSales(method){
         let dateFormatedID = year+month+day+new Date().toTimeString().replace(/\D/g,'');
         //Example of format YYYYMMDDHHMMSSmmmm
         
-        set(ref(db,'Sales/'+new Date().getFullYear()+"/"+(new Date().getUTCMonth())+"/"+ dateFormatedID),{
+        set(ref(db,'Sales/'+new Date().getFullYear()+"/"+(new Date().getUTCMonth()+1)+"/"+ dateFormatedID),{
             Time: String(new Date()).substring(16,24),
             Items: itemsOrdered,
             Total: orderTotal,
@@ -335,7 +335,7 @@ function getCorte(){
             })
 
         try{
-        get(child(ref(db),'Cortes/'+new Date().getFullYear()+"/"+(new Date().getUTCMonth())+"/"+ day)).then(function(data){
+        get(child(ref(db),'Cortes/'+new Date().getFullYear()+"/"+(new Date().getUTCMonth()+1)+"/"+ day)).then(function(data){
             console.log(data.val())
             window.pastCorte = data.val();
 
@@ -367,7 +367,7 @@ function getCorte(){
         
         
         //adds record of when corte was done and total in that moment
-        set(ref(db,'Cortes/'+new Date().getFullYear()+"/"+(new Date().getUTCMonth())+"/"+ day),{
+        set(ref(db,'Cortes/'+new Date().getFullYear()+"/"+(new Date().getUTCMonth()+1)+"/"+ day),{
             Time: String(new Date()).substring(16,24),
             Total: salesTotal,
             Efectivo: salesTotalCash,
