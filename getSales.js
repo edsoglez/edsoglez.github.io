@@ -185,7 +185,15 @@ function renderSales(fromDate,toDate,method){
                                         catch(error){
                                             console.log(item[0].split('_')[0])
                                         }
+
                                     })
+                                    try{
+                                    document.getElementById(`resumen-${String(sale.val().Time).split(':')[0]}`).textContent = Number(document.getElementById(`resumen-${String(sale.val().Time).split(':')[0]}`).textContent) + Number(sale.val().Total)
+                                    }
+                                    catch(e){
+                                        console.log(e)
+                                    }
+
                                 }
                                     
 
