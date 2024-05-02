@@ -62,7 +62,7 @@ get(child(ref(getDatabase()), `Products/`)).then((Products) => {
         renderSales(String(fromDateVal.value).replace(/-/g,""),String(toDateVal.value).replace(/-/g,""))
     })
     
-    renderSales(date[3]+"-"+month.slice(-2)+"-01",date[3]+"-"+month.slice(-2)+"-"+date[2]) //Default renders from current month day 1 to today
+    //renderSales(date[3]+"-"+month.slice(-2)+"-01",date[3]+"-"+month.slice(-2)+"-"+date[2]) //Default renders from current month day 1 to today
 })
 
 totalSelector.addEventListener('mouseover',()=>{
