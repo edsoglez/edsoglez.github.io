@@ -10,9 +10,6 @@ get(child(ref(db),`Users/${localStorage.getItem("USER")}`)).then((user)=>{
 window.productIndexes = {}
 
 
-
-
-
 window.itemRef = ref(db,'Items/');
 window.transRef = ref(db,'Transactions/');
 window.salesRef = ref(db,'Sales/');
@@ -46,6 +43,8 @@ let resumen18 = document.getElementById('resumen-18')
 let resumen19 = document.getElementById('resumen-19')
 let resumen20 = document.getElementById('resumen-20')
 
+resumen10.textContent = resumen11.textContent = resumen12.textContent = resumen13.textContent = resumen14.textContent = resumen15.textContent = resumen16.textContent = resumen17.textContent = resumen18.textContent = resumen19.textContent = resumen20.textContent = 0; 
+
 let month = "0"+String(new Date().getMonth()+1)
 let date = String(new Date()).split(" ")
 
@@ -54,6 +53,7 @@ fromDateVal.value = date[3]+"-"+month.slice(-2)+"-01"    //from Date is start cu
 toDateVal.value =  date[3]+"-"+month.slice(-2)+"-"+date[2]  //to Date is today
 
 get(child(ref(getDatabase()), `Products/`)).then((Products) => {
+
     Products.forEach((Product) => {
         productIndexes[Product.key] = Product.val().index
     })
@@ -66,6 +66,7 @@ get(child(ref(getDatabase()), `Products/`)).then((Products) => {
 })
 
 totalSelector.addEventListener('mouseover',()=>{
+    
     renderSales(String(fromDateVal.value).replace(/-/g,""),String(toDateVal.value).replace(/-/g,""))
 })
 cashSelector.addEventListener('mouseover',()=>{
@@ -108,6 +109,7 @@ fromDateVal.addEventListener('change',()=>{
     drawChart()
 })
 toDateVal.addEventListener('change',()=>{
+
     renderSales(String(fromDateVal.value).replace(/-/g,""),String(toDateVal.value).replace(/-/g,""))
     drawChart()
 })
@@ -130,9 +132,14 @@ function renderSales(fromDate,toDate,method){
     let days = Number(String(toDateSerial).substring(6,8)) - Number(String(fromDateSerial).substring(6,8))+1 + (monthsEvaluated-1)*30
 
     get(child(ref(db),'Sales/')).then((snapshot) => {
+        
         let salesTotal = 0;
         let salesTotalCash = 0;
         let salesTotalCard = 0;
+
+        salesTotalDisp.innerHTML = "$ "+ 0
+        salesTotalCashDisp.innerHTML = "$ "+ 0
+        salesTotalCardDisp.innerHTML = "$ "+ 0
 
         resumenFrios.textContent = 0;
         resumenCalientes.textContent = 0;
