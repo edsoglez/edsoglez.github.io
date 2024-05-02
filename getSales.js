@@ -191,7 +191,7 @@ function renderSales(fromDate,toDate,method){
                                                 <div style="width: 30%; text-align: left;">${String(sale.val().Time)}</div>
                                                 <div style="width: 5%"; text-align: right>$</div>
                                                 <div style="width: 15%"; text-align: left>${+sale.val().Total}</div>
-                                                <div style="width: 20%"; text-align: left>${sale.val().Method}</div>
+                                                <div onclick="toggleMethod(${sale.key})" style="width: 20%"; text-align: left>${sale.val().Method}</div>
                                             <div>
                                         </li>
                                     `
@@ -251,6 +251,24 @@ function getDailyAverage(total,days,monthsEvaluated){
  // Callback that creates and populates a data table, 
  // instantiates the pie chart, passes in the data and
  // draws it.
+function toggleMethod(sale_key){
+    
+    let year = String(sale_key).substring(0,4)
+    let month = Number(String(sale_key).substring(4,6))
+    console.log(year,month)
+    get(child(ref(db),`Sales/${year}/${month}/${sale_key}`)).then((sale) => {
+        console.log("Metodo actual: ",sale.val().Method)
+        console.log(sale.val().Method == "cash" ? "card" : "cash")
+
+        if(confirm("Seguro que quieres cambiar el metodo de pago de $ " + sale.val().Total + " en " + sale.val().Method + " a " + (sale.val().Method == "cash" ? "card" : "cash"))){
+            update(ref(db,`Sales/${year}/${month}/${sale_key}`),{
+                Method: sale.val().Method == "cash" ? "card" : "cash",
+            });
+        }
+        
+    })
+}
+
 function drawChart() {
 
     setTimeout(() => {
@@ -288,3 +306,4 @@ function drawChart() {
     
     
 }
+window.toggleMethod = toggleMethod
