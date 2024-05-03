@@ -243,7 +243,8 @@ function registerSales(method){
 
         //if user wants receipt will be redirected, data is already in memory for fast load
         if(confirm("Necesita recibo?")){
-            location.href = "receipt.html?duration=10"
+            let duration = 10
+            location.href = "receipt.html?duration="+duration
         }
         resetOrder()
     }
