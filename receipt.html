@@ -33,6 +33,10 @@
 
     <script>
         document.getElementById('date-time').textContent = String(new Date()).substring(3,24)
+        
+        const searchParams = new URLSearchParams(window.location.search);
+        let duration_ms = Number(searchParams.get('duration'))*1000
+
         window.orderedItems = JSON.parse(localStorage.myArray)
         window.prices = JSON.parse(localStorage.products)
        
@@ -60,7 +64,7 @@
         }
 
         print()
-        setTimeout(() => {location.href = "sell.html"},10000)
+        setTimeout(() => {location.href = "sell.html"},duration_ms)
         
        
     </script>
