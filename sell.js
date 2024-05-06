@@ -41,8 +41,6 @@ function tryWriteCached(sale){
         let sale_Total = sale[1].Total
         let sale_Items = sale[1].Items
 
-        console.log(sale_year,sale_month)
-
         get(child(ref(getDatabase()), `Sales/${sale_year}/${sale_month}/${sale[0]}`)).then((snapshot) => {
             if(snapshot.exists()){
                 console.log(sale[0],"record found, clearing chache")
