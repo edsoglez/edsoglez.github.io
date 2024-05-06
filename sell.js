@@ -40,6 +40,7 @@ function tryWriteCached(sale){
         let sale_Method = sale[1].Method
         let sale_Total = sale[1].Total
         let sale_Items = sale[1].Items
+        let sale_Seller = sale[1].Seller
 
         get(child(ref(getDatabase()), `Sales/${sale_year}/${sale_month}/${sale[0]}`)).then((snapshot) => {
             if(snapshot.exists()){
@@ -58,7 +59,8 @@ function tryWriteCached(sale){
                     Time: sale_Time,
                     Total: sale_Total,
                     Method: sale_Method,
-                    Items: sale_Items
+                    Items: sale_Items,
+                    Seller: sale_Seller
                 });
             }
         })
@@ -327,7 +329,8 @@ function registerSales(method){
             Time: TimeStamp,
             Items: itemsOrdered,
             Total: orderTotal,
-            Method: method
+            Method: method,
+            Seller: localStorage.getItem('USER')
         }
         //write to localStorage
         localStorage.cachedSaleID = JSON.stringify(pendingSalesCache)
