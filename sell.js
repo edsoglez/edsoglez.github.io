@@ -319,7 +319,8 @@ function registerSales(method){
             Time: TimeStamp,
             Items: itemsOrdered,
             Total: orderTotal,
-            Method: method
+            Method: method,
+            Seller: localStorage.getItem('USER')
         });
 
         //
