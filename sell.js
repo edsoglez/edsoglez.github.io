@@ -19,10 +19,16 @@ let dateFormatedID = year+month+day+new Date().toTimeString().replace(/\D/g,'');
 try{    
     window.pendingSalesCache = JSON.parse(localStorage.cachedSaleID)   
     console.log("Cached sales:",pendingSalesCache)
-    Object.entries(pendingSalesCache).forEach((sale)=>{
-        tryWriteCached(sale)
-    })
+    if(Object.values(JSON.parse(localStorage.cachedSaleID))[0] == undefined){
+        console.log("Nothing in cache")
+    }
+    else{
+        Object.entries(pendingSalesCache).forEach((sale)=>{
+            tryWriteCached(sale)
+        })
 
+        alert("Ordenes colocadas sin conexión a internet han sido mandadas! \n" + Object.keys(pendingSalesCache).join('\n'))
+    }
     
 }
 catch(e){
@@ -61,13 +67,12 @@ function tryWriteCached(sale){
                     Method: sale_Method,
                     Items: sale_Items,
                     Seller: sale_Seller
-                });
+                })
+
             }
         })
 
         console.log(sale)
-    
-
 }
 
 // Cache on localstorage sales for Offline Functionality
