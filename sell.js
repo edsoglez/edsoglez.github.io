@@ -16,6 +16,92 @@ let year = new Date().getUTCFullYear()
 //on page load reset order to 0 and render product cards
 let dateFormatedID = year+month+day+new Date().toTimeString().replace(/\D/g,'');
 
+try{    
+    window.pendingSalesCache = JSON.parse(localStorage.cachedSaleID)   
+    console.log("Cached sales:",pendingSalesCache)
+    Object.entries(pendingSalesCache).forEach((sale)=>{
+        tryWriteCached(sale)
+    })
+
+    
+}
+catch(e){
+    window.pendingSalesCache = {}
+    console.log("Cached sales:",pendingSalesCache)
+}
+
+function tryWriteCached(sale){
+
+    console.log("searching for ID: ",sale[0],sale[1])
+
+        let sale_year = String(sale).substring(0,4)
+        let sale_month = Number(String(sale).substring(4,6))
+        let sale_Time = sale[1].Time
+        let sale_Method = sale[1].Method
+        let sale_Total = sale[1].Total
+        let sale_Items = sale[1].Items
+
+        console.log(sale_year,sale_month)
+
+        get(child(ref(getDatabase()), `Sales/${sale_year}/${sale_month}/${sale[0]}`)).then((snapshot) => {
+            if(snapshot.exists()){
+                console.log(sale[0],"record found, clearing chache")
+                //delete from cache
+                pendingSalesCache = {}
+                localStorage.cachedSaleID = JSON.stringify(pendingSalesCache)
+            
+            }
+            else{
+                //write to db
+                console.log(sale[0],"tried to write to db")
+                let TimeStamp = String(new Date()).substring(16,24);
+
+                set(ref(db,'Sales/'+sale_year+"/"+sale_month+"/"+sale[0]),{
+                    Time: sale_Time,
+                    Total: sale_Total,
+                    Method: sale_Method,
+                    Items: sale_Items
+                });
+            }
+        })
+
+        console.log(sale)
+    
+
+}
+
+// Cache on localstorage sales for Offline Functionality
+
+// ONCLICK of cash or card buttons
+// SET to db/sales and write caches_sale_ID object JSON stringify to localStorage 
+// on next sale, iterate trough elements inside cache object
+// try to GET from db/sales cached_sale_ID
+// if record found, delete cached_sale_ID from localstorage
+// if record not foumd, try to SET on DB
+// END
+
+/* cache = {
+    2024050110300001 = {
+        Items = {
+
+        },
+        Method = "cash",
+        Total = 110,
+        Time = 10:30:15
+    }
+
+    2024050110310001 = {
+        Items = {
+
+        },
+        Method = "card",
+        Total = 100,
+        Time = 10:31:15
+    }
+
+}
+*/
+
 onValue(prodRef,(snapshot)=>{
     renderProductCards()    
 })
@@ -227,13 +313,27 @@ function registerSales(method){
 
         let dateFormatedID = year+month+day+new Date().toTimeString().replace(/\D/g,'');
         //Example of format YYYYMMDDHHMMSSmmmm
-        
+        let TimeStamp = String(new Date()).substring(16,24);
+
         set(ref(db,'Sales/'+new Date().getFullYear()+"/"+(new Date().getUTCMonth()+1)+"/"+ dateFormatedID),{
-            Time: String(new Date()).substring(16,24),
+            Time: TimeStamp,
             Items: itemsOrdered,
             Total: orderTotal,
             Method: method
         });
+
+        //
+
+        //cache to localStorage
+        pendingSalesCache[dateFormatedID] = {
+            Time: TimeStamp,
+            Items: itemsOrdered,
+            Total: orderTotal,
+            Method: method
+        }
+        //write to localStorage
+        localStorage.cachedSaleID = JSON.stringify(pendingSalesCache)
+
         //calls deduct from Inventory
         deductFromInventory()
 
