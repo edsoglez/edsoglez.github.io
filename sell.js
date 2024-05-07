@@ -388,7 +388,6 @@ function getCorte(){
     let toDate = String(toDateVal).replace(/-/g,"")
     let fromDateSerial = Number(fromDate.replace(/-/g,""))
     let toDateSerial = Number(toDate.replace(/-/g,""))
-
    
 
     get(child(ref(db),'Sales/')).then((snapshot) => {
@@ -418,7 +417,6 @@ function getCorte(){
         let gastosTotal = 0;
         get(child(ref(db),'Gastos/')).then((snapshot) => {
             //sets sum to zero
-            
     
             //will get all data but only data in range will be added
             snapshot.forEach(
@@ -451,7 +449,17 @@ function getCorte(){
                     "Gastos: " + (Number(gastosTotal))+'\n\n'+
                     "Efectivo restante: " + ((Number(salesTotalCash) + Number(gastosTotal)))
                 )  
-            }else{
+                //adds record of when corte was done and total in that moment
+                set(ref(db,'Cortes/'+new Date().getFullYear()+"/"+(new Date().getUTCMonth()+1)+"/"+ Number(day)),{
+                    Time: String(new Date()).substring(16,24),
+                    Total: salesTotal,
+                    Efectivo: salesTotalCash,
+                    Tarjeta: salesTotalCard,
+                    Gastos: Number(gastosTotal),
+                    Restante: (Number(salesTotalCash) + Number(gastosTotal))
+                });
+            }
+            else{
                 alert(
                     "Corte \n\n"+
                     "Total: " + (Number(salesTotal) - Number(pastCorte.Total))+'\n'+
@@ -459,15 +467,21 @@ function getCorte(){
                     "Tarjeta: " + (Number(salesTotalCard) - Number(pastCorte.Tarjeta))+'\n\n'+
                     "Gastos: " + (Number(gastosTotal) - Number(pastCorte.Gastos))+'\n\n'+
                     "Efectivo restante: " + ((Number(salesTotalCash)-Number(pastCorte.Efectivo) + Number(gastosTotal) - Number(pastCorte.Gastos)))
-                )   
+                )
+                set(ref(db,'Cortes/'+new Date().getFullYear()+"/"+(new Date().getUTCMonth()+1)+"/"+ (Number(day))+0.5),{
+                    Time: String(new Date()).substring(16,24),
+                    Total: (Number(salesTotal) - Number(pastCorte.Total)),
+                    Efectivo: (Number(salesTotalCash) - Number(pastCorte.Efectivo)),
+                    Tarjeta: (Number(salesTotalCard) - Number(pastCorte.Tarjeta)),
+                    Gastos: (Number(gastosTotal) - Number(pastCorte.Gastos)),
+                    Restante: ((Number(salesTotalCash)-Number(pastCorte.Efectivo) + Number(gastosTotal) - Number(pastCorte.Gastos)))
+                });   
             }
             
         });
         }catch(error){
             console.log("no hay corte previo")
         }        
-
-        
         
         //adds record of when corte was done and total in that moment
         set(ref(db,'Cortes/'+new Date().getFullYear()+"/"+(new Date().getUTCMonth()+1)+"/"+ day),{
