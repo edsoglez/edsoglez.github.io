@@ -436,7 +436,7 @@ function getCorte(){
             })
 
         try{
-        get(child(ref(db),'Cortes/'+new Date().getFullYear()+"/"+(new Date().getUTCMonth()+1)+"/"+ day)).then(function(data){
+        get(child(ref(db),'Cortes/'+new Date().getFullYear()+"/"+(new Date().getUTCMonth()+1)+"/"+ day+"/Mat")).then(function(data){
             console.log(data.val())
             window.pastCorte = data.val();
 
@@ -450,7 +450,7 @@ function getCorte(){
                     "Efectivo restante: " + ((Number(salesTotalCash) + Number(gastosTotal)))
                 )  
                 //adds record of when corte was done and total in that moment
-                set(ref(db,'Cortes/'+new Date().getFullYear()+"/"+(new Date().getUTCMonth()+1)+"/"+ Number(day)),{
+                set(ref(db,'Cortes/'+new Date().getFullYear()+"/"+(new Date().getUTCMonth()+1)+"/"+day+"/Mat"),{
                     Time: String(new Date()).substring(16,24),
                     Total: salesTotal,
                     Efectivo: salesTotalCash,
@@ -468,7 +468,8 @@ function getCorte(){
                     "Gastos: " + (Number(gastosTotal) - Number(pastCorte.Gastos))+'\n\n'+
                     "Efectivo restante: " + ((Number(salesTotalCash)-Number(pastCorte.Efectivo) + Number(gastosTotal) - Number(pastCorte.Gastos)))
                 )
-                set(ref(db,'Cortes/'+new Date().getFullYear()+"/"+(new Date().getUTCMonth()+1)+"/"+ (Number(day))+0.5),{
+
+                set(ref(db,'Cortes/'+new Date().getFullYear()+"/"+(new Date().getUTCMonth()+1)+"/"+day+"/Vesp"),{
                     Time: String(new Date()).substring(16,24),
                     Total: (Number(salesTotal) - Number(pastCorte.Total)),
                     Efectivo: (Number(salesTotalCash) - Number(pastCorte.Efectivo)),
@@ -482,17 +483,6 @@ function getCorte(){
         }catch(error){
             console.log("no hay corte previo")
         }        
-        
-        //adds record of when corte was done and total in that moment
-        set(ref(db,'Cortes/'+new Date().getFullYear()+"/"+(new Date().getUTCMonth()+1)+"/"+ day),{
-            Time: String(new Date()).substring(16,24),
-            Total: salesTotal,
-            Efectivo: salesTotalCash,
-            Tarjeta: salesTotalCard,
-            Gastos: Number(gastosTotal),
-            Restante: (Number(salesTotalCash) + Number(gastosTotal))
-        });
-
         
         })
     })
