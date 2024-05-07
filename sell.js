@@ -311,16 +311,14 @@ function registerSales(method){
     }
     //user must confirm if data is correct
     if(confirm(Object.entries(itemsOrdered).join('\n') +'\n\n'+ "Es correcto?")){
-        //if confirmed, register sale in db
-
-
-        //NOTE, need to sort out correct key name for sequential read
 
         let dateFormatedID = year+month+day+new Date().toTimeString().replace(/\D/g,'');
         //Example of format YYYYMMDDHHMMSSmmmm
         let TimeStamp = String(new Date()).substring(16,24);
+        let sale_year = new Date().getFullYear();
+        let sale_month = (new Date().getUTCMonth()+1);
 
-        set(ref(db,'Sales/'+new Date().getFullYear()+"/"+(new Date().getUTCMonth()+1)+"/"+ dateFormatedID),{
+        set(ref(db,'Sales/'+sale_year+"/"+sale_month+"/"+ dateFormatedID),{
             Time: TimeStamp,
             Items: itemsOrdered,
             Total: orderTotal,
@@ -328,9 +326,7 @@ function registerSales(method){
             Seller: localStorage.getItem('USER')
         });
 
-        //
-
-        //cache to localStorage
+        //write current order to cache object
         pendingSalesCache[dateFormatedID] = {
             Time: TimeStamp,
             Items: itemsOrdered,
@@ -338,10 +334,8 @@ function registerSales(method){
             Method: method,
             Seller: localStorage.getItem('USER')
         }
-        //write to localStorage
+        //write cache object to localStorage
         localStorage.cachedSaleID = JSON.stringify(pendingSalesCache)
-
-        //calls deduct from Inventory
         deductFromInventory()
 
         //saves current order to memory to pass to receipt html page
@@ -358,6 +352,7 @@ function registerSales(method){
 
 
 }
+
 //on sale, deduct ordered qty from inventory
 function deductFromInventory(){
     //go product by product on sale
