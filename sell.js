@@ -383,7 +383,7 @@ function getCorte(){
     }
 
     let EfectivoEnCaja = prompt("Ingresa cuanto efectivo hay en caja:")
-    if(EfectivoEnCaja == ""|| Number(EfectivoEnCaja) == 0 || Number(EfectivoEnCaja) == Nan){
+    if(EfectivoEnCaja == ""){
         alert("Favor de ingresar cuanto hay en caja")
         return
     }
