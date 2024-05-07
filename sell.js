@@ -27,7 +27,7 @@ try{
             tryWriteCached(sale)
         })
 
-        alert("Ordenes colocadas sin conexión a internet han sido mandadas! \n" + Object.keys(pendingSalesCache).join('\n'))
+        //alert("Ordenes colocadas sin conexión a internet han sido mandadas! \n" + Object.keys(pendingSalesCache).join('\n'))
     }
     
 }
