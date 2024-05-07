@@ -381,7 +381,12 @@ function getCorte(){
     if(!confirm("Seguro que quieres cerrar corte?")){
         return
     }
+
     let EfectivoEnCaja = prompt("Ingresa cuanto efectivo hay en caja:")
+    if(EfectivoEnCaja == ""|| Number(EfectivoEnCaja) == 0 || Number(EfectivoEnCaja) == Nan){
+        alert("Favor de ingresar cuanto hay en caja")
+        return
+    }
     
     //TODO: need to do a sweep of expenses and subtract from cash total
     let fromDateVal = date[3]+"-"+month.slice(-2)+"-"+date[2]  //from Date is today
