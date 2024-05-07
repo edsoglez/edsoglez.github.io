@@ -381,6 +381,8 @@ function getCorte(){
     if(!confirm("Seguro que quieres cerrar corte?")){
         return
     }
+    let EfectivoEnCaja = prompt("Ingresa cuanto efectivo hay en caja:")
+    
     //TODO: need to do a sweep of expenses and subtract from cash total
     let fromDateVal = date[3]+"-"+month.slice(-2)+"-"+date[2]  //from Date is today
     let toDateVal =  date[3]+"-"+month.slice(-2)+"-"+date[2]  //to Date is today
@@ -447,7 +449,9 @@ function getCorte(){
                     "Efectivo: " + (Number(salesTotalCash))+'\n'+
                     "Tarjeta: " + (Number(salesTotalCard))+'\n\n'+
                     "Gastos: " + (Number(gastosTotal))+'\n\n'+
-                    "Efectivo restante: " + ((Number(salesTotalCash) + Number(gastosTotal)))
+                    "Efectivo restante: " + ((Number(salesTotalCash) + Number(gastosTotal)))+'\n\n'+
+                    "Efectivo en caja: " + Number(EfectivoEnCaja) +'\n\n'+
+                    "Differencia: "+(Number(salesTotalCash) - Number(EfectivoEnCaja))
                 )  
                 //adds record of when corte was done and total in that moment
                 set(ref(db,'Cortes/'+new Date().getFullYear()+"/"+(new Date().getUTCMonth()+1)+"/"+day+"/Mat"),{
@@ -456,7 +460,9 @@ function getCorte(){
                     Efectivo: salesTotalCash,
                     Tarjeta: salesTotalCard,
                     Gastos: Number(gastosTotal),
-                    Restante: (Number(salesTotalCash) + Number(gastosTotal))
+                    Restante: (Number(salesTotalCash) + Number(gastosTotal)),
+                    EfectivoCaja: Number(EfectivoEnCaja),
+                    Diff: Number(salesTotalCash) - Number(EfectivoEnCaja)
                 });
             }
             else{
@@ -475,7 +481,9 @@ function getCorte(){
                     Efectivo: (Number(salesTotalCash) - Number(pastCorte.Efectivo)),
                     Tarjeta: (Number(salesTotalCard) - Number(pastCorte.Tarjeta)),
                     Gastos: (Number(gastosTotal) - Number(pastCorte.Gastos)),
-                    Restante: ((Number(salesTotalCash)-Number(pastCorte.Efectivo) + Number(gastosTotal) - Number(pastCorte.Gastos)))
+                    Restante: ((Number(salesTotalCash)-Number(pastCorte.Efectivo) + Number(gastosTotal) - Number(pastCorte.Gastos))),
+                    EfectivoCaja: Number(EfectivoEnCaja),
+                    Diff: Number(salesTotalCash) - Number(EfectivoEnCaja)
                 });   
             }
             
