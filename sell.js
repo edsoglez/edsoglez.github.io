@@ -9,7 +9,7 @@ window.itemsOrdered = {}
 let orderTotal = 0;
 window.orderIndexes = []
 //do not change below date defintions
-let month = "0"+String(new Date().getUTCMonth()+1)
+let month = String(new Date().getUTCMonth()+1)".padStart(2, '0')"
 let date = String(new Date()).split(" ")
 let day = String(new Date().getDate()).padStart(2,'0')
 let year = new Date().getUTCFullYear()

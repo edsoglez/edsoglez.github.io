@@ -62,8 +62,8 @@
                            
 <br>
                             <div id="promedios">
-                                <h4>Promedio Diario: <span id="daily-average"></span></h4>
-                                <h4>Est. Fin de mes: <span id="monthly-estimate"></span></h4>
+                                <h4>Promedio: <span id="daily-average"></span></h4>
+                                <h4>Est. Mes: <span id="monthly-estimate"></span></h4>
                             </div>
                         </div>
                         
@@ -81,9 +81,10 @@
                             <h4>20: $ <span id="resumen-20"></span></h4>
                         </div>
                 </div>
-                
-
-                <div id="chart_div" style="width:120%; height:300px;"></div>
+                <br>
+                <div style="width: 100%; margin-top: 20px;">   
+                    <button id="corteButton" style="width: 100%; background-color: rgb(00, 155, 255);">Corte de dia (hasta)</button>
+                </div>
 
                 <div style="display: flex; width: 100%; align-items: center; margin-top: 16px; justify-content: center;">
                     <div style="margin-top: 0px; text-align: center; width: 33%; justify-content: center;">
@@ -110,6 +111,10 @@
                         
                     </div>
                 </div>
+
+                <div id="chart_div" style="width:120%; height:300px;"></div>
+
+                
             
                 <ul id="sales-list" style="height: 200px; background-color: rgb(240, 240, 240); width: 100%; border-radius: 10px; overflow: scroll; padding: 10px; margin-top: 10px; padding-bottom: 20px;"> 
                     

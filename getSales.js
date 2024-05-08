@@ -43,6 +43,8 @@ let resumen18 = document.getElementById('resumen-18')
 let resumen19 = document.getElementById('resumen-19')
 let resumen20 = document.getElementById('resumen-20')
 
+let corteButton = document.getElementById('corteButton')
+
 resumen10.textContent = resumen11.textContent = resumen12.textContent = resumen13.textContent = resumen14.textContent = resumen15.textContent = resumen16.textContent = resumen17.textContent = resumen18.textContent = resumen19.textContent = resumen20.textContent = 0; 
 
 let month = "0"+String(new Date().getMonth()+1)
@@ -63,6 +65,47 @@ get(child(ref(getDatabase()), `Products/`)).then((Products) => {
     })
     
     //renderSales(date[3]+"-"+month.slice(-2)+"-01",date[3]+"-"+month.slice(-2)+"-"+date[2]) //Default renders from current month day 1 to today
+})
+
+corteButton.addEventListener('click',()=>{
+    let year = String(toDateVal.value).replace(/-/g,"").substring(0,4)
+    let month = String(toDateVal.value).replace(/-/g,"").substring(4,6)
+    let day = String(toDateVal.value).replace(/-/g,"").substring(6,8)
+
+    console.log(year+"/"+Number(month)+"/"+day)
+
+    get(child(ref(db),`Cortes/${year}/${Number(month)}/${String(day).padStart(2, '0')}`)).then((corte) => {
+        console.log(corte.val())
+        try{
+        try{
+            alert(`Cortes: \n 
+            Fecha: ${String(day).padStart(2, '0')}/${(month)}/${year}\n
+            Mat: ${
+                corte.val().Mat.Total
+            } @ (${
+                corte.val().Mat.Time
+            })\n 
+            Vesp: ${
+                corte.val().Vesp.Total
+            } @ (${
+                corte.val().Vesp.Time
+            } )`)
+        }
+        catch(e){
+            alert(`Cortes: \n 
+            Fecha: ${String(day).padStart(2, '0')}/${(month)}/${year}\n
+            Mat: ${
+                corte.val().Mat.Total
+            } @ (${
+                corte.val().Mat.Time
+            })`)
+        }
+        }
+        catch(e2){
+            alert(`No hay cortes para: ${String(day).padStart(2, '0')}/${(month)}/${year}`)
+        }
+        
+    })
 })
 
 totalSelector.addEventListener('mouseover',()=>{
@@ -200,11 +243,11 @@ function renderSales(fromDate,toDate,method){
                                         try{
                                         let product = item[0].split('_')[0]
                                         let category = productIndexes[item[0].split('_')[0]]
-                                        console.log(product,category)
+                                      
                                         document.getElementById(`resumen-${category}`).textContent = Number(document.getElementById(`resumen-${category}`).textContent) + item[1]
                                         }
                                         catch(error){
-                                            console.log(item[0].split('_')[0])
+                                        
                                         }
 
                                     })
