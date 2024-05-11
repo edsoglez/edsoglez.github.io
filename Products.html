@@ -1,23 +1,16 @@
-<!-- 
-users.html
-can add new user -> newuser.html
-view a list of users with basic data, last login, 
-can enter to userinfo with url param 
---> 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Calesa Users</title>
+    <title>Calesa Productos</title>
     <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="users.css">
     <link rel="stylesheet" href="headerfooter.css">
     <script type="module" src="dbconfig.js"></script>
-    <script type="module" src="getUserData.js"></script>
-
     <script type="module" src="header.js"></script>
+    <script type="module" src="getProducts.js"></script>
+    <link rel="stylesheet" href="Products.css">
+
  
 </head>
 <body>
@@ -48,14 +41,15 @@ can enter to userinfo with url param
     <div id="main-container" class="container" style="z-index: 10; overflow: hidden; justify-self: center; align-items: center; text-align: center;">
         <div id="add-new-bar" style="display: flex; align-items: center; padding: 20px;">
             <div style="width: 50%; height: 40px; text-align: left;">
-                <h2>Usuarios</h2>
+                <h2>Productos</h2>
             </div>
             <div style="width: 50%; height: 40px; text-align: right;">
-                <button id="add-new-user-button">Nuevo +</button>
+                <button id="add-new-product-button">Nuevo +</button>
             </div>
         </div>
-        <div style="padding: 10px; overflow: scroll; height: 100%; ">
-            <ul id="user-list">
+        <div style="padding: 10px; overflow: scroll; height: 100%;">
+            <ul id="products-list">
+
             </ul>
         </div>
     </div> 

@@ -19,20 +19,25 @@ let dateFormatedID = year+month+day+new Date().toTimeString().replace(/\D/g,'');
 try{    
     window.pendingSalesCache = JSON.parse(localStorage.cachedSaleID)   
     console.log("Cached sales:",pendingSalesCache)
+    
     if(Object.values(JSON.parse(localStorage.cachedSaleID))[0] == undefined){
         console.log("Nothing in cache")
     }
     else{
         Object.entries(pendingSalesCache).forEach((sale)=>{
+            console.log("Trying to write",sale[0])
             tryWriteCached(sale)
         })
 
         alert("Ordenes colocadas sin conexión a internet han sido mandadas! \n" + Object.keys(pendingSalesCache).join('\n'))
-    }
-    
-}
+        console.log("Clearing cache")
+        pendingSalesCache = "{}"
+        localStorage.setItem("cachedSaleID",pendingSalesCache)
+    }}
 catch(e){
-    window.pendingSalesCache = {}
+    console.log(e)
+    window.pendingSalesCache = "{}"
+    localStorage.setItem("cachedSaleID",pendingSalesCache)
     console.log("Cached sales:",pendingSalesCache)
 }
 
@@ -50,11 +55,7 @@ function tryWriteCached(sale){
 
         get(child(ref(getDatabase()), `Sales/${sale_year}/${sale_month}/${sale[0]}`)).then((snapshot) => {
             if(snapshot.exists()){
-                console.log(sale[0],"record found, clearing chache")
-                //delete from cache
-                pendingSalesCache = {}
-                localStorage.cachedSaleID = JSON.stringify(pendingSalesCache)
-            
+                console.log(sale[0],"record found")
             }
             else{
                 //write to db
@@ -68,11 +69,9 @@ function tryWriteCached(sale){
                     Items: sale_Items,
                     Seller: sale_Seller
                 })
-
             }
         })
 
-        console.log(sale)
 }
 
 // Cache on localstorage sales for Offline Functionality

@@ -109,7 +109,6 @@ corteButton.addEventListener('click',()=>{
 })
 
 totalSelector.addEventListener('mouseover',()=>{
-    
     renderSales(String(fromDateVal.value).replace(/-/g,""),String(toDateVal.value).replace(/-/g,""))
 })
 cashSelector.addEventListener('mouseover',()=>{
@@ -156,7 +155,6 @@ toDateVal.addEventListener('change',()=>{
     renderSales(String(fromDateVal.value).replace(/-/g,""),String(toDateVal.value).replace(/-/g,""))
     drawChart()
 })
-
 document.getElementById('search').addEventListener('click',()=>{
     renderSales(String(fromDateVal.value).replace(/-/g,""),String(toDateVal.value).replace(/-/g,""))
     drawChart()
@@ -193,16 +191,21 @@ function renderSales(fromDate,toDate,method){
         datatoload = []
         salesList.innerHTML = ""
 
+        console.log("Done pulling from db")
+
         snapshot.forEach(
         function(year){
+
             year.forEach(
                 function(month){
+
                     month.forEach(
                         function(sale){
-                            let saleDate = Number(sale.key.substring(0,8))    
-                            
-                           
+
+                                let saleDate = Number(sale.key.substring(0,8))    
+
                                 if(saleDate >= fromDateSerial && saleDate <= toDateSerial){
+                                    console.log(sale.key,sale.val())
                                     salesTotal += sale.val().Total
                                     let years = sale.key.substring(0,4)
                                     let monthIndex = Number(sale.key.substring(4,6))-1
