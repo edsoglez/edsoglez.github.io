@@ -145,7 +145,7 @@ let Months = {
 
 var datatoload = []
 
-
+/*
 fromDateVal.addEventListener('change',()=>{
     renderSales(String(fromDateVal.value).replace(/-/g,""),String(toDateVal.value).replace(/-/g,""))
     drawChart()
@@ -154,7 +154,8 @@ toDateVal.addEventListener('change',()=>{
 
     renderSales(String(fromDateVal.value).replace(/-/g,""),String(toDateVal.value).replace(/-/g,""))
     drawChart()
-})
+})*/
+
 document.getElementById('search').addEventListener('click',()=>{
     renderSales(String(fromDateVal.value).replace(/-/g,""),String(toDateVal.value).replace(/-/g,""))
     drawChart()
