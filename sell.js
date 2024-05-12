@@ -317,23 +317,27 @@ function registerSales(method){
         let sale_year = new Date().getFullYear();
         let sale_month = (new Date().getUTCMonth()+1);
 
-        set(ref(db,'Sales/'+sale_year+"/"+sale_month+"/"+ dateFormatedID),{
-            Time: TimeStamp,
-            Items: itemsOrdered,
-            Total: orderTotal,
-            Method: method,
-            Seller: localStorage.getItem('USER')
-        });
+        try{
+            set(ref(db,'Sales/'+sale_year+"/"+sale_month+"/"+ dateFormatedID),{
+                Time: TimeStamp,
+                Items: itemsOrdered,
+                Total: orderTotal,
+                Method: method,
+                Seller: localStorage.getItem('USER')
+            });
 
-        //write current order to cache object
-        pendingSalesCache[dateFormatedID] = {
-            Time: TimeStamp,
-            Items: itemsOrdered,
-            Total: orderTotal,
-            Method: method,
-            Seller: localStorage.getItem('USER')
+            console.log("No need to cache")
+            pendingSalesCache = {}
         }
-        //write cache object to localStorage
+        catch(E){
+            pendingSalesCache[dateFormatedID] = {
+                Time: TimeStamp,
+                Items: itemsOrdered,
+                Total: orderTotal,
+                Method: method,
+                Seller: localStorage.getItem('USER')
+            }
+        }
         
         deductFromInventory()
 
@@ -342,9 +346,10 @@ function registerSales(method){
             localStorage.cachedSaleID = JSON.stringify(pendingSalesCache)
             localStorage.myArray = JSON.stringify(itemsOrdered);
             localStorage.setItem("orderTotal",orderTotal);}
-        catch(E){
+        catch(error){
 
         }
+
         resetOrder()
         //if user wants receipt will be redirected, data is already in memory for fast load
         if(confirm("Necesita recibo?")){
