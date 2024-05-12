@@ -334,19 +334,25 @@ function registerSales(method){
             Seller: localStorage.getItem('USER')
         }
         //write cache object to localStorage
-        localStorage.cachedSaleID = JSON.stringify(pendingSalesCache)
+        
         deductFromInventory()
 
         //saves current order to memory to pass to receipt html page
-        localStorage.myArray = JSON.stringify(itemsOrdered);
-        localStorage.setItem("orderTotal",orderTotal);
+        try{
+            localStorage.cachedSaleID = JSON.stringify(pendingSalesCache)
+            localStorage.myArray = JSON.stringify(itemsOrdered);
+            localStorage.setItem("orderTotal",orderTotal);}
+        catch(E){
 
+        }
+        resetOrder()
         //if user wants receipt will be redirected, data is already in memory for fast load
         if(confirm("Necesita recibo?")){
             let duration = 10
             location.href = "receipt.html?duration="+duration
         }
-        resetOrder()
+
+   
     }
 
 
