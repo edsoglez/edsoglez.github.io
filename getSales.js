@@ -51,7 +51,7 @@ let month = "0"+String(new Date().getMonth()+1)
 let date = String(new Date()).split(" ")
 
 //Changing the value in the DOM divs
-fromDateVal.value = date[3]+"-"+month.slice(-2)+"-01"    //from Date is start current month 
+fromDateVal.value = date[3]+"-"+month.slice(-2)+"-"+date[2]  //to Date is today
 toDateVal.value =  date[3]+"-"+month.slice(-2)+"-"+date[2]  //to Date is today
 
 get(child(ref(getDatabase()), `Products/`)).then((Products) => {
@@ -78,27 +78,21 @@ corteButton.addEventListener('click',()=>{
         console.log(corte.val())
         try{
         try{
-            alert(`Cortes: \n 
+            alert(`
             Fecha: ${String(day).padStart(2, '0')}/${(month)}/${year}\n
-            Mat: $ ${
-                String(JSON.stringify(corte.val().Mat)).replace(",",'\n')
-            } @ (${
-                corte.val().Mat.Time
-            })\n 
-            Vesp: $ ${
-                JSON.stringify(corte.val().Vesp).replace(",",'\n')
-            } @ (${
-                corte.val().Vesp.Time
-            } )`)
+            Mat: \n ${
+                String(JSON.stringify(corte.val().Mat)).replace(/,/g,'\n').replace(/{/g,'\n').replace(/}/g,'\n').replace(/"/g,'')
+            } 
+            Vesp: \n ${
+                String(JSON.stringify(corte.val().Vesp)).replace(/,/g,'\n').replace(/{/g,'\n').replace(/}/g,'\n').replace(/"/g,'')
+            }`)
         }
         catch(e){
             alert(`Cortes: \n 
             Fecha: ${String(day).padStart(2, '0')}/${(month)}/${year}\n
-            Mat: $ ${
-                JSON.stringify(corte.val().Mat).replace(",",'\n')
-            } @ (${
-                corte.val().Mat.Time
-            })`)
+            Mat: \n ${
+                String(JSON.stringify(corte.val().Mat)).replace(/,/g,'\n').replace(/{/g,'\n').replace(/}/g,'\n').replace(/"/g,'')
+            } `)
         }
         }
         catch(e2){
