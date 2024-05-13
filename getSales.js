@@ -81,12 +81,12 @@ corteButton.addEventListener('click',()=>{
             alert(`Cortes: \n 
             Fecha: ${String(day).padStart(2, '0')}/${(month)}/${year}\n
             Mat: $ ${
-                corte.val().Mat.Total
+                JSON.stringify(corte.val().Mat)
             } @ (${
                 corte.val().Mat.Time
             })\n 
             Vesp: $ ${
-                corte.val().Vesp.Total
+                JSON.stringify(corte.val().Vesp)
             } @ (${
                 corte.val().Vesp.Time
             } )`)
@@ -206,7 +206,7 @@ function renderSales(fromDate,toDate,method){
                                 let saleDate = Number(sale.key.substring(0,8))    
 
                                 if(saleDate >= fromDateSerial && saleDate <= toDateSerial){
-                                    console.log(sale.key,sale.val())
+                                    
                                     salesTotal += sale.val().Total
                                     let years = sale.key.substring(0,4)
                                     let monthIndex = Number(sale.key.substring(4,6))-1
@@ -231,6 +231,7 @@ function renderSales(fromDate,toDate,method){
                                     salesTotalCardDisp.innerHTML = "$ "+ salesTotalCard
                                     
                                     if(sale.val().Method == method || method == null){
+                                    console.log(sale.key,sale.val().Total)
                                     salesList.innerHTML += `
                                         <li class="sale-item-li">
                                             <div class="sale-item-div" style="">
