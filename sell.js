@@ -62,7 +62,7 @@ function tryWriteCached(sale){
                 console.log(sale[0],"tried to write to db")
                 let TimeStamp = String(new Date()).substring(16,24);
 
-                set(ref(db,'Sales/'+sale_year+"/"+sale_month+"/"+sale[0]),{
+                set(ref(db,'Sales/'+sale_year+"/"+sale_month+"/"+sale[0]+"_cached"),{
                     Time: sale_Time,
                     Total: sale_Total,
                     Method: sale_Method,
