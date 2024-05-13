@@ -77,23 +77,23 @@ corteButton.addEventListener('click',()=>{
     get(child(ref(db),`Cortes/${year}/${Number(month)}/${String(day).padStart(2, '0')}`)).then((corte) => {
         console.log(corte.val())
         try{
-        try{
-            alert(`
-            Fecha: ${String(day).padStart(2, '0')}/${(month)}/${year}\n
-            Mat: \n ${
+        
+            if(String(JSON.stringify(corte.val().Vesp)).replace(/,/g,'\n').replace(/{/g,'\n').replace(/}/g,'\n').replace(/"/g,'') == "undefined"){
+                alert(`Cortes: \n 
+                Fecha: ${String(day).padStart(2, '0')}/${(month)}/${year}\n
+                Mat: \n ${
+                    String(JSON.stringify(corte.val().Mat)).replace(/,/g,'\n').replace(/{/g,'\n').replace(/}/g,'\n').replace(/"/g,'')
+                } `)
+            }else{
+                alert(`
+                Fecha: ${String(day).padStart(2, '0')}/${(month)}/${year}\n
+                Mat: \n ${
                 String(JSON.stringify(corte.val().Mat)).replace(/,/g,'\n').replace(/{/g,'\n').replace(/}/g,'\n').replace(/"/g,'')
-            } 
-            Vesp: \n ${
+                } 
+                Vesp: \n ${
                 String(JSON.stringify(corte.val().Vesp)).replace(/,/g,'\n').replace(/{/g,'\n').replace(/}/g,'\n').replace(/"/g,'')
-            }`)
-        }
-        catch(e){
-            alert(`Cortes: \n 
-            Fecha: ${String(day).padStart(2, '0')}/${(month)}/${year}\n
-            Mat: \n ${
-                String(JSON.stringify(corte.val().Mat)).replace(/,/g,'\n').replace(/{/g,'\n').replace(/}/g,'\n').replace(/"/g,'')
-            } `)
-        }
+                }`)
+            }
         }
         catch(e2){
             alert(`No hay cortes para: ${String(day).padStart(2, '0')}/${(month)}/${year}`)
