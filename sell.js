@@ -29,7 +29,6 @@ try{
             tryWriteCached(sale)
         })
 
-        alert("Ordenes colocadas sin conexión a internet han sido mandadas! \n" + Object.keys(pendingSalesCache).join('\n'))
         console.log("Clearing cache")
         pendingSalesCache = "{}"
         localStorage.setItem("cachedSaleID",pendingSalesCache)
@@ -43,34 +42,34 @@ catch(e){
 
 function tryWriteCached(sale){
 
-    console.log("searching for ID: ",sale[0],sale[1])
+    // console.log("searching for ID: ",sale[0],sale[1])
 
-        let sale_year = String(sale).substring(0,4)
-        let sale_month = Number(String(sale).substring(4,6))
-        let sale_Time = sale[1].Time
-        let sale_Method = sale[1].Method
-        let sale_Total = sale[1].Total
-        let sale_Items = sale[1].Items
-        let sale_Seller = sale[1].Seller
+    //     let sale_year = String(sale).substring(0,4)
+    //     let sale_month = Number(String(sale).substring(4,6))
+    //     let sale_Time = sale[1].Time
+    //     let sale_Method = sale[1].Method
+    //     let sale_Total = sale[1].Total
+    //     let sale_Items = sale[1].Items
+    //     let sale_Seller = sale[1].Seller
 
-        get(child(ref(getDatabase()), `Sales/${sale_year}/${sale_month}/${sale[0]}`)).then((snapshot) => {
-            if(snapshot.exists()){
-                console.log(sale[0],"record found")
-            }
-            else{
-                //write to db
-                console.log(sale[0],"tried to write to db")
-                let TimeStamp = String(new Date()).substring(16,24);
+    //     get(child(ref(getDatabase()), `Sales/${sale_year}/${sale_month}/${sale[0]}`)).then((snapshot) => {
+    //         if(snapshot.exists()){
+    //             console.log(sale[0],"record found")
+    //         }
+    //         else{
+    //             //write to db
+    //             console.log(sale[0],"tried to write to db")
+    //             let TimeStamp = String(new Date()).substring(16,24);
 
-                set(ref(db,'Sales/'+sale_year+"/"+sale_month+"/"+sale[0]+"_cached"),{
-                    Time: sale_Time,
-                    Total: sale_Total,
-                    Method: sale_Method,
-                    Items: sale_Items,
-                    Seller: sale_Seller
-                })
-            }
-        })
+    //             set(ref(db,'Sales/'+sale_year+"/"+sale_month+"/"+sale[0]+"_cached"),{
+    //                 Time: sale_Time,
+    //                 Total: sale_Total,
+    //                 Method: sale_Method,
+    //                 Items: sale_Items,
+    //                 Seller: sale_Seller
+    //             })
+    //         }
+    //     })
 
 }
 
