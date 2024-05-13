@@ -81,12 +81,12 @@ corteButton.addEventListener('click',()=>{
             alert(`Cortes: \n 
             Fecha: ${String(day).padStart(2, '0')}/${(month)}/${year}\n
             Mat: $ ${
-                JSON.stringify(corte.val().Mat)
+                String(JSON.stringify(corte.val().Mat)).replace(",",'\n')
             } @ (${
                 corte.val().Mat.Time
             })\n 
             Vesp: $ ${
-                JSON.stringify(corte.val().Vesp)
+                JSON.stringify(corte.val().Vesp).replace(",",'\n')
             } @ (${
                 corte.val().Vesp.Time
             } )`)
@@ -95,7 +95,7 @@ corteButton.addEventListener('click',()=>{
             alert(`Cortes: \n 
             Fecha: ${String(day).padStart(2, '0')}/${(month)}/${year}\n
             Mat: $ ${
-                corte.val().Mat.Total
+                JSON.stringify(corte.val().Mat).replace(",",'\n')
             } @ (${
                 corte.val().Mat.Time
             })`)
