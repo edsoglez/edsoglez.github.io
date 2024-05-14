@@ -217,13 +217,12 @@ function registerSales(method){
     }
     //user must confirm if data is correct
     if(confirm(Object.entries(itemsOrdered).join('\n') +'\n\n'+ "Es correcto?")){
-
         let dateFormatedID = year+month+day+new Date().toTimeString().replace(/\D/g,'');
         //Example of format YYYYMMDDHHMMSSmmmm
         let TimeStamp = String(new Date()).substring(16,24);
         let sale_year = new Date().getFullYear();
         let sale_month = (new Date().getUTCMonth()+1);
-
+        
         try{
             set(ref(db,'Sales/'+sale_year+"/"+sale_month+"/"+ dateFormatedID),{
                 Time: TimeStamp,
@@ -235,18 +234,12 @@ function registerSales(method){
 
             console.log("No need to cache")
             pendingSalesCache = {}
+
+            deductFromInventory()
         }
-        catch(E){
-            pendingSalesCache[dateFormatedID] = {
-                Time: TimeStamp,
-                Items: itemsOrdered,
-                Total: orderTotal,
-                Method: method,
-                Seller: localStorage.getItem('USER')
-            }
+        catch(error){
+            resetOrder()
         }
-        
-        deductFromInventory()
 
         //saves current order to memory to pass to receipt html page
         try{
@@ -254,7 +247,7 @@ function registerSales(method){
             localStorage.myArray = JSON.stringify(itemsOrdered);
             localStorage.setItem("orderTotal",orderTotal);}
         catch(error){
-
+            resetOrder()
         }
 
         resetOrder()
@@ -438,7 +431,6 @@ function resetOrder() {
     //upadates view
     document.getElementById("order-total").textContent = orderTotal
     document.getElementById("product-order").innerHTML = ""
-
 }
 
 
