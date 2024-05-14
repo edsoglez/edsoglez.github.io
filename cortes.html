@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calesa Sales Report</title>
+    <title>Calesa Cortes Report</title>
     <script type="module" src="dbconfig.js"></script>
-    <script type="module" src="getSales.js"></script>
+    <script type="module" src="getCortes.js"></script>
     <link rel="stylesheet" href="salesReport.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,12 +36,11 @@
                 
                 <div style="width: 35%;">
                     <div style="width: 49%; max-width: 500px; height: auto; align-items: left; justify-content: left; padding: 0; text-align: left;">
-                        <h5>Fecha:</h5>
+                        <h5>Desde:</h5>
                         <input type="date" name="" id="from-date">
                     </div>
                     <div style="width: 49%; max-width: 5 500px; height: auto; align-items: left; justify-content: left; padding: 0; text-align: left;">
-                        <h5>Hasta:</h5>
-                        <input type="date" name="" id="to-date">
+                        
                     </div> <br>
                     <div style="display: flex; justify-content: left; width: 100%; text-align: right;">
                         <button id="search">Actualizar</button>
@@ -120,9 +119,6 @@
                     
                 </ul>
 
-                
-
-                
             </div>
     </div>
     

@@ -8,7 +8,6 @@ get(child(ref(db),`Users/${localStorage.getItem("USER")}`)).then((user)=>{
 })
 
 window.productIndexes = {}
-
 window.itemRef = ref(db,'Items/');
 window.transRef = ref(db,'Transactions/');
 window.salesRef = ref(db,'Sales/');
@@ -49,7 +48,11 @@ let date = String(new Date()).split(" ")
 
 //Changing the value in the DOM divs
 fromDateVal.value = date[3]+"-"+month.slice(-2)+"-"+date[2]  //to Date is today
-toDateVal.value =  date[3]+"-"+month.slice(-2)+"-"+date[2]  //to Date is today
+
+fromDateVal.addEventListener('change',() => {
+    renderSales(String(fromDateVal.value).replace(/-/g,""),String(fromDateVal.value).replace(/-/g,""))
+    drawChart()
+})
 
 get(child(ref(getDatabase()), `Products/`)).then((Products) => {
 
@@ -58,15 +61,15 @@ get(child(ref(getDatabase()), `Products/`)).then((Products) => {
     })
 
     onValue(salesRef,(snapshot)=>{
-        renderSales(String(fromDateVal.value).replace(/-/g,""),String(toDateVal.value).replace(/-/g,""))
+        renderSales(String(fromDateVal.value).replace(/-/g,""),String(fromDateVal.value).replace(/-/g,""))
     })
     
 })
 
 corteButton.addEventListener('click',()=>{
-    let year = String(toDateVal.value).replace(/-/g,"").substring(0,4)
-    let month = String(toDateVal.value).replace(/-/g,"").substring(4,6)
-    let day = String(toDateVal.value).replace(/-/g,"").substring(6,8)
+    let year = String(fromDateVal.value).replace(/-/g,"").substring(0,4)
+    let month = String(fromDateVal.value).replace(/-/g,"").substring(4,6)
+    let day = String(fromDateVal.value).replace(/-/g,"").substring(6,8)
 
     console.log(year+"/"+Number(month)+"/"+day)
 
@@ -85,13 +88,13 @@ corteButton.addEventListener('click',()=>{
 })
 
 totalSelector.addEventListener('click',()=>{
-    renderSales(String(fromDateVal.value).replace(/-/g,""),String(toDateVal.value).replace(/-/g,""))
+    renderSales(String(fromDateVal.value).replace(/-/g,""),String(fromDateVal.value).replace(/-/g,""))
 })
 cashSelector.addEventListener('click',()=>{
-    renderSales(String(fromDateVal.value).replace(/-/g,""),String(toDateVal.value).replace(/-/g,""),'cash')
+    renderSales(String(fromDateVal.value).replace(/-/g,""),String(fromDateVal.value).replace(/-/g,""),'cash')
 })
 cardSelector.addEventListener('click',()=>{
-    renderSales(String(fromDateVal.value).replace(/-/g,""),String(toDateVal.value).replace(/-/g,""),'card')
+    renderSales(String(fromDateVal.value).replace(/-/g,""),String(fromDateVal.value).replace(/-/g,""),'card')
 })
 
 
@@ -99,7 +102,7 @@ let salesList = document.getElementById('sales-list')
 var datatoload = []
 
 document.getElementById('search').addEventListener('click',()=>{
-    renderSales(String(fromDateVal.value).replace(/-/g,""),String(toDateVal.value).replace(/-/g,""))
+    renderSales(String(fromDateVal.value).replace(/-/g,""),String(fromDateVal.value).replace(/-/g,""))
     drawChart()
 })
 
@@ -115,15 +118,11 @@ function renderSales(fromDate,toDate,method){
     let monthsEvaluated = Number(toDate.replace(/-/g,"").substring(0,6)) - Number(fromDate.replace(/-/g,"").substring(0,6)) + 1
     let days = Number(String(toDateSerial).substring(6,8)) - Number(String(fromDateSerial).substring(6,8))+1 + (monthsEvaluated-1)*30
 
-    get(child(ref(db),'Cortes/')).then((cortes) => {
-
+    get(child(ref(db),'Sales/')).then((snapshot) => {
+        
         let salesTotal = 0;
         let salesTotalCash = 0;
         let salesTotalCard = 0;
-        let totalSum = 0;
-        let cashSum = 0;
-        let cardSum = 0;
-        let Totals = [];
 
         salesTotalDisp.innerHTML = "$ "+ 0
         salesTotalCashDisp.innerHTML = "$ "+ 0
@@ -140,64 +139,102 @@ function renderSales(fromDate,toDate,method){
 
         console.log("Done pulling from db")
 
-        cortes.forEach(
+        snapshot.forEach(
         function(year){
 
             year.forEach(
                 function(month){
 
                     month.forEach(
-                        function(day){
+                        function(sale){
 
-                            try{
-                                salesTotal = day.val().Mat.Total + day.val().Vesp.Total
-                                salesTotalCash = day.val().Mat.Efectivo + day.val().Vesp.Efectivo
-                                salesTotalCard = day.val().Mat.Tarjeta + day.val().Vesp.Tarjeta
+                                let saleDate = Number(sale.key.substring(0,8))    
+                                console.log(saleDate,sale.val())
 
-                            }catch(e){
-                                salesTotal = day.val().Mat.Total
-                                salesTotalCash = day.val().Mat.Efectivo
-                                salesTotalCard = day.val().Mat.Tarjeta
-                            }
- 
-                            Totals.push(Number(salesTotal))
+                                if(saleDate >= fromDateSerial && saleDate <= toDateSerial){
 
-                            totalSum += salesTotal
-                            cashSum += salesTotalCash
-                            cardSum += salesTotalCard
+                                    salesTotal += sale.val().Total
+                                    let years = sale.key.substring(0,4)
+                                    let monthIndex = Number(sale.key.substring(4,6))-1
+                                    let day = sale.key.substring(6,8)
+                                    let hours = sale.val().Time.substring(0,2)
+                                    let minutes = sale.val().Time.substring(3,5)
+                                    let seconds = sale.val().Time.substring(6,8)
+                                   
+                                    datatoload.push([new Date(years, monthIndex, day, hours, minutes, seconds), salesTotal])
+                                
+    
+                                    if(sale.val().Method == 'cash'){
+                                        salesTotalCash += sale.val().Total
+                                    }
+                                        
+                                    if(sale.val().Method == 'card'){
+                                        salesTotalCard += sale.val().Total
+                                    }
+                                        
+                                    salesTotalDisp.innerHTML = "$ "+ salesTotal
+                                    salesTotalCashDisp.innerHTML = "$ "+ salesTotalCash
+                                    salesTotalCardDisp.innerHTML = "$ "+ salesTotalCard
+                                    
+                                    if(sale.val().Method == method || method == null){
+                                    console.log(sale.key,sale.val().Total)
+                                    salesList.innerHTML += `
+                                        <li class="sale-item-li">
+                                            <div class="sale-item-div" style="">
+                                                <div style="width: 30%; text-align: left;">${String(sale.key).substring(4, 6)+"/"+String(sale.key).substring(6, 8)}</div>
+                                                <div style="width: 30%; text-align: left;">${String(sale.val().Time)}</div>
+                                                <div style="width: 5%"; text-align: right>$</div>
+                                                <div style="width: 15%"; text-align: left>${+sale.val().Total}</div>
+                                                <div onclick="toggleMethod(${sale.key})" style="width: 20%"; text-align: left>${sale.val().Method}</div>
+                                            <div>
+                                        </li>
+                                    `
+                                    //breaks down order and gets individual item category for summary
+                                    Object.entries(sale.val().Items).forEach((item)=>{
+                                        try{
+                                        let product = item[0].split('_')[0]
+                                        let category = productIndexes[item[0].split('_')[0]]
+                                      
+                                        document.getElementById(`resumen-${category}`).textContent = Number(document.getElementById(`resumen-${category}`).textContent) + item[1]
+                                        }
+                                        catch(error){
+                                        
+                                        }
 
-                            console.log(`${month.key}/${day.key}: `,salesTotal, salesTotalCash, salesTotalCard)
+                                    })
+                                    try{
+                                    document.getElementById(`resumen-${String(sale.val().Time).split(':')[0]}`).textContent = Number(document.getElementById(`resumen-${String(sale.val().Time).split(':')[0]}`).textContent) + Number(sale.val().Total)
+                                    }
+                                    catch(e){
+                                        console.log(e)
+                                    }
 
-                            datatoload.push([new Date(year.key, month.key-1, day.key), salesTotal])
+                                }
+                                    
 
-                            salesTotalDisp.innerHTML = "$ "+ totalSum
-                            salesTotalCashDisp.innerHTML = "$ "+ cashSum
-                            salesTotalCardDisp.innerHTML = "$ "+ cardSum
-
-                    })    
-                    getAvg(Totals)
+                                    
+                                }
+                                
+                        }
+                    )
+                    getDailyAverage(salesTotal,days,monthsEvaluated)
                 }
             )            
         })
     })
-    drawChart()
 }
 
-function getAvg(sales) {
-    if (sales.length === 0) return 'Empty grades array';
-    let avg = sales.reduce((acc, c) => acc + c, 0) / sales.length;
+function getDailyAverage(total,days,monthsEvaluated){
+   
+
     let USDollar = new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'USD',
     });
 
-    dailyAverage.textContent = USDollar.format(avg)
-    monthlyEstimate.textContent = USDollar.format(30.41*avg)
-
-    console.log("Promedio: ",(avg))
-    return avg  
-  }
-
+    dailyAverage.textContent = USDollar.format(total/days)
+    monthlyEstimate.textContent = USDollar.format(total*30.41*monthsEvaluated/days)
+}
 
  // Load the Visualization API and the piechart package.
  google.charts.load('current', {'packages':['corechart']});
@@ -205,8 +242,26 @@ function getAvg(sales) {
  // Set a callback to run when the Google Visualization API is loaded.
  google.charts.setOnLoadCallback(drawChart);
 
- 
+ // Callback that creates and populates a data table, 
+ // instantiates the pie chart, passes in the data and
+ // draws it.
+function toggleMethod(sale_key){
+    
+    let year = String(sale_key).substring(0,4)
+    let month = Number(String(sale_key).substring(4,6))
+    console.log(year,month)
+    get(child(ref(db),`Sales/${year}/${month}/${sale_key}`)).then((sale) => {
+        console.log("Metodo actual: ",sale.val().Method)
+        console.log(sale.val().Method == "cash" ? "card" : "cash")
 
+        if(confirm("Seguro que quieres cambiar el metodo de pago de $ " + sale.val().Total + " en " + sale.val().Method + " a " + (sale.val().Method == "cash" ? "card" : "cash"))){
+            update(ref(db,`Sales/${year}/${month}/${sale_key}`),{
+                Method: sale.val().Method == "cash" ? "card" : "cash",
+            });
+        }
+        
+    })
+}
 
 function drawChart() {
 
@@ -245,3 +300,4 @@ function drawChart() {
     
     
 }
+window.toggleMethod = toggleMethod
