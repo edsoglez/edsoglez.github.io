@@ -14,6 +14,17 @@ let day = String(new Date().getDate()).padStart(2,'0')
 let year = new Date().getUTCFullYear()
 
 let productList = document.getElementById("product-list")
+let salesMade = {}
+
+try{
+    
+    salesMade = JSON.parse(localStorage.salesMade)
+    syncSalesToDB()
+}
+catch(e){
+}
+    
+   
 
 // ------------------------------------------------------------------------------------------------------------------------------------------------
 resetOrder()
@@ -22,6 +33,28 @@ onValue(prodRef,(snapshot)=>{
     renderAllProductCards()    
 })
 
+function syncSalesToDB(){
+    Object.entries(salesMade).forEach((sale)=>{
+        let key = sale[0]
+        let val = sale[1]
+
+        let year = String(key).substring(0,4)
+        let month = String(key).substring(5,6)
+        console.log(key,val)
+
+        set(ref(db,'CachedSales/'+year+"/"+month+"/"+ key),{
+            Total : val.Total,
+            Method : val.Method,
+            Seller : val.Seller,
+            Items : val.Items,
+            Time : val.Time,
+            Cached : true
+        })
+    })
+
+    salesMade = {}
+    localStorage.salesMade = JSON.stringify(salesMade)
+}
 
 function generateProductCard(Product){
     Product.forEach(
@@ -224,6 +257,17 @@ function registerSales(method){
         let sale_month = (new Date().getUTCMonth()+1);
         
         try{
+            salesMade[String(dateFormatedID)] = {
+                Time: TimeStamp,
+                Items: itemsOrdered,
+                Total: orderTotal,
+                Method: method,
+                Seller: localStorage.getItem('USER'),
+                Cached: true
+            }
+            localStorage.salesMade = JSON.stringify(salesMade);
+
+
             set(ref(db,'Sales/'+sale_year+"/"+sale_month+"/"+ dateFormatedID),{
                 Time: TimeStamp,
                 Items: itemsOrdered,
@@ -233,11 +277,10 @@ function registerSales(method){
             });
 
             console.log("No need to cache")
-            pendingSalesCache = {}
-
             deductFromInventory()
         }
         catch(error){
+            console.log(error)
             resetOrder()
         }
 
