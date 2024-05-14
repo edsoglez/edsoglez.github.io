@@ -23,26 +23,6 @@ let cashSelector = document.getElementById('cash-selector')
 let cardSelector = document.getElementById('card-selector')
 let dailyAverage = document.getElementById('daily-average')
 let monthlyEstimate = document.getElementById('monthly-estimate')
-let resumenCalientes = document.getElementById('resumen-caliente')
-let resumenFrios = document.getElementById('resumen-frio')
-let resumenPasteles = document.getElementById('resumen-pastel')
-let resumenBebidas = document.getElementById('resumen-bebidas')
-let resumenVarios = document.getElementById('resumen-varios')
-let resumen10 = document.getElementById('resumen-10')
-let resumen11 = document.getElementById('resumen-11')
-let resumen12 = document.getElementById('resumen-12')
-let resumen13 = document.getElementById('resumen-13')
-let resumen14 = document.getElementById('resumen-14')
-let resumen15 = document.getElementById('resumen-15')
-let resumen16 = document.getElementById('resumen-16')
-let resumen17 = document.getElementById('resumen-17')
-let resumen18 = document.getElementById('resumen-18')
-let resumen19 = document.getElementById('resumen-19')
-let resumen20 = document.getElementById('resumen-20')
-
-let corteButton = document.getElementById('corteButton')
-
-resumen10.textContent = resumen11.textContent = resumen12.textContent = resumen13.textContent = resumen14.textContent = resumen15.textContent = resumen16.textContent = resumen17.textContent = resumen18.textContent = resumen19.textContent = resumen20.textContent = 0; 
 
 let month = "0"+String(new Date().getMonth()+1)
 let date = String(new Date()).split(" ")
@@ -63,26 +43,6 @@ get(child(ref(getDatabase()), `Products/`)).then((Products) => {
     
 })
 
-corteButton.addEventListener('click',()=>{
-    let year = String(toDateVal.value).replace(/-/g,"").substring(0,4)
-    let month = String(toDateVal.value).replace(/-/g,"").substring(4,6)
-    let day = String(toDateVal.value).replace(/-/g,"").substring(6,8)
-
-    console.log(year+"/"+Number(month)+"/"+day)
-
-    get(child(ref(db),`Cortes/${year}/${Number(month)}/${String(day).padStart(2, '0')}`)).then((corte) => {
-        console.log(corte.val())
-
-        alert(`
-        Fecha: ${String(day).padStart(2, '0')}/${(month)}/${year}\n
-        Mat: \n ${
-        String(JSON.stringify(corte.val().Mat)).replace(/,/g,'\n').replace(/{/g,'\n').replace(/}/g,'\n').replace(/"/g,'')
-        } 
-        Vesp: \n ${
-        String(JSON.stringify(corte.val().Vesp)).replace(/,/g,'\n').replace(/{/g,'\n').replace(/}/g,'\n').replace(/"/g,'')
-        }`)
-    })
-})
 
 totalSelector.addEventListener('click',()=>{
     renderSales(String(fromDateVal.value).replace(/-/g,""),String(toDateVal.value).replace(/-/g,""))
@@ -104,7 +64,6 @@ document.getElementById('search').addEventListener('click',()=>{
 })
 
 function renderSales(fromDate,toDate,method){
-    resumen10.textContent = resumen11.textContent = resumen12.textContent = resumen13.textContent = resumen14.textContent = resumen15.textContent = resumen16.textContent = resumen17.textContent = resumen18.textContent = resumen19.textContent = resumen20.textContent = 0; 
 
     let lastUpdate = String(new Date()).substring(0,25)
     document.getElementById('last-update').innerHTML = lastUpdate
@@ -129,11 +88,7 @@ function renderSales(fromDate,toDate,method){
         salesTotalCashDisp.innerHTML = "$ "+ 0
         salesTotalCardDisp.innerHTML = "$ "+ 0
 
-        resumenFrios.textContent = 0;
-        resumenCalientes.textContent = 0;
-        resumenPasteles.textContent = 0;
-        resumenBebidas.textContent = 0;
-        resumenVarios.textContent = 0;
+
         
         datatoload = []
         salesList.innerHTML = ""
@@ -173,6 +128,20 @@ function renderSales(fromDate,toDate,method){
                             salesTotalDisp.innerHTML = "$ "+ totalSum
                             salesTotalCashDisp.innerHTML = "$ "+ cashSum
                             salesTotalCardDisp.innerHTML = "$ "+ cardSum
+
+                            salesList.innerHTML += `
+                            <li class="sale-item-li">
+                                <div class="sale-item-div" style="">
+                                    <div style="width: 30%; text-align: left;">${month.key+"/"+day.key}</div>
+                                    <div style="width: 5%"; text-align: right>$</div>
+                                    <div style="width: 15%"; text-align: left>${salesTotal}</div>
+                                    <div style="width: 5%"; text-align: right>$</div>
+                                    <div style="width: 15%"; text-align: left>${salesTotalCash}</div>
+                                    <div style="width: 5%"; text-align: right>$</div>
+                                    <div style="width: 15%"; text-align: left>${salesTotalCard}</div>
+                                <div>
+                            </li>
+                        `
 
                     })    
                     getAvg(Totals)

@@ -34,56 +34,27 @@
             <br>
             <div style="display: flex; margin-left: auto; margin-right: auto; flex-wrap: wrap; width: 100%; column-gap: 8px; row-gap: 16px;">
                 
-                <div style="width: 35%;">
-                    <div style="width: 49%; max-width: 500px; height: auto; align-items: left; justify-content: left; padding: 0; text-align: left;">
-                        <h5>Fecha:</h5>
-                        <input type="date" name="" id="from-date">
-                    </div>
-                    <div style="width: 49%; max-width: 5 500px; height: auto; align-items: left; justify-content: left; padding: 0; text-align: left;">
-                        <h5>Hasta:</h5>
-                        <input type="date" name="" id="to-date">
-                    </div> <br>
-                    <div style="display: flex; justify-content: left; width: 100%; text-align: right;">
-                        <button id="search">Actualizar</button>
-                    </div>
-                    <br>
-                    
-                </div>
+                <div style="width: 100%; display: flex; flex-direction: row;">
 
-                <div style="display: flex; width: 55%; height: 200px; gap: 0px; margin-left: 10px;">
-                    <br>    
-                        <div style="width: 160px; margin-left: 0px;">
-                            <h4>Cltes: <span id="resumen-caliente"></span></h4>
-                            <h4>Frios: <span id="resumen-frio"></span></h4>
-                            <h4>Pastel: <span id="resumen-pastel"></span></h4>
-                            <h4>Bebida: <span id="resumen-bebidas"></span></h4>
-                            <h4>Varios: <span id="resumen-varios"></span></h4>
+                    <div style="width: 99%; height: auto; align-items: left; justify-content: left; padding: 0; text-align: left;">
+                        <h5 style="text-align: center;">Desde:</h5>
+                        <input type="date" name="" id="from-date" style="width: 90%;">
+                    </div>
 
-                           
-<br>
-                            <div id="promedios">
-                                <h4>Promedio: <span id="daily-average"></span></h4>
-                                <h4>Est. Mes: <span id="monthly-estimate"></span></h4>
-                            </div>
-                        </div>
-                        
-                        <div style="width: 140px; margin-left: 10px;">
-                            <h4>10: $ <span id="resumen-10"></span></h4>
-                            <h4>11: $ <span id="resumen-11"></span></h4>
-                            <h4>12: $ <span id="resumen-12"></span></h4>
-                            <h4>13: $ <span id="resumen-13"></span></h4>
-                            <h4>14: $ <span id="resumen-14"></span></h4>
-                            <h4>15: $ <span id="resumen-15"></span></h4>
-                            <h4>16: $ <span id="resumen-16"></span></h4>
-                            <h4>17: $ <span id="resumen-17"></span></h4>
-                            <h4>18: $ <span id="resumen-18"></span></h4>
-                            <h4>19: $ <span id="resumen-19"></span></h4>
-                            <h4>20: $ <span id="resumen-20"></span></h4>
-                        </div>
+                    <div style="width: 99%; height: auto; align-items: right; justify-content: right; padding: 0; text-align: right;">
+                        <h5 style="text-align: center;">Hasta:</h5>
+                        <input type="date" name="" id="to-date" style="width: 90%;">
+                    </div> 
+                
                 </div>
-                <br>
-                <div style="width: 100%; margin-top: 20px;">   
-                    <button id="corteButton" style="width: 100%; background-color: rgb(00, 155, 255);">Corte de dia (hasta)</button>
+                <div style="display: flex; justify-content: right; width: 100%; text-align: right">
+                    <div id="promedios" style="width: 50%;">
+                        <h4>Promedio: <span id="daily-average"></span></h4>
+                        <h4>Est. Mes: <span id="monthly-estimate"></span></h4>
+                    </div>
+                    <div style="width: 50%;">
+                        <button id="search" style="width: 60%;">Actualizar</button>
+                    </div>
                 </div>
 
                 <div style="display: flex; width: 100%; align-items: center; margin-top: 16px; justify-content: center;">
