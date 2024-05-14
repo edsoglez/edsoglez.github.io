@@ -9,7 +9,6 @@ get(child(ref(db),`Users/${localStorage.getItem("USER")}`)).then((user)=>{
 
 window.productIndexes = {}
 
-
 window.itemRef = ref(db,'Items/');
 window.transRef = ref(db,'Transactions/');
 window.salesRef = ref(db,'Sales/');
@@ -24,13 +23,11 @@ let cashSelector = document.getElementById('cash-selector')
 let cardSelector = document.getElementById('card-selector')
 let dailyAverage = document.getElementById('daily-average')
 let monthlyEstimate = document.getElementById('monthly-estimate')
-
 let resumenCalientes = document.getElementById('resumen-caliente')
 let resumenFrios = document.getElementById('resumen-frio')
 let resumenPasteles = document.getElementById('resumen-pastel')
 let resumenBebidas = document.getElementById('resumen-bebidas')
 let resumenVarios = document.getElementById('resumen-varios')
-
 let resumen10 = document.getElementById('resumen-10')
 let resumen11 = document.getElementById('resumen-11')
 let resumen12 = document.getElementById('resumen-12')
@@ -64,7 +61,6 @@ get(child(ref(getDatabase()), `Products/`)).then((Products) => {
         renderSales(String(fromDateVal.value).replace(/-/g,""),String(toDateVal.value).replace(/-/g,""))
     })
     
-    //renderSales(date[3]+"-"+month.slice(-2)+"-01",date[3]+"-"+month.slice(-2)+"-"+date[2]) //Default renders from current month day 1 to today
 })
 
 corteButton.addEventListener('click',()=>{
@@ -76,79 +72,31 @@ corteButton.addEventListener('click',()=>{
 
     get(child(ref(db),`Cortes/${year}/${Number(month)}/${String(day).padStart(2, '0')}`)).then((corte) => {
         console.log(corte.val())
-        try{
-        
-            if(String(JSON.stringify(corte.val().Vesp)).replace(/,/g,'\n').replace(/{/g,'\n').replace(/}/g,'\n').replace(/"/g,'') == "undefined"){
-                alert(`Cortes: \n 
-                Fecha: ${String(day).padStart(2, '0')}/${(month)}/${year}\n
-                Mat: \n ${
-                    String(JSON.stringify(corte.val().Mat)).replace(/,/g,'\n').replace(/{/g,'\n').replace(/}/g,'\n').replace(/"/g,'')
-                } `)
-            }else{
-                alert(`
-                Fecha: ${String(day).padStart(2, '0')}/${(month)}/${year}\n
-                Mat: \n ${
-                String(JSON.stringify(corte.val().Mat)).replace(/,/g,'\n').replace(/{/g,'\n').replace(/}/g,'\n').replace(/"/g,'')
-                } 
-                Vesp: \n ${
-                String(JSON.stringify(corte.val().Vesp)).replace(/,/g,'\n').replace(/{/g,'\n').replace(/}/g,'\n').replace(/"/g,'')
-                }`)
-            }
-        }
-        catch(e2){
-            alert(`No hay cortes para: ${String(day).padStart(2, '0')}/${(month)}/${year}`)
-        }
-        
+
+        alert(`
+        Fecha: ${String(day).padStart(2, '0')}/${(month)}/${year}\n
+        Mat: \n ${
+        String(JSON.stringify(corte.val().Mat)).replace(/,/g,'\n').replace(/{/g,'\n').replace(/}/g,'\n').replace(/"/g,'')
+        } 
+        Vesp: \n ${
+        String(JSON.stringify(corte.val().Vesp)).replace(/,/g,'\n').replace(/{/g,'\n').replace(/}/g,'\n').replace(/"/g,'')
+        }`)
     })
 })
 
-totalSelector.addEventListener('mouseover',()=>{
+totalSelector.addEventListener('click',()=>{
     renderSales(String(fromDateVal.value).replace(/-/g,""),String(toDateVal.value).replace(/-/g,""))
 })
-cashSelector.addEventListener('mouseover',()=>{
+cashSelector.addEventListener('click',()=>{
     renderSales(String(fromDateVal.value).replace(/-/g,""),String(toDateVal.value).replace(/-/g,""),'cash')
 })
-cardSelector.addEventListener('mouseover',()=>{
+cardSelector.addEventListener('click',()=>{
     renderSales(String(fromDateVal.value).replace(/-/g,""),String(toDateVal.value).replace(/-/g,""),'card')
 })
-totalSelector.addEventListener('blur',()=>{
-    renderSales(String(fromDateVal.value).replace(/-/g,""),String(toDateVal.value).replace(/-/g,""))
-})
-cashSelector.addEventListener('blur',()=>{
-    renderSales(String(fromDateVal.value).replace(/-/g,""),String(toDateVal.value).replace(/-/g,""))
-})
-cardSelector.addEventListener('blur',()=>{
-    renderSales(String(fromDateVal.value).replace(/-/g,""),String(toDateVal.value).replace(/-/g,""))
-})
+
 
 let salesList = document.getElementById('sales-list')
-let Months = {
-    'Jan' : '01',
-    'Feb' : '02',
-    'Mar' : '03',
-    'Apr' : '04',
-    'May' : '05',
-    'Jun' : '06',
-    'Jul' : '07',
-    'Aug' : '08',
-    'Sep' : '09',
-    'Oct' : '10',
-    'Nov' : '11',
-    'Dec' : '12',
-}
-
 var datatoload = []
-
-/*
-fromDateVal.addEventListener('change',()=>{
-    renderSales(String(fromDateVal.value).replace(/-/g,""),String(toDateVal.value).replace(/-/g,""))
-    drawChart()
-})
-toDateVal.addEventListener('change',()=>{
-
-    renderSales(String(fromDateVal.value).replace(/-/g,""),String(toDateVal.value).replace(/-/g,""))
-    drawChart()
-})*/
 
 document.getElementById('search').addEventListener('click',()=>{
     renderSales(String(fromDateVal.value).replace(/-/g,""),String(toDateVal.value).replace(/-/g,""))

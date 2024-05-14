@@ -2,7 +2,6 @@ import {getDatabase, set, get, update, remove, ref, child, onValue, orderByChild
 window.itemRef = ref(db,'Items/');
 window.transRef = ref(db,'Transactions/');
 window.prodRef = ref(db,'Products/');
-
 //order variable define
 window.productPrices = {}
 window.itemsOrdered = {}
@@ -13,104 +12,18 @@ let month = String(new Date().getUTCMonth()+1).padStart(2, '0')
 let date = String(new Date()).split(" ")
 let day = String(new Date().getDate()).padStart(2,'0')
 let year = new Date().getUTCFullYear()
-//on page load reset order to 0 and render product cards
-let dateFormatedID = year+month+day+new Date().toTimeString().replace(/\D/g,'');
 
-try{    
-    window.pendingSalesCache = JSON.parse(localStorage.cachedSaleID)   
-    console.log("Cached sales:",pendingSalesCache)
-    
-    if(Object.values(JSON.parse(localStorage.cachedSaleID))[0] == undefined){
-        console.log("Nothing in cache")
-    }
-    else{
-        Object.entries(pendingSalesCache).forEach((sale)=>{
-            console.log("Trying to write",sale[0])
-            tryWriteCached(sale)
-        })
+let productList = document.getElementById("product-list")
 
-        console.log("Clearing cache")
-        pendingSalesCache = "{}"
-        localStorage.setItem("cachedSaleID",pendingSalesCache)
-    }}
-catch(e){
-    console.log(e)
-    window.pendingSalesCache = "{}"
-    localStorage.setItem("cachedSaleID",pendingSalesCache)
-    console.log("Cached sales:",pendingSalesCache)
-}
-
-function tryWriteCached(sale){
-
-    // console.log("searching for ID: ",sale[0],sale[1])
-
-    //     let sale_year = String(sale).substring(0,4)
-    //     let sale_month = Number(String(sale).substring(4,6))
-    //     let sale_Time = sale[1].Time
-    //     let sale_Method = sale[1].Method
-    //     let sale_Total = sale[1].Total
-    //     let sale_Items = sale[1].Items
-    //     let sale_Seller = sale[1].Seller
-
-    //     get(child(ref(getDatabase()), `Sales/${sale_year}/${sale_month}/${sale[0]}`)).then((snapshot) => {
-    //         if(snapshot.exists()){
-    //             console.log(sale[0],"record found")
-    //         }
-    //         else{
-    //             //write to db
-    //             console.log(sale[0],"tried to write to db")
-    //             let TimeStamp = String(new Date()).substring(16,24);
-
-    //             set(ref(db,'Sales/'+sale_year+"/"+sale_month+"/"+sale[0]+"_cached"),{
-    //                 Time: sale_Time,
-    //                 Total: sale_Total,
-    //                 Method: sale_Method,
-    //                 Items: sale_Items,
-    //                 Seller: sale_Seller
-    //             })
-    //         }
-    //     })
-
-}
-
-// Cache on localstorage sales for Offline Functionality
-
-// ONCLICK of cash or card buttons
-// SET to db/sales and write caches_sale_ID object JSON stringify to localStorage 
-// on next sale, iterate trough elements inside cache object
-// try to GET from db/sales cached_sale_ID
-// if record found, delete cached_sale_ID from localstorage
-// if record not foumd, try to SET on DB
-// END
-
-/* cache = {
-    2024050110300001 = {
-        Items = {
-
-        },
-        Method = "cash",
-        Total = 110,
-        Time = 10:30:15
-    }
-
-    2024050110310001 = {
-        Items = {
-
-        },
-        Method = "card",
-        Total = 100,
-        Time = 10:31:15
-    }
-
-}
-*/
-
-onValue(prodRef,(snapshot)=>{
-    renderProductCards()    
-})
+// ------------------------------------------------------------------------------------------------------------------------------------------------
 resetOrder()
+//when any change in db happens, re-renders cards
+onValue(prodRef,(snapshot)=>{
+    renderAllProductCards()    
+})
 
-function fillData(Product){
+
+function generateProductCard(Product){
     Product.forEach(
         function(Size){
             if(Size.key=="CH"||Size.key=="M"||Size.key=="G")
@@ -120,7 +33,7 @@ function fillData(Product){
     localStorage.products = JSON.stringify(productPrices);
 
     //render basic card layout without size buttons
-    document.getElementById("product-list").innerHTML +=
+    productList.innerHTML +=
             `<li id="${Product.key}" class="product-list-item">
                 <div style="display:flex; flex-direction:row;">
                 <div class="product-item" >
@@ -151,7 +64,7 @@ function fillData(Product){
         document.getElementById(String(Product.key)+ "-CH").textContent = 'CH'  
            
         //since not all products have a medium size, we will render considering product does not have it
-        //Only in the case it does, we risize all buttons to fil
+        //Only in the case it does, we risize all buttons to fill
         if(Product.val().M){
             document.getElementById(String(Product.key)+ "-CH").style.width = '30%'
             document.getElementById(String(Product.key)+ "-M").style.width = '30%'
@@ -162,45 +75,40 @@ function fillData(Product){
     }
 }
 
-function renderProductCards(){
-    document.getElementById("product-list").innerHTML = ""
-
+function renderAllProductCards(){
+    productList.innerHTML = ""
 
     get(child(ref(getDatabase()), `Products/`)).then((snapshot) => {
 
         //each forEach gets all products from certain category, to keep them grouped
-        document.getElementById("product-list").innerHTML +=
+        productList.innerHTML +=
         `<li style="margin:10px; height: auto;"> 
         <div class="product-separator">Calientes</div>
         </li>`
         snapshot.forEach(
             function(Product){
                 if(Product.val().index != "caliente"){return}
-                    //get price for all products at their size options
-                    
-                fillData(Product) 
+                generateProductCard(Product) 
         })
-        document.getElementById("product-list").innerHTML +=
+        productList.innerHTML +=
         `<li style="margin:10px; height: auto;"> 
         <div class="product-separator">Frios</div>
         </li>`
         snapshot.forEach(
             function(Product){
                     if(Product.val().index != "frio"){return}
-                    //get price for all products at their size options
-                    fillData(Product)                    
+                    generateProductCard(Product)                    
         })
-        document.getElementById("product-list").innerHTML +=
+        productList.innerHTML +=
         `<li style="margin:10px; height: auto;"> 
         <div class="product-separator">Pasteles</div>
         </li>`
         snapshot.forEach(
             function(Product){
                     if(Product.val().index != "pastel"){return}
-                    //get price for all products at their size options
-                    fillData(Product)                    
+                    generateProductCard(Product)                    
         })
-        document.getElementById("product-list").innerHTML +=
+        productList.innerHTML +=
         `<li style="margin:10px; height: auto;"> 
         <div class="product-separator">Sabores</div>
         </li>`
@@ -208,9 +116,9 @@ function renderProductCards(){
             function(Product){
                     if(Product.val().index != "sabor"){return}
                     //get price for all products at their size options
-                    fillData(Product)                    
+                    generateProductCard(Product)                    
         })
-        document.getElementById("product-list").innerHTML +=
+        productList.innerHTML +=
         `<li style="margin:10px; height: auto;"> 
         <div class="product-separator">Varios</div>
         </li>`
@@ -218,9 +126,9 @@ function renderProductCards(){
             function(Product){
                     if(Product.val().index != "varios"){return}
                     //get price for all products at their size options
-                    fillData(Product)                    
+                    generateProductCard(Product)                    
         })
-        document.getElementById("product-list").innerHTML +=
+        productList.innerHTML +=
         `<li style="margin:10px; height: auto;"> 
         <div class="product-separator">Bebidas</div>
         </li>`
@@ -228,7 +136,7 @@ function renderProductCards(){
             function(Product){
                     if(Product.val().index != "bebidas"){return}
                     //get price for all products at their size options
-                    fillData(Product)                    
+                    generateProductCard(Product)                    
         })
        
         
@@ -535,7 +443,7 @@ function resetOrder() {
 
 
 window.registerSales = registerSales;
-window.renderProductCards = renderProductCards;
+window.renderAllProductCards = renderAllProductCards;
 window.addItemToOrder = addItemToOrder;
 window.resetOrder = resetOrder;
 window.removeLastItem = removeLastItem;
