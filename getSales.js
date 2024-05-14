@@ -119,13 +119,13 @@ function renderSales(fromDate,toDate,method){
                                 salesList.innerHTML += `
                                 <li class="sale-item-li">
                                     <div class="sale-item-div" style="">
-                                        <div style="width: 30%; text-align: left;">${month.key+"/"+day.key}</div>
-                                        <div style="width: 5%"; text-align: right>$</div>
-                                        <div style="width: 15%"; text-align: left>${salesTotal}</div>
-                                        <div style="width: 5%"; text-align: right>$</div>
-                                        <div style="width: 15%"; text-align: left>${salesMat.Total}</div>
-                                        <div style="width: 5%"; text-align: right>$</div>
-                                        <div style="width: 15%"; text-align: left>${salesVesp.Total}</div>
+                                        <div style="width: 20%; text-align: left;">${month.key+"/"+day.key}</div>
+                                        <div style="width: 10%"; text-align: right>$</div>
+                                        <div style="width: 20%"; text-align: left>${salesTotal}</div>
+                                        <div style="width: 10%"; text-align: right>$</div>
+                                        <div style="width: 20%"; text-align: left>${salesMat.Total}</div>
+                                        <div style="width: 10%"; text-align: right>$</div>
+                                        <div style="width: 20%"; text-align: left>${salesVesp.Total}</div>
                                     <div>
                                 </li>`
 
@@ -140,13 +140,13 @@ function renderSales(fromDate,toDate,method){
                                 salesList.innerHTML += `
                                 <li class="sale-item-li">
                                     <div class="sale-item-div" style="">
-                                        <div style="width: 30%; text-align: left;">${month.key+"/"+day.key}</div>
-                                        <div style="width: 5%"; text-align: right>$</div>
-                                        <div style="width: 15%"; text-align: left>${salesTotal}</div>
-                                        <div style="width: 5%"; text-align: right>$</div>
-                                        <div style="width: 15%"; text-align: left>${0}</div>
-                                        <div style="width: 5%"; text-align: right>$</div>
-                                        <div style="width: 15%"; text-align: left>${salesMat.Total}</div>
+                                        <div style="width: 20%; text-align: left;">${month.key+"/"+day.key}</div>
+                                        <div style="width: 10%"; text-align: right>$</div>
+                                        <div style="width: 20%"; text-align: left>${salesTotal}</div>
+                                        <div style="width: 10%"; text-align: right>$</div>
+                                        <div style="width: 20%"; text-align: left>${0}</div>
+                                        <div style="width: 10%"; text-align: right>$</div>
+                                        <div style="width: 20%"; text-align: left>${salesMat.Total}</div>
                                     <div>
                                 </li>
                                 `
