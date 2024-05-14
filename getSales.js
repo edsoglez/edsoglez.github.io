@@ -77,6 +77,8 @@ function renderSales(fromDate,toDate,method){
     get(child(ref(db),'Cortes/')).then((cortes) => {
 
         let salesTotal = 0;
+        let salesMat = 0;
+        let salesVesp = {}
         let salesTotalCash = 0;
         let salesTotalCard = 0;
         let totalSum = 0;
@@ -103,17 +105,54 @@ function renderSales(fromDate,toDate,method){
 
                     month.forEach(
                         function(day){
+                            
 
                             try{
-                                salesTotal = day.val().Mat.Total + day.val().Vesp.Total
-                                salesTotalCash = day.val().Mat.Efectivo + day.val().Vesp.Efectivo
-                                salesTotalCard = day.val().Mat.Tarjeta + day.val().Vesp.Tarjeta
+
+                                salesMat = day.val().Mat
+                                salesVesp = day.val().Vesp
+
+                                salesTotal = salesMat.Total + salesVesp.Total
+                                salesTotalCash = salesMat.Efectivo + salesVesp.Efectivo
+                                salesTotalCard = salesMat.Tarjeta + salesVesp.Tarjeta
+
+                                salesList.innerHTML += `
+                                <li class="sale-item-li">
+                                    <div class="sale-item-div" style="">
+                                        <div style="width: 30%; text-align: left;">${month.key+"/"+day.key}</div>
+                                        <div style="width: 5%"; text-align: right>$</div>
+                                        <div style="width: 15%"; text-align: left>${salesTotal}</div>
+                                        <div style="width: 5%"; text-align: right>$</div>
+                                        <div style="width: 15%"; text-align: left>${salesMat.Total}</div>
+                                        <div style="width: 5%"; text-align: right>$</div>
+                                        <div style="width: 15%"; text-align: left>${salesVesp.Total}</div>
+                                    <div>
+                                </li>`
 
                             }catch(e){
-                                salesTotal = day.val().Mat.Total
-                                salesTotalCash = day.val().Mat.Efectivo
-                                salesTotalCard = day.val().Mat.Tarjeta
+
+                                salesMat = day.val().Mat
+
+                                salesTotal = salesMat.Total 
+                                salesTotalCash = salesMat.Efectivo 
+                                salesTotalCard = salesMat.Tarjeta 
+
+                                salesList.innerHTML += `
+                                <li class="sale-item-li">
+                                    <div class="sale-item-div" style="">
+                                        <div style="width: 30%; text-align: left;">${month.key+"/"+day.key}</div>
+                                        <div style="width: 5%"; text-align: right>$</div>
+                                        <div style="width: 15%"; text-align: left>${salesTotal}</div>
+                                        <div style="width: 5%"; text-align: right>$</div>
+                                        <div style="width: 15%"; text-align: left>${0}</div>
+                                        <div style="width: 5%"; text-align: right>$</div>
+                                        <div style="width: 15%"; text-align: left>${salesMat.Total}</div>
+                                    <div>
+                                </li>
+                                `
                             }
+
+                 
  
                             Totals.push(Number(salesTotal))
 
@@ -129,19 +168,7 @@ function renderSales(fromDate,toDate,method){
                             salesTotalCashDisp.innerHTML = "$ "+ cashSum
                             salesTotalCardDisp.innerHTML = "$ "+ cardSum
 
-                            salesList.innerHTML += `
-                            <li class="sale-item-li">
-                                <div class="sale-item-div" style="">
-                                    <div style="width: 30%; text-align: left;">${month.key+"/"+day.key}</div>
-                                    <div style="width: 5%"; text-align: right>$</div>
-                                    <div style="width: 15%"; text-align: left>${salesTotal}</div>
-                                    <div style="width: 5%"; text-align: right>$</div>
-                                    <div style="width: 15%"; text-align: left>${salesTotalCash}</div>
-                                    <div style="width: 5%"; text-align: right>$</div>
-                                    <div style="width: 15%"; text-align: left>${salesTotalCard}</div>
-                                <div>
-                            </li>
-                        `
+                            
 
                     })    
                     getAvg(Totals)
