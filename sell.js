@@ -42,7 +42,7 @@ function syncSalesToDB(){
         let month = String(key).substring(5,6)
         console.log(key,val)
 
-        set(ref(db,'CachedSales/'+year+"/"+month+"/"+ key),{
+        set(ref(db,'Sales/'+year+"/"+month+"/"+ key),{
             Total : val.Total,
             Method : val.Method,
             Seller : val.Seller,
@@ -374,6 +374,7 @@ function getCorte(){
                         })
                 })            
         })
+
         let gastosTotal = 0;
         get(child(ref(db),'Gastos/')).then((snapshot) => {
             //sets sum to zero
@@ -383,11 +384,13 @@ function getCorte(){
             function(year){
                 year.forEach(
                     function(month){
+                        gastosTotal = 0
                         month.forEach(
                             function(gasto){
                                 let saleDate = Number(gasto.key.substring(0,8))    
                                 
                                 if(saleDate >= fromDateSerial && saleDate <= toDateSerial){
+                                    console.log("Gasto: ",gasto.val().Total)
                                     gastosTotal += gasto.val().Total
                                 }
                             
@@ -396,9 +399,11 @@ function getCorte(){
             })
 
         try{
+            console.log(gastosTotal)
         get(child(ref(db),'Cortes/'+new Date().getFullYear()+"/"+(new Date().getUTCMonth()+1)+"/"+ day+"/Mat")).then(function(data){
             console.log(data.val())
             window.pastCorte = data.val();
+            console.log(pastCorte.Gastos)
 
             if(pastCorte == undefined){
                 if(confirm(
@@ -406,36 +411,37 @@ function getCorte(){
                     "Total: " + (Number(salesTotal))+'\n'+
                     "Efectivo: " + (Number(salesTotalCash))+'\n'+
                     "Tarjeta: " + (Number(salesTotalCard))+'\n\n'+
-                    "Gastos: " + (Number(gastosTotal))+'\n\n'+
+                    "Gastos: " + (-Number(gastosTotal))+'\n\n'+
                     "Efectivo restante: " + ((Number(salesTotalCash) + Number(gastosTotal)))+'\n\n'+
                     "Efectivo en caja: " + Number(EfectivoEnCaja) +'\n\n'+
                     "Differencia: "+(Number(EfectivoEnCaja) - (Number(salesTotalCash) + Number(gastosTotal)))
                 )){
                 //adds record of when corte was done and total in that moment
-                set(ref(db,'Cortes/'+new Date().getFullYear()+"/"+(new Date().getUTCMonth()+1)+"/"+day+"/Mat"),{
+                set(ref(db,'Cortes/'+new Date().getFullgeYear()+"/"+(new Date().getMonth()+1)+"/"+day+"/Mat"),{
                     Time: String(new Date()).substring(16,24),
                     Total: salesTotal,
                     Efectivo: salesTotalCash,
                     Tarjeta: salesTotalCard,
-                    Gastos: Number(gastosTotal),
+                    Gastos: -Number(gastosTotal),
                     Restante: (Number(salesTotalCash) + Number(gastosTotal)),
                     EfectivoCaja: Number(EfectivoEnCaja),
                     Diff: (Number(EfectivoEnCaja) - (Number(salesTotalCash) + Number(gastosTotal)))
                 });
-                location.href = "index.html"
                 }
                 
             }
             else{
+
+                console.log("Test 2")
                 if(confirm(
                     "Corte \n\n"+
                     "Total: " + (Number(salesTotal) - Number(pastCorte.Total))+'\n'+
                     "Efectivo: " + (Number(salesTotalCash) - Number(pastCorte.Efectivo))+'\n'+
                     "Tarjeta: " + (Number(salesTotalCard) - Number(pastCorte.Tarjeta))+'\n\n'+
-                    "Gastos: " + (Number(gastosTotal) - Number(pastCorte.Gastos))+'\n\n'+
-                    "Efectivo restante: " + ((Number(salesTotalCash)-Number(pastCorte.Efectivo) + Number(gastosTotal) - Number(pastCorte.Gastos)))+'\n\n'+
+                    "Gastos: " + (-Number(gastosTotal) - Number(pastCorte.Gastos))+'\n\n'+
+                    "Efectivo restante: " + ((Number(salesTotalCash) - Number(pastCorte.Efectivo)) - ((-Number(gastosTotal) - Number(pastCorte.Gastos))))+'\n\n'+
                     "Efectivo en caja: " + Number(EfectivoEnCaja) +'\n\n'+
-                    "Differencia: "+ (Number(EfectivoEnCaja) - ((Number(salesTotalCash)-Number(pastCorte.Efectivo) + Number(gastosTotal) - Number(pastCorte.Gastos))))
+                    "Differencia: "+ (((Number(salesTotalCash) - Number(pastCorte.Efectivo)) - ((-Number(gastosTotal) - Number(pastCorte.Gastos)))) - Number(EfectivoEnCaja))
                 ))
                 {
                     set(ref(db,'Cortes/'+new Date().getFullYear()+"/"+(new Date().getUTCMonth()+1)+"/"+day+"/Vesp"),{
@@ -443,12 +449,11 @@ function getCorte(){
                         Total: (Number(salesTotal) - Number(pastCorte.Total)),
                         Efectivo: (Number(salesTotalCash) - Number(pastCorte.Efectivo)),
                         Tarjeta: (Number(salesTotalCard) - Number(pastCorte.Tarjeta)),
-                        Gastos: (Number(gastosTotal) - Number(pastCorte.Gastos)),
-                        Restante: ((Number(salesTotalCash)-Number(pastCorte.Efectivo) + Number(gastosTotal) - Number(pastCorte.Gastos))),
+                        Gastos: (-Number(gastosTotal) - Number(pastCorte.Gastos)),
+                        Restante: (Number(salesTotalCash) - Number(pastCorte.Efectivo)) - ((-Number(gastosTotal) - Number(pastCorte.Gastos))),
                         EfectivoCaja: Number(EfectivoEnCaja),
-                        Diff: (Number(EfectivoEnCaja) - ((Number(salesTotalCash)-Number(pastCorte.Efectivo) + Number(gastosTotal) - Number(pastCorte.Gastos))))
+                        Diff: (((Number(salesTotalCash) - Number(pastCorte.Efectivo)) - ((-Number(gastosTotal) - Number(pastCorte.Gastos)))) - Number(EfectivoEnCaja))
                     });   
-                    location.href = "index.html"
                 }
 
                 
