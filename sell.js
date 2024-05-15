@@ -376,6 +376,7 @@ function getCorte(){
         })
 
         let gastosTotal = 0;
+
         get(child(ref(db),'Gastos/')).then((snapshot) => {
             //sets sum to zero
     
@@ -399,11 +400,8 @@ function getCorte(){
             })
 
         try{
-            console.log(gastosTotal)
         get(child(ref(db),'Cortes/'+new Date().getFullYear()+"/"+(new Date().getUTCMonth()+1)+"/"+ day+"/Mat")).then(function(data){
-            console.log(data.val())
             window.pastCorte = data.val();
-            console.log(pastCorte.Gastos)
 
             if(pastCorte == undefined){
                 if(confirm(
@@ -417,7 +415,7 @@ function getCorte(){
                     "Differencia: "+(Number(EfectivoEnCaja) - (Number(salesTotalCash) + Number(gastosTotal)))
                 )){
                 //adds record of when corte was done and total in that moment
-                set(ref(db,'Cortes/'+new Date().getFullgeYear()+"/"+(new Date().getMonth()+1)+"/"+day+"/Mat"),{
+                set(ref(db,'Cortes/'+new Date().getFullYear()+"/"+(new Date().getMonth()+1)+"/"+day+"/Mat"),{
                     Time: String(new Date()).substring(16,24),
                     Total: salesTotal,
                     Efectivo: salesTotalCash,
