@@ -366,6 +366,7 @@ function getCorte(){
                             let saleDate = Number(sale.key.substring(0,8))    
                             
                             if(saleDate >= fromDateSerial && saleDate <= toDateSerial){
+                                console.log(sale.val())
                                 salesTotal += sale.val().Total
                                 if(sale.val().Method == 'cash'){ salesTotalCash += sale.val().Total }
                                 if(sale.val().Method == 'card'){ salesTotalCard += sale.val().Total }
@@ -407,12 +408,12 @@ function getCorte(){
                 if(confirm(
                     "Corte \n\n"+
                     "Total: " + (Number(salesTotal))+'\n'+
-                    "Efectivo: " + (Number(salesTotalCash))+'\n'+
-                    "Tarjeta: " + (Number(salesTotalCard))+'\n\n'+
+                    "Efectivo: " + Number(salesTotalCash)+'\n'+
+                    "Tarjeta: " + Number(salesTotalCard)+'\n\n'+
                     "Gastos: " + (-Number(gastosTotal))+'\n\n'+
                     "Efectivo restante: " + ((Number(salesTotalCash) + Number(gastosTotal)))+'\n\n'+
                     "Efectivo en caja: " + Number(EfectivoEnCaja) +'\n\n'+
-                    "Differencia: "+(-(Number(EfectivoEnCaja) - (Number(salesTotalCash) + Number(gastosTotal))))
+                    "Differencia: "+ (Number(EfectivoEnCaja) - ((Number(salesTotalCash) + Number(gastosTotal))))
                 )){
                 //adds record of when corte was done and total in that moment
                 set(ref(db,'Cortes/'+new Date().getFullYear()+"/"+(new Date().getMonth()+1)+"/"+day+"/Mat"),{
@@ -423,7 +424,7 @@ function getCorte(){
                     Gastos: -Number(gastosTotal),
                     Restante: (Number(salesTotalCash) + Number(gastosTotal)),
                     EfectivoCaja: Number(EfectivoEnCaja),
-                    Diff: -(Number(EfectivoEnCaja) - (Number(salesTotalCash) + Number(gastosTotal)))
+                    Diff: (Number(EfectivoEnCaja) - ((Number(salesTotalCash) + Number(gastosTotal))))
                 });
                 }
                 
@@ -439,7 +440,7 @@ function getCorte(){
                     "Gastos: " + (-Number(gastosTotal) - Number(pastCorte.Gastos))+'\n\n'+
                     "Efectivo restante: " + ((Number(salesTotalCash) - Number(pastCorte.Efectivo)) - ((-Number(gastosTotal) - Number(pastCorte.Gastos))))+'\n\n'+
                     "Efectivo en caja: " + Number(EfectivoEnCaja) +'\n\n'+
-                    "Differencia: "+ (-(((Number(salesTotalCash) - Number(pastCorte.Efectivo)) - ((-Number(gastosTotal) - Number(pastCorte.Gastos)))) - Number(EfectivoEnCaja)))
+                    "Differencia: "+ (Number(EfectivoEnCaja) - ((Number(salesTotalCash) - Number(pastCorte.Efectivo)) - ((-Number(gastosTotal) - Number(pastCorte.Gastos)))))
                 ))
                 {
                     set(ref(db,'Cortes/'+new Date().getFullYear()+"/"+(new Date().getUTCMonth()+1)+"/"+day+"/Vesp"),{
@@ -450,7 +451,7 @@ function getCorte(){
                         Gastos: (-Number(gastosTotal) - Number(pastCorte.Gastos)),
                         Restante: (Number(salesTotalCash) - Number(pastCorte.Efectivo)) - ((-Number(gastosTotal) - Number(pastCorte.Gastos))),
                         EfectivoCaja: Number(EfectivoEnCaja),
-                        Diff: -(((Number(salesTotalCash) - Number(pastCorte.Efectivo)) - ((-Number(gastosTotal) - Number(pastCorte.Gastos)))) - Number(EfectivoEnCaja))
+                        Diff: (Number(EfectivoEnCaja) - ((Number(salesTotalCash) - Number(pastCorte.Efectivo)) - ((-Number(gastosTotal) - Number(pastCorte.Gastos)))))
                     });   
                 }
 
