@@ -14,6 +14,7 @@ window.salesRef = ref(db,'Sales/');
 
 let fromDateVal = document.getElementById('from-date')
 let toDateVal = document.getElementById('to-date')
+
 let salesTotalDisp = document.getElementById('sales-total')
 let salesTotalCashDisp = document.getElementById('sales-total-cash')
 let salesTotalCardDisp = document.getElementById('sales-total-card')
@@ -148,8 +149,7 @@ function renderSales(fromDate,toDate,method){
                     month.forEach(
                         function(sale){
 
-                                let saleDate = Number(sale.key.substring(0,8))    
-                                console.log(saleDate,sale.val())
+                                let saleDate = Number(sale.key.substring(0,8))  
 
                                 if(saleDate >= fromDateSerial && saleDate <= toDateSerial){
 

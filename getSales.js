@@ -106,8 +106,12 @@ function renderSales(fromDate,toDate,method){
                     month.forEach(
                         function(day){
                             
+                            let dataDateSerial = Number(year.key + String(month.key).padStart(2,'0') + String(day.key))
 
-                            try{
+                            if(dataDateSerial >= fromDateSerial & dataDateSerial <= toDateSerial){
+                              console.log("Displaying ",dataDateSerial)
+
+                              try{
 
                                 salesMat = day.val().Mat
                                 salesVesp = day.val().Vesp
@@ -167,6 +171,9 @@ function renderSales(fromDate,toDate,method){
                             salesTotalDisp.innerHTML = "$ "+ totalSum
                             salesTotalCashDisp.innerHTML = "$ "+ cashSum
                             salesTotalCardDisp.innerHTML = "$ "+ cardSum
+                            }
+
+                            
 
                             
 
