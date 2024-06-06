@@ -161,6 +161,7 @@ function renderAllProductCards(){
                     //get price for all products at their size options
                     generateProductCard(Product)                    
         })
+
         productList.innerHTML +=
         `<li style="margin:10px; height: auto;"> 
         <div class="product-separator">Bebidas</div>
@@ -168,6 +169,17 @@ function renderAllProductCards(){
         snapshot.forEach(
             function(Product){
                     if(Product.val().index != "bebidas"){return}
+                    //get price for all products at their size options
+                    generateProductCard(Product)                    
+        })
+
+        productList.innerHTML +=
+        `<li style="margin:10px; height: auto;"> 
+        <div class="product-separator">PROMOS</div>
+        </li>`
+        snapshot.forEach(
+            function(Product){
+                    if(Product.val().index != "promos"){return}
                     //get price for all products at their size options
                     generateProductCard(Product)                    
         })

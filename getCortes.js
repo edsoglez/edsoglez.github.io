@@ -28,6 +28,7 @@ let resumenFrios = document.getElementById('resumen-frio')
 let resumenPasteles = document.getElementById('resumen-pastel')
 let resumenBebidas = document.getElementById('resumen-bebidas')
 let resumenVarios = document.getElementById('resumen-varios')
+let resumenPromos = document.getElementById('resumen-promos')
 let resumen10 = document.getElementById('resumen-10')
 let resumen11 = document.getElementById('resumen-11')
 let resumen12 = document.getElementById('resumen-12')
@@ -134,6 +135,7 @@ function renderSales(fromDate,toDate,method){
         resumenPasteles.textContent = 0;
         resumenBebidas.textContent = 0;
         resumenVarios.textContent = 0;
+        resumenPromos.textContent = 0;
         
         datatoload = []
         salesList.innerHTML = ""
