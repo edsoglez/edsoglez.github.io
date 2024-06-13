@@ -503,7 +503,12 @@ function resetOrder() {
     //upadates view
     document.getElementById("order-total").textContent = orderTotal
     document.getElementById("change-order-total").textContent = orderTotal
+
+    document.getElementById("change-order-items").textContent = ""
     document.getElementById("product-order").innerHTML = ""
+    document.getElementById("product-order").innerHTML = ""
+     document.getElementById("change-total").innerHTML = ""
+    document.getElementById("change-confirm").style.visibility = 'hidden'
 }
 
 
