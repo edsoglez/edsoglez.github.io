@@ -10,11 +10,10 @@
     <script type="module" src="header.js"></script>
     <script type="module" src="sell.js"></script>
     <script type="module" src="pay.js"></script>
+    <script type="module" src="change.js"></script>
     <link rel="stylesheet" href="popups.css">
 </head>
 <body>
-    
-
     <div id="header" style="display: flex ; z-index: 0;">
         <div id="header-left">
             <button onclick="location.href='menu.html'" class="logo-button" style="background-color: transparent; border: 0px; padding: 10px; text-align: left; margin: 0px;">
@@ -44,6 +43,7 @@
     
 
     <div id="main-container" class="container" style="display: flex; flex-direction: column; height: 82%;">
+
         
         <div style="display: flex; padding: 20px; padding-bottom: 10px;">
                 <div style="display: flex; width: 100%; height: 60px;">
@@ -63,7 +63,29 @@
             </ul>
         </div>
 
-        
+        <div style="height: 0px; text-align: center; z-index: 999; position: absolute; width: 90%; background-color: blue;">
+            <div id="change-confirm">
+<br>
+                <h3 style="text-align: left; margin: 20px;">Resumen</h3>
+                <div style="border: 1px gray; border-radius: 10px; height: 100px;">
+                    <ul style="list-style: none; height: 100px; overflow-y: scroll;" id="change-order-items">
+                        
+                    </ul>
+                </div>
+                <h4 style="margin-top: 20px; margin-left: 20px; text-align: left;">Total: <span id="change-order-total" style="font-weight: 300;"></span></h4>
+                <br>
+                <button class="bill-button" onclick="calculateChange(50)">$ 50</button>
+                <button class="bill-button" onclick="calculateChange(100)">$ 100</button>
+                <button class="bill-button" onclick="calculateChange(200)">$ 200</button>
+                <button class="bill-button" onclick="calculateChange(500)">$ 500</button>
+                <br>
+                <h4 style="margin-top: 20px; margin-left: 20px; text-align: left;">Cambio: <span id="change-total" style="font-weight: 300;"></span></h4>
+                <br>
+                <button class="cancel-button" onclick="document.getElementById('change-confirm').style.visibility = 'hidden'">← Regresar</button>
+                <button class="confirm-button" onclick="registerSales('cash')">Confirmar</button>
+
+            </div>
+        </div>
         
         <div style="display: flex; align-items: center; justify-content: center; text-align: center; height: 120px; margin-bottom: 15px;">
 
@@ -76,13 +98,13 @@
             <div class="card-button" onclick="registerSales('card')" style="width: 70px; height: 50px; padding: 0;">
             <img width="45px" style="mix-blend-mode: multiply; margin-top: 3px;" src="https://static.vecteezy.com/system/resources/previews/000/357/048/original/vector-credit-card-icon.jpg" alt="">
             </div>
-            <div class="cash-button" onclick="registerSales('cash')" style="background-color: rgb(100, 172, 100); color: white; width: 90px; height: 50px; padding: 0;">
+            <div class="cash-button" onclick="document.getElementById('change-confirm').style.visibility = 'visible';" style="background-color: rgb(100, 172, 100); color: white; width: 90px; height: 50px; padding: 0;">
                 <img width="50px" style="mix-blend-mode: multiply; margin-top: 0px;" src="https://t4.ftcdn.net/jpg/05/29/07/37/360_F_529073750_7FAadm3LWGT74UHCBVXhcfVC0geFpJQj.jpg" alt="">
             </div>
         </div>
     </div>
 
-<p style="color: white; text-align: right;">V.1.0.7</p>    
+<p style="color: white; text-align: right;">V.1.1.0</p>    
 </body>
 
 </html>

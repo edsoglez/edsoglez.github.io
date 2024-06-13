@@ -382,7 +382,7 @@ h3{
 .product-list-item{
     margin: 5px;
     height: 100%;
-
+    z-index: 2;
     width: 40vw;
     max-width: 160px;
 
@@ -395,7 +395,7 @@ h3{
     
     width: 40vw;
     max-width: 160px;
-    
+    z-index: 2;
     height: 156px;
     display: flex;
     flex-direction: column;
@@ -487,6 +487,66 @@ h3{
 }
 
 #product-list{
+    z-index: 2;
     text-align: left;
     align-content: left;
+}
+
+#change-confirm{
+    margin-top: 35px;
+    background-color: rgba(231, 231, 231, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    margin-left: 10px;
+    margin-right: auto;
+    border-radius: 24px;
+    border: 1px solid rgba(79, 79, 79, 0.141);
+    z-index: 999;
+    width: 90vw;
+    height: 60vh;
+    visibility: hidden;
+    padding: 0px;
+    box-shadow: 0px 4px 4px 1px rgba(0, 0, 0,0.3);
+}
+
+.bill-button{
+    height: 50px;
+    width: 80px;
+    color: rgb(21, 21, 21);
+    font-size: 16px;
+    border: 0px solid black;
+    border-radius: 14px;
+    box-shadow: 0px 2px 2px 1px rgba(0, 0, 0,0.2);
+    transition: 0.3s;
+}
+.bill-button:hover{
+    border: 2px solid rgb(236, 148, 16);
+    box-shadow: 0px 8px 8px 1px rgba(0, 0, 0,0.2);
+
+    background-color: rgb(255, 188, 63);
+}
+.cancel-button{
+
+    margin: 10px;
+    height: 50px; 
+    width: 40%;
+    color: rgb(45, 45, 45);
+    font-size: 16px;
+    font-weight: bold;
+    border: 0px solid black;
+    border-radius: 14px;
+    background-color: #a6a6a6;
+    box-shadow: 0px 2px 2px 1px rgba(0, 0, 0,0.2);
+}
+.confirm-button{
+    margin: 10px;
+    height: 50px; 
+    width: 40%;
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    font-weight: bold;
+    border: 0px solid black;
+    border-radius: 14px;
+    background-color: #3ba526;
+    box-shadow: 0px 2px 2px 1px rgba(0, 0, 0,0.2);
 }

@@ -5,7 +5,7 @@ window.prodRef = ref(db,'Products/');
 //order variable define
 window.productPrices = {}
 window.itemsOrdered = {}
-let orderTotal = 0;
+window.orderTotal = 0;
 window.orderIndexes = []
 //do not change below date defintions
 let month = String(new Date().getUTCMonth()+1).padStart(2, '0')
@@ -190,6 +190,7 @@ function renderAllProductCards(){
 
 function renderOrderedItems(){
     document.getElementById("product-order").innerHTML = ""
+    document.getElementById("change-order-items").innerHTML = ""
     Object.entries(itemsOrdered).forEach(val =>{
         let item = val[0]
         let cant = val[1]
@@ -198,6 +199,11 @@ function renderOrderedItems(){
                 <div style="width: 60%; padding-left: 10px; font-weight: bold; font-size:14px">${item}</div>
                 <div style="width: 30px; font-weight: bold; font-size:14px">${cant}x</div>
                 <div style="width: 40px; text-align: right; padding-right: 5px; font-size:14px">$ ${productPrices[item]}</div>
+            </li>`
+        document.getElementById("change-order-items").innerHTML += 
+            `<li style="margin: 4px; padding: 0px; height: 20px; text-align: left; display: flex;">
+                            <div style="width: 85%;">${item}</div>
+                            <div style="width: 10%;">x${cant}</div>
             </li>`
     })
 }
@@ -221,6 +227,7 @@ function addItemToOrder(id,size) {
     //increase order total cost by product clicked price
     orderTotal += productPrices[id+"_"+size]
     document.getElementById("order-total").textContent = orderTotal
+    document.getElementById("change-order-total").textContent = orderTotal
 
     //render product in order list
     renderOrderedItems()
@@ -239,7 +246,7 @@ function removeLastItem(){
     orderTotal = orderTotal - productPrices[lastItem]
     //update total in view
     document.getElementById("order-total").textContent = orderTotal
-
+    document.getElementById("change-order-total").textContent = orderTotal
     //subtract current item qty - 1 from order OBJECT, if current qty is 1, remove item from object
     if(itemsOrdered[lastItem] == 1){
         //instead of leaving item with qty = 0, remove from list
@@ -261,7 +268,7 @@ function registerSales(method){
         return
     }
     //user must confirm if data is correct
-    if(confirm(Object.entries(itemsOrdered).join('\n') +'\n\n'+ "Es correcto?")){
+    if(true){
         let dateFormatedID = year+month+day+new Date().toTimeString().replace(/\D/g,'');
         //Example of format YYYYMMDDHHMMSSmmmm
         let TimeStamp = String(new Date()).substring(16,24);
@@ -419,7 +426,7 @@ function getCorte(){
             if(pastCorte == undefined){
 
                 //adds record of when corte was done and total in that moment
-                set(ref(db,'Cortes/'+new Date().getFullYear()+"/"+(new Date().getMonth()+1)+"/"+day+"/Mat"),{
+                set(ref(db,'Cortes/'+new Date().getFullYear()+"/"+(new Date().getUTCMonth()+1)+"/"+day+"/Mat"),{
                     Time: String(new Date()).substring(16,24),
                     Total: salesTotal,
                     Efectivo: salesTotalCash,
@@ -495,6 +502,7 @@ function resetOrder() {
 
     //upadates view
     document.getElementById("order-total").textContent = orderTotal
+    document.getElementById("change-order-total").textContent = orderTotal
     document.getElementById("product-order").innerHTML = ""
 }
 
