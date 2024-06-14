@@ -22,7 +22,7 @@
         </div>
         <div id="header-right" style="width: 50%;">
             <div id="header-0">
-                <button class="header-icon-button" style="padding: 5px;" onclick="registerExpense()">
+                <button class="header-icon-button" style="padding: 5px;" onclick="document.getElementById('gastos-pane').style.visibility = 'visible'">
                     <img class="icon" width="40px" style="margin: 0px; filter: invert(); mix-blend-mode: lighten;" src="https://static.vecteezy.com/system/resources/previews/030/926/575/original/reduce-expense-icon-symbol-design-illustration-vector.jpg">
                 </button>
             </div>
@@ -64,8 +64,8 @@
         </div>
 
         <div style="height: 0px; text-align: center; z-index: 999; position: absolute; width: 90%; background-color: blue;">
-            <div id="change-confirm">
-<br>
+            <div id="change-confirm" class="hidden-pane">
+                <br>
                 <h3 style="text-align: left; margin: 20px;">Resumen</h3>
                 <div style="border: 1px gray; border-radius: 10px; height: 100px;">
                     <ul style="list-style: none; height: 100px; overflow-y: scroll;" id="change-order-items">
@@ -85,6 +85,40 @@
                 <button class="confirm-button" onclick="registerSales('cash')">Confirmar</button>
 
             </div>
+        </div>
+
+        <div style="height: 0px; text-align: center; z-index: 999; position: absolute; width: 90%; background-color: blue;">
+        <div id="gastos-pane" class="hidden-pane" style="text-align: left; height: 350px;">
+            <br>
+            <h3 style="text-align: left; margin: 20px;">Gasto</h3>
+            
+            <h3 style="margin-top: 20px; margin-left: 20px; text-align: left; display: inline; font-weight: 300;">Monto:   $ </h3><input id="monto-input" type="number" class="monto-input">
+            <br>
+   
+            <h3 style="margin-top: 20px; margin-left: 20px; text-align: left; display: inline; font-weight: 300;">Concepto: </h3>
+            
+            <select name="" id="gasto-concept" class="monto-input" style="margin: 0; padding: 0; width: 210px;">
+                
+                <option value="Hielo">Hielo</option>
+                <option value="Agua">Agua</option>
+                <option value="Vasos">Vasos</option>
+                <option value="Leche">Leche</option>
+                <option value="Etrusca">Etrusca</option>
+                <option value="Limpieza">Limpieza</option>
+                <option value="Otro">Otro</option>
+
+            </select>
+            <br>
+            <h3 style="margin-top: 20px; margin-left: 20px; text-align: left; display: inline; font-weight: 300;">Otro: </h3><input type="text" class="monto-input" id="gasto-other" style="width: 240px;">
+
+            <br>
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="cancel-button" onclick="document.getElementById('gastos-pane').style.visibility = 'hidden'">← Regresar</button>
+                <button class="confirm-button" onclick="registerExpenseV2()">Confirmar</button>
+            </div>
+            
+
+        </div>
         </div>
         
         <div style="display: flex; align-items: center; justify-content: center; text-align: center; height: 120px; margin-bottom: 15px;">
