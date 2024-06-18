@@ -185,8 +185,8 @@ function renderSales(fromDate,toDate,method){
                                             <div class="sale-item-div" style="">
                                                 <div style="width: 25%; text-align: left;">${String(sale.key).substring(4, 6)+"/"+String(sale.key).substring(6, 8)}</div>
                                                 <div style="width: 30%; text-align: left;">${String(sale.val().Time)}</div>
-                                                <div style="width: 10%"; text-align: right>$</div>
-                                                <div style="width: 15%"; text-align: left>${+sale.val().Total}</div>
+                                                <div style="width: 10%"; text-align: right">$</div>
+                                                <div style="width: 15%"; text-align: left" onclick="updateSaleDetail(${sale.key})">${+sale.val().Total}</div>
                                                 <div onclick="toggleMethod(${sale.key})" style="width: 30%"; text-align: left>${sale.val().Method}</div>
                                                 <div style="width: 10%; text-align: right; color: red; height: 100%" onclick="deleteSale('${sale.key}')">
                                                      <img height="20px" src="https://cdn.iconscout.com/icon/free/png-256/free-delete-4095676-3389247.png?f=webp&w=256" alt="">
@@ -252,29 +252,34 @@ function getDailyAverage(total,days,monthsEvaluated){
  // draws it.
 
 function deleteSale(sale_key){
+
     let years = String(sale_key).substring(0,4)
     let monthIndex = Number(String(sale_key).substring(4,6))
 
     console.log(years,monthIndex)
 
     get(child(ref(db),`Users/${localStorage.getItem('USER')}`)).then((user) => {
-        console.log(`Sales/${years}/${monthIndex}/${sale_key}`)
+        if(!confirm("Seguro quiere borrar esta orden?")){
+            alert("Abortado")
+            return
+        }
+
+       if(String(user.val().canDelete) == "true"){
         remove(child(ref(db),`Sales/${years}/${monthIndex}/${sale_key}`))
         .then(function() {
-            console.log("Remove succeeded.")
+            alert(`Venta ${sale_key} borrada\nmonto: ${sale.val().total}`)
         })
         .catch(function(error) {
             console.log("Remove failed: " + error.message)
         });
-   
-       if(String(user.val().canDelete) == "true"){
-        alert("sale deleted")
        }
        else{
-        alert("no tiene permiso para borrar ventas")
+            alert("no tiene permiso para borrar ventas")
        }
         
     })
+
+    document.getElementById('sale-detail').style.visibility = 'hidden'
 
     
 }
@@ -291,10 +296,13 @@ function toggleMethod(sale_key){
         if(confirm("Seguro que quieres cambiar el metodo de pago de $ " + sale.val().Total + " en " + sale.val().Method + " a " + (sale.val().Method == "cash" ? "card" : "cash"))){
             update(ref(db,`Sales/${year}/${month}/${sale_key}`),{
                 Method: sale.val().Method == "cash" ? "card" : "cash",
-            });
+            }).then(
+                updateSaleDetail(sale_key)
+            );
         }
         
     })
+
 }
 
 function drawChart() {
@@ -336,6 +344,34 @@ function drawChart() {
     
     
 }
-window.toggleMethod = toggleMethod
 
+function updateSaleDetail(sale_key){
+    let year = String(sale_key).substring(0,4)
+    let monthIndex = Number(String(sale_key).substring(4,6))
+
+    get(child(ref(db),`Sales/${year}/${monthIndex}/${sale_key}`)).then((sale) => {
+        console.log(sale.val())
+        document.getElementById('sale-detail-items').textContent = ""
+
+        document.getElementById('sale-detail-total').textContent = sale.val().Total
+        document.getElementById('sale-detail-seller').textContent = sale.val().Seller
+        document.getElementById('sale-detail-time').textContent = sale.val().Time
+        document.getElementById('sale-detail-method').textContent = sale.val().Method
+        document.getElementById('sale-detail').style.visibility = 'visible'
+
+        
+        Object.entries(sale.val().Items).forEach((item)=>{
+            document.getElementById('sale-detail-items').innerHTML += `<li><div style="width:200px; display: inline-block">${item[0]}</div>${item[1]}</li>`
+        })
+
+        document.getElementById('actions').innerHTML = `
+        <button class="change-method" id="sale-detail-change-method" onclick="toggleMethod(${sale_key})">Cambiar Metodo</button>
+        <button class="delete-sale" id="sale-detail-delete" onclick="deleteSale(${sale_key})">Borrar</button>`
+
+    })
+    
+}
+
+window.updateSaleDetail = updateSaleDetail
+window.toggleMethod = toggleMethod
 window.deleteSale = deleteSale

@@ -76,3 +76,46 @@ h5{
     color: green;
     background-color: rgb(240, 255, 223) !important;
 }
+
+.hidden-pane{
+    margin-top: 35px;
+    background-color: rgba(231, 231, 231, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    margin-left: 10px;
+    margin-right: auto;
+    border-radius: 24px;
+    border: 1px solid rgba(79, 79, 79, 0.141);
+    z-index: 999;
+    width: 90vw;
+    height: 60vh;
+    visibility: hidden;
+    padding: 0px;
+    box-shadow: 0px 4px 4px 1px rgba(0, 0, 0,0.3);
+}
+
+
+.change-method{
+    margin: 10px;
+    height: 50px; 
+    width: 40%;
+    color: rgb(45, 45, 45);
+    font-size: 16px;
+    font-weight: bold;
+    border: 0px solid black;
+    border-radius: 14px;
+    background-color: #a6a6a6;
+    box-shadow: 0px 2px 2px 1px rgba(0, 0, 0,0.2);
+}
+.delete-sale{
+    margin: 10px;
+    height: 50px; 
+    width: 40%;
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    font-weight: bold;
+    border: 0px solid black;
+    border-radius: 14px;
+    background-color: #d74c47;
+    box-shadow: 0px 2px 2px 1px rgba(0, 0, 0,0.2);
+}
