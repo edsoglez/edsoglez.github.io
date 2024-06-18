@@ -299,7 +299,7 @@ function registerSales(method){
             });
 
             console.log("No need to cache")
-            deductFromInventory()
+            //deductFromInventory()
         }
         catch(error){
             console.log(error)
@@ -315,7 +315,8 @@ function registerSales(method){
         }
         
         //if user wants receipt will be redirected, data is already in memory for fast load
-        if(document.getElementById('receipt').checked = true){
+        if(document.getElementById('receipt-confirm').checked == true){
+            document.getElementById('receipt-confirm').checked = false
             let duration = 10
             location.href = "receipt.html?duration="+duration
         }
@@ -505,11 +506,11 @@ function resetOrder() {
     //upadates view
     document.getElementById("order-total").textContent = orderTotal
     document.getElementById("change-order-total").textContent = orderTotal
-    document.getElementById('receipt').checked = false
+
     document.getElementById("change-order-items").textContent = ""
     document.getElementById("product-order").innerHTML = ""
     document.getElementById("product-order").innerHTML = ""
-     document.getElementById("change-total").innerHTML = ""
+    document.getElementById("change-total").innerHTML = ""
     document.getElementById("change-confirm").style.visibility = 'hidden'
 }
 
