@@ -385,7 +385,10 @@ function updateSaleDetail(sale_key){
 
         document.getElementById('actions').innerHTML = `
         <button class="change-method" id="sale-detail-change-method" onclick="toggleMethod(${sale_key})">Cambiar Metodo</button>
-        <button class="reprint-ticket" id="sale-detail-reprint-ticket" onclick="reprintTicket(${sale_key})">Ticket</button>
+        <button class="reprint-ticket" id="sale-detail-reprint-ticket" onclick="reprintTicket(${sale_key})">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRKI3xu7Gnuu5dWaAHQjAWR9hv9OnjfSvEXTDvt4dbJLCHqVRymgXlaF39F-Cd24vtqvg&usqp=CAU" height="18" style="margin: 0px; transform: scale(1.3); filter: invert(1); mix-blend-mode: lighten;">
+        </button>
+        <br>
         <button class="delete-sale" id="sale-detail-delete" onclick="deleteSale(${sale_key})">Borrar Venta</button>`
 
     })
