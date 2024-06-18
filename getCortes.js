@@ -188,7 +188,7 @@ function renderSales(fromDate,toDate,method){
                                                 <div style="width: 10%"; text-align: right">$</div>
                                                 <div style="width: 15%"; text-align: left" onclick="updateSaleDetail(${sale.key})">${+sale.val().Total}</div>
                                                 <div onclick="toggleMethod(${sale.key})" style="width: 30%"; text-align: left>${sale.val().Method}</div>
-                                                <div style="width: 10%; text-align: right; color: red; height: 100%; transform: translateY(2px);" onclick="updateSaleDetail('${sale.key}')">
+                                                <div style="width: 10%; text-align: right; color: red; height: 100%; transform: translate(-4px, 2px);" onclick="updateSaleDetail('${sale.key}')">
                                                      <img height="20px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Infobox_info_icon.svg/1200px-Infobox_info_icon.svg.png" alt="">
                                                 </div>
                                             <div>
