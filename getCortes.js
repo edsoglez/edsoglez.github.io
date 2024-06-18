@@ -344,6 +344,22 @@ function drawChart() {
     
     
 }
+function reprintTicket(sale_key){
+    let year = String(sale_key).substring(0,4)
+    let monthIndex = Number(String(sale_key).substring(4,6))
+    let orderedItems = {}
+
+    get(child(ref(db),`Sales/${year}/${monthIndex}/${sale_key}`)).then((sale) => {
+        Object.entries(sale.val().Items).forEach((item)=>{
+            console.log(item[0])
+            console.log(item[1])
+            orderedItems[item[0]] = item[1]
+        })
+        localStorage.myArray = JSON.stringify(orderedItems)
+        let duration = 10
+        location.href = "receipt.html?duration="+duration
+    })
+}
 
 function updateSaleDetail(sale_key){
     let year = String(sale_key).substring(0,4)
@@ -366,11 +382,13 @@ function updateSaleDetail(sale_key){
 
         document.getElementById('actions').innerHTML = `
         <button class="change-method" id="sale-detail-change-method" onclick="toggleMethod(${sale_key})">Cambiar Metodo</button>
-        <button class="delete-sale" id="sale-detail-delete" onclick="deleteSale(${sale_key})">Borrar</button>`
+        <button class="reprint-ticket" id="sale-detail-reprint-ticket" onclick="reprintTicket(${sale_key})">Ticket</button>
+        <button class="delete-sale" id="sale-detail-delete" onclick="deleteSale(${sale_key})">Borrar Venta</button>`
 
     })
     
 }
+window.reprintTicket = reprintTicket
 
 window.updateSaleDetail = updateSaleDetail
 window.toggleMethod = toggleMethod
