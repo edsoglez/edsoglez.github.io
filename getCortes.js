@@ -183,11 +183,14 @@ function renderSales(fromDate,toDate,method){
                                     salesList.innerHTML += `
                                         <li class="sale-item-li">
                                             <div class="sale-item-div" style="">
-                                                <div style="width: 30%; text-align: left;">${String(sale.key).substring(4, 6)+"/"+String(sale.key).substring(6, 8)}</div>
+                                                <div style="width: 25%; text-align: left;">${String(sale.key).substring(4, 6)+"/"+String(sale.key).substring(6, 8)}</div>
                                                 <div style="width: 30%; text-align: left;">${String(sale.val().Time)}</div>
-                                                <div style="width: 5%"; text-align: right>$</div>
+                                                <div style="width: 10%"; text-align: right>$</div>
                                                 <div style="width: 15%"; text-align: left>${+sale.val().Total}</div>
-                                                <div onclick="toggleMethod(${sale.key})" style="width: 20%"; text-align: left>${sale.val().Method}</div>
+                                                <div onclick="toggleMethod(${sale.key})" style="width: 30%"; text-align: left>${sale.val().Method}</div>
+                                                <div style="width: 10%; text-align: right; color: red; height: 100%" onclick="deleteSale('${sale.key}')">
+                                                     <img height="20px" src="https://cdn.iconscout.com/icon/free/png-256/free-delete-4095676-3389247.png?f=webp&w=256" alt="">
+                                                </div>
                                             <div>
                                         </li>
                                     `
@@ -247,6 +250,35 @@ function getDailyAverage(total,days,monthsEvaluated){
  // Callback that creates and populates a data table, 
  // instantiates the pie chart, passes in the data and
  // draws it.
+
+function deleteSale(sale_key){
+    let years = String(sale_key).substring(0,4)
+    let monthIndex = Number(String(sale_key).substring(4,6))
+
+    console.log(years,monthIndex)
+
+    get(child(ref(db),`Users/${localStorage.getItem('USER')}`)).then((user) => {
+        console.log(`Sales/${years}/${monthIndex}/${sale_key}`)
+        remove(child(ref(db),`Sales/${years}/${monthIndex}/${sale_key}`))
+        .then(function() {
+            console.log("Remove succeeded.")
+        })
+        .catch(function(error) {
+            console.log("Remove failed: " + error.message)
+        });
+   
+       if(String(user.val().canDelete) == "true"){
+        alert("sale deleted")
+       }
+       else{
+        alert("no tiene permiso para borrar ventas")
+       }
+        
+    })
+
+    
+}
+
 function toggleMethod(sale_key){
     
     let year = String(sale_key).substring(0,4)
@@ -305,3 +337,5 @@ function drawChart() {
     
 }
 window.toggleMethod = toggleMethod
+
+window.deleteSale = deleteSale
