@@ -311,13 +311,13 @@ function registerSales(method){
         catch(error){
             resetOrder()
         }
-
-        resetOrder()
+        
         //if user wants receipt will be redirected, data is already in memory for fast load
-        if(confirm("Necesita recibo?")){
+        if(document.getElementById('receipt').checked = true){
             let duration = 10
             location.href = "receipt.html?duration="+duration
         }
+        resetOrder()
 
    
     }
@@ -503,7 +503,7 @@ function resetOrder() {
     //upadates view
     document.getElementById("order-total").textContent = orderTotal
     document.getElementById("change-order-total").textContent = orderTotal
-
+    document.getElementById('receipt').checked = false
     document.getElementById("change-order-items").textContent = ""
     document.getElementById("product-order").innerHTML = ""
     document.getElementById("product-order").innerHTML = ""
