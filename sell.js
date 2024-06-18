@@ -269,6 +269,9 @@ function registerSales(method){
     }
     //user must confirm if data is correct
     if(true){
+        localStorage.myArray = JSON.stringify(itemsOrdered)
+        localStorage.setItem("orderTotal",orderTotal);
+
         let dateFormatedID = year+month+day+new Date().toTimeString().replace(/\D/g,'');
         //Example of format YYYYMMDDHHMMSSmmmm
         let TimeStamp = String(new Date()).substring(16,24);
@@ -306,8 +309,7 @@ function registerSales(method){
         //saves current order to memory to pass to receipt html page
         try{
             localStorage.cachedSaleID = JSON.stringify(pendingSalesCache)
-            localStorage.myArray = JSON.stringify(itemsOrdered);
-            localStorage.setItem("orderTotal",orderTotal);}
+        }
         catch(error){
             resetOrder()
         }
