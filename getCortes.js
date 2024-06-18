@@ -344,6 +344,7 @@ function drawChart() {
     
     
 }
+
 function reprintTicket(sale_key){
     let year = String(sale_key).substring(0,4)
     let monthIndex = Number(String(sale_key).substring(4,6))
@@ -351,13 +352,15 @@ function reprintTicket(sale_key){
 
     get(child(ref(db),`Sales/${year}/${monthIndex}/${sale_key}`)).then((sale) => {
         Object.entries(sale.val().Items).forEach((item)=>{
-            console.log(item[0])
-            console.log(item[1])
             orderedItems[item[0]] = item[1]
         })
+    
         localStorage.myArray = JSON.stringify(orderedItems)
         let duration = 10
-        location.href = "receipt.html?duration="+duration
+        setTimeout(() => {
+            location.href = "receipt.html?duration="+duration
+        },500)
+        
     })
 }
 
