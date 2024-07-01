@@ -8,7 +8,7 @@ window.itemsOrdered = {}
 window.orderTotal = 0;
 window.orderIndexes = []
 //do not change below date defintions
-let month = String(new Date().getUTCMonth()+1).padStart(2, '0')
+let month = String(new Date().getMonth()+1).padStart(2, '0')
 let date = String(new Date()).split(" ")
 let day = String(new Date().getDate()).padStart(2,'0')
 let year = new Date().getUTCFullYear()
@@ -276,7 +276,7 @@ function registerSales(method){
         //Example of format YYYYMMDDHHMMSSmmmm
         let TimeStamp = String(new Date()).substring(16,24);
         let sale_year = new Date().getFullYear();
-        let sale_month = (new Date().getUTCMonth()+1);
+        let sale_month = (new Date().getMonth()+1);
         
         try{
             salesMade[String(dateFormatedID)] = {
@@ -423,13 +423,13 @@ function getCorte(){
             })
 
         try{
-        get(child(ref(db),'Cortes/'+new Date().getFullYear()+"/"+(new Date().getUTCMonth()+1)+"/"+ day+"/Mat")).then(function(data){
+        get(child(ref(db),'Cortes/'+new Date().getFullYear()+"/"+(new Date().getMonth()+1)+"/"+ day+"/Mat")).then(function(data){
             window.pastCorte = data.val();
 
             if(pastCorte == undefined){
 
                 //adds record of when corte was done and total in that moment
-                set(ref(db,'Cortes/'+new Date().getFullYear()+"/"+(new Date().getUTCMonth()+1)+"/"+day+"/Mat"),{
+                set(ref(db,'Cortes/'+new Date().getFullYear()+"/"+(new Date().getMonth()+1)+"/"+day+"/Mat"),{
                     Time: String(new Date()).substring(16,24),
                     Total: salesTotal,
                     Efectivo: salesTotalCash,
@@ -458,7 +458,7 @@ function getCorte(){
 
                 console.log("Test 2")
 
-                set(ref(db,'Cortes/'+new Date().getFullYear()+"/"+(new Date().getUTCMonth()+1)+"/"+day+"/Vesp"),{
+                set(ref(db,'Cortes/'+new Date().getFullYear()+"/"+(new Date().getMonth()+1)+"/"+day+"/Vesp"),{
                     Time: String(new Date()).substring(16,24),
                     Total: (Number(salesTotal) - Number(pastCorte.Total)),
                     Efectivo: (Number(salesTotalCash) - Number(pastCorte.Efectivo)),
