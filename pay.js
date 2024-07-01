@@ -9,7 +9,7 @@ function registerExpense(){
         if(amount===NaN){alert("Ingresaste un valor no numerico"); return}
         if(amount==null || amount == ""){alert("Gasto no registrado"); return}
 
-        let month = String(new Date().getUTCMonth()+1).padStart(2, '0')
+        let month = String(new Date().getMonth()+1).padStart(2, '0')
         let date = String(new Date()).split(" ")
         let day = String(new Date().getDate()).padStart(2,'0')
         let year = new Date().getUTCFullYear()
@@ -31,7 +31,7 @@ function resetPane(){
 }
 
 function registerExpenseV2(){
-    let month = String(new Date().getUTCMonth()+1).padStart(2, '0')
+    let month = String(new Date().getMonth()+1).padStart(2, '0')
         let date = String(new Date()).split(" ")
         let day = String(new Date().getDate()).padStart(2,'0')
         let year = new Date().getUTCFullYear()
