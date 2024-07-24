@@ -11,7 +11,7 @@ window.orderIndexes = []
 let month = String(new Date().getMonth()+1).padStart(2, '0')
 let date = String(new Date()).split(" ")
 let day = String(new Date().getDate()).padStart(2,'0')
-let year = new Date().getUTCFullYear()
+let year = new Date().getFullYear()
 
 let productList = document.getElementById("product-list")
 let salesMade = {}

@@ -14,7 +14,6 @@ appId: "1:992390081249:web:6b5a47227f9546e64ae5a0"
 }; 
 // Initialize Firebases
 const app = initializeApp(firebaseConfig);
-
 window.db = getDatabase();    
 window.itemRef = ref(db,'Items/');
 window.userRef = ref(db,'Users/');
