@@ -272,7 +272,7 @@ function registerSales(method){
         localStorage.myArray = JSON.stringify(itemsOrdered)
         localStorage.setItem("orderTotal",orderTotal);
 
-        let dateFormatedID = year+month+day+new Date().toTimeString().replace(/\D/g,'');
+        let dateFormatedID = year+month+new Date().getDate()+new Date().toTimeString().replace(/\D/g,'');
         //Example of format YYYYMMDDHHMMSSmmmm
         let TimeStamp = String(new Date()).substring(16,24);
         let sale_year = new Date().getFullYear();
