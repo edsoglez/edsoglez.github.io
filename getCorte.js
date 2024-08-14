@@ -145,20 +145,23 @@ function renderSales(fromDate,toDate,method){
                 salesTotalCashDisp.innerText = Number(salesTotalCashDisp.innerText) + transaction.val().Total
             }
 
-            salesList.innerHTML += `
-                                        <li class="sale-item-li">
-                                            <div class="sale-item-div" style="">
-                                                <div style="width: 25%; text-align: left;">${String(transaction.key).substring(4, 6)+"/"+String(transaction.key).substring(6, 8)}</div>
-                                                <div style="width: 30%; text-align: left;">${String(transaction.val().Time)}</div>
-                                                <div style="width: 10%"; text-align: right">$</div>
-                                                <div style="width: 15%"; text-align: left" onclick="updatetransactionDetail(${transaction.key})">${+transaction.val().Total}</div>
-                                                <div onclick="toggleMethod(${transaction.key})" style="width: 30%"; text-align: left>${transaction.val().Method}</div>
-                                                <div style="width: 10%; text-align: right; color: red; height: 100%; transform: translate(-4px, 2px);" onclick="updateSaleDetail('${transaction.key}')">
-                                                     <img height="20px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Infobox_info_icon.svg/1200px-Infobox_info_icon.svg.png" alt="">
-                                                </div>
-                                            <div>
-                                        </li>
-                                    `
+            if(transaction.val().Method == method || method == null){
+                salesList.innerHTML += `
+                <li class="sale-item-li">
+                    <div class="sale-item-div" style="">
+                        <div style="width: 25%; text-align: left;">${String(transaction.key).substring(4, 6)+"/"+String(transaction.key).substring(6, 8)}</div>
+                        <div style="width: 30%; text-align: left;">${String(transaction.val().Time)}</div>
+                        <div style="width: 10%"; text-align: right">$</div>
+                        <div style="width: 15%"; text-align: left" onclick="updatetransactionDetail(${transaction.key})">${+transaction.val().Total}</div>
+                        <div onclick="toggleMethod(${transaction.key})" style="width: 30%"; text-align: left>${transaction.val().Method}</div>
+                        <div style="width: 10%; text-align: right; color: red; height: 100%; transform: translate(-4px, 2px);" onclick="updateSaleDetail('${transaction.key}')">
+                             <img height="20px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Infobox_info_icon.svg/1200px-Infobox_info_icon.svg.png" alt="">
+                        </div>
+                    <div>
+                </li>
+            `
+            }
+            
 
             salesTotal += transaction.val().Total
             let years = transaction.key.substring(0,4)
@@ -207,6 +210,7 @@ function renderSales(fromDate,toDate,method){
 
 function deleteSale(sale_key){
 
+    let [yearSel,monthSel,daySel] = String(dateSelector.value).split('-')
     let years = String(sale_key).substring(0,4)
     let monthIndex = Number(String(sale_key).substring(4,6))
 
@@ -219,7 +223,7 @@ function deleteSale(sale_key){
         }
 
        if(String(user.val().canDelete) == "true"){
-        remove(child(ref(db),`Sales/${years}/${monthIndex}/${daySel}/${sale_key}`))
+        remove(child(ref(db),`SalesMigrated/${years}/${monthIndex}/${daySel}/${sale_key}`))
         .then(function() {
             alert(`Venta ${sale_key} borrada\nmonto: ${sale.val().total}`)
         })
@@ -242,6 +246,7 @@ function toggleMethod(sale_key){
     
     let year = String(sale_key).substring(0,4)
     let month = Number(String(sale_key).substring(4,6))
+    let [yearSel,monthSel,daySel] = String(dateSelector.value).split('-')
     console.log(year,month)
     get(child(ref(db),`SalesMigrated/${year}/${month}/${daySel}/${sale_key}`)).then((sale) => {
         console.log("Metodo actual: ",sale.val().Method)
