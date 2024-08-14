@@ -12,8 +12,7 @@ window.itemRef = ref(db,'Items/');
 window.transRef = ref(db,'Transactions/');
 window.salesRef = ref(db,'Sales/');
 
-let fromDateVal = document.getElementById('from-date')
-let toDateVal = document.getElementById('to-date')
+let dateSelector = document.getElementById('from-date')
 
 let salesTotalDisp = document.getElementById('sales-total')
 let salesTotalCashDisp = document.getElementById('sales-total-cash')
@@ -51,10 +50,10 @@ let date = String(new Date()).split(" ")
 
 
 //Changing the value in the DOM divs
-fromDateVal.value = date[3]+"-"+month.slice(-2)+"-"+date[2]  //to Date is today
+dateSelector.value = date[3]+"-"+month.slice(-2)+"-"+date[2]  //to Date is today
 
-fromDateVal.addEventListener('change',() => {
-    renderSales(String(fromDateVal.value).replace(/-/g,""),String(fromDateVal.value).replace(/-/g,""))
+dateSelector.addEventListener('change',() => {
+    renderSales(String(dateSelector.value).replace(/-/g,""),String(dateSelector.value).replace(/-/g,""))
     drawChart()
 })
 
@@ -65,15 +64,15 @@ get(child(ref(getDatabase()), `Products/`)).then((Products) => {
     })
 
     onValue(salesRef,(snapshot)=>{
-        renderSales(String(fromDateVal.value).replace(/-/g,""),String(fromDateVal.value).replace(/-/g,""))
+        renderSales(String(dateSelector.value).replace(/-/g,""),String(dateSelector.value).replace(/-/g,""))
     })
     
 })
 
 corteButton.addEventListener('click',()=>{
-    let year = String(fromDateVal.value).replace(/-/g,"").substring(0,4)
-    let month = String(fromDateVal.value).replace(/-/g,"").substring(4,6)
-    let day = String(fromDateVal.value).replace(/-/g,"").substring(6,8)
+    let year = String(dateSelector.value).replace(/-/g,"").substring(0,4)
+    let month = String(dateSelector.value).replace(/-/g,"").substring(4,6)
+    let day = String(dateSelector.value).replace(/-/g,"").substring(6,8)
 
     console.log(year+"/"+Number(month)+"/"+day)
 
@@ -92,13 +91,13 @@ corteButton.addEventListener('click',()=>{
 })
 
 totalSelector.addEventListener('click',()=>{
-    renderSales(String(fromDateVal.value).replace(/-/g,""),String(fromDateVal.value).replace(/-/g,""))
+    renderSales(String(dateSelector.value).replace(/-/g,""),String(dateSelector.value).replace(/-/g,""))
 })
 cashSelector.addEventListener('click',()=>{
-    renderSales(String(fromDateVal.value).replace(/-/g,""),String(fromDateVal.value).replace(/-/g,""),'cash')
+    renderSales(String(dateSelector.value).replace(/-/g,""),String(dateSelector.value).replace(/-/g,""),'cash')
 })
 cardSelector.addEventListener('click',()=>{
-    renderSales(String(fromDateVal.value).replace(/-/g,""),String(fromDateVal.value).replace(/-/g,""),'card')
+    renderSales(String(dateSelector.value).replace(/-/g,""),String(dateSelector.value).replace(/-/g,""),'card')
 })
 
 
@@ -106,141 +105,94 @@ let salesList = document.getElementById('sales-list')
 var datatoload = []
 
 document.getElementById('search').addEventListener('click',()=>{
-    renderSales(String(fromDateVal.value).replace(/-/g,""),String(fromDateVal.value).replace(/-/g,""))
+    renderSales(String(dateSelector.value).replace(/-/g,""),String(dateSelector.value).replace(/-/g,""))
     drawChart()
 })
 
 function renderSales(fromDate,toDate,method){
+    salesTotalCardDisp.innerText = 0
+    salesTotalCashDisp.innerText = 0
+    salesTotalDisp.innerText = 0
+    let salesTotal = 0
+    datatoload = []
+    salesList.innerHTML = ''
+    
+    resumenFrios.textContent = 0;
+    resumenCalientes.textContent = 0;
+    resumenPasteles.textContent = 0;
+    resumenBebidas.textContent = 0;
+    resumenVarios.textContent = 0;
+    resumenPromos.textContent = 0;
+
     resumen10.textContent = resumen11.textContent = resumen12.textContent = resumen13.textContent = resumen14.textContent = resumen15.textContent = resumen16.textContent = resumen17.textContent = resumen18.textContent = resumen19.textContent = resumen20.textContent = 0; 
 
     let lastUpdate = String(new Date()).substring(0,25)
     document.getElementById('last-update').innerHTML = lastUpdate
     console.log("Rendering sales from",fromDate.replace(/-/g,""),"to",toDate.replace(/-/g,"")) //SERIALIZE DATE TO LATER COMPARE GREATER AND LESS THAN
-    let fromDateSerial = Number(fromDate.replace(/-/g,""))
-    let toDateSerial = Number(toDate.replace(/-/g,""))
-  
-    let monthsEvaluated = Number(toDate.replace(/-/g,"").substring(0,6)) - Number(fromDate.replace(/-/g,"").substring(0,6)) + 1
-    let days = Number(String(toDateSerial).substring(6,8)) - Number(String(fromDateSerial).substring(6,8))+1 + (monthsEvaluated-1)*30
 
-    get(child(ref(db),'Sales/')).then((snapshot) => {
-        
-        let salesTotal = 0;
-        let salesTotalCash = 0;
-        let salesTotalCard = 0;
+    let [yearSel,monthSel,daySel] = String(dateSelector.value).split('-')
+    console.log(yearSel,monthSel,daySel)
+    get(child(ref(db),`SalesMigrated/${yearSel}/${Number(monthSel)}/${daySel}`)).then((sales) => {
 
-        salesTotalDisp.innerHTML = "$ "+ 0
-        salesTotalCashDisp.innerHTML = "$ "+ 0
-        salesTotalCardDisp.innerHTML = "$ "+ 0
+        sales.forEach((transaction)=>{
+            console.log(transaction.key, transaction.val().Total, transaction.val().Method)
 
-        resumenFrios.textContent = 0;
-        resumenCalientes.textContent = 0;
-        resumenPasteles.textContent = 0;
-        resumenBebidas.textContent = 0;
-        resumenVarios.textContent = 0;
-        resumenPromos.textContent = 0;
-        
-        datatoload = []
-        salesList.innerHTML = ""
+            salesTotalDisp.innerText = Number(salesTotalDisp.innerText) + transaction.val().Total
+            if(transaction.val().Method == 'card'){
+                salesTotalCardDisp.innerText = Number(salesTotalCardDisp.innerText) + transaction.val().Total
+            }
+            else{
+                salesTotalCashDisp.innerText = Number(salesTotalCashDisp.innerText) + transaction.val().Total
+            }
 
-        console.log("Done pulling from db")
-
-        snapshot.forEach(
-        function(year){
-
-            year.forEach(
-                function(month){
-
-                    month.forEach(
-                        function(sale){
-
-                                let saleDate = Number(sale.key.substring(0,8))  
-
-                                if(saleDate >= fromDateSerial && saleDate <= toDateSerial){
-
-                                    salesTotal += sale.val().Total
-                                    let years = sale.key.substring(0,4)
-                                    let monthIndex = Number(sale.key.substring(4,6))-1
-                                    let day = sale.key.substring(6,8)
-                                    let hours = sale.val().Time.substring(0,2)
-                                    let minutes = sale.val().Time.substring(3,5)
-                                    let seconds = sale.val().Time.substring(6,8)
-                                   
-                                    datatoload.push([new Date(years, monthIndex, day, hours, minutes, seconds), salesTotal])
-                                
-    
-                                    if(sale.val().Method == 'cash'){
-                                        salesTotalCash += sale.val().Total
-                                    }
-                                        
-                                    if(sale.val().Method == 'card'){
-                                        salesTotalCard += sale.val().Total
-                                    }
-                                        
-                                    salesTotalDisp.innerHTML = "$ "+ salesTotal
-                                    salesTotalCashDisp.innerHTML = "$ "+ salesTotalCash
-                                    salesTotalCardDisp.innerHTML = "$ "+ salesTotalCard
-                                    
-                                    if(sale.val().Method == method || method == null){
-                                    console.log(sale.key,sale.val().Total)
-                                    salesList.innerHTML += `
+            salesList.innerHTML += `
                                         <li class="sale-item-li">
                                             <div class="sale-item-div" style="">
-                                                <div style="width: 25%; text-align: left;">${String(sale.key).substring(4, 6)+"/"+String(sale.key).substring(6, 8)}</div>
-                                                <div style="width: 30%; text-align: left;">${String(sale.val().Time)}</div>
+                                                <div style="width: 25%; text-align: left;">${String(transaction.key).substring(4, 6)+"/"+String(transaction.key).substring(6, 8)}</div>
+                                                <div style="width: 30%; text-align: left;">${String(transaction.val().Time)}</div>
                                                 <div style="width: 10%"; text-align: right">$</div>
-                                                <div style="width: 15%"; text-align: left" onclick="updateSaleDetail(${sale.key})">${+sale.val().Total}</div>
-                                                <div onclick="toggleMethod(${sale.key})" style="width: 30%"; text-align: left>${sale.val().Method}</div>
-                                                <div style="width: 10%; text-align: right; color: red; height: 100%; transform: translate(-4px, 2px);" onclick="updateSaleDetail('${sale.key}')">
+                                                <div style="width: 15%"; text-align: left" onclick="updatetransactionDetail(${transaction.key})">${+transaction.val().Total}</div>
+                                                <div onclick="toggleMethod(${transaction.key})" style="width: 30%"; text-align: left>${transaction.val().Method}</div>
+                                                <div style="width: 10%; text-align: right; color: red; height: 100%; transform: translate(-4px, 2px);" onclick="updateSaleDetail('${transaction.key}')">
                                                      <img height="20px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Infobox_info_icon.svg/1200px-Infobox_info_icon.svg.png" alt="">
                                                 </div>
                                             <div>
                                         </li>
                                     `
-                                    //breaks down order and gets individual item category for summary
-                                    Object.entries(sale.val().Items).forEach((item)=>{
-                                        try{
-                                        let product = item[0].split('_')[0]
-                                        let category = productIndexes[item[0].split('_')[0]]
-                                      
-                                        document.getElementById(`resumen-${category}`).textContent = Number(document.getElementById(`resumen-${category}`).textContent) + item[1]
-                                        }
-                                        catch(error){
-                                        
-                                        }
 
-                                    })
-                                    try{
-                                    document.getElementById(`resumen-${String(sale.val().Time).split(':')[0]}`).textContent = Number(document.getElementById(`resumen-${String(sale.val().Time).split(':')[0]}`).textContent) + Number(sale.val().Total)
-                                    }
-                                    catch(e){
-                                        console.log(e)
-                                    }
+            salesTotal += transaction.val().Total
+            let years = transaction.key.substring(0,4)
+            let monthIndex = Number(transaction.key.substring(4,6))-1
+            let day = transaction.key.substring(6,8)
+            let hours = transaction.val().Time.substring(0,2)
+            let minutes = transaction.val().Time.substring(3,5)
+            let seconds = transaction.val().Time.substring(6,8)
+           
+            datatoload.push([new Date(years, monthIndex, day, hours, minutes, seconds), salesTotal])
+            drawChart()
 
-                                }
-                                    
-
-                                    
-                                }
-                                
-                        }
-                    )
-                    getDailyAverage(salesTotal,days,monthsEvaluated)
+            //breaks down order and gets individual item category for summary
+            Object.entries(transaction.val().Items).forEach((item)=>{
+                try{
+                let product = item[0].split('_')[0]
+                let category = productIndexes[item[0].split('_')[0]]
+              
+                document.getElementById(`resumen-${category}`).textContent = Number(document.getElementById(`resumen-${category}`).textContent) + item[1]
                 }
-            )            
+                catch(error){
+                
+                }
+
+            })
+            try{
+            document.getElementById(`resumen-${String(transaction.val().Time).split(':')[0]}`).textContent = Number(document.getElementById(`resumen-${String(transaction.val().Time).split(':')[0]}`).textContent) + Number(transaction.val().Total)
+            }
+            catch(e){
+                console.log(e)
+            }
         })
+    
     })
-}
-
-function getDailyAverage(total,days,monthsEvaluated){
-   
-
-    let USDollar = new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD',
-    });
-
-    dailyAverage.textContent = USDollar.format(total/days)
-    monthlyEstimate.textContent = USDollar.format(total*30.41*monthsEvaluated/days)
 }
 
  // Load the Visualization API and the piechart package.

@@ -18,4 +18,6 @@ window.db = getDatabase();
 window.itemRef = ref(db,'Items/');
 window.userRef = ref(db,'Users/');
 
-
+window.get = get;
+window.child = child;
+window.ref = ref;

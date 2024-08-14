@@ -298,6 +298,14 @@ function registerSales(method){
                 Seller: localStorage.getItem('USER')
             });
 
+            set(ref(db,'SalesMigrated/'+sale_year+"/"+sale_month+"/"+String(dateFormatedID).substring(6,8)+'/'+dateFormatedID),{
+                Time: TimeStamp,
+                Items: itemsOrdered,
+                Total: orderTotal,
+                Method: method,
+                Seller: localStorage.getItem('USER')
+            });
+
             console.log("No need to cache")
             //deductFromInventory()
         }
@@ -371,39 +379,24 @@ function getCorte(){
     let fromDateSerial = Number(fromDate.replace(/-/g,""))
     let toDateSerial = Number(toDate.replace(/-/g,""))
    
-
-    get(child(ref(db),'Sales/')).then((snapshot) => {
+    get(child(ref(db),`SalesMigrated/${new Date().getFullYear()}/${new Date().getMonth()+1}/${String(new Date().getDate()).padStart(2,'0')}`)).then((sales) => {
         //sets sum to zero
         let salesTotal = 0;
         let salesTotalCash = 0;
         let salesTotalCard = 0;
-
-        //will get all data but only data in range will be added
-        snapshot.forEach(
-        function(year){
-            year.forEach(
-                function(month){
-                    month.forEach(
-                        function(sale){
-                            let saleDate = Number(sale.key.substring(0,8))    
-                            
-                            if(saleDate >= fromDateSerial && saleDate <= toDateSerial){
-                                console.log(sale.val())
-                                salesTotal += sale.val().Total
-                                if(sale.val().Method == 'cash'){ salesTotalCash += sale.val().Total }
-                                if(sale.val().Method == 'card'){ salesTotalCard += sale.val().Total }
-                            }
-                        
-                        })
-                })            
-        })
-
         let gastosTotal = 0;
 
+        sales.forEach(
+            function(sale){
+                let saleDate = Number(sale.key.substring(0,8))    
+                salesTotal += sale.val().Total
+                if(sale.val().Method == 'cash'){ salesTotalCash += sale.val().Total }
+                if(sale.val().Method == 'card'){ salesTotalCard += sale.val().Total } 
+        })
+
+        console.log(salesTotal,salesTotalCash,salesTotalCard)
+
         get(child(ref(db),'Gastos/')).then((snapshot) => {
-            //sets sum to zero
-    
-            //will get all data but only data in range will be added
             snapshot.forEach(
             function(year){
                 year.forEach(
@@ -423,11 +416,12 @@ function getCorte(){
             })
 
         try{
+
         get(child(ref(db),'Cortes/'+new Date().getFullYear()+"/"+(new Date().getMonth()+1)+"/"+ day+"/Mat")).then(function(data){
             window.pastCorte = data.val();
-
             if(pastCorte == undefined){
 
+                console.log("Corte Mat")
                 //adds record of when corte was done and total in that moment
                 set(ref(db,'Cortes/'+new Date().getFullYear()+"/"+(new Date().getMonth()+1)+"/"+day+"/Mat"),{
                     Time: String(new Date()).substring(16,24),
@@ -455,8 +449,7 @@ function getCorte(){
                 
             }
             else{
-
-                console.log("Test 2")
+                console.log("Corte Vesp")
 
                 set(ref(db,'Cortes/'+new Date().getFullYear()+"/"+(new Date().getMonth()+1)+"/"+day+"/Vesp"),{
                     Time: String(new Date()).substring(16,24),
