@@ -219,7 +219,7 @@ function deleteSale(sale_key){
         }
 
        if(String(user.val().canDelete) == "true"){
-        remove(child(ref(db),`Sales/${years}/${monthIndex}/${sale_key}`))
+        remove(child(ref(db),`Sales/${years}/${monthIndex}/${daySel}/${sale_key}`))
         .then(function() {
             alert(`Venta ${sale_key} borrada\nmonto: ${sale.val().total}`)
         })
@@ -243,12 +243,12 @@ function toggleMethod(sale_key){
     let year = String(sale_key).substring(0,4)
     let month = Number(String(sale_key).substring(4,6))
     console.log(year,month)
-    get(child(ref(db),`Sales/${year}/${month}/${sale_key}`)).then((sale) => {
+    get(child(ref(db),`SalesMigrated/${year}/${month}/${daySel}/${sale_key}`)).then((sale) => {
         console.log("Metodo actual: ",sale.val().Method)
         console.log(sale.val().Method == "cash" ? "card" : "cash")
 
         if(confirm("Seguro que quieres cambiar el metodo de pago de $ " + sale.val().Total + " en " + sale.val().Method + " a " + (sale.val().Method == "cash" ? "card" : "cash"))){
-            update(ref(db,`Sales/${year}/${month}/${sale_key}`),{
+            update(ref(db,`SalesMigrated/${year}/${month}/${daySel}/${sale_key}`),{
                 Method: sale.val().Method == "cash" ? "card" : "cash",
             }).then(
                 updateSaleDetail(sale_key)

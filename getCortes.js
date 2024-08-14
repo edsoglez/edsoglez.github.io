@@ -305,6 +305,8 @@ function toggleMethod(sale_key){
         
     })
 
+    
+
 }
 
 function drawChart() {
