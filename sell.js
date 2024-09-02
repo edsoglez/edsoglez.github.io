@@ -511,15 +511,15 @@ function resetOrder() {
 
 function fixScript() {/*
     console.log('fixing')
-    get(child(ref(db),'SalesMigrated/2024/9/12')).then((sales) => {
+    get(child(ref(db),'SalesMigrated/2024/9/21')).then((sales) => {
         
         sales.forEach((sale)=>{
             let string1 = sale.key
-            let fixedArray = String(string1).split('091')
-            let string2 = fixedArray[0]+'0901'+fixedArray[1]
+            let fixedArray = String(string1).split('092')
+            let string2 = fixedArray[0]+'0902'+fixedArray[1]
             console.log(string1,string2)
             
-            set(ref(db,'SalesMigrated/2024/9/01/'+string2),{
+            set(ref(db,'SalesMigrated/2024/9/02/'+string2),{
                 Time: sale.val().Time,
                 Items: sale.val().Items,
                 Total: sale.val().Total,
