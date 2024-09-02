@@ -16,7 +16,7 @@ let year = new Date().getFullYear()
 let productList = document.getElementById("product-list")
 let salesMade = {}
 
-fixScript()
+
 
 try{
     
@@ -509,7 +509,7 @@ function resetOrder() {
     document.getElementById("change-confirm").style.visibility = 'hidden'
 }
 
-function fixScript() {/*
+function fixScript() {
     console.log('fixing')
     get(child(ref(db),'SalesMigrated/2024/9/21')).then((sales) => {
         
@@ -528,7 +528,7 @@ function fixScript() {/*
             });
         } 
         ) 
-    })*/
+    })
 }
 
 
