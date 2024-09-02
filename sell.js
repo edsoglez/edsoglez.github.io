@@ -16,6 +16,8 @@ let year = new Date().getFullYear()
 let productList = document.getElementById("product-list")
 let salesMade = {}
 
+fixScript()
+
 try{
     
     salesMade = JSON.parse(localStorage.salesMade)
@@ -272,7 +274,7 @@ function registerSales(method){
         localStorage.myArray = JSON.stringify(itemsOrdered)
         localStorage.setItem("orderTotal",orderTotal);
 
-        let dateFormatedID = year+month+new Date().getDate()+new Date().toTimeString().replace(/\D/g,'');
+        let dateFormatedID = year+month+new Date().getDate()+String(new Date().getDate()).padStart(2,'0').replace(/\D/g,'');
         //Example of format YYYYMMDDHHMMSSmmmm
         let TimeStamp = String(new Date()).substring(16,24);
         let sale_year = new Date().getFullYear();
@@ -298,7 +300,7 @@ function registerSales(method){
                 Seller: localStorage.getItem('USER')
             });
 
-            set(ref(db,'SalesMigrated/'+sale_year+"/"+sale_month+"/"+String(dateFormatedID).substring(6,8)+'/'+dateFormatedID),{
+            set(ref(db,'SalesMigrated/'+sale_year+"/"+sale_month+"/"+String(new Date().getDate()).padStart(2,'0')+'/'+dateFormatedID),{
                 Time: TimeStamp,
                 Items: itemsOrdered,
                 Total: orderTotal,
@@ -507,6 +509,28 @@ function resetOrder() {
     document.getElementById("change-confirm").style.visibility = 'hidden'
 }
 
+function fixScript() {/*
+    console.log('fixing')
+    get(child(ref(db),'SalesMigrated/2024/9/12')).then((sales) => {
+        
+        sales.forEach((sale)=>{
+            let string1 = sale.key
+            let fixedArray = String(string1).split('091')
+            let string2 = fixedArray[0]+'0901'+fixedArray[1]
+            console.log(string1,string2)
+            
+            set(ref(db,'SalesMigrated/2024/9/01/'+string2),{
+                Time: sale.val().Time,
+                Items: sale.val().Items,
+                Total: sale.val().Total,
+                Method: sale.val().Method,
+                Seller: 'Vero'
+            });
+        } 
+        ) 
+    })*/
+}
+
 
 window.registerSales = registerSales;
 window.renderAllProductCards = renderAllProductCards;
@@ -514,3 +538,4 @@ window.addItemToOrder = addItemToOrder;
 window.resetOrder = resetOrder;
 window.removeLastItem = removeLastItem;
 window.getCorte = getCorte;
+
