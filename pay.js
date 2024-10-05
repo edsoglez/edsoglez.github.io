@@ -47,12 +47,14 @@ function registerExpenseV2(){
         return
     }
     else{
+        console.log("trying to write expense")
         set(ref(db,'Gastos/'+new Date().getFullYear()+"/"+(new Date().getMonth()+1)+"/"+ dateFormatedID),{
             Time: String(new Date()).substring(16,24),
             Total: -Number(monto),
             Vendor: concept + ':' + comment
-            });
-    
+        });
+        alert("Gasto registrado")
+        console.log("done")
         resetPane()
     }
     
