@@ -13,7 +13,9 @@ html,body{
 }
 
 ul{
-    width: 100%;
+    width: 95%;
+    padding: 10px;
+    list-style: none;
 }
 h2{
     width: 10%;

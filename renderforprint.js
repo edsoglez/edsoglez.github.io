@@ -26,10 +26,9 @@ for (let i = 0; i < Vendors.length; i++) {
                 document.getElementById(currentlist).innerHTML += `
                     <li>
                         <div class='item' style="display: flex; gap: 10px; margin-bottom: 10px;">
-                            <div style="width: 300px">${Child.key}</div>
-                            <div style="width: 10px">${Child.val().Cantidad}</div>
-                            <div style="width: 50px">${Child.val().Urgente ? "Urg":""}</div>
-                            <div style="width: 150px; text-align: right;">${String(Child.val().Date).substring(0,10)}</div>
+                            <div style="flex: 6">${Child.key}</div>
+                            <div style="flex: 1">${Child.val().Cantidad}</div>
+                            <div style="flex: 5;text-align: right;">${String(Child.val().Date).substring(0,10)}</div>
                         </div>
                     </li>
                     
